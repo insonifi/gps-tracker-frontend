@@ -1,7 +1,3 @@
 [submodule "jquery-simple-datetimepicker"]
 	path = jquery-simple-datetimepicker
 	url = https://github.com/mugifly/jquery-simple-datetimepicker
-[submodule "gps-tracker-frontend"]
-	path = gps-tracker-frontend
-	url = git@github.com:insonifi/gps-tracker-frontend.git
-	branch = master
