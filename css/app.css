@@ -1,6 +1,38 @@
+input {
+    padding: 5px;
+}
+input:hover {
+  cursor: pointer;
+}
+input.field {
+  border: 2px solid white;  
+}
+input:focus {
+  border-bottom-color: #a03232;
+}
+input[dtpicker] {
+  width: 9em;
+}
+#map {
+	position: absolute;
+	width: 99%;
+	height: 99%;
+	border-radius: 0.5em 0.5em 0.5em 0.5em;
+}
+#clock {
+	font-size: smaller;
+	border: #df7611;
+}
+#select {
+	border-radius: 0.2em;
+	padding: 0.2em;
+	background: #E5E3E1;
+	position: absolute;
+	z-index: 2;
+}
 /* app css stylesheet */
 body {
-  background: grey;
+  background: #333;
 }
 
 /* Frame */
