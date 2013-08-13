@@ -8,7 +8,8 @@
 
 angular.module('btford.socket-io', []).
   factory('socket', function ($rootScope, $timeout) {
-    var socket = io.connect();
+    var path = window.location.origin + ':8000',
+      socket = io.connect(path);
     return {
       on: function (eventName, callback) {
         socket.on(eventName, function () {  
