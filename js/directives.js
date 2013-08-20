@@ -65,8 +65,8 @@ angular.module('core.directives', [])
             socket.emit('get-address', {lat: waypoint.lat, long: waypoint.long});
           }
         }
-        scope.setMarker = function () {
-          var waypoint = scope.waypoints[this.$index];
+        scope.setMarker = function (index) {
+          var waypoint = scope.waypoints[index];
           console.log(waypoint);
           scope.markers[waypoint.module_id] = {
             lat: waypoint.lat,
