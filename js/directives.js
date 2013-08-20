@@ -20,7 +20,7 @@ angular.module('core.directives', [])
                 current: date_string
             });
             scope[attrs.period] = element.val();
-        element.bind('change', function () {
+        element.bind('keyup', function () {
           scope[attrs.period] = element.val();
         });
       }
@@ -58,8 +58,8 @@ angular.module('core.directives', [])
           scope.sly.reload();
           scope.done = true;
         });
-        scope.showAddress = function () {
-          var waypoint = scope.waypoints[this.$index];
+        scope.showAddress = function (index) {
+          var waypoint = scope.waypoints[index];
           waypoint.show_address = true
           if (!waypoint.address) {
             socket.emit('get-address', {lat: waypoint.lat, long: waypoint.long});
@@ -114,7 +114,7 @@ angular.module('core.directives', [])
             clickBar: 1,
         }).init();
         scope.sly.on('active', function () {
-           scope.setMarker();
+           scope.setMarker(this.rel.activeItem);
         });
       }
     }
