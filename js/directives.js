@@ -95,7 +95,7 @@ angular.module('core.directives', [])
         '</div>' +
       '</div>',
       link: function (scope, element, attrs) {
-        scope.sly = new Sly($(element.find('.frame')), {
+        scope.sly = new Sly($(element).find('.frame'), {
             itemNav: 'forceCentered',
             //smart: 1,
             activateMiddle: 1,
