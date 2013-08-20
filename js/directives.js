@@ -20,10 +20,9 @@ angular.module('core.directives', [])
                 current: date_string
             });
             scope[attrs.period] = element.val();
-        
-        // element.bind('input', function () {
-        //   scope[attrs.period] = element.val();
-        // });
+        element.bind('change', function () {
+          scope[attrs.period] = element.val();
+        });
       }
     }
   })
