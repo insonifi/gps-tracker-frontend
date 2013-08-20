@@ -15,14 +15,15 @@ angular.module('core.directives', [])
           today = today - 24 * 3600000;
         }
         var date_string = (new Date(today)).toISOString().replace(/T/, ' ').slice(0,-8),
-          newElem = $(element).appendDtpicker({
-					  dateFormat: 'h:mm DD.MM.YYYY',
-					  current: date_string
-				  });
-				scope[attrs.period] = element.val();
-        element.bind('input', function () {
-          scope[attrs.period] = element.val();
-        });
+            newElem = $(element).appendDtpicker({
+                dateFormat: 'h:mm DD.MM.YYYY',
+                current: date_string
+            });
+            scope[attrs.period] = element.val();
+        
+        // element.bind('input', function () {
+        //   scope[attrs.period] = element.val();
+        // });
       }
     }
   })
@@ -81,14 +82,14 @@ angular.module('core.directives', [])
       '<div>' + 
         '<div class="scrollbar">' +
           '<div class="handle">' +
-	          '<div class="mousearea"></div>' +
+            '<div class="mousearea"></div>' +
           '</div>' +
         '</div>' +
         '<div class="frame">' +
           '<ul class="slidee">' +
-            '<li id="{{$index}}" ng-repeat="item in waypoints" ng-click="showAddress()" ng-mouseover="setMarker()">' +
+            '<li id="{{$index}}" ng-repeat="item in waypoints" ng-click="showAddress()">' +
               '<div>' +
-                '<span ng-show="item.show_address" style="padding-right: 1em">{{item.address}}</span>{{item.timestamp|date:"HH:mm:ss"}}'+
+                '<span ng-show="item.show_address" style="padding-right: 1em">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
               '</div>' +
             '</li>' +
           '</ul>' +
@@ -97,7 +98,7 @@ angular.module('core.directives', [])
       link: function (scope, element, attrs) {
         scope.sly = new Sly($(element).find('.frame'), {
             itemNav: 'forceCentered',
-            //smart: 1,
+            smart: 1,
             activateMiddle: 1,
             activateOn: 'click',
             mouseDragging: 1,
@@ -113,6 +114,9 @@ angular.module('core.directives', [])
             dynamicHandle: 1,
             clickBar: 1,
         }).init();
+        scope.sly.on('active', function () {
+           scope.setMarker();
+        });
       }
     }
   })

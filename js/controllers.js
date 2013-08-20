@@ -30,7 +30,7 @@ angular.module('core.controllers', [])
         module_id = $scope.module.module_id;
       
       console.log('[queryCtrl] query %s: from %s to %s', module_id, start_date, end_date);
-        socket.emit('query', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf()});
+        socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf()});
     }
   })
   .controller('mapCtrl', ['$scope', function ($scope) {
