@@ -34,15 +34,18 @@ angular.module('core.controllers', [])
     }
   })
   .controller('mapCtrl', ['$scope', function ($scope) {
-    $scope.center = {
-      lat: 56.9496,
-      lng: 24.1040,
-      zoom: 12
-    }
-    $scope.defaults = {
-      maxZoom: 18
-    }
-    $scope.markers = {};
+    angular.extend($scope, {
+        riga: {
+          lat: 56.9496,
+          lng: 24.1040,
+          zoom: 12
+        },
+        markers : {},
+        defaults: {
+            doubleClickZoom: false,
+            maxZoom: 18
+        }
+    });
   }]);
 
   
