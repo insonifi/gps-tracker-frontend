@@ -24,7 +24,7 @@
         <link type='text/css' href='css/app.css' rel='stylesheet' />
 	</head>
 	<body ng-app='core' ng-controller='mapCtrl'>
-        <leaflet id='map' defaults='defaults' center='riga'></leaflet>
+        <leaflet id='map' defaults='defaults' center='riga' markers='markers'></leaflet>
 		<form id='query-params' ng-controller='queryCtrl' ng-submit='sendQueryRequest()'>
 		  <input class='field' dtpicker period='start'></input>
 		  <input class='field' dtpicker period='end'></input>

@@ -40,12 +40,6 @@ angular.module('core.controllers', [])
           lng: 24.1040,
           zoom: 12
         },
-        markers : {
-            '123' : {
-                lat: 56.873967,
-                long: 24.1189
-            }
-        },
         defaults: {
             doubleClickZoom: false,
             maxZoom: 18
