@@ -58,15 +58,15 @@ angular.module('core.directives', [])
           scope.sly.reload();
           scope.done = true;
         });
-        scope.showAddress = function (index) {
-          var waypoint = scope.waypoints[index];
+        scope.showAddress = function () {
+          var waypoint = scope.waypoints[this.$index];
           waypoint.show_address = true
           if (!waypoint.address) {
             socket.emit('get-address', {lat: waypoint.lat, long: waypoint.long});
           }
         }
-        scope.setMarker = function (index) {
-          var waypoint = scope.waypoints[index];
+        scope.setMarker = function () {
+          var waypoint = scope.waypoints[this.$index];
           console.log(waypoint);
           scope.markers[waypoint.module_id] = {
             lat: waypoint.lat,
@@ -114,7 +114,8 @@ angular.module('core.directives', [])
             clickBar: 1,
         }).init();
         scope.sly.on('active', function () {
-           scope.setMarker(this.rel.activeItem);
+           scope.setMarker.apply(this.items[this.rel.activeItem].el);
+           // generate intermediate event to communicate with AngularJS
         });
       }
     }
