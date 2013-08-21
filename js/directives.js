@@ -114,7 +114,7 @@ angular.module('core.directives', [])
             clickBar: 1,
         }).init();
         scope.sly.on('active', function () {
-           $(this.items[this.rel.activeItem].el).trigger('focus');
+           scope.$emit('focus', this.rel.activeItem)
            // generate intermediate event to communicate with AngularJS
         });
       }
