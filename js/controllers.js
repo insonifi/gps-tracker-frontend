@@ -40,6 +40,7 @@ angular.module('core.controllers', [])
           lng: 24.1040,
           zoom: 12
         },
+        markers: {},
         defaults: {
             doubleClickZoom: false,
             maxZoom: 18
