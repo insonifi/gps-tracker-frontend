@@ -86,7 +86,7 @@ angular.module('core.directives', [])
         '</div>' +
         '<div class="frame">' +
           '<ul class="slidee">' +
-            '<li id="{{$index}}" ng-repeat="item in waypoints" ng-click="showAddress()">' +
+            '<li id="{{$index}}" ng-repeat="item in waypoints" ng-click="showAddress()" ng-focus="setMarker()">' +
               '<div>' +
                 '<span ng-show="item.show_address" style="padding-right: 1em">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
               '</div>' +
@@ -114,7 +114,7 @@ angular.module('core.directives', [])
             clickBar: 1,
         }).init();
         scope.sly.on('active', function () {
-           scope.setMarker.apply(this.items[this.rel.activeItem].el);
+           $(this.items[this.rel.activeItem].el).trigger('focus');
            // generate intermediate event to communicate with AngularJS
         });
       }
