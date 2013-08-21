@@ -73,7 +73,16 @@ angular.module('core.directives', [])
             lng: waypoint.long,
             message: waypoint.address
           }
-        }
+        };
+        scope.$on('focus', function (event, index) {
+          var waypoint = scope.waypoints[index];
+          console.log(waypoint);
+          scope.markers[waypoint.module_id] = {
+            lat: waypoint.lat,
+            lng: waypoint.long,
+            message: waypoint.address
+          }
+        });
         
       }],
       transclude: false,
@@ -114,7 +123,7 @@ angular.module('core.directives', [])
             clickBar: 1,
         }).init();
         scope.sly.on('active', function () {
-           scope.$emit('focus', this.rel.activeItem)
+           scope.$emit('focus', scope.sly.rel.activeItem);
            // generate intermediate event to communicate with AngularJS
         });
       }
