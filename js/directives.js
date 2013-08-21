@@ -41,7 +41,7 @@ angular.module('core.directives', [])
           waypoint.timestamp = new Date(waypoint.timestamp); /* convert to date */
           waypoint.show_address = false;
           scope.waypoints.push(waypoint);
-          scope.$apply('waypoints');
+          // scope.$apply('waypoints');
         });
         socket.on('result-address', function (response) {
           var i,
@@ -65,23 +65,14 @@ angular.module('core.directives', [])
             socket.emit('get-address', {lat: waypoint.lat, long: waypoint.long});
           }
         }
-        scope.setMarker = function () {
-          var waypoint = scope.waypoints[this.$index];
-          console.log(waypoint);
-          scope.markers[waypoint.module_id] = {
-            lat: waypoint.lat,
-            lng: waypoint.long,
-            message: waypoint.address
-          }
-        };
         scope.$on('focus', function (event, index) {
           var waypoint = scope.waypoints[index];
-          console.log(waypoint);
           scope.markers[waypoint.module_id] = {
             lat: waypoint.lat,
             lng: waypoint.long,
             message: waypoint.address
           }
+          scope.$digest();
         });
         
       }],
@@ -95,7 +86,7 @@ angular.module('core.directives', [])
         '</div>' +
         '<div class="frame">' +
           '<ul class="slidee">' +
-            '<li id="{{$index}}" ng-repeat="item in waypoints" ng-click="showAddress()" ng-focus="setMarker()">' +
+            '<li id="{{$index}}" ng-repeat="item in waypoints" ng-click="showAddress()">' +
               '<div>' +
                 '<span ng-show="item.show_address" style="padding-right: 1em">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
               '</div>' +
@@ -124,7 +115,6 @@ angular.module('core.directives', [])
         }).init();
         scope.sly.on('active', function () {
            scope.$emit('focus', scope.sly.rel.activeItem);
-           // generate intermediate event to communicate with AngularJS
         });
       }
     }
