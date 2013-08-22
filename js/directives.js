@@ -72,8 +72,8 @@ angular.module('core.directives', [])
             lng: waypoint.long,
             message: waypoint.address
           }
+          scope.$digest();
         });
-        
       }],
       transclude: false,
       template: 

@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "gps-tracker-frontend",
   "version": "0.0.0",
   "ignore": [
     "**/.*",
@@ -7,6 +7,7 @@
     "components"
   ],
   "dependencies": {
-    "angular-socket-io": "~0.0.2"
+    "angular-socket-io": "",
+    "angular-leaflet": ""
   }
 }
