@@ -33,7 +33,7 @@ angular.module('core.controllers', [])
         socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf()});
     }
   })
-  .controller('mapCtrl', ['$scope', function ($scope) {
+  .controller('mapCtrl', ['$scope', 'socket', function ($scope, socket) {
     angular.extend($scope, {
         riga: {
           lat: 56.9496,
@@ -46,7 +46,20 @@ angular.module('core.controllers', [])
             maxZoom: 18
         }
     });
-  }]);
-
-  
-
+    $scope.waypoints = [];
+    $scope.done = true;
+    socket.on('query-waypoint', function (waypoint) {
+      if($scope.done) {
+        $scope.waypoints = [];
+        $scope.done = false;
+      }
+      waypoint.timestamp = new Date(waypoint.timestamp); /* convert to date */
+      waypoint.show_address = false;
+      $scope.waypoints.push(waypoint);
+    });
+    socket.on('query-end', function (count) {
+      console.log('Found', count, 'waypoints');
+      $scope.slyWaypoints.reload();
+      $scope.done = true;
+    });
+  }])
