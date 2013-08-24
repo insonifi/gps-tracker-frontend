@@ -19,9 +19,6 @@ input[dtpicker] {
 #map {
 	border-radius: 0.5em 0.5em 0.5em 0.5em;
 }
-.leaflet-container {
-    position: absolute;
-}
 #query-box {
 	position: absolute;
 	padding: 0.4em;
