@@ -69,6 +69,9 @@ angular.module('core.directives', [])
               $scope.$digest();
             });
             $scope.toggleAddress = function () {
+                if ($scope.activeItem !== this.$index) {
+                    return;
+                }
                 var waypoint = $scope.waypoints[this.$index];
                 if (waypoint.show_address) {
                     waypoint.show_address = false;
