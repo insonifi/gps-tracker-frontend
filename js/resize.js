@@ -1,9 +1,14 @@
-var container = document.querySelector('.leaflet-container');
-document.body.onload = function () {
-    container.style.width = (window.innerWidth - 30) + 'px';
-    container.style.height = (window.innerHeight - 20) + 'px';
+window.onload = function () {
+    var checkInterval = setInterval(function () {
+        if (document.readyState === "complete") {
+            L.container = document.querySelector('.leaflet-container');
+            L.container.style.width = (window.innerWidth - 30) + 'px';
+            L.container.style.height = (window.innerHeight - 20) + 'px';
+            clearInterval(checkInterval);
+        }
+    }, 100)
 }
 window.onresize = function () {
-    container.style.width = (window.innerWidth - 30) + 'px';
-    container.style.height = (window.innerHeight - 20) + 'px';
+    L.container.style.width = (window.innerWidth - 30) + 'px';
+    L.container.style.height = (window.innerHeight - 20) + 'px';
 }
