@@ -40,39 +40,37 @@ angular.module('core.directives', [])
         '</div>' +
         '<div class="frame">' +
           '<ul class="slidee">' +
-            '<li id="{{$index}}" ng-repeat="item in waypoints" ng-click="showAddress()">' +
+            '<li id="{{$index}}" ng-repeat="item in waypoints | period:start:end" ng-click="showAddress()">' +
               '<div>' +
-                '<span ng-show="item.show_address" style="padding-right: 1em">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
+                '<span ng-show="active()" style="padding-right: 1em">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
               '</div>' +
             '</li>' +
           '</ul>' +
         '</div>' +
       '</div>',
-      controller: ['$scope', '$rootScope', 'socket', function ($scope, $rootScope, socket) {
-        socket.on('result-address', function (response) {
-            angular.forEach($rootScope.waypoints, function (waypoint, index) {
-                if (waypoint.lat === response.lat
-                  || waypoint.long === response.long) {
-                    waypoint.address = response.address;
-                  }
-                });
-            });
-        $scope.showAddress = function () {
-          var waypoint = $rootScope.waypoints[this.$index];
-          waypoint.show_address = true
-          if (!waypoint.address) {
-            socket.emit('get-address', {lat: waypoint.lat, long: waypoint.long});
-          }
-        }
+      controller: ['$scope', 'socket', function ($scope, socket) {
+        $scope.$on('blur', function (event, index) {
+           $scope.waypoints[index].show_address = false; 
+        });
         $scope.$on('focus', function (event, index) {
           var waypoint = $scope.waypoints[index];
+          $scope.waypoints[index].show_address = true;
           $scope.markers[waypoint.module_id] = {
             lat: waypoint.lat,
             lng: waypoint.long,
             message: waypoint.address
           }
           $scope.$digest();
-        });  
+        });
+        
+        /* Must use AngularJS promise for Address requests*/
+        $scope.showAddress = function () {
+          var waypoint = $scope.waypoints[this.$index];
+          waypoint.show_address = true
+          if (!waypoint.address) {
+            socket.emit('get-address', {lat: waypoint.lat, long: waypoint.long});
+          }
+        }
       }],
       link: function ($scope, element, attrs) {
         $scope.slyWaypoints = new Sly($(element).find('.frame'), {
@@ -94,7 +92,9 @@ angular.module('core.directives', [])
             clickBar: 1,
         }).init();
         $scope.slyWaypoints.on('active', function () {
-           $scope.$emit('focus', $scope.slyWaypoints.rel.activeItem);
+            $scope.$emit('blur', $scope.active);
+            $scope.active = $scope.slyWaypoints.rel.activeItem;
+            $scope.$emit('focus', $scope.active);
         });
       }
     }
@@ -115,7 +115,7 @@ angular.module('core.directives', [])
           '<ul class="slidee">' +
             '<li id="{{$index}}" ng-repeat="item in trips" ng-click="showAddress()">' +
               '<div>' +
-                '<span ng-show="item.show_address" style="padding-right: 1em">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
+                '<span ng-show="item.show_address">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
               '</div>' +
             '</li>' +
           '</ul>' +

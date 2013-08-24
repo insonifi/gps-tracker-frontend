@@ -3,8 +3,10 @@
 /* Filters */
 
 angular.module('core.filters', []).
-  filter('datetonum', function() {
-    return function(date) {
-      return date.valueOf();
+  filter('period', function() {
+    return function(list, start, end) {
+      return list.filer(function (item) {
+          return (item.timestamp >= start && item.timestamp <= end);
+      })
     }
   });

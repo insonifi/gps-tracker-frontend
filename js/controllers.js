@@ -33,7 +33,7 @@ angular.module('core.controllers', [])
         socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf()});
     }
   })
-  .controller('mapCtrl', ['$scope', 'socket', function ($scope, socket) {
+  .controller('mapCtrl', ['$scope', 'socket', '$q', function ($scope, socket, $q) {
     angular.extend($scope, {
         riga: {
           lat: 56.9496,
@@ -46,20 +46,37 @@ angular.module('core.controllers', [])
             maxZoom: 18
         }
     });
+    /* Query waypoints */
     $scope.waypoints = [];
-    $scope.done = true;
+    $scope.waypoints.min = 0;
+    $scope.waypoints.max = 0;
+    $scope.notReceiving = true;
     socket.on('query-waypoint', function (waypoint) {
-      if($scope.done) {
+      if($scope.notReceiving) {
         $scope.waypoints = [];
-        $scope.done = false;
+        $scope.notReceiving = false;
+        $scope.waypoints.min = 0;
+      }
+      if ($scope.waypoints.max < waypoint.timestamp) {
+        $scope.waypoints.max = waypoint.timestamp;
       }
       waypoint.timestamp = new Date(waypoint.timestamp); /* convert to date */
       waypoint.show_address = false;
+      waypoint.address = null;
       $scope.waypoints.push(waypoint);
     });
     socket.on('query-end', function (count) {
       console.log('Found', count, 'waypoints');
       $scope.slyWaypoints.reload();
-      $scope.done = true;
+      $scope.notReceiving = true;
     });
-  }])
+    /* Get address for coordinates */
+    socket.on('result-address', function (response) {
+        angular.forEach($scope.waypoints, function (index, waypoint) {
+            if (waypoint.lat === response.lat
+              || waypoint.long === response.long) {
+                waypoint.address = response.address;
+              }
+            });
+        });
+    }])
