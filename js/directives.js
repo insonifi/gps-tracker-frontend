@@ -68,7 +68,7 @@ angular.module('core.directives', [])
               $scope.waypoints[index].show_address = true; 
               $scope.$digest();
             });
-            $scope.toggleAddress = function () {
+            $scope.showAddress = function () {
                 if ($scope.activeItem !== this.$index) {
                     return;
                 }
