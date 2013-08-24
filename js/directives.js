@@ -51,6 +51,7 @@ angular.module('core.directives', [])
             '</div>',
         scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $rootScope) {
+            $scope.activeItem = 0;
             $scope.$on('query-end', function () {
                 $scope.activeItem = 0;
                 $scope.sly.reload();
