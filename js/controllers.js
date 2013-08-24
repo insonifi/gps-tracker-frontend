@@ -37,7 +37,7 @@ angular.module('core.controllers', [])
     var now = (new Date()).valueOf();
     $scope.map_width = window.innerWidth;
     $scope.map_height = window.innerHeight;
-    $scope.resizeWindow = function () {
+    window.onresize = function () {
         $scope.width = window.innerWidth;
         $scope.height = window.innerHeight;
     }
