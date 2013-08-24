@@ -40,8 +40,7 @@ angular.module('core.directives', [])
             '</div>' +
             '<div class="waypoints">' +
               '<ul class="slidee">' +
-                '<li id="{{$index}}" ng-repeat="item in waypoints" ng-click="showAddress()">' +
-                // '<li id="{{$index}}" ng-repeat="item in waypoints | period:start:end" ng-click="showAddress()">' +
+                '<li id="{{$index}}" ng-repeat="item in waypoints | period:start:end" ng-click="showAddress()">' +
                   '<div>' +
                     '<span ng-show="item.show_address" style="padding-right: 1em">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
                   '</div>' +
@@ -70,7 +69,6 @@ angular.module('core.directives', [])
               $scope.$digest();
             });
             $scope.showAddress = function () {
-                if (!this) { return; }
                 var waypoint = $scope.waypoints[this.$index];
                 waypoint.show_address = true
                 if (!waypoint.address) {
@@ -129,7 +127,7 @@ angular.module('core.directives', [])
         '</div>' +
         '</div>',
         scope: true,
-        controller: ['$scope', '$rootScope', function ($scope, $rootScope) {
+        controller: ['$scope', function ($scope) {
             $scope.$on('query-end', function () {
                 
             });    
