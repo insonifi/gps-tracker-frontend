@@ -40,7 +40,7 @@ angular.module('core.directives', [])
             '</div>' +
             '<div class="waypoints">' +
               '<ul class="slidee">' +
-                '<li id="{{$index}}" ng-repeat="item in list | period:start:end" ng-click="showAddress()">' +
+                '<li id="{{$index}}" ng-repeat="item in waypoints | period:start:end" ng-click="showAddress()">' +
                   '<div>' +
                     '<span ng-show="item.show_address" style="padding-right: 1em">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
                   '</div>' +
@@ -56,16 +56,16 @@ angular.module('core.directives', [])
                 $scope.sly.reload();
             });   
             $scope.$on('blur', function (event, index) {
-                $scope.list[index].show_address = false; 
+                $scope.waypoints[index].show_address = false; 
             });
             $scope.$on('focus', function (event, index) {
-              var waypoint = $scope.list[index];
+              var waypoint = $scope.waypoints[index];
               $scope.markers['selected']= {
                 lat: waypoint.lat,
                 lng: waypoint.long,
                 message: waypoint.address
               }
-              $scope.list[index].show_address = true; 
+              $scope.waypoints[index].show_address = true; 
               $scope.$digest();
             });
             $scope.showAddress = function () {
