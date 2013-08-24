@@ -54,8 +54,9 @@ angular.module('core.controllers', [])
     socket.on('query-waypoint', function (waypoint) {
       if($scope.notReceiving) {
         $scope.waypoints = [];
-        $scope.notReceiving = false;
         $scope.waypoints.min = 0;
+        $scope.waypoints.max = 0;
+        $scope.notReceiving = false;
       }
       if ($scope.waypoints.max < waypoint.timestamp) {
         $scope.waypoints.max = waypoint.timestamp;
