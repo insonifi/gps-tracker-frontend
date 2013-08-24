@@ -40,7 +40,7 @@ angular.module('core.directives', [])
             '</div>' +
             '<div class="waypoints">' +
               '<ul class="slidee">' +
-                '<li id="{{$index}}" ng-repeat="item in list" ng-click="showAddress()">' +
+                '<li id="{{$index}}" ng-repeat="item in list | period:start:end" ng-click="showAddress()">' +
                   '<div>' +
                     '<span ng-show="item.show_address" style="padding-right: 1em">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
                   '</div>' +
@@ -53,9 +53,6 @@ angular.module('core.directives', [])
             $scope.activeItem = 0;
             $scope.$on('refresh-lists', function () {
                 $scope.activeItem = 0;
-                $scope.list = $scope.waypoints.filter(function (item) {
-                    return (item.timestamp >= $scope.start && item.timestamp <= $scope.end);
-                })
                 $scope.sly.reload();
             });   
             $scope.$on('blur', function (event, index) {
