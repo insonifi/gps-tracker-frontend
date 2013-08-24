@@ -50,7 +50,7 @@ angular.module('core.directives', [])
             '</div>' +
             '</div>',
         scope: true,
-        controller: ['$scope', '$rootScope', function ($scope, $rootScope) {
+        controller: ['$scope', function ($scope) {
             $scope.activeItem = 0;
             $scope.$on('query-end', function () {
                 $scope.activeItem = 0;
@@ -61,21 +61,21 @@ angular.module('core.directives', [])
             });
             $scope.$on('focus', function (event, index) {
               var waypoint = $scope.waypoints[index];
-              $rootScope.waypoints[index].show_address = true;
-              $rootScope.markers[waypoint.module_id] = {
+              $scope.waypoints[index].show_address = true;
+              $scope.markers[waypoint.module_id] = {
                 lat: waypoint.lat,
                 lng: waypoint.long,
                 message: waypoint.address
               }
-              $rootScope.waypoints[index].show_address = false; 
-              $rootScope.$digest();
+              $scope.waypoints[index].show_address = false; 
+              $scope.$digest();
             });
             $scope.showAddress = function () {
                 if (!this) { return; }
                 var waypoint = $rootScope.waypoints[this.$index];
                 waypoint.show_address = true
                 if (!waypoint.address) {
-                    $rootScope.requestAddress({lat: waypoint.lat, long: waypoint.long});
+                    $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
                 }
             }
         }],
