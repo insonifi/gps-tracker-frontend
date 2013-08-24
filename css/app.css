@@ -16,7 +16,7 @@ input:focus {
 input[dtpicker] {
   width: 9em;
 }
-#map {
+.angular-leaflet-map {
 	position: absolute;
 	width: 99%;
 	height: 99%;
