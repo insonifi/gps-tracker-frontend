@@ -38,8 +38,8 @@ angular.module('core.controllers', [])
     $scope.map_width = window.innerWidth;
     $scope.map_height = window.innerHeight;
     window.onresize = function () {
-        $scope.width = window.innerWidth;
-        $scope.height = window.innerHeight;
+        $scope.map_width = window.innerWidth;
+        $scope.map_height = window.innerHeight;
     }
     angular.extend($scope, {
         riga: {
