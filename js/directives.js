@@ -52,6 +52,7 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $rootScope) {
             $scope.$on('query-end', function () {
+                $scope.activeItem = 0;
                 $scope.sly.reload();
             });   
             $scope.$on('blur', function (event, index) {

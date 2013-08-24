@@ -52,7 +52,6 @@ angular.module('core.controllers', [])
     $scope.waypoints.min = now
     $scope.waypoints.max = now;
     $scope.notReceiving = true;
-    $scope.activeItem = 0;
     socket.on('query-waypoint', function (waypoint) {
         if($scope.notReceiving) {
             now = (new Date()).valueOf();
