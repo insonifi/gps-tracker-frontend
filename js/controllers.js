@@ -34,6 +34,7 @@ angular.module('core.controllers', [])
     }
   })
   .controller('mapCtrl', ['$scope', 'socket', function ($scope, socket) {
+    var now = (new Date()).valueOf();
     angular.extend($scope, {
         riga: {
           lat: 56.9496,
@@ -48,30 +49,30 @@ angular.module('core.controllers', [])
     });
     /* Query waypoints */
     $scope.waypoints = [];
-    $scope.waypoints.min = 0;
-    $scope.waypoints.max = 0;
+    $scope.waypoints.min = now
+    $scope.waypoints.max = now;
     $scope.notReceiving = true;
     socket.on('query-waypoint', function (waypoint) {
-      if($scope.notReceiving) {
-        $scope.waypoints = [];
-        $scope.waypoints.min = 0;
-        $scope.waypoints.max = 0;
-        $scope.notReceiving = false;
-      }
-      if ($scope.waypoints.max < waypoint.timestamp) {
-        $scope.waypoints.max = waypoint.timestamp;
-      }
-      waypoint.timestamp = new Date(waypoint.timestamp); /* convert to date */
-      waypoint.show_address = false;
-      waypoint.address = null;
-      $scope.waypoints.push(waypoint);
+        if($scope.notReceiving) {
+            now = (new Date()).valueOf();
+            $scope.waypoints = [];
+            $scope.waypoints.min = now;
+            $scope.waypoints.max = now;
+            $scope.notReceiving = false;
+        }
+        $scope.waypoints.min = Math.min(waypoint.timestamp, $scope.waypoints.min);
+        $scope.waypoints.max = Math.max(waypoint.timestamp, $scope.waypoints.max);
+        waypoint.timestamp = new Date(waypoint.timestamp); /* convert to date */
+        waypoint.show_address = false;
+        waypoint.address = null;
+        $scope.waypoints.push(waypoint);
     });
     socket.on('query-end', function (count) {
       console.log('Found', count, 'waypoints');
-      $scope.slyWaypoints.reload();
       $scope.start = $scope.waypoints.min;
       $scope.end = $scope.waypoints.max;
       $scope.notReceiving = true;
+      $scope.slyWaypoints.reload();
     });
     /* Get address for coordinates */
     socket.on('result-address', function (response) {
