@@ -60,8 +60,8 @@ angular.module('core.controllers', [])
             $scope.end = now;
             $scope.notReceiving = false;
         }
-        $scope.waypoints.min = Math.min(waypoint.timestamp, $scope.waypoints.min);
-        $scope.waypoints.max = Math.max(waypoint.timestamp, $scope.waypoints.max);
+        $scope.start = Math.min(waypoint.timestamp, $scope.start);
+        $scope.end = Math.max(waypoint.timestamp, $scope.end);
         waypoint.timestamp = new Date(waypoint.timestamp); /* convert to date */
         waypoint.show_address = false;
         waypoint.address = null;
