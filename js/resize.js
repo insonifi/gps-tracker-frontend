@@ -1,6 +1,5 @@
 
 window.onresize = function () {
-    var container = document.getElementById('map-container');
-    container.style.width = window.innerWidth;
-    container.style.height = window.innerWidth;
+    document.body.style.width = window.innerWidth + 'px';
+    document.body.style.height = window.innerWidth + 'px';
 }
