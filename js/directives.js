@@ -40,7 +40,7 @@ angular.module('core.directives', [])
             '</div>' +
             '<div class="waypoints">' +
               '<ul class="slidee">' +
-                '<li id="{{$index}}" ng-repeat="item in waypoints | period:start:end" ng-click="showAddress()">' +
+                '<li id="{{$index}}" ng-repeat="item in waypoints | period:start:end" ng-click="toggleAddress()">' +
                   '<div>' +
                     '<span ng-show="item.show_address" class="address">{{item.address}}</span><div class="time">{{item.timestamp|date:"HH:mm:ss"}}</div>'+
                   '</div>' +
@@ -68,11 +68,15 @@ angular.module('core.directives', [])
               $scope.waypoints[index].show_address = true; 
               $scope.$digest();
             });
-            $scope.showAddress = function () {
+            $scope.toggleAddress = function () {
                 var waypoint = $scope.waypoints[this.$index];
-                waypoint.show_address = true
-                if (!waypoint.address) {
-                    $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
+                if (waypoint.show_address) {
+                    waypoint.show_address = false;
+                } else {
+                    waypoint.show_address = true
+                    if (!waypoint.address) {
+                        $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
+                    }
                 }
             }
         }],
