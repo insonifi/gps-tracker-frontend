@@ -33,7 +33,7 @@ angular.module('core.controllers', [])
         socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf()});
     }
   })
-  .controller('mapCtrl', ['$scope', 'socket', '$q', function ($scope, socket, $q) {
+  .controller('mapCtrl', ['$scope', 'socket', function ($scope, socket) {
     angular.extend($scope, {
         riga: {
           lat: 56.9496,
@@ -68,6 +68,8 @@ angular.module('core.controllers', [])
     socket.on('query-end', function (count) {
       console.log('Found', count, 'waypoints');
       $scope.slyWaypoints.reload();
+      $scope.start = $scope.waypoints.min;
+      $scope.end = $scope.waypoints.max;
       $scope.notReceiving = true;
     });
     /* Get address for coordinates */

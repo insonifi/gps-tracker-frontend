@@ -62,8 +62,6 @@ angular.module('core.directives', [])
           }
           $scope.$digest();
         });
-        
-        /* Must use AngularJS promise for Address requests*/
         $scope.showAddress = function () {
           var waypoint = $scope.waypoints[this.$index];
           waypoint.show_address = true
