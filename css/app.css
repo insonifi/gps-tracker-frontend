@@ -60,9 +60,6 @@ input[dtpicker] {
 	z-index: 2;
 }
 #map {
-	position: absolute;
-	width: 99%;
-	height: 99%;
 	border-radius: 0.5em 0.5em 0.5em 0.5em;
 }
 #clock {
