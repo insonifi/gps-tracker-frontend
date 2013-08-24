@@ -50,7 +50,7 @@ angular.module('core.directives', [])
             '</div>' +
             '</div>',
         scope: true,
-        controller: ['$scope', '$rootScope', function ($scope, $rootScope) {
+        controller: ['$scope', function ($scope) {
             $scope.activeItem = 0;
             $scope.$on('refresh-lists', function () {
                 $scope.activeItem = 0;
@@ -67,7 +67,7 @@ angular.module('core.directives', [])
                 message: waypoint.address
               }
               //$scope.waypoints[index].show_address = true; 
-              $rootScope.$digest();
+              $scope.$root.$digest();
             });
             $scope.showAddress = function () {
                 if ($scope.activeItem !== this.$index) {
