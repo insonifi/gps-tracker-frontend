@@ -101,7 +101,7 @@ body {
 .waypoints {
   position: absolute;
   right: 20px;
-	width: 200px;
+	width: 120px;
 	height: 800px;
 }
 .waypoints .slidee {
@@ -118,7 +118,7 @@ body {
 }
 .waypoints ul li {
 	float: right;
-	width: 60%;
+	/*width: 60%;*/
 	height: 50px;
 	margin: 0 0 1px;
 	padding: 0;
@@ -128,7 +128,7 @@ body {
 	cursor: pointer;
 }
 .waypoints ul li.active {
-	width: 100%;
+	/*width: 100%;*/
 }
 .waypoints ul li.active .address {
     background: #333;
