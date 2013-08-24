@@ -52,6 +52,7 @@ angular.module('core.directives', [])
       controller: ['$scope', function ($scope) {
         $scope.$on('blur', function (event, index) {
             if (!index) { return; }
+            
             $scope.waypoints[index].show_address = false; 
         });
         $scope.$on('focus', function (event, index) {
