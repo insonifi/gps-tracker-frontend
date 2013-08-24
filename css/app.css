@@ -16,9 +16,9 @@ input:focus {
 input[dtpicker] {
   width: 9em;
 }
-#map-container {
-    width: 800px;
-    height: 600px;
+#map {
+    width: 100%;
+    height: 100%;
 	border-radius: 0.5em 0.5em 0.5em 0.5em;
 }
 #query-box {
