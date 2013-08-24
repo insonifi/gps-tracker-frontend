@@ -51,7 +51,8 @@ angular.module('core.directives', [])
       '</div>',
       controller: ['$scope', function ($scope) {
         $scope.$on('blur', function (event, index) {
-           $scope.waypoints[index].show_address = false; 
+            if (!index) { return; }
+            $scope.waypoints[index].show_address = false; 
         });
         $scope.$on('focus', function (event, index) {
           var waypoint = $scope.waypoints[index];
@@ -94,7 +95,7 @@ angular.module('core.directives', [])
             clickBar: 1,
         }).init();
         $scope.slyWaypoints.on('active', function () {
-            $scope.$emit('blur', $scope.active);
+            $scope.$emit('blur', $scope.activeItem);
             $scope.activeItem = $scope.slyWaypoints.rel.activeItem;
             $scope.$emit('focus', $scope.active);
         });
