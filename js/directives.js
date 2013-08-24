@@ -57,7 +57,7 @@ angular.module('core.directives', [])
                 $scope.sly.reload();
             });   
             $scope.$on('blur', function (event, index) {
-                $rootScope.waypoints[index].show_address = false; 
+                $scope.waypoints[index].show_address = false; 
             });
             $scope.$on('focus', function (event, index) {
               var waypoint = $scope.waypoints[index];
