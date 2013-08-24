@@ -101,7 +101,7 @@ angular.module('core.directives', [])
             $scope.sly.on('active', function () {
                 $scope.$emit('blur', $scope.activeItem);
                 $scope.activeItem = $scope.sly.rel.activeItem;
-                $scope.$emit('focus', $scope.active);
+                $scope.$emit('focus', $scope.activeItem);
             });
         }
     }
