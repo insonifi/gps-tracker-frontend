@@ -73,7 +73,7 @@ angular.module('core.controllers', [])
       $scope.start = $scope.waypoints.min;
       $scope.end = $scope.waypoints.max;
       $scope.notReceiving = true;
-      $scope.slyWaypoints.reload();
+      $scope.$broadcast('query-end');
     });
     /* Get address for coordinates */
     $scope.requestAddress = function (coords) {
