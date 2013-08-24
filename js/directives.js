@@ -42,7 +42,7 @@ angular.module('core.directives', [])
               '<ul class="slidee">' +
                 '<li id="{{$index}}" ng-repeat="item in waypoints | period:start:end" ng-click="showAddress()">' +
                   '<div>' +
-                    '<span ng-show="item.show_address" style="padding-right: 1em">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
+                    '<span ng-show="item.show_address" class="address">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
                   '</div>' +
                 '</li>' +
               '</ul>' +

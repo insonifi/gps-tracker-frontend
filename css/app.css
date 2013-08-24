@@ -132,6 +132,11 @@ body {
 	width: 100%;
 	background: #a03232;
 }
+.waypoints ul li.active.address {
+    background: #fff;
+	position: relative;
+    right: 10em;
+}
 /* Scrollbar */
 .w-scrollbar {
 	position: absolute;
