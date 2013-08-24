@@ -75,6 +75,9 @@ angular.module('core.controllers', [])
       $scope.slyWaypoints.reload();
     });
     /* Get address for coordinates */
+    $scope.requestAddress = function (coords) {
+        socket.emit('get-address', coords);
+    };
     socket.on('result-address', function (response) {
         angular.forEach($scope.waypoints, function (index, waypoint) {
             if (waypoint.lat === response.lat

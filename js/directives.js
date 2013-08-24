@@ -48,7 +48,7 @@ angular.module('core.directives', [])
           '</ul>' +
         '</div>' +
       '</div>',
-      controller: ['$scope', 'socket', function ($scope, socket) {
+      controller: ['$scope', function ($scope) {
         $scope.$on('blur', function (event, index) {
            $scope.waypoints[index].show_address = false; 
         });
@@ -66,7 +66,7 @@ angular.module('core.directives', [])
           var waypoint = $scope.waypoints[this.$index];
           waypoint.show_address = true
           if (!waypoint.address) {
-            socket.emit('get-address', {lat: waypoint.lat, long: waypoint.long});
+            $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
           }
         }
       }],
@@ -99,11 +99,11 @@ angular.module('core.directives', [])
   })
   .directive('tripsList', function () {
     return {
-      restrict: 'A',
-      replace: true,
-      transclude: false,
-      template: 
-      '<div>' + 
+        restrict: 'A',
+        replace: true,
+        transclude: false,
+        template: 
+        '<div>' + 
         '<div class="scrollbar">' +
           '<div class="handle">' +
             '<div class="mousearea"></div>' +
@@ -111,15 +111,18 @@ angular.module('core.directives', [])
         '</div>' +
         '<div class="frame">' +
           '<ul class="slidee">' +
-            '<li id="{{$index}}" ng-repeat="item in trips" ng-click="showAddress()">' +
+            '<li id="{{$index}}" ng-repeat="trip in trips" ng-click="changePeriod()">' +
               '<div>' +
-                '<span ng-show="item.show_address">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
+                '<span>{{trip.addressA}}</span><span>{{trip.addressB}}</span>'+
               '</div>' +
             '</li>' +
           '</ul>' +
         '</div>' +
-      '</div>',
-      link: function ($scope, element, attrs) {
+        '</div>',
+        controller: ['$scope', function ($scope) {
+            
+        }]
+        link: function ($scope, element, attrs) {
         $scope.slyTrips = new Sly($(element).find('.frame'), {
             itemNav: 'forceCentered',
             smart: 1,
@@ -139,8 +142,8 @@ angular.module('core.directives', [])
             clickBar: 1,
         }).init();
         $scope.slyTrips.on('active', function () {
-           $scope.$emit('focus', $scope.slyTrips.rel.activeItem);
+           // $scope.$emit('focus', $scope.slyTrips.rel.activeItem);
         });
-      }
+        }
     }
   })
