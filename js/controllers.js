@@ -49,15 +49,15 @@ angular.module('core.controllers', [])
     });
     /* Query waypoints */
     $scope.waypoints = [];
-    $scope.waypoints.min = now
-    $scope.waypoints.max = now;
+    $scope.start = now
+    $scope.end = now;
     $scope.notReceiving = true;
     socket.on('query-waypoint', function (waypoint) {
         if($scope.notReceiving) {
             now = (new Date()).valueOf();
             $scope.waypoints = [];
-            $scope.waypoints.min = now;
-            $scope.waypoints.max = now;
+            $scope.start = now;
+            $scope.end = now;
             $scope.notReceiving = false;
         }
         $scope.waypoints.min = Math.min(waypoint.timestamp, $scope.waypoints.min);
@@ -69,10 +69,8 @@ angular.module('core.controllers', [])
     });
     socket.on('query-end', function (count) {
       console.log('Found', count, 'waypoints');
-      $scope.start = $scope.waypoints.min;
-      $scope.end = $scope.waypoints.max;
       $scope.notReceiving = true;
-      $scope.$broadcast('query-end');
+      $scope.$broadcast('refresh-lists');
     });
     /* Get address for coordinates */
     $scope.requestAddress = function (coords) {

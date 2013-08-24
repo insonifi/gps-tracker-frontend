@@ -40,7 +40,7 @@ angular.module('core.directives', [])
             '</div>' +
             '<div class="waypoints">' +
               '<ul class="slidee">' +
-                '<li id="{{$index}}" ng-repeat="item in waypoints | period:start:end" ng-click="showAddress()">' +
+                '<li id="{{$index}}" ng-repeat="item in list" ng-click="showAddress()">' +
                   '<div>' +
                     '<span ng-show="item.show_address" style="padding-right: 1em">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
                   '</div>' +
@@ -51,25 +51,28 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', function ($scope) {
             $scope.activeItem = 0;
-            $scope.$on('query-end', function () {
+            $scope.$on('refresh-lists', function () {
                 $scope.activeItem = 0;
+                $scope.list = $scope.waypoints.filter(function (item) {
+                    return (item.timestamp >= start && item.timestamp <= end);
+                })
                 $scope.sly.reload();
             });   
             $scope.$on('blur', function (event, index) {
-                $scope.waypoints[index].show_address = false; 
+                $scope.list[index].show_address = false; 
             });
             $scope.$on('focus', function (event, index) {
-              var waypoint = $scope.waypoints[index];
+              var waypoint = $scope.list[index];
               $scope.markers['selected']= {
                 lat: waypoint.lat,
                 lng: waypoint.long,
                 message: waypoint.address
               }
-              $scope.waypoints[index].show_address = true; 
+              $scope.list[index].show_address = true; 
               $scope.$digest();
             });
             $scope.showAddress = function () {
-                var waypoint = $scope.waypoints[this.$index];
+                var waypoint = $scope.list[this.$index];
                 waypoint.show_address = true
                 if (!waypoint.address) {
                     $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
@@ -128,7 +131,7 @@ angular.module('core.directives', [])
         '</div>',
         scope: true,
         controller: ['$scope', function ($scope) {
-            $scope.$on('query-end', function () {
+            $scope.$on('refresh-lists', function () {
                 
             });    
         }],
