@@ -43,42 +43,39 @@ angular.module('core.directives', [])
             '<li id="{{$index}}" ng-repeat="item in waypoints" ng-click="showAddress()">' +
             // '<li id="{{$index}}" ng-repeat="item in waypoints | period:start:end" ng-click="showAddress()">' +
               '<div>' +
-                '<span ng-show="active()" style="padding-right: 1em">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
+                '<span ng-show="item.show_address" style="padding-right: 1em">{{item.address}}</span><span>{{item.timestamp|date:"HH:mm:ss"}}</span>'+
               '</div>' +
             '</li>' +
           '</ul>' +
         '</div>' +
       '</div>',
-      controller: ['$scope', function ($scope) {
+      scope: true,
+      controller: ['$scope', '$rootScope', function ($scope, $rootScope) {
         $scope.$on('blur', function (event, index) {
-            if (!index) { return; }
-            
-            $scope.waypoints[index].show_address = false; 
+            $rootScope.waypoints[index].show_address = false; 
         });
         $scope.$on('focus', function (event, index) {
           var waypoint = $scope.waypoints[index];
-          $scope.waypoints[index].show_address = true;
-          $scope.markers[waypoint.module_id] = {
+          $rootScope.waypoints[index].show_address = true;
+          $rootScope.markers[waypoint.module_id] = {
             lat: waypoint.lat,
             lng: waypoint.long,
             message: waypoint.address
           }
-          $scope.$digest();
+          $rootScope.waypoints[index].show_address = false; 
+          $rootScope.$digest();
         });
         $scope.showAddress = function () {
             if (!this) { return; }
-            var waypoint = $scope.waypoints[this.$index];
+            var waypoint = $rootScope.waypoints[this.$index];
             waypoint.show_address = true
             if (!waypoint.address) {
-            $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
-}
-        }
-        $scope.active = function () {
-            return (this.$index === $scope.activeItem);
+                $rootScope.requestAddress({lat: waypoint.lat, long: waypoint.long});
+            }
         }
       }],
       link: function ($scope, element, attrs) {
-        $scope.slyWaypoints = new Sly($(element).find('.frame'), {
+        $scope.sly = new Sly($(element).find('.frame'), {
             itemNav: 'forceCentered',
             smart: 1,
             activateMiddle: 1,
@@ -96,9 +93,9 @@ angular.module('core.directives', [])
             dynamicHandle: 1,
             clickBar: 1,
         }).init();
-        $scope.slyWaypoints.on('active', function () {
+        $scope.sly.on('active', function () {
             $scope.$emit('blur', $scope.activeItem);
-            $scope.activeItem = $scope.slyWaypoints.rel.activeItem;
+            $scope.activeItem = $scope.sly.rel.activeItem;
             $scope.$emit('focus', $scope.active);
         });
       }
@@ -126,11 +123,12 @@ angular.module('core.directives', [])
           '</ul>' +
         '</div>' +
         '</div>',
-        controller: ['$scope', function ($scope) {
+        scope: true,
+        controller: ['$scope', '$rootScope', function ($scope, $rootScope) {
             
         }],
         link: function ($scope, element, attrs) {
-        $scope.slyTrips = new Sly($(element).find('.frame'), {
+        $scope.sly = new Sly($(element).find('.frame'), {
             itemNav: 'forceCentered',
             smart: 1,
             activateMiddle: 1,
@@ -148,7 +146,7 @@ angular.module('core.directives', [])
             dynamicHandle: 1,
             clickBar: 1,
         }).init();
-        $scope.slyTrips.on('active', function () {
+        $scope.sly.on('active', function () {
            // $scope.$emit('focus', $scope.slyTrips.rel.activeItem);
         });
         }
