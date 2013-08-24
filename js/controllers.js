@@ -77,7 +77,7 @@ angular.module('core.controllers', [])
         socket.emit('get-address', coords);
     };
     socket.on('result-address', function (response) {
-        angular.forEach($scope.waypoints, function (index, waypoint) {
+        angular.forEach($scope.waypoints, function (waypoint, index) {
             if (waypoint.lat === response.lat
               || waypoint.long === response.long) {
                 waypoint.address = response.address;
