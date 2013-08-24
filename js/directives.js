@@ -73,13 +73,14 @@ angular.module('core.directives', [])
                     return;
                 }
                 var waypoint = $scope.waypoints[this.$index];
-                waypoint.show_address = true
+                waypoint.show_address = true;
                 if (!waypoint.address) {
                     $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
                 }
             }
             $scope.hideAddress = function () {
-                $scope.waypoints[this.$index].show_address = false;
+                var waypoint = $scope.waypoints[this.$index];
+                waypoint.show_address = false;
             }
         }],
         link: function ($scope, element, attrs) {
