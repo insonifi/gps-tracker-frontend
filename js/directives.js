@@ -54,7 +54,7 @@ angular.module('core.directives', [])
             $scope.$on('refresh-lists', function () {
                 $scope.activeItem = 0;
                 $scope.list = $scope.waypoints.filter(function (item) {
-                    return (item.timestamp >= start && item.timestamp <= end);
+                    return (item.timestamp >= $scope.start && item.timestamp <= $scope.end);
                 })
                 $scope.sly.reload();
             });   
