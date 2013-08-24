@@ -97,18 +97,18 @@ body {
   background: #333;
 }
 
-/* Frame */
-.frame {
+/* Waypoint list */
+.waypoints {
   position: absolute;
   right: 20px;
 	width: 200px;
 	height: 800px;
 }
-.frame .slidee {
+.waypoints .slidee {
 /*	padding: 20px 25px;*/
 /*	background: #fff;*/
 }
-.frame ul {
+.waypoints ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -116,7 +116,7 @@ body {
 	font-size: 14px;
 	line-height: 50px;
 }
-.frame ul li {
+.waypoints ul li {
 	float: right;
 	width: 60%;
 	height: 50px;
@@ -127,13 +127,13 @@ body {
 	text-align: center;
 	cursor: pointer;
 }
-.frame ul li.active {
+.waypoints ul li.active {
 	color: #fff;
 	width: 100%;
 	background: #a03232;
 }
 /* Scrollbar */
-.scrollbar {
+.w-scrollbar {
 	position: absolute;
 	right: 10px;
 	width: 2px;
@@ -141,16 +141,74 @@ body {
 	background: #ccc;
 	line-height: 0;
 }
-.scrollbar .handle {
+.w-scrollbar .handle {
 	width: 100%;
 	height: 100px;
 	background: #292a33;
 	cursor: pointer;
 }
-.scrollbar .handle .mousearea {
+.w-scrollbar .handle .mousearea {
 	position: absolute;
 	top: 0;
 	left: -10px;
 	width: 22px;
 	height: 100%;
 }
+/* Trips list */
+.trips {
+  position: absolute;
+  right: 20px;
+    width: 200px;
+	height: 800px;
+}
+.trips .t-slidee {
+/*	padding: 20px 25px;*/
+/*	background: #fff;*/
+}
+.trips ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	font-size: 14px;
+	line-height: 50px;
+}
+.trips ul li {
+	float: right;
+	width: 60%;
+	height: 50px;
+	margin: 0 0 1px;
+	padding: 0;
+	background: #333;
+	color: #ddd;
+	text-align: center;
+	cursor: pointer;
+}
+.trips ul li.active {
+	color: #fff;
+	width: 100%;
+	background: #a03232;
+}
+/* Scrollbar */
+.t-scrollbar {
+	position: absolute;
+	right: 10px;
+	width: 2px;
+	height: 600px;
+	background: #ccc;
+	line-height: 0;
+}
+.t-scrollbar .handle {
+	width: 100%;
+	height: 100px;
+	background: #292a33;
+	cursor: pointer;
+}
+.t-scrollbar .handle .mousearea {
+	position: absolute;
+	top: 0;
+	left: -10px;
+	width: 22px;
+	height: 100%;
+}
+

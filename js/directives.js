@@ -33,12 +33,12 @@ angular.module('core.directives', [])
         transclude: false,
         template: 
             '<div>' + 
-            '<div class="scrollbar">' +
+            '<div class="w-scrollbar">' +
               '<div class="handle">' +
                 '<div class="mousearea"></div>' +
               '</div>' +
             '</div>' +
-            '<div class="frame">' +
+            '<div class="waypoints">' +
               '<ul class="slidee">' +
                 '<li id="{{$index}}" ng-repeat="item in waypoints" ng-click="showAddress()">' +
                 // '<li id="{{$index}}" ng-repeat="item in waypoints | period:start:end" ng-click="showAddress()">' +
@@ -81,7 +81,7 @@ angular.module('core.directives', [])
         }],
         link: function ($scope, element, attrs) {
             var parent = $(element);
-            $scope.sly = new Sly(parent.find('.frame'), {
+            $scope.sly = new Sly(parent.find('.waypoints'), {
                 itemNav: 'forceCentered',
                 smart: 1,
                 activateMiddle: 1,
@@ -90,7 +90,7 @@ angular.module('core.directives', [])
                 touchDragging: 1,
                 releaseSwing: 1,
                 startAt: 0,
-                scrollBar: parent.find('.scrollbar'),
+                scrollBar: parent.find('.w-scrollbar'),
                 scrollBy: 1,
                 speed: 300,
                 elasticBounds: 1,
@@ -114,12 +114,12 @@ angular.module('core.directives', [])
         transclude: false,
         template: 
         '<div>' + 
-        '<div class="scrollbar">' +
+        '<div class="t-scrollbar">' +
           '<div class="handle">' +
             '<div class="mousearea"></div>' +
           '</div>' +
         '</div>' +
-        '<div class="frame">' +
+        '<div class="trips">' +
           '<ul class="slidee">' +
             '<li id="{{$index}}" ng-repeat="trip in trips" ng-click="changePeriod()">' +
               '<div>' +
@@ -137,7 +137,7 @@ angular.module('core.directives', [])
         }],
         link: function ($scope, element, attrs) {
             var parent = $(element);
-            $scope.sly = new Sly(parent.find('.frame'), {
+            $scope.sly = new Sly(parent.find('.trips'), {
                 itemNav: 'forceCentered',
                 smart: 1,
                 activateMiddle: 1,
@@ -146,7 +146,7 @@ angular.module('core.directives', [])
                 touchDragging: 1,
                 releaseSwing: 1,
                 startAt: 0,
-                scrollBar: parent.find('.scrollbar'),
+                scrollBar: parent.find('.t-scrollbar'),
                 scrollBy: 1,
                 speed: 300,
                 elasticBounds: 1,
