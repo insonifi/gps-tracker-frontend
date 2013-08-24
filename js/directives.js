@@ -61,18 +61,17 @@ angular.module('core.directives', [])
             });
             $scope.$on('focus', function (event, index) {
               var waypoint = $scope.waypoints[index];
-              $scope.waypoints[index].show_address = true;
-              $scope.markers[waypoint.module_id] = {
+              $scope.markers['selected']= {
                 lat: waypoint.lat,
                 lng: waypoint.long,
                 message: waypoint.address
               }
-              $scope.waypoints[index].show_address = false; 
+              $scope.waypoints[index].show_address = true; 
               $scope.$digest();
             });
             $scope.showAddress = function () {
                 if (!this) { return; }
-                var waypoint = $rootScope.waypoints[this.$index];
+                var waypoint = $scope.waypoints[this.$index];
                 waypoint.show_address = true
                 if (!waypoint.address) {
                     $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
