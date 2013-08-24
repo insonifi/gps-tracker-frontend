@@ -80,7 +80,8 @@ angular.module('core.directives', [])
             }
         }],
         link: function ($scope, element, attrs) {
-            $scope.sly = new Sly($(element).find('.frame'), {
+            var parent = $(element);
+            $scope.sly = new Sly(parent.find('.frame'), {
                 itemNav: 'forceCentered',
                 smart: 1,
                 activateMiddle: 1,
@@ -89,7 +90,7 @@ angular.module('core.directives', [])
                 touchDragging: 1,
                 releaseSwing: 1,
                 startAt: 0,
-                scrollBar: element.find('.scrollbar'),
+                scrollBar: parent.find('.scrollbar'),
                 scrollBy: 1,
                 speed: 300,
                 elasticBounds: 1,
@@ -135,7 +136,8 @@ angular.module('core.directives', [])
             });    
         }],
         link: function ($scope, element, attrs) {
-            $scope.sly = new Sly($(element).find('.frame'), {
+            var parent = $(element);
+            $scope.sly = new Sly(parent.find('.frame'), {
                 itemNav: 'forceCentered',
                 smart: 1,
                 activateMiddle: 1,
@@ -144,7 +146,7 @@ angular.module('core.directives', [])
                 touchDragging: 1,
                 releaseSwing: 1,
                 startAt: 0,
-                scrollBar: element.find('.scrollbar'),
+                scrollBar: parent.find('.scrollbar'),
                 scrollBy: 1,
                 speed: 300,
                 elasticBounds: 1,
