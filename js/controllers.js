@@ -35,12 +35,6 @@ angular.module('core.controllers', [])
   })
   .controller('mapCtrl', ['$scope', 'socket', function ($scope, socket) {
     var now = (new Date()).valueOf();
-    $scope.map_width = window.innerWidth;
-    $scope.map_height = window.innerHeight;
-    window.onresize = function () {
-        $scope.map_width = window.innerWidth;
-        $scope.map_height = window.innerHeight;
-    }
     angular.extend($scope, {
         riga: {
           lat: 56.9496,
