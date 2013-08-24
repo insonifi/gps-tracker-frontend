@@ -128,13 +128,18 @@ body {
 	cursor: pointer;
 }
 .waypoints ul li.active {
-	color: #fff;
 	width: 100%;
-	background: #a03232;
 }
-.waypoints ul li.active.address {
-    background: #fff;
+.waypoints ul li.active .address {
+    background: #333;
+    color: #ddd;
 	position: relative;
+    right: 10em;
+}
+
+.waypoints ul li.active .time {
+    background: #a03232;
+    color: #fff;
     right: 10em;
 }
 /* Scrollbar */
