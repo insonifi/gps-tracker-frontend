@@ -42,7 +42,7 @@ angular.module('core.directives', [])
               '<ul class="slidee">' +
                 '<li id="{{$index}}" ng-repeat="item in waypoints | period:start:end" ng-click="showAddress()">' +
                   '<div>' +
-                    '<div ng-show="item.show_address" class="address" ng-click="item.show_address=false">{{item.address}}</div><div class="time">{{item.timestamp|date:"HH:mm:ss"}}</div>'+
+                    '<div ng-show="item.show_address" class="address" ng-click="hideAddress()">{{item.address}}</div><div class="time">{{item.timestamp|date:"HH:mm:ss"}}</div>'+
                   '</div>' +
                 '</li>' +
               '</ul>' +
@@ -77,6 +77,9 @@ angular.module('core.directives', [])
                 if (!waypoint.address) {
                     $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
                 }
+            }
+            $scope.hideAddress = function () {
+                $scope.waypoints[this.$index].show_address = false;
             }
         }],
         link: function ($scope, element, attrs) {
