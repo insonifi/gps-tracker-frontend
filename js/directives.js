@@ -66,11 +66,12 @@ angular.module('core.directives', [])
           $scope.$digest();
         });
         $scope.showAddress = function () {
-          var waypoint = $scope.waypoints[this.$index];
-          waypoint.show_address = true
-          if (!waypoint.address) {
+            if (!this) { return; }
+            var waypoint = $scope.waypoints[this.$index];
+            waypoint.show_address = true
+            if (!waypoint.address) {
             $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
-          }
+}
         }
         $scope.active = function () {
             return (this.$index === $scope.activeItem);
