@@ -69,6 +69,9 @@ angular.module('core.directives', [])
             $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
           }
         }
+        $scope.active = function () {
+            return ($index === $scope.activeItem);
+        }
       }],
       link: function ($scope, element, attrs) {
         $scope.slyWaypoints = new Sly($(element).find('.frame'), {
@@ -91,7 +94,7 @@ angular.module('core.directives', [])
         }).init();
         $scope.slyWaypoints.on('active', function () {
             $scope.$emit('blur', $scope.active);
-            $scope.active = $scope.slyWaypoints.rel.activeItem;
+            $scope.activeItem = $scope.slyWaypoints.rel.activeItem;
             $scope.$emit('focus', $scope.active);
         });
       }
