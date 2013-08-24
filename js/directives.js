@@ -70,7 +70,7 @@ angular.module('core.directives', [])
           }
         }
         $scope.active = function () {
-            return ($index === $scope.activeItem);
+            return (this.$index === $scope.activeItem);
         }
       }],
       link: function ($scope, element, attrs) {
