@@ -66,7 +66,7 @@ angular.module('core.directives', [])
                 lng: waypoint.long,
                 message: waypoint.address
               }
-              $scope.waypoints[index].show_address = true; 
+              //$scope.waypoints[index].show_address = true; 
               $scope.$digest();
             });
             $scope.showAddress = function () {
