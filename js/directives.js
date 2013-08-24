@@ -121,7 +121,7 @@ angular.module('core.directives', [])
         '</div>',
         controller: ['$scope', function ($scope) {
             
-        }]
+        }],
         link: function ($scope, element, attrs) {
         $scope.slyTrips = new Sly($(element).find('.frame'), {
             itemNav: 'forceCentered',
