@@ -5,7 +5,7 @@
 angular.module('core.filters', []).
   filter('period', function() {
     return function(list, start, end) {
-      return list.filer(function (item) {
+      return list.filter(function (item) {
           return (item.timestamp >= start && item.timestamp <= end);
       })
     }
