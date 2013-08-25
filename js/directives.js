@@ -126,7 +126,7 @@ angular.module('core.directives', [])
         '</div>' +
         '<div class="trips">' +
           '<ul class="slidee">' +
-            '<li id="{{$index}}" ng-repeat="trip in trips" ng-click="changePeriod()">' +
+            '<li id="{{$index}}" ng-repeat="trip in trips"">' +
               '<div>' +
                 '<span>{{trip.addressA}}</span><span>{{trip.addressB}}</span>'+
               '</div>' +
@@ -139,14 +139,13 @@ angular.module('core.directives', [])
             $scope.$on('refresh-trips', function () {
                 $scope.sly.reload();
             });
-            $scope.changePeriod = function () {
-                var tripIdx = this.$index
-                $scope.path = $scope.trips[tripIdx];
-                $scope.start = $scope[tripIdx].start;
-                $scope.start = $scope[tripIdx].end;
+            $scope.$on('focus', function (index) {
+                $scope.path = $scope.trips[index];
+                $scope.start = $scope.trips[index].start;
+                $scope.end = $scope.trips[index].end;
                 $scope.$root.$digest();
-                $scope.$root.$emit('refres-waypoints');
-            }
+                $scope.$root.$emit('refresh-waypoints');
+            });
         }],
         link: function ($scope, element, attrs) {
             var parent = $(element);
@@ -169,7 +168,7 @@ angular.module('core.directives', [])
                 clickBar: 1,
             }).init();
             $scope.sly.on('active', function () {
-               // $scope.$emit('focus', $scope.slyTrips.rel.activeItem);
+               $scope.$emit('focus', $scope.slyTrips.rel.activeItem);
             });
         }
     }

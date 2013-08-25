@@ -110,7 +110,6 @@ angular.module('core.controllers', [])
         $scope.start = $scope.trips[0].start;
         $scope.end = $scope.trips[0].end;
         $scope.$broadcast('refresh-trips');
-        $scope.$broadcast('refresh-waypoints');
     });
     /* Get address for coordinates */
     $scope.requestAddress = function (coords) {
