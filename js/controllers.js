@@ -59,6 +59,7 @@ angular.module('core.controllers', [])
           zoom: 12
         },
         markers: {},
+        path: {},
         defaults: {
             doubleClickZoom: false,
             maxZoom: 18
@@ -96,8 +97,6 @@ angular.module('core.controllers', [])
     socket.on('query-end', function (count) {
         console.log('Found', count, 'waypoints');
         $scope.notReceiving = true;
-        $scope.start = $scope.trips[0].start;
-        $scope.end = $scope.trips[0].end;
         $scope.$broadcast('refresh-trips');
     });
     /* Get address for coordinates */
