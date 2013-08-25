@@ -36,16 +36,13 @@ angular.module('core.controllers', [])
   .controller('mapCtrl', ['$scope', 'socket', function ($scope, socket) {
     var now,
         tripIdx,
-        length,
+        last,
         parking_time = 300 * 1000,
         init_vars = function () {
             now = (new Date()).valueOf();
             tripIdx = 0;
-            length = 0;
+            last = -1;
             $scope.trips = [];
-            $scope.trips[tripIdx] = [];
-            $scope.trips[tripIdx].start = 0;
-            $scope.trips[tripIdx].end = 0;
             $scope.waypoints = [];
             $scope.start = now;
             $scope.end = now;
@@ -80,20 +77,25 @@ angular.module('core.controllers', [])
         $scope.waypoints.push(waypoint);
         
         /* Detect trip */
-        if (waypoint.timestamp - $scope.trips[tripIdx].end > parking_time) {
-            tripIdx += 1;
+        if (last === -1) {
             $scope.trips[tripIdx].start = waypoint.timestamp;
-            length = $scope.trips[tripIdx].length - 1;
+            last = $scope.trips[tripIdx].length - 1;
+        } else {
+            if (waypoint.timestamp - $scope.trips[tripIdx].end > parking_time) {
+                tripIdx += 1;
+                $scope.trips[tripIdx].start = waypoint.timestamp;
+                last = $scope.trips[tripIdx].length - 1;
+            }
         }
-        if ($scope.trips[tripIdx][length].lat !== waypoint.lat &&
-            $scope.trips[tripIdx][length].lng !== waypoint.lng) {
+        if ($scope.trips[tripIdx][last].lat !== waypoint.lat &&
+            $scope.trips[tripIdx][last].lng !== waypoint.lng) {
             
             $scope.trips[tripIdx].push({
                 lat: waypoint.lat,
                 lng: waypoint.long,
             });
             $scope.trips[tripIdx].end = waypoint.timestamp;
-            length = $scope.trips[tripIdx].length - 1;
+            last = $scope.trips[tripIdx].length - 1;
         }
     });
     socket.on('query-end', function (count) {
