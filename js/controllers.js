@@ -46,6 +46,7 @@ angular.module('core.controllers', [])
             last = 0;
             $scope.waypoints = [];
             $scope.trips = [];
+            $scope.trips[0] = {};
             $scope.trips[0].addressA = 'All';
             $scope.trips[0].addressB = 'waypoints';
             $scope.trips[0].start = now;
