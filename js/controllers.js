@@ -59,7 +59,7 @@ angular.module('core.controllers', [])
           zoom: 12
         },
         markers: {},
-        path: {},
+        paths: {},
         defaults: {
             doubleClickZoom: false,
             maxZoom: 18

@@ -56,14 +56,17 @@ angular.module('core.directives', [])
                 $scope.activeItem = -1;
                 $scope.start = start;
                 $scope.end = end;
-                $scope.path = $scope.waypoints.filter(function (item) {
+                $scope.paths.['selected'] = {
+                    weight: 3,
+                    opacity: 0.618
+                };
+                $scope.paths.['selected'].latlngs = $scope.waypoints.filter(function (item) {
                     return (item.timestamp >= start && item.timestamp <= end);
                 })
                 .map(function (item) {
                     return {
                     lat: item.lat,
                     lng: item.long,
-                    message: item.address
                 }
                 });
                 $scope.$digest();
