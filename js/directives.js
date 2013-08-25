@@ -138,7 +138,11 @@ angular.module('core.directives', [])
         controller: ['$scope', function ($scope) {
             $scope.$on('refresh-lists', function () {
                 $scope.sly.reload();
-            });    
+            });
+            $scope.changePeriod = function () {
+                $scope.path = $scope.trips[this.$index];
+                $scope.$root.$digest();
+            }
         }],
         link: function ($scope, element, attrs) {
             var parent = $(element);

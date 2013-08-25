@@ -41,7 +41,8 @@ angular.module('core.controllers', [])
         init_vars = function () {
             now = (new Date()).valueOf();
             tripIdx = 0;
-            last = -1;
+            last = 0;
+            $scope.trips[tripIdx] = [];
             $scope.trips = [];
             $scope.waypoints = [];
             $scope.start = now;
@@ -77,7 +78,7 @@ angular.module('core.controllers', [])
         $scope.waypoints.push(waypoint);
         
         /* Detect trip */
-        if (last === -1) {
+        if (last === 0) {
             $scope.trips[tripIdx] = [];
             $scope.trips[tripIdx].start = waypoint.timestamp;
             $scope.trips[tripIdx].push({
@@ -106,6 +107,8 @@ angular.module('core.controllers', [])
     socket.on('query-end', function (count) {
       console.log('Found', count, 'waypoints');
       $scope.notReceiving = true;
+      $scope.trips[0].start = $scope.start;
+      $scope.trips[0].end = $scope.end;
       $scope.$broadcast('refresh-lists');
     });
     /* Get address for coordinates */
