@@ -109,8 +109,9 @@ angular.module('core.controllers', [])
                 previous = $scope.waypoints[i - 1].timestamp;
                 current = $scope.waypoints[i].timestamp;
                 if (current - previous > parking_time) {
-                    $scope.trips[trip_idx].end = current;
-                    $scope.trips[trip_idx].addressB = current.getMonth();
+                    $scope.trips[trip_idx].end = previous;
+                    $scope.trips[trip_idx].addressB = previous.getMonth();
+                    trip_idx += 1;
                 }
                 if (!$scope.trips[trip_idx]) {
                     $scope.trips[trip_idx] = {
@@ -120,7 +121,7 @@ angular.module('core.controllers', [])
                     };
                 }
             }
-            console.log('Detected', $scope.trips.length, 'trips');
+            console.log('Detected', $scope.trips.length - 1, 'trips');
         }) ();
         $scope.$broadcast('refresh-trips');
     });
