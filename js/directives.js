@@ -71,6 +71,7 @@ angular.module('core.directives', [])
                 });
                 $scope.$digest();
                 $scope.sly.reload();
+                $scope.sly.item(0);
             });   
             $scope.$on('blur', function (event, index) {
                 if (index === -1) { return; }
@@ -155,6 +156,7 @@ angular.module('core.directives', [])
         controller: ['$scope', function ($scope) {
             $scope.$on('refresh-trips', function () {
                 $scope.sly.reload();
+                $scope.sly.item(0);
             });
             $scope.$on('focus', function (event, index) {
                 $scope.$root.$broadcast('refresh-waypoints', 
