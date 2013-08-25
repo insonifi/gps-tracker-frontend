@@ -137,7 +137,7 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', function ($scope) {
             $scope.$on('refresh-lists', function () {
-                
+                $scope.sly.reload();
             });    
         }],
         link: function ($scope, element, attrs) {
