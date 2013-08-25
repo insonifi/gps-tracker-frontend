@@ -56,7 +56,7 @@ angular.module('core.directives', [])
                 $scope.activeItem = -1;
                 $scope.start = start;
                 $scope.end = end;
-                $scope.paths.['selected'] = {
+                $scope.paths['selected'] = {
                     weight: 3,
                     opacity: 0.618
                 };
