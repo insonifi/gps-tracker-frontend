@@ -91,7 +91,7 @@ angular.module('core.controllers', [])
             if (a.timestamp < b.timestamp) {
                 return 1;
             }
-            if (a.timestamo > b.timestamp) {
+            if (a.timestamp > b.timestamp) {
                 return -1;
             }
             return 0;
@@ -117,7 +117,7 @@ angular.module('core.controllers', [])
                 $scope.trips[trip_idx].start = Math.min(waypoint.timestamp, $scope.trips[trip_idx].start);
                 $scope.trips[trip_idx].end = Math.max(waypoint.timestamp, $scope.trips[trip_idx].end);
             }
-        }) ()
+        }) ();
         $scope.$broadcast('refresh-trips');
     });
     /* Get address for coordinates */
