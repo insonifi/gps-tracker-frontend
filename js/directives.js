@@ -71,7 +71,6 @@ angular.module('core.directives', [])
                 });
                 $scope.$digest();
                 $scope.sly.reload();
-                $scope.sly.item(0);
             });   
             $scope.$on('blur', function (event, index) {
                 if (index === -1) { return; }
@@ -127,6 +126,9 @@ angular.module('core.directives', [])
                 $scope.activeItem = $scope.sly.rel.activeItem;
                 $scope.$emit('focus', $scope.activeItem);
             });
+            $scope.sly.on('load', function () {
+                $scope.sly.item(0);
+            })
         }
     }
   })
@@ -156,7 +158,6 @@ angular.module('core.directives', [])
         controller: ['$scope', function ($scope) {
             $scope.$on('refresh-trips', function () {
                 $scope.sly.reload();
-                $scope.sly.item(0);
             });
             $scope.$on('focus', function (event, index) {
                 $scope.$root.$broadcast('refresh-waypoints', 
@@ -188,6 +189,9 @@ angular.module('core.directives', [])
             $scope.sly.on('active', function () {
                $scope.$emit('focus', $scope.sly.rel.activeItem);
             });
+            $scope.sly.on('load', function () {
+                $scope.sly.item(0);
+            })
         }
     }
   })
