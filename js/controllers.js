@@ -42,15 +42,8 @@ angular.module('core.controllers', [])
         init_vars = function () {
             now = (new Date()).valueOf();
             trip_idx = 0;
-            first = true;
-            last = 0;
             $scope.waypoints = [];
             $scope.trips = [];
-            $scope.trips[0] = {};
-            $scope.trips[0].addressA = 'All';
-            $scope.trips[0].addressB = 'waypoints';
-            $scope.trips[0].start = now;
-            $scope.trips[0].end = now;
         };
     angular.extend($scope, {
         riga: {
@@ -74,6 +67,11 @@ angular.module('core.controllers', [])
         if($scope.notReceiving) {
             init_vars()
             $scope.notReceiving = false;
+            $scope.trips[0] = {};
+            $scope.trips[0].addressA = 'All';
+            $scope.trips[0].addressB = 'waypoints';
+            $scope.trips[0].start = now;
+            $scope.trips[0].end = now;
         }
         /* Receive waypoint */
         overall = $scope.trips[0];
