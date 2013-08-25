@@ -78,7 +78,12 @@ angular.module('core.controllers', [])
         
         /* Detect trip */
         if (last === -1) {
+            $scope.trips[tripIdx] = [];
             $scope.trips[tripIdx].start = waypoint.timestamp;
+            $scope.trips[tripIdx].push({
+                lat: waypoint.lat,
+                lng: waypoint.long,
+            });
             last = $scope.trips[tripIdx].length - 1;
         } else {
             if (waypoint.timestamp - $scope.trips[tripIdx].end > parking_time) {
