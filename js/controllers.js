@@ -70,8 +70,8 @@ angular.module('core.controllers', [])
             $scope.notReceiving = false;
         }
         /* Receive waypoint */
-        $scope.start = Math.min(waypoint.timestamp, $scope.start);
-        $scope.end = Math.max(waypoint.timestamp, $scope.end);
+        $scope.trips[0].start = Math.min(waypoint.timestamp, $scope.trips[0].start);
+        $scope.trips[0].end = Math.max(waypoint.timestamp, $scope.trips[0].end);
         waypoint.timestamp = new Date(waypoint.timestamp); /* convert to date */
         waypoint.show_address = false;
         waypoint.address = null;
@@ -105,11 +105,12 @@ angular.module('core.controllers', [])
         }
     });
     socket.on('query-end', function (count) {
-      console.log('Found', count, 'waypoints');
-      $scope.notReceiving = true;
-      $scope.trips[0].start = $scope.start;
-      $scope.trips[0].end = $scope.end;
-      $scope.$broadcast('refresh-lists');
+        console.log('Found', count, 'waypoints');
+        $scope.notReceiving = true;
+        $scope.start = $scope.trips[0].start;
+        $scope.end = $scope.trips[0].end;
+        $scope.$broadcast('refresh-trips');
+        $scope.$broadcast('refresh-waypoints');
     });
     /* Get address for coordinates */
     $scope.requestAddress = function (coords) {

@@ -52,7 +52,7 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', function ($scope) {
             $scope.activeItem = 0;
-            $scope.$on('refresh-lists', function () {
+            $scope.$on('refresh-waypoints', function () {
                 $scope.activeItem = 0;
                 $scope.sly.reload();
             });   
@@ -136,12 +136,16 @@ angular.module('core.directives', [])
         '</div>',
         scope: true,
         controller: ['$scope', function ($scope) {
-            $scope.$on('refresh-lists', function () {
+            $scope.$on('refresh-trips', function () {
                 $scope.sly.reload();
             });
             $scope.changePeriod = function () {
-                $scope.path = $scope.trips[this.$index];
+                var tripIdx = this.$index
+                $scope.path = $scope.trips[tripIdx];
+                $scope.start = $scope[tripIdx].start;
+                $scope.start = $scope[tripIdx].end;
                 $scope.$root.$digest();
+                $scope.$root.$emit('refres-waypoints');
             }
         }],
         link: function ($scope, element, attrs) {
