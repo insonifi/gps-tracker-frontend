@@ -64,11 +64,6 @@ div.angular-leaflet-map {
     width: 100%;
     height: 100%;
 }
-/* set Sly top position*/
-.top-indent {
-    position: absolute;
-    top: 6em;
-}
 /* Waypoint list */
 .waypoints {
     right: 20px;

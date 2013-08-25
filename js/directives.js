@@ -32,7 +32,7 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template: 
-            '<div class="top-indent">' + 
+            '<div>' + 
             '<div class="w-scrollbar">' +
               '<div class="handle">' +
                 '<div class="mousearea"></div>' +
@@ -118,7 +118,7 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template: 
-        '<div class="top-indent">' + 
+        '<div>' + 
         '<div class="t-scrollbar">' +
           '<div class="handle">' +
             '<div class="mousearea"></div>' +
