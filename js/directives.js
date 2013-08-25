@@ -53,7 +53,7 @@ angular.module('core.directives', [])
         controller: ['$scope', function ($scope) {
             $scope.activeItem = 0;
             $scope.$on('refresh-waypoints', function () {
-                $scope.activeItem = 0;
+                $scope.activeItem = -1;
                 $scope.sly.reload();
             });   
             $scope.$on('blur', function (event, index) {
@@ -144,7 +144,7 @@ angular.module('core.directives', [])
                 $scope.start = $scope.trips[index].start;
                 $scope.end = $scope.trips[index].end;
                 $scope.$root.$digest();
-                $scope.$root.$emit('refresh-waypoints');
+                $scope.$root.$broadcast('refresh-waypoints');
             });
         }],
         link: function ($scope, element, attrs) {
