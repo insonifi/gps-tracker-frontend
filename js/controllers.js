@@ -47,8 +47,8 @@ angular.module('core.controllers', [])
             $scope.trips = [];
             $scope.trips[trip_idx] = [];
             $scope.waypoints = [];
-            $scope.start = now;
-            $scope.end = now;
+            $scope.trips[0].start = now;
+            $scope.trips[0].end = now;
         };
     angular.extend($scope, {
         riga: {
