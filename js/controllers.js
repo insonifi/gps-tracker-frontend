@@ -84,7 +84,10 @@ angular.module('core.controllers', [])
         /* Detect trip */
         if (first || waypoint.timestamp - $scope.trips[trip_idx].end > parking_time) {
             trip_idx += 1;
-            $scope.trips[trip_idx] = {};
+            $scope.trips[trip_idx] = {
+                start: now,
+                end: now
+            };
             $scope.trips[trip_idx].start = Math.min(waypoint.timestamp, $scope.trips[trip_idx].start);
             first = false; 
         }
