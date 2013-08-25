@@ -8,7 +8,7 @@ input.field {
   border: 2px solid white;  
 }
 input#update-pwd {
-	width: 5em;
+    width: 5em;
 }
 input:focus {
   border-bottom-color: #a03232;
@@ -185,6 +185,7 @@ div.angular-leaflet-map {
 	height: 80%;
 	background: #ccc;
 	line-height: 0;
+    top: 0;
 }
 .t-scrollbar .handle {
 	width: 100%;
