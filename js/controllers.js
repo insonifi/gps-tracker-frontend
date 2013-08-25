@@ -44,8 +44,6 @@ angular.module('core.controllers', [])
             trip_idx = 0;
             first = true;
             last = 0;
-            $scope.trips = [];
-            $scope.trips[trip_idx] = [];
             $scope.waypoints = [];
             $scope.trips[0].addressA = 'All';
             $scope.trips[0].addressB = 'waypoints';
@@ -70,33 +68,54 @@ angular.module('core.controllers', [])
     $scope.notReceiving = true;
     /* Query waypoints */
     socket.on('query-waypoint', function (waypoint) {
+        var overall;
         if($scope.notReceiving) {
             init_vars()
             $scope.notReceiving = false;
         }
         /* Receive waypoint */
-        $scope.trips[0].start = Math.min(waypoint.timestamp, $scope.trips[0].start);
-        $scope.trips[0].end = Math.max(waypoint.timestamp, $scope.trips[0].end);
+        overall = $scope.trips[0];
+        overall.start = Math.min(waypoint.timestamp, overall.start);
+        overall.end = Math.max(waypoint.timestamp, overall.end);
         waypoint.timestamp = new Date(waypoint.timestamp); /* convert to date */
         waypoint.show_address = false;
         waypoint.address = null;
         $scope.waypoints.push(waypoint);
-        
-        /* Detect trip */
-        if (first || waypoint.timestamp - $scope.trips[trip_idx].end > parking_time) {
-            trip_idx += 1;
-            $scope.trips[trip_idx] = {
-                start: now,
-                end: now
-            };
-            $scope.trips[trip_idx].start = Math.min(waypoint.timestamp, $scope.trips[trip_idx].start);
-            first = false; 
-        }
-        $scope.trips[trip_idx].end = Math.max(waypoint.timestamp, $scope.trips[trip_idx].end);
     });
     socket.on('query-end', function (count) {
         console.log('Found', count, 'waypoints');
         $scope.notReceiving = true;
+        $scope.sort(function (a, b) {
+            if (a.timestamp < b.timestamp) {
+                return 1;
+            }
+            if (a.timestamo > b.timestamp) {
+                return -1;
+            }
+            return 0;
+        })
+        /* Detect trip */
+        (function () {
+            var i,
+                trip_idx = 0,
+                waypoint,
+                now = (new Date()).valueOf(),
+                length = $scope.waypoints.length;
+            for (i = 0; i < length; i += 1) {
+                waypoint = $scope.waypoints[i];
+                if (waypoint.timestamp - $scope.trips[trip_idx].end > parking_time) {
+                    trip_idx += 1;;
+                    if (!$scope.trips[trip_idx]) {
+                        $scope.trips[trip_idx] = {
+                            start: now,
+                            end: 0
+                        }
+                    }
+                }
+                $scope.trips[trip_idx].start = Math.min(waypoint.timestamp, $scope.trips[trip_idx].start);
+                $scope.trips[trip_idx].end = Math.max(waypoint.timestamp, $scope.trips[trip_idx].end);
+            }
+        }) ()
         $scope.$broadcast('refresh-trips');
     });
     /* Get address for coordinates */
