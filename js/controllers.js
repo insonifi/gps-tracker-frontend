@@ -120,6 +120,7 @@ angular.module('core.controllers', [])
                     };
                 }
             }
+            console.log('Detected', $scope.trips.length, 'trips');
         }) ();
         $scope.$broadcast('refresh-trips');
     });
