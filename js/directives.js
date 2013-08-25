@@ -51,14 +51,16 @@ angular.module('core.directives', [])
             '</div>',
         scope: true,
         controller: ['$scope', function ($scope) {
-            $scope.activeItem = 0;
+            $scope.activeItem = -1;
             $scope.$on('refresh-waypoints', function (event, start, end) {
                 $scope.activeItem = -1;
                 $scope.start = start;
                 $scope.end = end;
+                $scope.$digest();
                 $scope.sly.reload();
             });   
             $scope.$on('blur', function (event, index) {
+                if (index === -1) { return; }
                 $scope.waypoints[index].show_address = false; 
             });
             $scope.$on('focus', function (event, index) {
