@@ -87,7 +87,7 @@ angular.module('core.controllers', [])
     socket.on('query-end', function (count) {
         console.log('Found', count, 'waypoints');
         $scope.notReceiving = true;
-        $scope.sort(function (a, b) {
+        $scope.waypoints.sort(function (a, b) {
             if (a.timestamp < b.timestamp) {
                 return 1;
             }
