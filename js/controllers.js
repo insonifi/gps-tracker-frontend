@@ -125,6 +125,7 @@ angular.module('core.controllers', [])
             $scope.trips[trip_idx].end = current;
             $scope.trips[trip_idx].addressB = current.getMonth();
             console.log('Detected', $scope.trips.length - 1, 'trips');
+            $scope.$digest();
         }) ();
         $scope.$broadcast('refresh-trips');
     });
