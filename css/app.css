@@ -76,14 +76,12 @@ div.angular-leaflet-map {
     /*position: absolute;*/
     /*top: 0;*/
     /*height: 100%;*/
-    overflow-y: hidden;
-    overflow-x: visible;
 }
 /* Waypoint list */
 .waypoints {
     right: 20px;
 	width: 6em;
-	height: 100%;
+	height: 700px;
     position: absolute;
     top: 0;
 }
@@ -131,14 +129,14 @@ div.angular-leaflet-map {
 	position: absolute;
 	right: 10px;
 	width: 2px;
-	height: 80%;
+	height: 700px;
 	background: #ccc;
 	line-height: 0;
     top: 0;
 }
 .w-scrollbar .handle {
 	width: 100%;
-	height: 20%;
+	height: 200px;
 	background: #292a33;
 	cursor: pointer;
 }
@@ -147,13 +145,13 @@ div.angular-leaflet-map {
 	top: 0;
 	right: -10px;
 	width: 22px;
-	height: 100%;
+	height: 700px;
 }
 /* Trips list */
 .trips {
     left: 20px;
     width: 10em;
-    height: 100%;
+    height: 700px;
     position: absolute;
     top: 0;
 }
@@ -190,14 +188,14 @@ div.angular-leaflet-map {
 	position: absolute;
 	left: 10px;
 	width: 2px;
-	height: 80%;
+	height: 700px;
 	background: #ccc;
 	line-height: 0;
     top: 0;
 }
 .t-scrollbar .handle {
 	width: 100%;
-	height: 20%;
+	height: 100px;
 	background: #292a33;
 	cursor: pointer;
 }
@@ -206,6 +204,6 @@ div.angular-leaflet-map {
 	top: 0;
 	left: -10px;
 	width: 22px;
-	height: 100%;
+	height: 700px;
 }
 
