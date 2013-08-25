@@ -1,8 +1,9 @@
 html {
+    width: 100%;
     height: 100%;
 }
 body {
-    height: 98%;
+    height: 99%;
     overflow: hidden;
 }
 input {
@@ -25,7 +26,7 @@ input[dtpicker] {
 }
 select {
     border-radius: 0.2em;
-    padding: 0.2em;
+	padding: 0.2em;
 	background: #E5E3E1;
 }
 #query-params {
@@ -82,7 +83,7 @@ div.angular-leaflet-map {
 .waypoints {
     right: 20px;
 	width: 6em;
-	height: 700px;
+	height: 100%;
     position: absolute;
     top: 0;
 }
@@ -110,7 +111,7 @@ div.angular-leaflet-map {
 	cursor: pointer;
 }
 .waypoints ul li.active {
-	/*width: 100%;*/
+	padding-right: 1em;
 }
 .waypoints ul li.active .address {
     background: #333;
@@ -130,14 +131,14 @@ div.angular-leaflet-map {
 	position: absolute;
 	right: 10px;
 	width: 2px;
-	height: 700px;
+	height: 80%;
 	background: #ccc;
 	line-height: 0;
     top: 0;
 }
 .w-scrollbar .handle {
 	width: 100%;
-	height: 200px;
+	height: 20%;
 	background: #292a33;
 	cursor: pointer;
 }
@@ -146,13 +147,13 @@ div.angular-leaflet-map {
 	top: 0;
 	right: -10px;
 	width: 22px;
-	height: 700px;
+	height: 100%;
 }
 /* Trips list */
 .trips {
     left: 20px;
     width: 10em;
-    height: 700px;
+    height: 100%;
     position: absolute;
     top: 0;
 }
@@ -189,14 +190,14 @@ div.angular-leaflet-map {
 	position: absolute;
 	left: 10px;
 	width: 2px;
-	height: 700px;
+	height: 80%;
 	background: #ccc;
 	line-height: 0;
     top: 0;
 }
 .t-scrollbar .handle {
 	width: 100%;
-	height: 100px;
+	height: 20%;
 	background: #292a33;
 	cursor: pointer;
 }
@@ -205,6 +206,6 @@ div.angular-leaflet-map {
 	top: 0;
 	left: -10px;
 	width: 22px;
-	height: 700px;
+	height: 100%;
 }
 
