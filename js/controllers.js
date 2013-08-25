@@ -37,8 +37,8 @@ angular.module('core.controllers', [])
     var now,
         tripIdx,
         length,
-        parking_time = 300 * 1000;
-        init = function () {
+        parking_time = 300 * 1000,
+        init_vars = function () {
             now = (new Date()).valueOf();
             tripIdx = 0;
             length = 0;
@@ -63,7 +63,7 @@ angular.module('core.controllers', [])
         }
     });
     /* Initialise variables */
-    init();
+    init_vars();
     $scope.notReceiving = true;
     /* Query waypoints */
     socket.on('query-waypoint', function (waypoint) {
