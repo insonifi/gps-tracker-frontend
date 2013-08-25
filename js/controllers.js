@@ -47,6 +47,8 @@ angular.module('core.controllers', [])
             $scope.trips = [];
             $scope.trips[trip_idx] = [];
             $scope.waypoints = [];
+            $scope.trips[0].addressA = 'All';
+            $scope.trips[0].addressB = 'waypoints';
             $scope.trips[0].start = now;
             $scope.trips[0].end = now;
         };
@@ -84,6 +86,10 @@ angular.module('core.controllers', [])
             trip_idx += 1;
             $scope.trips[trip_idx] = [];
             $scope.trips[trip_idx].start = waypoint.timestamp;
+            $scope.trips[trip_idx].push({
+                lat: waypoint.lat,
+                lng: waypoint.long,
+            });
             last = $scope.trips[trip_idx].length - 1;
             first = false; 
         }
