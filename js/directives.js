@@ -139,7 +139,7 @@ angular.module('core.directives', [])
             $scope.$on('refresh-trips', function () {
                 $scope.sly.reload();
             });
-            $scope.$on('focus', function (index) {
+            $scope.$on('focus', function (event, index) {
                 $scope.path = $scope.trips[index];
                 $scope.start = $scope.trips[index].start;
                 $scope.end = $scope.trips[index].end;
