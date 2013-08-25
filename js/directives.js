@@ -127,7 +127,7 @@ angular.module('core.directives', [])
                 $scope.$emit('focus', $scope.activeItem);
             });
             $scope.sly.on('load', function () {
-                $scope.sly.item(0);
+                $scope.sly.activate(0);
             })
         }
     }
@@ -190,7 +190,7 @@ angular.module('core.directives', [])
                $scope.$emit('focus', $scope.sly.rel.activeItem);
             });
             $scope.sly.on('load', function () {
-                $scope.sly.item(0);
+                $scope.sly.activate(0);
             })
         }
     }
