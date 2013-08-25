@@ -76,6 +76,8 @@ div.angular-leaflet-map {
     /*position: absolute;*/
     /*top: 0;*/
     /*height: 100%;*/
+    overflow-y: hidden;
+    overflow-x: visible;
 }
 /* Waypoint list */
 .waypoints {
@@ -83,8 +85,6 @@ div.angular-leaflet-map {
 	width: 6em;
 	height: 100%;
     position: absolute;
-    overflow-x: visible;
-    overflow-y: hidden;
     top: 0;
 }
 .waypoints .slidee {
@@ -155,8 +155,6 @@ div.angular-leaflet-map {
     width: 10em;
     height: 100%;
     position: absolute;
-    overflow-x: visible;
-    overflow-y: hidden;
     top: 0;
 }
 .trips .t-slidee {
