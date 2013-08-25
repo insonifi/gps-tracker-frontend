@@ -85,7 +85,7 @@ angular.module('core.controllers', [])
         if (first || waypoint.timestamp - $scope.trips[trip_idx].end > parking_time) {
             trip_idx += 1;
             $scope.trips[trip_idx] = [];
-            $scope.trips[trip_idx].start = waypoint.timestamp;
+            $scope.trips[trip_idx].start = Math.min(waypoint.timestamp, $scope.trips[trip_idx].start);
             $scope.trips[trip_idx].push({
                 lat: waypoint.lat,
                 lng: waypoint.long,
@@ -100,7 +100,7 @@ angular.module('core.controllers', [])
                 lat: waypoint.lat,
                 lng: waypoint.long,
             });
-            $scope.trips[trip_idx].end = waypoint.timestamp;
+            $scope.trips[trip_idx].end = Math.max(waypoint.timestamp, $scope.trips[trip_idx].end);
             last = $scope.trips[trip_idx].length - 1;
         }
     });
