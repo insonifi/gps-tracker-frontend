@@ -168,7 +168,7 @@ angular.module('core.directives', [])
                 clickBar: 1,
             }).init();
             $scope.sly.on('active', function () {
-               $scope.$emit('focus', $scope.slyTrips.rel.activeItem);
+               $scope.$emit('focus', $scope.sly.rel.activeItem);
             });
         }
     }
