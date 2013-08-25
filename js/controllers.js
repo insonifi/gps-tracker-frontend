@@ -34,7 +34,22 @@ angular.module('core.controllers', [])
     }
   })
   .controller('mapCtrl', ['$scope', 'socket', function ($scope, socket) {
-    var now = (new Date()).valueOf();
+    var now,
+        tripIdx,
+        length,
+        parking_time = 300 * 1000;
+        init = function () {
+            now = (new Date()).valueOf();
+            tripIdx = 0;
+            length = 0;
+            $scope.trips = [];
+            $scope.trips[tripIdx] = [];
+            $scope.trips[tripIdx].start = 0;
+            $scope.trips[tripIdx].end = 0;
+            $scope.waypoints = [];
+            $scope.start = now;
+            $scope.end = now;
+        };
     angular.extend($scope, {
         riga: {
           lat: 56.9496,
@@ -47,25 +62,39 @@ angular.module('core.controllers', [])
             maxZoom: 18
         }
     });
-    /* Query waypoints */
-    $scope.waypoints = [];
-    $scope.start = now
-    $scope.end = now;
+    /* Initialise variables */
+    init();
     $scope.notReceiving = true;
+    /* Query waypoints */
     socket.on('query-waypoint', function (waypoint) {
         if($scope.notReceiving) {
-            now = (new Date()).valueOf();
-            $scope.waypoints = [];
-            $scope.start = now;
-            $scope.end = now;
+            init()
             $scope.notReceiving = false;
         }
+        /* Receive waypoint */
         $scope.start = Math.min(waypoint.timestamp, $scope.start);
         $scope.end = Math.max(waypoint.timestamp, $scope.end);
         waypoint.timestamp = new Date(waypoint.timestamp); /* convert to date */
         waypoint.show_address = false;
         waypoint.address = null;
         $scope.waypoints.push(waypoint);
+        
+        /* Detect trip */
+        if (waypoint.timestamp - $scope.trips[tripIdx].end > parking_time) {
+            tripIdx += 1;
+            $scope.trips[tripIdx].start = waypoint.timestamp;
+            length = $scope.trips[tripIdx].length - 1;
+        }
+        if ($scope.trips[tripIdx][length].lat !== waypoint.lat &&
+            $scope.trips[tripIdx][length].lng !== waypoint.lng) {
+            
+            $scope.trips[tripIdx].push({
+                lat: waypoint.lat,
+                lng: waypoint.long,
+            });
+            $scope.trips[tripIdx].end = waypoint.timestamp;
+            length = $scope.trips[tripIdx].length - 1;
+        }
     });
     socket.on('query-end', function (count) {
       console.log('Found', count, 'waypoints');
