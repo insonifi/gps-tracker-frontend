@@ -67,15 +67,16 @@ div.angular-leaflet-map {
 
 /* Sly */
 .sly-container {
-    position: absolute;
-    top: 0;
-    height: 100%;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*height: 100%;*/
 }
 /* Waypoint list */
 .waypoints {
     right: 20px;
-	width: 120px;
+	width: 6em;
 	height: 100%;
+    position: absolute
 }
 .waypoints .slidee {
 /*	padding: 20px 25px;*/
@@ -141,8 +142,9 @@ div.angular-leaflet-map {
 /* Trips list */
 .trips {
     left: 20px;
-    width: 200px;
+    width: 10em;
     height: 100%;
+    position: absolute
 }
 .trips .t-slidee {
 /*	padding: 20px 25px;*/
