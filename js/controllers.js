@@ -95,7 +95,7 @@ angular.module('core.controllers', [])
                 return -1;
             }
             return 0;
-        })
+        });
         /* Detect trip */
         (function () {
             var i,
