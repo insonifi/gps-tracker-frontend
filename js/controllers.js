@@ -109,6 +109,9 @@ angular.module('core.controllers', [])
                 previous = $scope.waypoints[i - 1].timestamp;
                 current = $scope.waypoints[i].timestamp;
                 if (current - previous > parking_time) {
+                    if ($scope.trips[trip_idx].end === $scope.trips[trip_idx].start) {
+                        continue;
+                    }
                     $scope.trips[trip_idx].end = previous;
                     $scope.trips[trip_idx].addressB = previous.getMonth();
                     trip_idx += 1;
