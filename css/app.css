@@ -111,7 +111,7 @@ div.angular-leaflet-map {
 	cursor: pointer;
 }
 .waypoints ul li.active {
-	padding-right: 1em;
+	width: 100%;
 }
 .waypoints ul li.active .address {
     background: #333;
