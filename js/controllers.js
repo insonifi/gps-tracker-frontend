@@ -103,22 +103,22 @@ angular.module('core.controllers', [])
                 current,
                 now = (new Date()).valueOf(),
                 length = $scope.waypoints.length;
-            for (i = 1; i < length; i += 1) {
-                previous = $scope.waypoints[i - 1].timestamp;
+            for (i = 0; i < length; i += 1) {
+                previous = $scope.waypoints[i - 1].timestamp || $scope.waypoints[i].timestamp;
                 current = $scope.waypoints[i].timestamp;
                 if (current - previous > parking_time) {
                     if ($scope.trips[trip_idx].end === $scope.trips[trip_idx].start) {
                         continue;
                     }
                     $scope.trips[trip_idx].end = previous;
-                    $scope.trips[trip_idx].addressB = previous.getMonth();
+                    $scope.trips[trip_idx].addressB = '';
                     trip_idx += 1;
                 }
                 if (!$scope.trips[trip_idx]) {
                     $scope.trips[trip_idx] = {
                         start: current,
                         end: 0,
-                        addressA: current.getMonth()
+                        addressA: 'Trip ' + trip_idx
                     };
                 }
             }
