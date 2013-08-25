@@ -2,6 +2,10 @@
 <html lang='en'>
 	<head>
       	<meta charset='utf-8'>
+        <link type='text/css' href='//cdn.leafletjs.com/leaflet-0.6.2/leaflet.css' rel='stylesheet' />
+        <link type='text/css' href='jquery-simple-datetimepicker/jquery.simple-dtpicker.css' rel='stylesheet' />
+        <link type='text/css' href='css/jquery-ui-1.10.3.custom.min.css' rel='stylesheet' />
+        <link type='text/css' href='css/app.css' rel='stylesheet' />
         <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js'></script>
         <script src='//cdn.leafletjs.com/leaflet-0.6.2/leaflet.js'></script>
         <script src='/socket.io/socket.io.js'></script>
@@ -18,10 +22,6 @@
         <script src='js/services.js'></script>
         <script src='js/distance.js'></script>
         <script src='jquery-simple-datetimepicker/jquery.simple-dtpicker.js'></script>
-        <link type='text/css' href='//cdn.leafletjs.com/leaflet-0.6.2/leaflet.css' rel='stylesheet' />
-        <link type='text/css' href='jquery-simple-datetimepicker/jquery.simple-dtpicker.css' rel='stylesheet' />
-        <link type='text/css' href='css/jquery-ui-1.10.3.custom.min.css' rel='stylesheet' />
-        <link type='text/css' href='css/app.css' rel='stylesheet' />
 	</head>
 	<body ng-app='core' ng-controller='mapCtrl'>
         <leaflet defaults='defaults' center='riga' markers='markers'></leaflet>
