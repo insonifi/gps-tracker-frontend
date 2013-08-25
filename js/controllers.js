@@ -104,7 +104,7 @@ angular.module('core.controllers', [])
                 now = (new Date()).valueOf(),
                 length = $scope.waypoints.length;
             for (i = 0; i < length; i += 1) {
-                previous = $scope.waypoints[i - 1].timestamp || $scope.waypoints[i].timestamp;
+                previous = ($scope.waypoints[i - 1] || $scope.waypoints[i]).timestamp;
                 current = $scope.waypoints[i].timestamp;
                 if (current - previous > parking_time) {
                     if ($scope.trips[trip_idx].end === $scope.trips[trip_idx].start) {
