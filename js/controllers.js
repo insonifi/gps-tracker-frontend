@@ -87,6 +87,7 @@ angular.module('core.controllers', [])
     socket.on('query-end', function (count) {
         console.log('Found', count, 'waypoints');
         $scope.notReceiving = true;
+        /* Sort waypoints */
         $scope.waypoints.sort(function (a, b) {
             if (a.timestamp > b.timestamp) {
                 return 1;
@@ -100,24 +101,22 @@ angular.module('core.controllers', [])
         (function () {
             var i,
                 trip_idx = 1,
-                waypoint,
+                previous,
+                current,
                 now = (new Date()).valueOf(),
                 length = $scope.waypoints.length;
-            $scope.trips[trip_idx] = {
-                start: now,
-                end: 0
-            };
-            for (i = 0; i < length; i += 1) {
-                waypoint = $scope.waypoints[i];
-                if (waypoint.timestamp - $scope.trips[trip_idx].end > parking_time) {
-                    trip_idx += 1;;
+            for (i = 1; i < length; i += 1) {
+                previous = $scope.waypoints[i - 1].timestamp;
+                current = $scope.waypoints[i].timestamp;
+                if (current - previous > parking_time) {
+                    $scope.trips[trip_idx].end = current;
+                }
+                if (!$scope.trips[trip_idx]) {
                     $scope.trips[trip_idx] = {
-                        start: now,
+                        start: current,
                         end: 0
                     };
                 }
-                $scope.trips[trip_idx].start = Math.min(waypoint.timestamp, $scope.trips[trip_idx].start);
-                $scope.trips[trip_idx].end = Math.max(waypoint.timestamp, $scope.trips[trip_idx].end);
             }
         }) ();
         $scope.$broadcast('refresh-trips');
