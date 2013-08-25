@@ -42,8 +42,8 @@ angular.module('core.controllers', [])
             now = (new Date()).valueOf();
             tripIdx = 0;
             last = 0;
-            $scope.trips[tripIdx] = [];
             $scope.trips = [];
+            $scope.trips[tripIdx] = [];
             $scope.waypoints = [];
             $scope.start = now;
             $scope.end = now;
