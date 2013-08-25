@@ -84,25 +84,11 @@ angular.module('core.controllers', [])
         /* Detect trip */
         if (first || waypoint.timestamp - $scope.trips[trip_idx].end > parking_time) {
             trip_idx += 1;
-            $scope.trips[trip_idx] = [];
+            $scope.trips[trip_idx] = {};
             $scope.trips[trip_idx].start = Math.min(waypoint.timestamp, $scope.trips[trip_idx].start);
-            $scope.trips[trip_idx].push({
-                lat: waypoint.lat,
-                lng: waypoint.long,
-            });
-            last = $scope.trips[trip_idx].length - 1;
             first = false; 
         }
-        if ($scope.trips[trip_idx][last].lat !== waypoint.lat &&
-            $scope.trips[trip_idx][last].lng !== waypoint.lng) {
-            
-            $scope.trips[trip_idx].push({
-                lat: waypoint.lat,
-                lng: waypoint.long,
-            });
-            $scope.trips[trip_idx].end = Math.max(waypoint.timestamp, $scope.trips[trip_idx].end);
-            last = $scope.trips[trip_idx].length - 1;
-        }
+        $scope.trips[trip_idx].end = Math.max(waypoint.timestamp, $scope.trips[trip_idx].end);
     });
     socket.on('query-end', function (count) {
         console.log('Found', count, 'waypoints');

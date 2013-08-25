@@ -56,6 +56,16 @@ angular.module('core.directives', [])
                 $scope.activeItem = -1;
                 $scope.start = start;
                 $scope.end = end;
+                $scope.path = $scope.waypoints.filter(function (item) {
+                    return (item.timestamp >= start && item.timestamp <= end);
+                })
+                .map(function (item) {
+                    return {
+                    lat: item.lat,
+                    lng: item.long,
+                    message: item.address
+                }
+                });
                 $scope.$digest();
                 $scope.sly.reload();
             });   
@@ -144,8 +154,6 @@ angular.module('core.directives', [])
                 $scope.sly.reload();
             });
             $scope.$on('focus', function (event, index) {
-                $scope.path = $scope.trips[index];
-                $scope.$digest();
                 $scope.$root.$broadcast('refresh-waypoints', 
                     $scope.trips[index].start,
                     $scope.trips[index].end
