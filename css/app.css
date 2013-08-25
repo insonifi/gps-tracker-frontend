@@ -77,6 +77,10 @@ input[dtpicker] {
 body {
   background: #333;
 }
+map {
+    width: 100%;
+    height: 100%;
+}
 div.angular-leaflet-map {
     width: 100%;
     height: 100%;
