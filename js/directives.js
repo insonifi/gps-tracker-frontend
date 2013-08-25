@@ -144,7 +144,7 @@ angular.module('core.directives', [])
                 $scope.start = $scope.trips[index].start;
                 $scope.end = $scope.trips[index].end;
                 $scope.$digest();
-                $scope.$broadcast('refresh-waypoints');
+                $scope.$root.$broadcast('refresh-waypoints');
             });
         }],
         link: function ($scope, element, attrs) {
