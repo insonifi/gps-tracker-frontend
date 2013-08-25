@@ -52,7 +52,7 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', function ($scope) {
             $scope.activeItem = 0;
-            $scope.$on('refresh-waypoints', function (start, end) {
+            $scope.$on('refresh-waypoints', function (event, start, end) {
                 $scope.activeItem = -1;
                 $scope.start = start;
                 $scope.end = end;
