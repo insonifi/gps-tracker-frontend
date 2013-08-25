@@ -60,7 +60,7 @@ angular.module('core.directives', [])
                     weight: 3,
                     opacity: 0.618
                 };
-                $scope.paths.['selected'].latlngs = $scope.waypoints.filter(function (item) {
+                $scope.paths['selected'].latlngs = $scope.waypoints.filter(function (item) {
                     return (item.timestamp >= start && item.timestamp <= end);
                 })
                 .map(function (item) {
