@@ -65,7 +65,7 @@ angular.module('core.controllers', [])
     /* Query waypoints */
     socket.on('query-waypoint', function (waypoint) {
         if($scope.notReceiving) {
-            init()
+            init_vars()
             $scope.notReceiving = false;
         }
         /* Receive waypoint */
