@@ -31,7 +31,7 @@
 		<form id='query-params' ng-controller='queryCtrl' ng-submit='sendQueryRequest()'>
             <input class='field' kendo-date-time-picker></input>
             <input class='field' dtpicker period='end'></input>
-            <select ng-model='module' ng-options='module.name for module in list'></select>
+            <select ng-model='module' ng-options='module.name for module in list' kendo-drop-down-list></select>
             <input type='submit' id='query'></input>
 		</form>
 		<iframe id='print-frame'></iframe>
