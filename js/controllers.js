@@ -122,8 +122,9 @@ angular.module('core.controllers', [])
                     };
                 }
             }
+            /* Append last waypoint */
             $scope.trips[trip_idx].end = current;
-            $scope.trips[trip_idx].addressB = current.getMonth();
+            $scope.trips[trip_idx].addressB = '';
             console.log('Detected', $scope.trips.length - 1, 'trips');
             $scope.$digest();
         }) ();

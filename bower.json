@@ -8,6 +8,7 @@
   ],
   "dependencies": {
     "angular-socket-io": "",
+    "angular-kendo-ui": "",
     "angular-leaflet": ""
   }
 }
