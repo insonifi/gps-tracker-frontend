@@ -30,7 +30,7 @@
         <leaflet defaults='defaults' center='riga' markers='markers' paths='paths'></leaflet>
 		<form id='query-params' ng-controller='queryCtrl' ng-submit='sendQueryRequest()'>
             <input class='field' kendo-date-time-picker></input>
-            <input class='field' dtpicker period='end'></input>
+            <input class='field' kendo-date-time-picker></input>
             <select ng-model='module' ng-options='module.name for module in list' kendo-drop-down-list></select>
             <input type='submit' id='query'></input>
 		</form>
