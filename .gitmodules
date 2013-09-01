@@ -1,4 +1,0 @@
-[submodule "jquery-simple-datetimepicker"]
-	path = jquery-simple-datetimepicker
-	url = https://github.com/mugifly/jquery-simple-datetimepicker
-	branch = master
