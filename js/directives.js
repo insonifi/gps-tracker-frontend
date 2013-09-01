@@ -4,28 +4,6 @@
 
 
 angular.module('core.directives', [])
- .directive('dtpicker', function () {
-    return {
-        restrict: 'A',
-        replace: true,
-        transclude: false,
-        link: function ($scope, element, attrs) {
-            var today = (new Date()).valueOf() + (-(new Date()).getTimezoneOffset() * 60 * 1000);
-            if (attrs.period === 'start') {
-              today = today - 24 * 3600000;
-            }
-            var date_string = (new Date(today)).toISOString().replace(/T/, ' ').slice(0,-8),
-                newElem = $(element).appendDtpicker({
-                    dateFormat: 'h:mm DD.MM.YYYY',
-                    current: date_string
-                });
-                $scope[attrs.period] = element.val();
-            element.bind('keyup', function () {
-              $scope[attrs.period] = element.val();
-            });
-      }
-    }
-  })
   .directive('waypointsList', function () {
     return {
         restrict: 'A',
