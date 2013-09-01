@@ -18,7 +18,7 @@ angular.module('core.directives', [])
             '</div>' +
             '<div class="waypoints">' +
               '<ul class="slidee">' +
-                '<li id="{{$index}}" ng-repeat="item in waypoints | period:start:end">' +
+                '<li id="{{$index}}" ng-repeat="item in waypoints_range">' +
                   '<div>' +
                     '<div ng-show="item.show_address" class="address" ng-click="item.show_address=false;">{{item.address}}</div>' +
                     '<div class="time" ng-click="showAddress()">{{item.timestamp|date:"HH:mm:ss"}}</div>' +
@@ -34,18 +34,18 @@ angular.module('core.directives', [])
                 $scope.activeItem = -1;
                 $scope.start = start;
                 $scope.end = end;
+                $scope.waypoints_range = $scope.waypoints.filter(function (item) {
+                    return (item.timestamp >= start && item.timestamp <= end);
+                })
                 $scope.paths['selected'] = {
                     weight: 3,
                     opacity: 0.618
                 };
-                $scope.paths['selected'].latlngs = $scope.waypoints.filter(function (item) {
-                    return (item.timestamp >= start && item.timestamp <= end);
-                })
-                .map(function (item) {
+                $scope.paths['selected'].latlngs = $scope.waypoints_range.map(function (item) {
                     return {
-                    lat: item.lat,
-                    lng: item.long,
-                }
+                        lat: item.lat,
+                        lng: item.long,
+                    }
                 });
                 $scope.$digest();
                 $scope.sly.reload();
