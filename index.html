@@ -31,9 +31,9 @@
 	<body ng-app='core' ng-controller='mapCtrl'>
         <leaflet defaults='defaults' center='riga' markers='markers' paths='paths'></leaflet>
 		<form id='query-params' ng-controller='queryCtrl' ng-submit='sendQueryRequest()'>
-            <input class='field' kendo-date-time-picker></input>
-            <input class='field' kendo-date-time-picker></input>
-            <select ng-model='module' ng-options='module.name for module in list' kendo-drop-down-list></select>
+            <input kendo-date-time-picker ng-model='start_date'></input>
+            <input kendo-date-time-picker ng-model='end_date'></input>
+            <select kendo-drop-down-list k-option-label="'Module'" k-data-text-field="'name'" k-data-value-field="'module_id'" k-data-source="list"></select>
             <input type='submit' id='query'></input>
 		</form>
 		<iframe id='print-frame'></iframe>

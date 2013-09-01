@@ -9,6 +9,8 @@ angular.module('core.controllers', [])
     });
   }])
   .controller('queryCtrl', function ($scope, socket) {
+    $scope.start_date = new Date() - 1000 * 3600 * 24;
+    $scope.end_date = new Date();
     socket.on('connect', function () {
       socket.emit('get-modulelist');
     });
@@ -20,14 +22,9 @@ angular.module('core.controllers', [])
         console.log('[queryCtrl] no module selected');
         return;
       }
-      var extractDate = function (str) {
-          var re = /(\d+):(\d+)\ (\d+)\.(\d+)\.(\d+)/,//H:mm D.M.YYYYY
-            array = re.exec(str);
-          return (new Date(array[5], array[4] - 1, array[3], array[1], array[2]));
-        },
-        start_date = extractDate($scope.start),
-        end_date = extractDate($scope.end),
-        module_id = $scope.module.module_id;
+    var start_date = $scope.start_date.
+    end_date = $scope.end_date
+    module_id = $scope.module.module_id;
       
       console.log('[queryCtrl] query %s: from %s to %s', module_id, start_date, end_date);
         socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf()});
