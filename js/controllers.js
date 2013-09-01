@@ -9,8 +9,8 @@ angular.module('core.controllers', [])
     });
   }])
   .controller('queryCtrl', function ($scope, socket) {
-    $scope.start_date = new Date() - 1000 * 3600 * 24;
     $scope.end_date = new Date();
+    $scope.start_date = new Date($scope.end_date - 1000 * 3600 * 24);
     socket.on('connect', function () {
       socket.emit('get-modulelist');
     });
