@@ -33,7 +33,7 @@
 		<form id='query-params' ng-controller='queryCtrl' ng-submit='sendQueryRequest()'>
             <input kendo-date-time-picker ng-model='start_date'></input>
             <input kendo-date-time-picker ng-model='end_date'></input>
-            <select kendo-drop-down-list k-option-label="'Module'" k-data-text-field="'name'" k-data-value-field="'module_id'" k-data-source="list"></select>
+            <select kendo-drop-down-list k-option-label="'Module'" k-data-text-field="'name'" k-data-value-field="'module_id'" k-data-source="list" ng-model="module_id"></select>
             <input type='submit' id='query'></input>
 		</form>
 		<iframe id='print-frame'></iframe>
