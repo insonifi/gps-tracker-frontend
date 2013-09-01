@@ -52,14 +52,14 @@ angular.module('core.directives', [])
             });   
             $scope.$on('blur', function (event, index) {
                 if (index === -1) { return; }
-                $scope.waypoints[index].show_address = false; 
+                $scope.waypoints_range[index].show_address = false; 
             });
             $scope.$on('focus', function (event, index) {
-                var waypoint = $scope.waypoints[index];
+                var waypoint = $scope.waypoints_range[index];
                 $scope.markers['selected']= {
                     lat: waypoint.lat,
                     lng: waypoint.long,
-                    message: waypoint.address
+                    message: waypoint
                 }
                 //$scope.waypoints[index].show_address = true; 
                 $scope.$root.$digest();
@@ -68,14 +68,14 @@ angular.module('core.directives', [])
                 if ($scope.activeItem !== this.$index) {
                     return;
                 }
-                var waypoint = $scope.waypoints[this.$index];
+                var waypoint = $scope.waypoints_range[this.$index];
                 waypoint.show_address = true;
                 if (!waypoint.address) {
                     $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
                 }
             }
             $scope.hideAddress = function () {
-                var waypoint = $scope.waypoints[this.$index];
+                var waypoint = $scope.waypoints_range[this.$index];
                 waypoint.show_address = false;
             }
         }],
