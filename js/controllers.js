@@ -22,8 +22,8 @@ angular.module('core.controllers', [])
         console.log('[queryCtrl] no module selected');
         return;
       }
-    var start_date = $scope.start_date.
-    end_date = $scope.end_date
+    var start_date = $scope.start_date,
+    end_date = $scope.end_date,
     module_id = $scope.module.module_id;
       
       console.log('[queryCtrl] query %s: from %s to %s', module_id, start_date, end_date);
