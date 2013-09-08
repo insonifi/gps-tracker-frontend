@@ -44,7 +44,7 @@ angular.module('core.controllers', [])
         };
     Date.prototype.toMyString = function () {
         return this.getDate() + '.' 
-            + this.getMonth() + ' '
+            + this.getMonth() + '. '
             + this.toTimeString().slice(0, 5);
     }
     angular.extend($scope, {
