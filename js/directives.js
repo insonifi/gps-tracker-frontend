@@ -126,7 +126,7 @@ angular.module('core.directives', [])
           '<ul class="slidee">' +
             '<li id="{{$index}}" ng-repeat="trip in trips"">' +
               '<div>' +
-                '<div id="s-trip">{{trip.addressA}}</div><div id="e-trip">{{trip.addressB}}</div>'+
+                '<div class="s-trip">{{trip.addressA}}</div><div class="e-trip">{{trip.addressB}}</div>'+
               '</div>' +
             '</li>' +
           '</ul>' +
