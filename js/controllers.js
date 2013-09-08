@@ -100,7 +100,9 @@ angular.module('core.controllers', [])
                 current,
                 now = (new Date()).valueOf(),
                 length = $scope.waypoints.length;
+            /* set start boundary */
             $scope.trips[0].addressA = $scope.waypoints[0].timestamp.toLocaleString();
+            /* iterate trough waypoints */
             for (i = 0; i < length; i += 1) {
                 previous = ($scope.waypoints[i - 1] || $scope.waypoints[i]).timestamp;
                 current = $scope.waypoints[i].timestamp;
@@ -123,6 +125,8 @@ angular.module('core.controllers', [])
             /* Append last waypoint */
             $scope.trips[trip_idx].end = current;
             $scope.trips[trip_idx].addressB = current.toLocaleString();
+            /* set end boundary */
+            $scope.trips[0].addressB = current.toLocaleString();
             console.log('Detected', $scope.trips.length - 1, 'trips');
             $scope.$digest();
         }) ();
