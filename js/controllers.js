@@ -121,7 +121,7 @@ angular.module('core.controllers', [])
                     $scope.trips[trip_idx] = {
                         start: current,
                         end: 0,
-                        addressA: current..toMyString();
+                        addressA: current.toMyString()
                     };
                 }
             }
