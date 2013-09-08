@@ -65,8 +65,8 @@ angular.module('core.controllers', [])
             init_vars()
             $scope.notReceiving = false;
             $scope.trips[0] = {};
-            $scope.trips[0].addressA = 'All';
-            $scope.trips[0].addressB = 'waypoints';
+            $scope.trips[0].addressA = '';
+            $scope.trips[0].addressB = '';
             $scope.trips[0].start = now;
             $scope.trips[0].end = now;
         }
@@ -108,14 +108,22 @@ angular.module('core.controllers', [])
                         continue;
                     }
                     $scope.trips[trip_idx].end = previous;
-                    $scope.trips[trip_idx].addressB = '';
+                    $scope.trips[trip_idx].addressB = 
+                        current.getDate() + 1 + '.'
+                        + current.getMonth() + '. '
+                        + current.getHours() + ':'
+                        + current.getMinutes();
                     trip_idx += 1;
                 }
                 if (!$scope.trips[trip_idx]) {
                     $scope.trips[trip_idx] = {
                         start: current,
                         end: 0,
-                        addressA: 'Trip ' + trip_idx
+                        addressA: 
+                            current.getDate() + 1 + '.'
+                            + current.getMonth() + '. '
+                            + current.getHours() + ':'
+                            + current.getMinutes()
                     };
                 }
             }
