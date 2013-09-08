@@ -43,7 +43,9 @@ angular.module('core.controllers', [])
             $scope.trips = [];
         };
     Date.prototype.toMyString = function () {
-        return this.toDateString() + ' ' + this.toTimeString().slice(0, 8);
+        return this.getDate() + '.' 
+            + this.getMonth() + ' '
+            + this.toTimeString().slice(0, 5);
     }
     angular.extend($scope, {
         riga: {
