@@ -104,7 +104,7 @@ angular.module('core.controllers', [])
                 now = (new Date()).valueOf(),
                 length = $scope.waypoints.length;
             /* set start boundary */
-            $scope.trips[0].addressA = $scope.waypoints[0].timestamp.toLocaleString();
+            $scope.trips[0].addressA = $scope.waypoints[0].timestamp.toMyString();
             /* iterate trough waypoints */
             for (i = 0; i < length; i += 1) {
                 previous = ($scope.waypoints[i - 1] || $scope.waypoints[i]).timestamp;
