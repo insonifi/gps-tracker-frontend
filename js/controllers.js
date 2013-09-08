@@ -42,6 +42,9 @@ angular.module('core.controllers', [])
             $scope.waypoints = [];
             $scope.trips = [];
         };
+    Date.prototype.toMyString = function () {
+        return this.toDateString() + ' ' + this.toTimeString().slice(0, 8);
+    }
     angular.extend($scope, {
         riga: {
           lat: 56.9496,
@@ -111,22 +114,22 @@ angular.module('core.controllers', [])
                         continue;
                     }
                     $scope.trips[trip_idx].end = previous;
-                    $scope.trips[trip_idx].addressB = current.toLocaleString();
+                    $scope.trips[trip_idx].addressB = current.toMyString();
                     trip_idx += 1;
                 }
                 if (!$scope.trips[trip_idx]) {
                     $scope.trips[trip_idx] = {
                         start: current,
                         end: 0,
-                        addressA: current.toLocaleString()
+                        addressA: current..toMyString();
                     };
                 }
             }
             /* Append last waypoint */
             $scope.trips[trip_idx].end = current;
-            $scope.trips[trip_idx].addressB = current.toLocaleString();
+            $scope.trips[trip_idx].addressB = current.toMyString();
             /* set end boundary */
-            $scope.trips[0].addressB = current.toLocaleString();
+            $scope.trips[0].addressB = current.toMyString();
             console.log('Detected', $scope.trips.length - 1, 'trips');
             $scope.$digest();
         }) ();
