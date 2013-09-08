@@ -100,6 +100,7 @@ angular.module('core.controllers', [])
                 current,
                 now = (new Date()).valueOf(),
                 length = $scope.waypoints.length;
+            $scope.trips[0].addressA = $scope.waypoints[0].timestamp.toLocaleString();
             for (i = 0; i < length; i += 1) {
                 previous = ($scope.waypoints[i - 1] || $scope.waypoints[i]).timestamp;
                 current = $scope.waypoints[i].timestamp;
@@ -108,28 +109,20 @@ angular.module('core.controllers', [])
                         continue;
                     }
                     $scope.trips[trip_idx].end = previous;
-                    $scope.trips[trip_idx].addressB = 
-                        current.getDate() + 1 + '.'
-                        + current.getMonth() + '. '
-                        + current.getHours() + ':'
-                        + current.getMinutes();
+                    $scope.trips[trip_idx].addressB = current.toLocaleString();
                     trip_idx += 1;
                 }
                 if (!$scope.trips[trip_idx]) {
                     $scope.trips[trip_idx] = {
                         start: current,
                         end: 0,
-                        addressA: 
-                            current.getDate() + 1 + '.'
-                            + current.getMonth() + '. '
-                            + current.getHours() + ':'
-                            + current.getMinutes()
+                        addressA: current.toLocaleString()
                     };
                 }
             }
             /* Append last waypoint */
             $scope.trips[trip_idx].end = current;
-            $scope.trips[trip_idx].addressB = '';
+            $scope.trips[trip_idx].addressB = current.toLocaleString();
             console.log('Detected', $scope.trips.length - 1, 'trips');
             $scope.$digest();
         }) ();
