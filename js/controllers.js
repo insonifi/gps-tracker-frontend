@@ -13,19 +13,19 @@ angular.module('core.controllers', [])
           $scope.list = list;
         })
         $scope.sendQueryRequest = function () {
-          if (!$scope.module) {
-            console.log('[queryCtrl] no module selected');
-            $root.message('[queryCtrl] no module selected');
-            return;
-          }
-        var start_date = $scope.start_date,
-        end_date = $scope.end_date,
-        module_id = $scope.module.module_id;
-          
-        console.log('[queryCtrl] query %s: from %s to %s', module_id, start_date, end_date);
+            if (!$scope.module) {
+                console.log('[queryCtrl] no module selected');
+                $root.message('[queryCtrl] no module selected');
+                return;
+            }
+            var start_date = $scope.start_date,
+                end_date = $scope.end_date,
+                module_id = $scope.module.module_id;
+            
+            console.log('[queryCtrl] query %s: from %s to %s', module_id, start_date, end_date);
+            $root.message('Looking between', start_date, '...', end_date, 'for module', module_id);
             socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf()});
         }
-        $root.message('Looking between', start_date, '...', end_date, 'for module', module_id);
     }])
     .controller('mapCtrl', ['$scope', '$rootScope', 'socket', function ($scope, $root, socket) {
         var now,
