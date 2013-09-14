@@ -30,7 +30,7 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', function ($scope) {
             var range = new Worker('js/range.js'),
-                path_worker = new Worker('js/path.js');
+                pathWorker = new Worker('js/path.js');
             $scope.activeItem = -1;
             $scope.$on('refresh-waypoints', function (event, start, end) {
                 $scope.activeItem = -1;
@@ -45,10 +45,10 @@ angular.module('core.directives', [])
                 range.onmessage = function (event) {
                     $scope.waypoints_range = event.data;
                     /* prepare path */
-                    path_worker.postMessage(event.data);
+                    pathWorker.postMessage(event.data);
                 }
                 /* show path */
-                path_worker.onmessage = function (event) {
+                pathWorker.onmessage = function (event) {
                     $scope.paths['selected'].latlngs = event.data;
                     /* update model */
                     $scope.$digest();
