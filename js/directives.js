@@ -197,9 +197,9 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template: 
-            '<div id="message-box" ng-repeat="msg in messages">' +
-                '<div>{{msg}}</div>'+
-            '</div>',
+            '<ul id="message-box" ng-repeat="msg in messages">' +
+                '<li>{{msg}}</li>'+
+            '</ul>',
         scope: true,
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
             $scope.messages = [];
