@@ -197,21 +197,21 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template: 
-            '<ul id="message-box" ng-repeat="msg in messages">' +
+            '<ul id="message-box" ng-repeat="msg in mm">' +
                 '<li>{{msg}}</li>'+
             '</ul>',
         scope: true,
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
             $root.message = function () {
                 arguments.join = Array.prototype.join;
-                $scope.messages.push(arguments.join(' '));
+                $scope.mm.push(arguments.join(' '));
                 $timeout(function () {
-                    $scope.messages.shift();
+                    $scope.mm.shift();
                 }, 30000);
             }
         }],
         link: function ($scope, element, attrs) {
-            $scope.messages = [];
+            $scope.mm = [];
         }
     }
   })
