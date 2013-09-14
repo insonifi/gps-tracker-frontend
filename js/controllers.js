@@ -152,7 +152,8 @@ angular.module('core.controllers', [])
             }
         })
         $scope.$on('leafletDirectiveMap.click', function(event, args){
-            console.log('[mapCtrl] find waypoint at ',  args.leafletEvent.latlng);
+            var event_latlng = args.leafletEvent.latlng;
+            console.log('[mapCtrl] find waypoint at ',  event_latlng.lat, event_latlng.lng);
         });
         $scope.$on('leafletDirectiveMap.dragstart', function(event, args){
             var event_latlng = args.leafletEvent.latlng;
