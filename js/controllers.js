@@ -150,15 +150,13 @@ angular.module('core.controllers', [])
                 lng: waypoint.long
             }
         })
-        /* temporarily disabled
-        $scope.$on('leafletDirectiveMap.click', function(event){
-            console.log('[mapCtrl]', event)
+        $scope.$on('leafletDirectiveMap.click', function(event, args){
+            console.log('[mapCtrl]', event, args)
         });
-        $scope.$on('leafletDirectiveMap.dragstart', function(event){
-            console.log('[mapCtrl]', event)
+        $scope.$on('leafletDirectiveMap.dragstart', function(event, args){
+            console.log('[mapCtrl]', event, args)
         });
-        $scope.$on('leafletDirectiveMap.dragend', function(event){
-            console.log('[mapCtrl]', event)
+        $scope.$on('leafletDirectiveMap.dragend', function(event, args){
+            console.log('[mapCtrl]', event, args)
         });
-        */
     }])
