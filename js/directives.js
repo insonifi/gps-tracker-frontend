@@ -205,7 +205,7 @@ angular.module('core.directives', [])
             $scope.message_array = [];
             $root.message = function () {
                 arguments.join = Array.prototype.join;
-                $scope.message_text.push(arguments.join(' '));
+                $scope.message_array.push(arguments.join(' '));
                 $timeout(function () {
                     $scope.message_array.shift();
                 }, 30000);
