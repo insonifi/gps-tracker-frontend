@@ -53,6 +53,9 @@ angular.module('core.directives', [])
                 }
                 /* show path */
                 pathWorker.onmessage = function (event) {
+                    if (event.data.length === 1000) {
+                        $root.message('Path on map is limited to 1000 waypoints');
+                    }
                     $scope.paths['selected'].latlngs = event.data;
                     /* update model */
                     $scope.$digest();

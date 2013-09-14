@@ -6,5 +6,5 @@ onmessage = function (event) {
             lng: item.long,
         }
     });
-    postMessage(path);
+    postMessage(path.slice(0, 1000)); /* limit to 1000 waypoints */
 }
