@@ -156,7 +156,7 @@ angular.module('core.controllers', [])
                 event_latlng.lat.toFixed(6),
                 event_latlng.lng.toFixed(6)
             );
-            angular.forEach($scope.waypoints, function (waypoint, index) {
+            angular.forEach($scope.waypoints_range, function (waypoint, index) {
                 var margin = 0.0001,
                     lat_diff = null,
                     long_diff = null;
