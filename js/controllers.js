@@ -58,6 +58,7 @@ angular.module('core.controllers', [])
         /* Initialise variables */
         init_vars();
         $scope.notReceiving = true;
+        $scope.drag = {start: {}, end: {}};
         /* Query waypoints */
         socket.on('query-waypoint', function (waypoint) {
             var overall;
@@ -154,10 +155,10 @@ angular.module('core.controllers', [])
             console.log('[mapCtrl] find waypoint at ',  args.latlng);
         });
         $scope.$on('leafletDirectiveMap.dragstart', function(event, args){
-            $scope.drag = {start: args.latlng};
+            $scope.drag.start = args.latlng;
         });
         $scope.$on('leafletDirectiveMap.dragend', function(event, args){
-            $scope.drag = {end: args.latlng};
+            $scope.drag.end = args.latlng;
             console.log('[mapCtrl] drag box',  $scope.drag.start, $scope.drag.end);
         });
     }])
