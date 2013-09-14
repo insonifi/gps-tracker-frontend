@@ -145,7 +145,7 @@ angular.module('core.controllers', [])
             });
         });
         socket.on('update-waypoint', function (waypoint) {
-            $scope.markers.now = {
+            $scope.markers[waypoint.module_id] = {
                 lat: waypoint.lat,
                 lng: waypoint.long
             }
