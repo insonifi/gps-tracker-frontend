@@ -64,6 +64,15 @@ select {
     height: 100%;
 	border-radius: 0.5em 0.5em 0.5em 0.5em;
 }
+#message-box {
+    color: #fff;
+    position: absolute;
+    left: 10%;
+    bottom: 2%;
+    background: #ddd;
+    padding: 0.5em;
+    box-shadow: inset 0 0 1em 0.5em;
+}
 /* app css stylesheet */
 body {
   background: #333;

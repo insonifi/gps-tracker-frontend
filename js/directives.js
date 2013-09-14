@@ -207,7 +207,7 @@ angular.module('core.directives', [])
                 arguments.join = Array.prototype.join;
                 $scope.message_text = arguments.join(' ');
                 $timeout(function () {
-                    $scope.message_text = '';
+                    $scope.show_message = false;
                 }, 30000);
             }
         }]
