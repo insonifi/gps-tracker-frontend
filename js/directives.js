@@ -197,7 +197,7 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template:
-            '<div id="message-box">' +
+            '<div id="message-box" ng-hide="messages.length === 0">' +
                 '<ul ng-repeat="msg in messages">' +
                     '<li>{{msg}}</li> ' +
                 '</ul>' +
@@ -206,7 +206,7 @@ angular.module('core.directives', [])
             $scope.messages = [];
             $root.message = function () {
                 arguments.join = Array.prototype.join;
-                $scope.mm.push(arguments.join(' '));
+                $scope.messages.push(arguments.join(' '));
                 $timeout(function () {
                     $scope.messages.shift();
                 }, 30000);
