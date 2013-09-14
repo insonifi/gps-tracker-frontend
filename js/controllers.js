@@ -152,13 +152,13 @@ angular.module('core.controllers', [])
             }
         })
         $scope.$on('leafletDirectiveMap.click', function(event, args){
-            console.log('[mapCtrl] find waypoint at ',  args.latlng);
+            console.log('[mapCtrl] find waypoint at ',  args.leafletEvent.latlng);
         });
         $scope.$on('leafletDirectiveMap.dragstart', function(event, args){
-            $scope.drag.start = args.latlng;
+            $scope.drag.start = args.leafletEvent.latlng;
         });
         $scope.$on('leafletDirectiveMap.dragend', function(event, args){
-            $scope.drag.end = args.latlng;
+            $scope.drag.end = args.leafletEvent.latlng;
             console.log('[mapCtrl] drag box',  $scope.drag.start, $scope.drag.end);
         });
     }])
