@@ -21,7 +21,7 @@ angular.module('core.controllers', [])
                 end_date = $scope.end_date,
                 module_id = $scope.module.module_id;
             
-            $root.message('Searching between', start_date.toLocalteString(), '...', end_date.toLocalteString(), 'for module', module_id);
+            $root.message('Searching between', start_date.toLocaleString(), '...', end_date.toLocaleString(), 'for module', module_id);
             socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf()});
         }
     }])
