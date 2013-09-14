@@ -196,10 +196,12 @@ angular.module('core.directives', [])
         restrict: 'A',
         replace: true,
         transclude: false,
-        template: 
-            '<ul id="message-box" ng-repeat="msg in messages">' +
-                '<li>{{msg}}</li> ' +
-            '</ul>',
+        template:
+            '<div id="message-box">' +
+                '<ul ng-repeat="msg in messages">' +
+                    '<li>{{msg}}</li> ' +
+                '</ul>' +
+            '</div>',
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
             $scope.messages = [];
             /*
