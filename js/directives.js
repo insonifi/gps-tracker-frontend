@@ -191,3 +191,23 @@ angular.module('core.directives', [])
         }
     }
   })
+  .directive('messageBox', function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        transclude: false,
+        template: 
+            '<div id="message-box" ngshow="show_message">{{message_text}}</div>',
+        scope: true,
+        controller: ['$scope', '$timeout', function ($scope, $timeout) {
+            $scope.show_message = false;
+            $scope.message = function (message) {
+                $scope.show_message = true;
+                $scope.message_text = message;
+                $timeout(function () {
+                    $scope.message_text = '';
+                }, 3000);
+            }
+        }]
+    }
+  })
