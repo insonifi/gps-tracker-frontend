@@ -12,7 +12,12 @@ onmessage = function (event) {
         trips = [],
         length = event.data.length;
     /* set start boundary */
-    trips[0].addressA = event.data[0].timestamp.toMyString();
+    trips.push({
+        addressA: event.data[0].timestamp.toMyString(),
+        addressB: event.data[length - 1].timestamp.toMyString(),
+        start: event.data[0].timestamp,
+        end: event.data[length - 1].timestamp
+    })
     /* iterate trough waypoints */
     for (i = 0; i < length; i += 1) {
         previous = (event.data[i - 1] || event.data[i]).timestamp;

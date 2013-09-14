@@ -60,16 +60,8 @@ angular.module('core.controllers', [])
             if($scope.notReceiving) {
                 init_vars()
                 $scope.notReceiving = false;
-                $scope.trips[0] = {};
-                $scope.trips[0].addressA = '';
-                $scope.trips[0].addressB = '';
-                $scope.trips[0].start = now;
-                $scope.trips[0].end = now;
             }
             /* Receive waypoint */
-            overall = $scope.trips[0];
-            overall.start = Math.min(waypoint.timestamp, overall.start);
-            overall.end = Math.max(waypoint.timestamp, overall.end);
             waypoint.timestamp = new Date(waypoint.timestamp); /* convert to date */
             waypoint.show_address = false;
             waypoint.address = null;
