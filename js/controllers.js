@@ -14,7 +14,6 @@ angular.module('core.controllers', [])
         })
         $scope.sendQueryRequest = function () {
             if (!$scope.module) {
-                console.log('[queryCtrl] no module selected');
                 $root.message('[queryCtrl] no module selected');
                 return;
             }
@@ -22,8 +21,7 @@ angular.module('core.controllers', [])
                 end_date = $scope.end_date,
                 module_id = $scope.module.module_id;
             
-            console.log('[queryCtrl] query %s: from %s to %s', module_id, start_date, end_date);
-            $root.message('Looking between', start_date, '...', end_date, 'for module', module_id);
+            $root.message('Searching between', start_date.toLocalteString(), '...', end_date.toLocalteString(), 'for module', module_id);
             socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf()});
         }
     }])
@@ -82,7 +80,6 @@ angular.module('core.controllers', [])
             $scope.waypoints.push(waypoint);
         });
         socket.on('query-end', function (count) {
-            console.log('Found', count, 'waypoints');
             $root.message('Found', count, 'waypoints');
             $scope.notReceiving = true;
             /* Sort waypoints */
@@ -130,7 +127,6 @@ angular.module('core.controllers', [])
                 $scope.trips[trip_idx].addressB = current.toMyString();
                 /* set end boundary */
                 $scope.trips[0].addressB = current.toMyString();
-                console.log('Detected', $scope.trips.length - 1, 'trips');
                 $root.message('Detected', $scope.trips.length - 1, 'trips');
                 $scope.$digest();
             }) ();

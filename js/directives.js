@@ -212,7 +212,7 @@ angular.module('core.directives', [])
                 $scope.messages.push(arguments.join(' '));
                 $timeout(function () {
                     $scope.messages.shift();
-                }, 30000);
+                }, 3000);
             }
         }],
     }
