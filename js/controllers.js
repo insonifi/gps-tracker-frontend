@@ -152,6 +152,19 @@ angular.module('core.controllers', [])
         })
         $scope.$on('leafletDirectiveMap.click', function(event, args){
             var event_latlng = args.leafletEvent.latlng;
-            console.log('[mapCtrl] find waypoint at ',  event_latlng.lat, event_latlng.lng);
+            console.log('[mapCtrl] find waypoint at',
+                event_latlng.lat.toFixed(6),
+                event_latlng.lng.toFixed(6)
+            );
+            angular.forEach($scope.waypoints, function (waypoint, index) {
+                var margin = 0.0001,
+                    lat_diff = null,
+                    long_diff = null;
+                lat_diff = Math.abs(waypoint.lat - event_latlng.lat);
+                long_diff = Math.abs(waypoint.long - event_latlng.lng);
+                if (lat_diff < margin && long_diff < margin) {
+                    $scope.broadcast('waypoint-select', index);
+                }
+            });
         });
     }])

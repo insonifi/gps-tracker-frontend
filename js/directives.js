@@ -64,6 +64,9 @@ angular.module('core.directives', [])
                 //$scope.waypoints[index].show_address = true; 
                 $scope.$root.$digest();
             });
+            $scope.$on('waypoint-select', function (index) {
+                $scope.sly.activate(index);
+            });
             $scope.showAddress = function () {
                 if ($scope.activeItem !== this.$index) {
                     return;
