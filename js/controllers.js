@@ -149,7 +149,6 @@ angular.module('core.controllers', [])
                 lat: waypoint.lat,
                 lng: waypoint.long
             }
-            $scope.$digest();
         })
         /* temporarily disabled
         $scope.$on('leafletDirectiveMap.click', function(event){
