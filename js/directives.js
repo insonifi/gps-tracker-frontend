@@ -29,26 +29,31 @@ angular.module('core.directives', [])
             '</div>',
         scope: true,
         controller: ['$scope', function ($scope) {
+            var range = new Worker('js/range.js'),
+                path_worker = new Worker('js/path.js');
             $scope.activeItem = -1;
             $scope.$on('refresh-waypoints', function (event, start, end) {
                 $scope.activeItem = -1;
                 $scope.start = start;
                 $scope.end = end;
-                $scope.waypoints_range = $scope.waypoints.filter(function (item) {
-                    return (item.timestamp >= start && item.timestamp <= end);
-                })
                 $scope.paths['selected'] = {
                     weight: 3,
                     opacity: 0.618
                 };
-                $scope.paths['selected'].latlngs = $scope.waypoints_range.map(function (item) {
-                    return {
-                        lat: item.lat,
-                        lng: item.long,
-                    }
-                });
-                $scope.$digest();
-                $scope.sly.reload();
+                /* filter waypoints*/
+                range.postMessage($scope.waypoints);
+                range.onmessage = function (event) {
+                    $scope.waypoints_range = event.data;
+                    /* prepare path */
+                    path_worker.postMessage(event.data);
+                }
+                /* show path */
+                path_worker.onmessage = function (event) {
+                    $scope.paths['selected'].latlngs = event.data;
+                    /* update model */
+                    $scope.$digest();
+                    $scope.sly.reload();
+                }
             });   
             $scope.$on('blur', function (event, index) {
                 if (index === -1) { return; }
