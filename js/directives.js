@@ -204,7 +204,6 @@ angular.module('core.directives', [])
             '</div>',
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
             $scope.messages = [];
-            /*
             $root.message = function () {
                 arguments.join = Array.prototype.join;
                 $scope.mm.push(arguments.join(' '));
@@ -212,7 +211,6 @@ angular.module('core.directives', [])
                     $scope.messages.shift();
                 }, 30000);
             }
-            */
         }],
     }
   })
