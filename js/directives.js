@@ -64,11 +64,6 @@ angular.module('core.directives', [])
                 //$scope.waypoints[index].show_address = true; 
                 $scope.$root.$digest();
             });
-            /*
-            $scope.$on('waypoint-select', function (index) {
-                $scope.sly.activate(index);
-            });
-            */
             $scope.$on('leafletDirectiveMap.click', function(event, args){
                 var event_latlng = args.leafletEvent.latlng;
                 console.log('[mapCtrl] find waypoint at',
@@ -76,13 +71,12 @@ angular.module('core.directives', [])
                     event_latlng.lng.toFixed(6)
                 );
                 angular.forEach($scope.waypoints_range, function (waypoint, index) {
-                    var margin = 0.0001,
+                    var tolerance = 0.00015,
                         lat_diff = null,
                         long_diff = null;
                     lat_diff = Math.abs(waypoint.lat - event_latlng.lat);
                     long_diff = Math.abs(waypoint.long - event_latlng.lng);
-                    if (lat_diff < margin && long_diff < margin) {
-                        /* $scope.$broadcast('waypoint-select', index); */
+                    if (lat_diff < tolerance && long_diff < tolerance) {
                         $scope.sly.activate(index);
                     }
                 });
