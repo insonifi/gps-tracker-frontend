@@ -73,6 +73,14 @@ select {
     padding: 0.7em;
     box-shadow: inset 0 0 1em 0.1em #222;
 }
+#message-box ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	font-size: 14px;
+	line-height: 25px;
+}
 /* app css stylesheet */
 body {
   background: #333;
