@@ -202,9 +202,9 @@ angular.module('core.directives', [])
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
             $scope.show_message = false;
             $scope.message_text = '';
-            $root.message = function (message) {
+            $root.message = function () {
                 $scope.show_message = true;
-                $scope.message_text = message;
+                $scope.message_text = arguments.join(' ');
                 $timeout(function () {
                     $scope.message_text = '';
                 }, 3000);
