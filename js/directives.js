@@ -197,7 +197,7 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template:
-            '<div id="message-box" ng-hide="messages.length === 0">' +
+            '<div id="message-box" ng-hide="messages.length===0">' +
                 '<ul ng-repeat="msg in messages">' +
                     '<li>{{msg}}</li> ' +
                 '</ul>' +
