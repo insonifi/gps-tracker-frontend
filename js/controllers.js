@@ -59,6 +59,7 @@ angular.module('core.controllers', [])
             }
             /* Receive waypoint */
             waypoint.timestamp = new Date(waypoint.timestamp); /* convert to date */
+            waypoint.time = waypoint.timestamp.toLocaleTimeString();
             waypoint.show_address = false;
             waypoint.address = null;
             $scope.waypoints.push(waypoint);

@@ -21,7 +21,7 @@ angular.module('core.directives', [])
                 '<li id="{{$index}}" ng-repeat="item in waypoints_range">' +
                   '<div>' +
                     '<div ng-show="item.show_address" class="address" ng-click="item.show_address=false;">{{item.address}}</div>' +
-                    '<div class="time" ng-click="showAddress()">{{item.timestamp|date:"HH:mm:ss"}}</div>' +
+                    '<div class="time" ng-click="showAddress()">{{item.time"}}</div>' +
                   '</div>' +
                 '</li>' +
               '</ul>' +
