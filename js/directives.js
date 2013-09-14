@@ -204,10 +204,11 @@ angular.module('core.directives', [])
             $scope.message_text = '';
             $root.message = function () {
                 $scope.show_message = true;
-                $scope.message_text = (new Array(arguments)).join(' ');
+                arguments.join = Array.prototype.join;
+                $scope.message_text = arguments.join(' ');
                 $timeout(function () {
                     $scope.message_text = '';
-                }, 3000);
+                }, 30000);
             }
         }]
     }
