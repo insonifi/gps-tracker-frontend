@@ -197,17 +197,17 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template: 
-            '<div id="message-box" ngshow="show_message">{{message_text}}</div>',
+            '<div id="message-box" ng-repeat="msg in message_array">' +
+                '<div>{{msg}}</div>'+
+            '</div>',
         scope: true,
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
-            $scope.show_message = false;
-            $scope.message_text = '';
+            $scope.message_array = [];
             $root.message = function () {
-                $scope.show_message = true;
                 arguments.join = Array.prototype.join;
-                $scope.message_text = arguments.join(' ');
+                $scope.message_text.push(arguments.join(' '));
                 $timeout(function () {
-                    $scope.show_message = false;
+                    $scope.message_array.shift();
                 }, 30000);
             }
         }]
