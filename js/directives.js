@@ -41,7 +41,11 @@ angular.module('core.directives', [])
                     opacity: 0.618
                 };
                 /* filter waypoints*/
-                range.postMessage($scope.waypoints);
+                range.postMessage({
+                    waypoints: $scope.waypoints,
+                    start: start,
+                    end: end
+                });
                 range.onmessage = function (event) {
                     $scope.waypoints_range = event.data;
                     /* prepare path */

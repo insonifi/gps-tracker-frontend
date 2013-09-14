@@ -1,7 +1,9 @@
 onmessage = function (event) {
-    var range = [];
-    range = event.data.filter(function (item) {
-        return (item.timestamp >= start && item.timestamp <= end);
-    })
+    var start = event.data.start,
+        end = event.data.end,
+        waypoints = event.data.waypoints,
+        range = waypoints.filter(function (item) {
+            return (item.timestamp >= start && item.timestamp <= end);
+        });
     postMessage(range);
 }
