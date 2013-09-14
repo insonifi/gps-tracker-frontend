@@ -168,7 +168,7 @@ angular.module('core.directives', [])
                $scope.$emit('focus', $scope.sly.rel.activeItem);
             });
             $scope.sly.on('load', function () {
-                $scope.sly.activate(0);
+                $scope.sly.activate(1);
             })
         }
     }
