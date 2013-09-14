@@ -163,7 +163,7 @@ angular.module('core.controllers', [])
                 lat_diff = Math.abs(waypoint.lat - event_latlng.lat);
                 long_diff = Math.abs(waypoint.long - event_latlng.lng);
                 if (lat_diff < margin && long_diff < margin) {
-                    $scope.broadcast('waypoint-select', index);
+                    $scope.$broadcast('waypoint-select', index);
                 }
             });
         });
