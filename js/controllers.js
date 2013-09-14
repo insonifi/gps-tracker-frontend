@@ -150,7 +150,7 @@ angular.module('core.controllers', [])
                 lng: waypoint.long
             }
         })
-        
+        /* temporarily disabled
         $scope.$on('leafletDirectiveMap.click', function(event){
             console.log('[mapCtrl]', event)
         });
@@ -160,4 +160,5 @@ angular.module('core.controllers', [])
         $scope.$on('leafletDirectiveMap.dragend', function(event){
             console.log('[mapCtrl]', event)
         });
+        */
     }])
