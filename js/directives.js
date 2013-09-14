@@ -141,7 +141,7 @@ angular.module('core.directives', [])
         '</div>' +
         '<div class="trips">' +
           '<ul class="slidee">' +
-            '<li id="{{$index}}" ng-repeat="trip in trips>' +
+            '<li id="{{$index}}" ng-repeat="trip in trips">' +
               '<div>' +
                 '<div class="s-trip">{{trip.addressA}}</div><div class="e-trip">{{trip.addressB}}</div>'+
               '</div>' +
@@ -197,17 +197,17 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template: 
-            '<ul id="message-box">' +
+            '<ul id="message-box" ng-repeat="msg in asdf">' +
                 '<li>{{msg}}</li>'+
             '</ul>',
         scope: true,
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
-            $scope.messages = [];
+            $scope.asdf = [];
             $root.message = function () {
                 arguments.join = Array.prototype.join;
-                $scope.messages.push(arguments.join(' '));
+                $scope.asdf.push(arguments.join(' '));
                 $timeout(function () {
-                    $scope.messages.shift();
+                    $scope.asdf.shift();
                 }, 30000);
             }
         }]
