@@ -199,9 +199,10 @@ angular.module('core.directives', [])
         template: 
             '<div id="message-box" ngshow="show_message">{{message_text}}</div>',
         scope: true,
-        controller: ['$scope', '$timeout', function ($scope, $timeout) {
+        controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
             $scope.show_message = false;
-            $scope.message = function (message) {
+            $scope.message_text = '';
+            $root.message = function (message) {
                 $scope.show_message = true;
                 $scope.message_text = message;
                 $timeout(function () {
