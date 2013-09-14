@@ -29,7 +29,6 @@ angular.module('core.controllers', [])
         var now,
             init_vars = function () {
                 now = (new Date()).valueOf();
-                trip_idx = 0;
                 $scope.waypoints = [];
                 $scope.trips = [];
             },
