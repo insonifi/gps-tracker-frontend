@@ -197,13 +197,16 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template:
-            '<div id="message-box" ng-hide="messages.length===0">' +
+            '<div id="message-box" ng-hide="isEmpty()">' +
                 '<ul ng-repeat="msg in messages">' +
                     '<li>{{msg}}</li> ' +
                 '</ul>' +
             '</div>',
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
             $scope.messages = [];
+            $scope.isEmpty = function () {
+                return $scope.messages.length === 0;
+            }
             $root.message = function () {
                 arguments.join = Array.prototype.join;
                 $scope.messages.push(arguments.join(' '));
