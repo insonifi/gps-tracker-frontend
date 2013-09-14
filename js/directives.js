@@ -54,7 +54,9 @@ angular.module('core.directives', [])
                 /* show path */
                 pathWorker.onmessage = function (event) {
                     $root.message(event.data.length,'waypoints on map');
+                    /*
                     $scope.paths['selected'].latlngs = event.data;
+                    */
                     /* update model */
                     $scope.$digest();
                     $scope.sly.reload();
