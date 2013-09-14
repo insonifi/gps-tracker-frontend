@@ -1,6 +1,6 @@
 onmessage = function (event) {
     var path = [],
-        limit = 500; /* limit to 500 waypoints */
+        limit = 100; /* limit path waypoints */
     path = event.data.map(function (item) {
         return {
             lat: item.lat,
