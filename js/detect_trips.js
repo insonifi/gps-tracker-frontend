@@ -6,8 +6,9 @@ Date.prototype.toMyString = function () {
 onmessage = function (event) {
     var i,
         trip_idx = 1,
-        previous,
-        current,
+        previous = undefined,
+        current = undefined,
+        parking_time = 300 * 1000, /* 5mins */
         now = (new Date()).valueOf(),
         trips = [],
         length = event.data.length;

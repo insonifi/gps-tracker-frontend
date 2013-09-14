@@ -27,10 +27,6 @@ angular.module('core.controllers', [])
     }])
     .controller('mapCtrl', ['$scope', '$rootScope', 'socket', function ($scope, $root, socket) {
         var now,
-            trip_idx,
-            first,
-            last,
-            parking_time = 300 * 1000, /* 5mins */
             init_vars = function () {
                 now = (new Date()).valueOf();
                 trip_idx = 0;
@@ -38,6 +34,7 @@ angular.module('core.controllers', [])
                 $scope.trips = [];
             },
             detect_trips = new Worker('js/detect_trips.js');
+            
         angular.extend($scope, {
             riga: {
               lat: 56.9496,
