@@ -81,6 +81,7 @@ angular.module('core.controllers', [])
             detect_trips.onmessage = function (event) {
                 $scope.trips = event.data;
                 $root.message('Detected', $scope.trips.length - 1, 'trips');
+                $scope.$digest(); /* make sure model is updated */
                 $scope.$broadcast('refresh-trips');
             }
         });
