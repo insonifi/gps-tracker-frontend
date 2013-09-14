@@ -1,3 +1,8 @@
+Date.prototype.toMyString = function () {
+    return this.getDate() + '.' 
+        + this.getMonth() + '. '
+        + this.toTimeString().slice(0, 5);
+}
 onmessage = function (event) {
     var i,
         trip_idx = 1,

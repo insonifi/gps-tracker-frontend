@@ -38,11 +38,6 @@ angular.module('core.controllers', [])
                 $scope.trips = [];
             },
             detect_trips = new Worker('js/detect_trips.js');
-        Date.prototype.toMyString = function () {
-            return this.getDate() + '.' 
-                + this.getMonth() + '. '
-                + this.toTimeString().slice(0, 5);
-        }
         angular.extend($scope, {
             riga: {
               lat: 56.9496,
