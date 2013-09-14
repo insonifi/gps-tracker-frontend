@@ -36,7 +36,8 @@ angular.module('core.controllers', [])
                 trip_idx = 0;
                 $scope.waypoints = [];
                 $scope.trips = [];
-            };
+            },
+            detect_trips = new Worker('detect_trips.js');
         Date.prototype.toMyString = function () {
             return this.getDate() + '.' 
                 + this.getMonth() + '. '
@@ -93,44 +94,12 @@ angular.module('core.controllers', [])
                 return 0;
             });
             /* Detect trip */
-            (function () {
-                var i,
-                    trip_idx = 1,
-                    previous,
-                    current,
-                    now = (new Date()).valueOf(),
-                    length = $scope.waypoints.length;
-                /* set start boundary */
-                $scope.trips[0].addressA = $scope.waypoints[0].timestamp.toMyString();
-                /* iterate trough waypoints */
-                for (i = 0; i < length; i += 1) {
-                    previous = ($scope.waypoints[i - 1] || $scope.waypoints[i]).timestamp;
-                    current = $scope.waypoints[i].timestamp;
-                    if (current - previous > parking_time) {
-                        if ($scope.trips[trip_idx].end === $scope.trips[trip_idx].start) {
-                            continue;
-                        }
-                        $scope.trips[trip_idx].end = previous;
-                        $scope.trips[trip_idx].addressB = current.toMyString();
-                        trip_idx += 1;
-                    }
-                    if (!$scope.trips[trip_idx]) {
-                        $scope.trips[trip_idx] = {
-                            start: current,
-                            end: 0,
-                            addressA: current.toMyString()
-                        };
-                    }
-                }
-                /* Append last waypoint */
-                $scope.trips[trip_idx].end = current;
-                $scope.trips[trip_idx].addressB = current.toMyString();
-                /* set end boundary */
-                $scope.trips[0].addressB = current.toMyString();
+            detect_trips.postMessage($scope.waypoints);
+            detect_trips.onmessage = function (event) {
+                $scope.trips = event.data;
                 $root.message('Detected', $scope.trips.length - 1, 'trips');
-                $scope.$digest();
-            }) ();
-            $scope.$broadcast('refresh-trips');
+                $scope.$broadcast('refresh-trips');
+            }
         });
         /* Get address for coordinates */
         $scope.requestAddress = function (coords) {
