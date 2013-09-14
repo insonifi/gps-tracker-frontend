@@ -37,7 +37,7 @@ angular.module('core.controllers', [])
                 $scope.waypoints = [];
                 $scope.trips = [];
             },
-            detect_trips = new Worker('detect_trips.js');
+            detect_trips = new Worker('js/detect_trips.js');
         Date.prototype.toMyString = function () {
             return this.getDate() + '.' 
                 + this.getMonth() + '. '
