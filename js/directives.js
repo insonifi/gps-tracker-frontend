@@ -28,7 +28,7 @@ angular.module('core.directives', [])
             '</div>' +
             '</div>',
         scope: true,
-        controller: ['$scope', function ($scope) {
+        controller: ['$scope', '$rootScope', function ($scope, $root) {
             var range = new Worker('js/range.js'),
                 pathWorker = new Worker('js/path.js');
             $scope.activeItem = -1;
