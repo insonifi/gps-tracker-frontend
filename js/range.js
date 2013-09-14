@@ -1,6 +1,9 @@
 onmessage = function (event) {
-    var path = event.data.filter(function (item) {
+    var range = [];
+    console.log('[range] process', event.data.length, 'waypoints');
+    event.data.filter(function (item) {
         return (item.timestamp >= start && item.timestamp <= end);
     })
-    postMessage(path);
+    console.log('[range] done');
+    postMessage(range);
 }
