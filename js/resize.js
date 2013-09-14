@@ -1,4 +1,4 @@
-window.onload = function () {
+window.onload = function () {
     var margin = 16,
     checkInterval = setInterval(function () {
         if (document.readyState === "complete") {

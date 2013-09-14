@@ -141,7 +141,7 @@ angular.module('core.directives', [])
         '</div>' +
         '<div class="trips">' +
           '<ul class="slidee">' +
-            '<li id="{{$index}}" ng-repeat="trip in trips"">' +
+            '<li id="{{$index}}" ng-repeat="trip in trips>' +
               '<div>' +
                 '<div class="s-trip">{{trip.addressA}}</div><div class="e-trip">{{trip.addressB}}</div>'+
               '</div>' +
@@ -197,7 +197,7 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template: 
-            '<ul id="message-box" ng-repeat="msg in messages">' +
+            '<ul id="message-box">' +
                 '<li>{{msg}}</li>'+
             '</ul>',
         scope: true,
