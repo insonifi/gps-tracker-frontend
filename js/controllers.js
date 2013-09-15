@@ -52,7 +52,6 @@ angular.module('core.controllers', [])
         $scope.notReceiving = true;
         /* Query waypoints */
         socket.on('query-waypoint', function (waypoint) {
-            var overall;
             if($scope.notReceiving) {
                 $root.message('Receiving...');
                 init_vars()

@@ -94,7 +94,7 @@ div.angular-leaflet-map {
 .sly-container {
     /*position: absolute;*/
     /*top: 0;*/
-    /*height: 100%;*/
+    height: inherit;
 }
 /* Waypoint list */
 .waypoints {
@@ -196,6 +196,10 @@ div.angular-leaflet-map {
 	color: #ddd;
 	text-align: center;
 	cursor: pointer;
+}
+trips ul li:first-child {
+    background: #333;
+    color: #ddd;
 }
 .trips ul li .s-trip {
     text-align:left ;
