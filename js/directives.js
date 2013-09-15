@@ -106,7 +106,7 @@ angular.module('core.directives', [])
                 }
                 var waypoint = $scope.waypoints_range[this.$index],
                     index = function () {
-                        var i, len = this.length,
+                        var i, len = $scope.waypoints.length,
                             test_waypoint = null;
                         for (i = 0; i < len; i += 1) {
                             test_waypoint = this[i];
