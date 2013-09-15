@@ -12,6 +12,6 @@ angular.module('core.filters', [])
   })
   .filter('km', function () {
       return function (meters) {
-          return (meters / 1000).toFixed(1)
+          return (meters / 1000).toFixed(1) + ' km';
       }
   });
