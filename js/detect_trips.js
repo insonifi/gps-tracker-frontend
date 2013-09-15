@@ -37,7 +37,7 @@ onmessage = function (event) {
             trips[trip_idx].end = previous;
             trips[trip_idx].addressB = current.toMyString();
             trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
-            trips[0].distance = trips[trip_idx].distance;
+            trips[0].distance += trips[trip_idx].distance;
             trip_idx += 1;
         }
         if (!trips[trip_idx]) {
