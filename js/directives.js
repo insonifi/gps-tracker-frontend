@@ -31,6 +31,7 @@ angular.module('core.directives', [])
         controller: ['$scope', '$rootScope', function ($scope, $root) {
             var range = new Worker('js/range.js'),
                 pathWorker = new Worker('js/path.js');
+                
             $scope.activeItem = -1;
             $scope.$on('refresh-waypoints', function (event, start, end) {
                 $scope.activeItem = -1;
@@ -103,32 +104,20 @@ angular.module('core.directives', [])
                 if ($scope.activeItem !== this.$index) {
                     return;
                 }
-                var waypoint = $scope.waypoints_range[this.$index];
+                var waypoint = $scope.waypoints_range[this.$index],
+                    index = $scope.waypoints.getIndex(waypoint);
                 waypoint.show_address = true;
                 if (!waypoint.address) {
-                    if ($scope.waypoints[this.$index].address) {
-                           waypoint.address = $scope.way
+                    if ($scope.waypoints[index].address) {
+                        waypoint.address = $scope.waypoints[index].address;
+                    } else {
+                        $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
                     }
-                    $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
                 }
             }
-            $scope.hideAddress = function () {
-                var waypoint = $scope.waypoints_range[this.$index];
-                waypoint.show_address = false;
-            }
             $scope.$on('result-address', function (event, response) {
-                (function () {
-                    var index = 0,
-                        len = $scope.waypoints_range.length,
-                        waypoint = null;
-                    for (index = 0; index < len; index += 1) {
-                        waypoint = $scope.waypoints_range[index];
-                        if (waypoint.lat === response.lat
-                            || waypoint.long === response.long) {
-                            waypoint.address = response.address;
-                        }
-                    }
-                }) ()
+                var index = $scope.activeItem;
+                $scope.waypoints_range[index].address = response;
             });
         }],
         link: function ($scope, element, attrs) {

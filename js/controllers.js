@@ -32,6 +32,17 @@ angular.module('core.controllers', [])
                 $scope.waypoints = [];
                 $scope.trips = [];
             },
+            getIndex = function (request_waypoint) {
+                var i, len = this.length,
+                    waypoint = null;
+                for (i = 0; i < len; i += 1) {
+                    waypoint = this[i];
+                    if (waypoint.lat === request_waypoint.lat
+                        || waypoint.long === request_waypoint.long) {
+                        return i;
+                    }
+                }
+            },
             detect_trips = new Worker('js/detect_trips.js');
             
         angular.extend($scope, {
@@ -78,13 +89,14 @@ angular.module('core.controllers', [])
                 }
                 return 0;
             });
+            $scope.waypoints.getIndex = getIndex;
             /* Detect trip */
             $root.message('Calculating...');
             detect_trips.postMessage($scope.waypoints);
             detect_trips.onmessage = function (event) {
                 $scope.trips = event.data;
                 $root.message('Detected', $scope.trips.length - 1, 'trips');
-                $scope.$digest(); /* make sure model is updated */
+                /* $scope.$digest(); /* make sure model is updated */
                 $scope.$broadcast('refresh-trips');
             }
         });
@@ -92,13 +104,26 @@ angular.module('core.controllers', [])
         $scope.requestAddress = function (coords) {
             socket.emit('get-address', coords);
         };
-        socket.on('result-address', function (response) {
-            $scope.$broadcast('result-address', response);
-        });
         socket.on('update-waypoint', function (waypoint) {
             $scope.markers[waypoint.module_id] = {
                 lat: waypoint.lat,
                 lng: waypoint.long
             }
-        })
+        });
+        socket.on('result-address', function (response) {
+            (function () {
+                var index = 0,
+                    len = $scope.waypoints_range.length,
+                    waypoint = null;
+
+                for (index = 0; index < len; index += 1) {
+                    waypoint = $scope.waypoints_range[index];
+                    if (waypoint.lat === response.lat
+                        || waypoint.long === response.long) {
+                        waypoint.address = response.address;
+                    }
+                }
+                $scope.$broadcast('result-address', response.address);
+            }) ()
+        });
     }])
