@@ -106,16 +106,17 @@ angular.module('core.directives', [])
                 }
                 var waypoint = $scope.waypoints_range[this.$index],
                     index = function () {
-                        var i, len = $scope.waypoints.length,
+                        var i, $this = $scope.waypoints,
+                            len = $this.length,
                             test_waypoint = null;
                         for (i = 0; i < len; i += 1) {
-                            test_waypoint = this[i];
+                            test_waypoint = $this[i];
                             if (test_waypoint.lat === waypoint.lat
                                 || test_waypoint.long === waypoint.long) {
                                 return i;
                             }
                         }
-                    } ();
+                    } ;
                 
                 waypoint.show_address = true;
                 if (!waypoint.address) {
