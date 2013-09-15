@@ -100,7 +100,7 @@ div.angular-leaflet-map {
 .waypoints {
     right: 20px;
 	width: 6em;
-	height: 100%;
+	height: inherit;
     position: absolute;
     top: 0;
 }
@@ -164,13 +164,13 @@ div.angular-leaflet-map {
 	top: 0;
 	right: -10px;
 	width: 22px;
-	height: 100%;
+	height: inherit;
 }
 /* Trips list */
 .trips {
     left: 20px;
     width: 7em;
-    height: 100%;
+    height: inherit;
     position: absolute;
     top: 0;
 }
@@ -243,6 +243,6 @@ trips ul li:first-child {
 	top: 0;
 	left: -10px;
 	width: 22px;
-	height: 100%;
+	height: inherit;
 }
 
