@@ -198,9 +198,9 @@ div.angular-leaflet-map {
 	text-align: center;
 	cursor: pointer;
 }
-trips ul li:first-child {
+.trips ul:first-child {
     background: #333;
-    color: #ddd;
+    color: #ccc;
 }
 .trips ul li .s-trip {
     text-align:left ;
