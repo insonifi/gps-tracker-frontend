@@ -115,7 +115,7 @@ angular.module('core.directives', [])
                                 return i;
                             }
                         }
-                    };
+                    } ();
                 
                 waypoint.show_address = true;
                 if (!waypoint.address) {
