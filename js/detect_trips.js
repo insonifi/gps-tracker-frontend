@@ -53,7 +53,7 @@ onmessage = function (event) {
     trips[trip_idx].end = current;
     trips[trip_idx].addressB = current.toMyString();
     trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
-    trips[0].distance = trips[trip_idx].distance;
+    trips[0].distance += trips[trip_idx].distance;
     /* set end boundary */
     trips[0].addressB = current.toMyString();
     postMessage(trips);
