@@ -58,7 +58,7 @@ calculateDistance = function (coordsA, coordsB) {
     B/6*cos2SigmaM*(-3+4*sinSigma*sinSigma)*(-3+4*cos2SigmaM*cos2SigmaM)));
   var s = b*A*(sigma-deltaSigma);
   
-  s = s.toFixed(3); // round to 1mm precision
+  s = +s.toFixed(3); // round to 1mm precision
   return s;
   
   // note: to return initial/final bearings in addition to distance, use something like:
