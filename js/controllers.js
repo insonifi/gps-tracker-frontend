@@ -101,11 +101,11 @@ angular.module('core.controllers', [])
         socket.on('result-address', function (response) {
             (function () {
                 var index = 0,
-                    len = $scope.waypoints_range.length,
+                    len = $scope.waypoints.length,
                     waypoint = null;
 
                 for (index = 0; index < len; index += 1) {
-                    waypoint = $scope.waypoints_range[index];
+                    waypoint = $scope.waypoints[index];
                     if (waypoint.lat === response.lat
                         || waypoint.long === response.long) {
                         waypoint.address = response.address;
