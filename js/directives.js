@@ -163,8 +163,8 @@ angular.module('core.directives', [])
               '<div>' +
                 '<div class="s-trip">{{trip.addressA}}&#8594;</div>' +
                 '<div class="e-trip">&#8594;{{trip.addressB}}</div>' +
+                '<div class="d-trip">{{trip.distance | km}}</div>' +
               '</div>' +
-              '<span class="d-trip">{{trip.distance}}</span>' +
             '</li>' +
           '</ul>' +
         '</div>' +

@@ -9,4 +9,9 @@ angular.module('core.filters', []).
           return (item.timestamp >= start && item.timestamp <= end);
       })
     }
+  })
+  filter('km', function () {
+      return function (meters) {
+          return (meters / 1000).toFixed(1)
+      }
   });
