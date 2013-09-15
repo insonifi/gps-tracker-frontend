@@ -210,7 +210,8 @@ div.angular-leaflet-map {
     color: #ddd;
     position: absolute;
     left: 8em;
-    width: 4em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
 }
 .trips ul li.active {
 	color: #fff;
