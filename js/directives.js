@@ -98,6 +98,9 @@ angular.module('core.directives', [])
                 var waypoint = $scope.waypoints_range[this.$index];
                 waypoint.show_address = true;
                 if (!waypoint.address) {
+                    if ($scope.waypoints[this.$index].address) {
+                           waypoint.address = 
+                    }
                     $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
                 }
             }
