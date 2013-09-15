@@ -1,4 +1,4 @@
-importScripts('js/distance.js');
+importScripts('distance.js');
 
 Date.prototype.toMyString = function () {
     return this.getDate() + '.' 
