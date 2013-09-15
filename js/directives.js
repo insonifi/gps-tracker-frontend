@@ -105,6 +105,14 @@ angular.module('core.directives', [])
                 var waypoint = $scope.waypoints_range[this.$index];
                 waypoint.show_address = false;
             }
+            $scope.$on('result-address', function (response) {
+                angular.forEach($scope.waypoints_range, function (waypoint, index) {
+                    if (waypoint.lat === response.lat
+                        || waypoint.long === response.long) {
+                        waypoint.address = response.address;
+                    }
+                });
+            });
         }],
         link: function ($scope, element, attrs) {
             var parent = $(element);

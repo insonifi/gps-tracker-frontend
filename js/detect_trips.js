@@ -30,7 +30,7 @@ onmessage = function (event) {
         current = event.data[i].timestamp;
         previous_coords = current_coords || [event.data[i].lat, event.data[i].long];
         current_coords = [event.data[i].lat, event.data[i].long];
-        if (current - previous > parking_time) {
+        if (current - previous > parking_time) { /* assume next trip of time gap exceeds parking time */
             if (trips[trip_idx].end === trips[trip_idx].start) {
                 continue;
             }
