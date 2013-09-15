@@ -10,6 +10,8 @@ onmessage = function (event) {
         trip_idx = 1,
         previous = undefined,
         current = undefined,
+        previous_coords = undefined,
+        current_coords = undefined,
         parking_time = 300 * 1000, /* 5mins */
         now = (new Date()).valueOf(),
         trips = [],
@@ -24,18 +26,17 @@ onmessage = function (event) {
     })
     /* iterate trough waypoints */
     for (i = 0; i < length; i += 1) {
-        previous = (event.data[i - 1] || event.data[i]).timestamp;
+        previous = current || event.data[i].timestamp;
         current = event.data[i].timestamp;
+        previous_coords = current_coords || [event.data[i].lat, event.data[i].long];
+        current_coords = [event.data[i].lat, event.data[i].long];
         if (current - previous > parking_time) {
             if (trips[trip_idx].end === trips[trip_idx].start) {
                 continue;
             }
             trips[trip_idx].end = previous;
             trips[trip_idx].addressB = current.toMyString();
-            trips[trip_idx].distance += calculateDistance(
-                [previous.lat, previous.long],
-                [current.lat, current.long]
-            );
+            trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
             trips[0].distance = trips[trip_idx].distance;
             trip_idx += 1;
         }
@@ -51,10 +52,7 @@ onmessage = function (event) {
     /* Append last waypoint */
     trips[trip_idx].end = current;
     trips[trip_idx].addressB = current.toMyString();
-    trips[trip_idx].distance += calculateDistance(
-        [previous.lat, previous.long],
-        [current.lat, current.long]
-    );
+    trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
     trips[0].distance = trips[trip_idx].distance;
     /* set end boundary */
     trips[0].addressB = current.toMyString();
