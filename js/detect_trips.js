@@ -1,7 +1,9 @@
+importScripts('js/distance.js');
+
 Date.prototype.toMyString = function () {
     return this.getDate() + '.' 
-        + this.getMonth() + '. '
-        + this.toTimeString().slice(0, 5);
+        + (this.getMonth() + 1) + '. '
+        + this.toLocaleTimeString();
 }
 onmessage = function (event) {
     var i,
@@ -17,7 +19,8 @@ onmessage = function (event) {
         addressA: event.data[0].timestamp.toMyString(),
         addressB: event.data[length - 1].timestamp.toMyString(),
         start: event.data[0].timestamp,
-        end: event.data[length - 1].timestamp
+        end: event.data[length - 1].timestamp,
+        distance: 0
     })
     /* iterate trough waypoints */
     for (i = 0; i < length; i += 1) {
@@ -29,19 +32,30 @@ onmessage = function (event) {
             }
             trips[trip_idx].end = previous;
             trips[trip_idx].addressB = current.toMyString();
+            trips[trip_idx].distance += calculateDistance(
+                [previous.lat, previous.long],
+                [current.lat, current.long]
+            );
+            trips[0].distance = trips[trip_idx].distance;
             trip_idx += 1;
         }
         if (!trips[trip_idx]) {
             trips[trip_idx] = {
                 start: current,
                 end: 0,
-                addressA: current.toMyString()
+                addressA: current.toMyString(),
+                distance: 0
             };
         }
     }
     /* Append last waypoint */
     trips[trip_idx].end = current;
     trips[trip_idx].addressB = current.toMyString();
+    trips[trip_idx].distance += calculateDistance(
+        [previous.lat, previous.long],
+        [current.lat, current.long]
+    );
+    trips[0].distance = trips[trip_idx].distance;
     /* set end boundary */
     trips[0].addressB = current.toMyString();
     postMessage(trips);
