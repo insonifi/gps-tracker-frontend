@@ -32,17 +32,6 @@ angular.module('core.controllers', [])
                 $scope.waypoints = [];
                 $scope.trips = [];
             },
-            getIndex = function (request_waypoint) {
-                var i, len = this.length,
-                    waypoint = null;
-                for (i = 0; i < len; i += 1) {
-                    waypoint = this[i];
-                    if (waypoint.lat === request_waypoint.lat
-                        || waypoint.long === request_waypoint.long) {
-                        return i;
-                    }
-                }
-            },
             detect_trips = new Worker('js/detect_trips.js');
             
         angular.extend($scope, {
@@ -98,7 +87,6 @@ angular.module('core.controllers', [])
                 /* $scope.$digest(); /* make sure model is updated */
                 $scope.$broadcast('refresh-trips');
             }
-            $scope.waypoints.getIndex = getIndex;
         });
         /* Get address for coordinates */
         $scope.requestAddress = function (coords) {
