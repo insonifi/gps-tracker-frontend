@@ -97,7 +97,7 @@ angular.module('core.directives', [])
                             break;
                         }
                     }
-                });
+                }) ()
             });
             $scope.showAddress = function () {
                 if ($scope.activeItem !== this.$index) {
@@ -128,7 +128,7 @@ angular.module('core.directives', [])
                             waypoint.address = response.address;
                         }
                     }
-                });
+                }) ()
             });
         }],
         link: function ($scope, element, attrs) {
