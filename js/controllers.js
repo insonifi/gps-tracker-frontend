@@ -89,7 +89,6 @@ angular.module('core.controllers', [])
                 }
                 return 0;
             });
-            $scope.waypoints.getIndex = getIndex;
             /* Detect trip */
             $root.message('Calculating...');
             detect_trips.postMessage($scope.waypoints);
@@ -99,6 +98,7 @@ angular.module('core.controllers', [])
                 /* $scope.$digest(); /* make sure model is updated */
                 $scope.$broadcast('refresh-trips');
             }
+            $scope.waypoints.getIndex = getIndex;
         });
         /* Get address for coordinates */
         $scope.requestAddress = function (coords) {
