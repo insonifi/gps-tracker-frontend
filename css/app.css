@@ -67,11 +67,11 @@ select {
 #message-box {
     color: #fff;
     position: absolute;
-    left: 10%;
+    left: 15em;
     bottom: 2%;
     background: #333;
     padding: 0.7em;
-    box-shadow: inset 0 0 1em 0.1em #222;
+    /*box-shadow: inset 0 0 1em 0.1em #222;*/
 }
 #message-box ul {
 	list-style: none;
@@ -169,7 +169,7 @@ div.angular-leaflet-map {
 /* Trips list */
 .trips {
     left: 20px;
-    width: 10em;
+    width: 7em;
     height: 100%;
     position: absolute;
     top: 0;
@@ -204,6 +204,13 @@ div.angular-leaflet-map {
 .trips ul li .e-trip {
     text-align: right;
     padding-right: 0.5em;    
+}
+.trips ul li .d-trip {
+    background: #333;
+    color: #ddd;
+    position: absolute;
+    left: 8em;
+    width: 4em;
 }
 .trips ul li.active {
 	color: #fff;

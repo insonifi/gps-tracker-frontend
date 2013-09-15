@@ -3,7 +3,7 @@ importScripts('distance.js');
 Date.prototype.toMyString = function () {
     return this.getDate() + '.' 
         + (this.getMonth() + 1) + '. '
-        + this.toLocaleTimeString();
+        + this.toLocaleTimeString().slice(0,5);
 }
 onmessage = function (event) {
     var i,
@@ -36,7 +36,7 @@ onmessage = function (event) {
             }
             trips[trip_idx].end = previous;
             trips[trip_idx].addressB = current.toMyString();
-            trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
+            trips[trip_idx].distance += calculateDistance(previous_coords, current_coords).distance;
             trips[0].distance = trips[trip_idx].distance;
             trip_idx += 1;
         }
@@ -52,7 +52,7 @@ onmessage = function (event) {
     /* Append last waypoint */
     trips[trip_idx].end = current;
     trips[trip_idx].addressB = current.toMyString();
-    trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
+    trips[trip_idx].distance += calculateDistance(previous_coords, current_coords).distance;
     trips[0].distance = trips[trip_idx].distance;
     /* set end boundary */
     trips[0].addressB = current.toMyString();
