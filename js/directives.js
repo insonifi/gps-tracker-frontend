@@ -80,14 +80,22 @@ angular.module('core.directives', [])
                     event_latlng.lat.toFixed(6),
                     event_latlng.lng.toFixed(6)
                 );
-                angular.forEach($scope.waypoints_range, function (waypoint, index) {
+                
+                (function () {
                     var tolerance = 0.00015,
                         lat_diff = null,
-                        long_diff = null;
-                    lat_diff = Math.abs(waypoint.lat - event_latlng.lat);
-                    long_diff = Math.abs(waypoint.long - event_latlng.lng);
-                    if (lat_diff < tolerance && long_diff < tolerance) {
-                        $scope.sly.activate(index);
+                        long_diff = null,
+                        index = 0,
+                        len = $scope.waypoints_range.length,
+                        waypoint = null;
+                    for (index = 0; index < len; index += 1) {
+                        waypoint = $scope.waypoints_range[index];
+                        lat_diff = Math.abs(waypoint.lat - event_latlng.lat);
+                        long_diff = Math.abs(waypoint.long - event_latlng.lng);
+                        if (lat_diff < tolerance && long_diff < tolerance) {
+                            $scope.sly.activate(index);
+                            break;
+                        }
                     }
                 });
             });
@@ -99,7 +107,7 @@ angular.module('core.directives', [])
                 waypoint.show_address = true;
                 if (!waypoint.address) {
                     if ($scope.waypoints[this.$index].address) {
-                           waypoint.address = 
+                           waypoint.address = $scope.way
                     }
                     $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
                 }
@@ -109,10 +117,16 @@ angular.module('core.directives', [])
                 waypoint.show_address = false;
             }
             $scope.$on('result-address', function (event, response) {
-                angular.forEach($scope.waypoints_range, function (waypoint, index) {
-                    if (waypoint.lat === response.lat
-                        || waypoint.long === response.long) {
-                        waypoint.address = response.address;
+                (function () {
+                    var index = 0,
+                        len = $scope.waypoints_range.length,
+                        waypoint = null;
+                    for (index = 0; index < len; index += 1) {
+                        waypoint = $scope.waypoints_range[index];
+                        if (waypoint.lat === response.lat
+                            || waypoint.long === response.long) {
+                            waypoint.address = response.address;
+                        }
                     }
                 });
             });

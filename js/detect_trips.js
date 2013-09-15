@@ -8,10 +8,10 @@ Date.prototype.toMyString = function () {
 onmessage = function (event) {
     var i,
         trip_idx = 1,
-        previous = undefined,
-        current = undefined,
-        previous_coords = undefined,
-        current_coords = undefined,
+        previous = null,
+        current = null,
+        previous_coords = null,
+        current_coords = null,
         parking_time = 300 * 1000, /* 5mins */
         now = (new Date()).valueOf(),
         trips = [],
