@@ -1,8 +1,6 @@
 'use strict';
 
 /* Directives */
-
-
 angular.module('core.directives', [])
   .directive('waypointsList', function () {
     return {
@@ -31,11 +29,27 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $root) {
             var range = new Worker('js/range.js'),
-                pathWorker = new Worker('js/path.js');
+                pathWorker = new Worker('js/path.js'),
+                arrayBufferToJSON = function (buf) {
+                    var string = '', i, len, array = new Uint16Array(buf);
+                    for (i = 0, len = array.length; i< len; i += 1) {
+                        string += String.fromCharCode(array[i]);
+                    }
+                    return JSON.parse(string);
+                },
+                jsonToArrayBuffer = function (json) {
+                    var str = JSON.stringify(json),
+                        buf = new ArrayBuffer(str.length*2), // 2 bytes for each char
+                        bufView = new Uint16Array(buf);
+                    for (var i=0, strLen=str.length; i<strLen; i++) {
+                        bufView[i] = str.charCodeAt(i);
+                    }
+                    return buf;
+                };
                 
             $scope.activeItem = -1;
-            $scope.waypointsOptions = { data: 'waypoints_range' };
             $scope.$on('refresh-waypoints', function (event, start, end) {
+                var buffer = new ArrayBuffer(0);
                 $scope.activeItem = -1;
                 $scope.start = start;
                 $scope.end = end;
@@ -44,20 +58,22 @@ angular.module('core.directives', [])
                     opacity: 0.618
                 };
                 /* filter waypoints*/
-                range.postMessage({
+                buffer = jsonToArrayBuffer({
                     waypoints: $scope.waypoints,
                     start: start,
                     end: end
                 });
+                range.postMessage(buffer, [buffer]);
                 range.onmessage = function (event) {
-                    $scope.waypoints_range = event.data;
+                    $scope.waypoints_range = arrayBufferToJSON(event.data);
                     /* prepare path */
                     pathWorker.postMessage(event.data);
                 }
                 /* show path */
                 pathWorker.onmessage = function (event) {
-                    $root.message(event.data.length,'waypoints on map');
-                    $scope.paths['selected'].latlngs = event.data;
+                    var array = arrayBufferToJSON(event.data);
+                    $scope.paths['selected'].latlngs = array;
+                    $root.message(array.length,'waypoints on map');
                     /* update model */
                     $scope.$digest();
                     $scope.sly.reload();
