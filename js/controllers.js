@@ -69,7 +69,7 @@ angular.module('core.controllers', [])
             $scope.notReceiving = true;
             if (response.count === 0) { return; }
             /* Sort waypoints */
-            response.rows.sort(function (a, b) {
+            response.result.sort(function (a, b) {
                 if (a.timestamp > b.timestamp) {
                     return 1;
                 }
@@ -80,7 +80,7 @@ angular.module('core.controllers', [])
             });
             /* Detect trip */
             $root.message('Calculating...');
-            $scope.waypoints = response.rows;
+            $scope.waypoints = response.result;
             detect_trips.postMessage($scope.waypoints);
             detect_trips.onmessage = function (event) {
                 $scope.trips = event.data;
