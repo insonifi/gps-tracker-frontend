@@ -90,7 +90,13 @@ div.angular-leaflet-map {
     width: 100%;
     height: 100%;
 }
-
+div.grid {
+    width: 10em;
+    height: inherit;
+    position: absolute;
+    top: 1em;
+    right: 20em;
+}
 /* Sly */
 .sly-container {
     /*position: absolute;*/
