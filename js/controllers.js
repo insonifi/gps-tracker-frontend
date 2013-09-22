@@ -152,6 +152,7 @@ angular.module('core.controllers', [])
                 }
                 return buf;
             };
+        $scope.waypoints_range = [];
         $scope.waypointsOptions = {data: $scope.waypoints_range};
             
         $scope.activeItem = -1;
