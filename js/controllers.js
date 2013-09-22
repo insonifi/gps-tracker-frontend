@@ -64,12 +64,12 @@ angular.module('core.controllers', [])
             waypoint.address = null;
             $scope.waypoints.push(waypoint);
         });
-        socket.on('query-end', function (count) {
-            $root.message('Found', count, 'waypoints');
+        socket.on('query-end', function (response) {
+            $root.message('Found', response.count, 'waypoints');
             $scope.notReceiving = true;
-            if (count === 0) { return; }
+            if (response.count === 0) { return; }
             /* Sort waypoints */
-            $scope.waypoints.sort(function (a, b) {
+            response.rows.sort(function (a, b) {
                 if (a.timestamp > b.timestamp) {
                     return 1;
                 }
@@ -80,6 +80,7 @@ angular.module('core.controllers', [])
             });
             /* Detect trip */
             $root.message('Calculating...');
+            $scope.waypoints = response.rows;
             detect_trips.postMessage($scope.waypoints);
             detect_trips.onmessage = function (event) {
                 $scope.trips = event.data;
