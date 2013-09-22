@@ -13,7 +13,8 @@ jsonToArrayBuffer = function (json) {
         bufView[i] = str.charCodeAt(i);
     }
     return buf;
-};
+},
+limit = 200; /* path display limit */
 
 onmessage = function (event) {
     postMessage(jsonToArrayBuffer((arrayBufferToJSON(event.data).map(function (item) {
@@ -21,5 +22,5 @@ onmessage = function (event) {
             lat: item.lat,
             lng: item.long,
         }
-    }))));
+    })).slice(0, 500)));
 }
