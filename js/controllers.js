@@ -134,3 +134,116 @@ angular.module('core.controllers', [])
             }) ()
         });
     }])
+    .controller('waypointsListCtrl', ['$scope', '$rootScope', function ($scope, $root) {
+        var range = new Worker('js/range.js'),
+            arrayBufferToJSON = function (buf) {
+                var string = '', i, len, array = new Uint16Array(buf);
+                for (i = 0, len = array.length; i< len; i += 1) {
+                    string += String.fromCharCode(array[i]);
+                }
+                return JSON.parse(string);
+            },
+            jsonToArrayBuffer = function (json) {
+                var str = JSON.stringify(json),
+                    buf = new ArrayBuffer(str.length*2), // 2 bytes for each char
+                    bufView = new Uint16Array(buf);
+                for (var i=0, strLen=str.length; i<strLen; i++) {
+                    bufView[i] = str.charCodeAt(i);
+                }
+                return buf;
+            };
+        $scope.waypointsOptions = {data: $scope.waypoints_range};
+            
+        $scope.activeItem = -1;
+        $scope.$on('refresh-waypoints', function (event, start, end) {
+            var buffer = new ArrayBuffer(0);
+            $scope.activeItem = -1;
+            $scope.start = start;
+            $scope.end = end;
+            $scope.paths['selected'] = {
+                weight: 3,
+                opacity: 0.618
+            };
+            /* filter waypoints*/
+            buffer = jsonToArrayBuffer({
+                waypoints: $scope.waypoints,
+                start: start,
+                end: end
+            });
+            range.postMessage(buffer, [buffer]);
+            range.onmessage = function (event) {
+                $scope.waypoints_range = arrayBufferToJSON(event.data);
+            }
+            /* show path */
+            $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(0, 100);
+            $root.message($scope.waypoints_range.length || 0, 'waypoints displayed');
+            /* update model */
+            $scope.$digest();
+        });   
+        $scope.$on('blur', function (event, index) {
+            if (index === -1) { return; }
+            $scope.waypoints_range[index].show_address = false; 
+        });
+        $scope.$on('focus', function (event, index) {
+            var waypoint = $scope.waypoints_range[index];
+            $scope.markers['selected']= waypoint;
+            //$scope.waypoints[index].show_address = true; 
+            $scope.$root.$digest();
+        });
+        $scope.$on('leafletDirectiveMap.click', function(event, args){
+            var event_latlng = args.leafletEvent.latlng;
+            console.log('[mapCtrl] find waypoint at',
+                event_latlng.lat.toFixed(6),
+                event_latlng.lng.toFixed(6)
+            );
+            
+            (function () {
+                var tolerance = 0.00015,
+                    lat_diff = null,
+                    long_diff = null,
+                    index = 0,
+                    len = $scope.waypoints_range.length,
+                    waypoint = null;
+                for (index = 0; index < len; index += 1) {
+                    waypoint = $scope.waypoints_range[index];
+                    lat_diff = Math.abs(waypoint.lat - event_latlng.lat);
+                    long_diff = Math.abs(waypoint.lng - event_latlng.lng);
+                    if (lat_diff < tolerance && long_diff < tolerance) {
+                        $scope.sly.activate(index);
+                        break;
+                    }
+                }
+            }) ()
+        });
+        $scope.showAddress = function () {
+            if ($scope.activeItem !== this.$index) {
+                return;
+            }
+            var waypoint = $scope.waypoints_range[this.$index],
+                index = (function () {
+                    var i, $this = $scope.waypoints,
+                        len = $this.length,
+                        test_waypoint = null;
+                    for (i = 0; i < len; i += 1) {
+                        test_waypoint = $this[i];
+                        if (test_waypoint.lat === waypoint.lat
+                            || test_waypoint.lng === waypoint.lng) {
+                            return i;
+                        }
+                    }
+                }) ();
+            
+            waypoint.show_address = true;
+            if (!waypoint.address) {
+                if ($scope.waypoints[index].address) {
+                    waypoint.address = $scope.waypoints[index].address;
+                } else {
+                    $scope.requestAddress({lat: waypoint.lat, long: waypoint.lng});
+                }
+            }
+        }
+        $scope.$on('result-address', function (event, response) {
+            var index = $scope.activeItem;
+            $scope.waypoints_range[index].address = response;
+        });
+    }])
