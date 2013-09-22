@@ -153,7 +153,11 @@ angular.module('core.controllers', [])
                 return buf;
             };
         $scope.waypoints_range = [];
-        $scope.waypointsOptions = {data: $scope.waypoints_range};
+        $scope.waypointsOptions = {
+            data: $scope.waypoints_range,
+            columnDefs: [{field:'timestamp', displayName:'time'}],
+            tabIndex: 1
+        };
             
         $scope.activeItem = -1;
         $scope.$on('refresh-waypoints', function (event, start, end) {
@@ -176,8 +180,8 @@ angular.module('core.controllers', [])
                 $scope.waypoints_range = arrayBufferToJSON(event.data);
             }
             /* show path */
-            $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(0, 100);
-            $root.message($scope.waypoints_range.length || 0, 'waypoints displayed');
+            $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(0, 1200);
+            $root.message($scope.paths['selected'].latlngs.length || 0, 'waypoints displayed');
             /* update model */
             $scope.$digest();
         });   

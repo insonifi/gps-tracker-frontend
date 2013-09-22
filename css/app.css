@@ -92,7 +92,7 @@ div.angular-leaflet-map {
 }
 div.grid {
     width: 10em;
-    height: inherit;
+    height: 98%;
     position: absolute;
     top: 1em;
     right: 20em;
