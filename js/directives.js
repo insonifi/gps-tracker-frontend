@@ -71,14 +71,17 @@ angular.module('core.directives', [])
                     pathWorker.postMessage(buffer, [buffer]);
                 }
                 /* show path */
+                $scope.paths['selected'].latlngs = $scope.waypoints_range;
+                /*
                 pathWorker.onmessage = function (event) {
                     var array = arrayBufferToJSON(event.data);
                     $scope.paths['selected'].latlngs = array;
                     $root.message(array.length,'waypoints on map');
-                    /* update model */
+                    /* update model *//*
                     $scope.$digest();
-                    /* $scope.sly.reload(); */
+                    /* $scope.sly.reload(); *//*
                 }
+                */
             });   
             $scope.$on('blur', function (event, index) {
                 if (index === -1) { return; }
