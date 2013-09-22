@@ -95,7 +95,8 @@ angular.module('core.controllers', [])
                 }
                 return 0;
             });
-            waypointsBuffer = jsonToArrayBuffer(response.result);
+            $scope.waypoints = response.result;
+            waypointsBuffer = jsonToArrayBuffer($scope.waypoints);
             /* Detect trip */
             $root.message('Calculating...');
             detect_trips.postMessage(waypointsBuffer, [waypointsBuffer]);

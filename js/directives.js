@@ -66,8 +66,9 @@ angular.module('core.directives', [])
                 range.postMessage(buffer, [buffer]);
                 range.onmessage = function (event) {
                     $scope.waypoints_range = arrayBufferToJSON(event.data);
+                    buffer = event.data
                     /* prepare path */
-                    pathWorker.postMessage(event.data);
+                    pathWorker.postMessage(buffer, [buffer]);
                 }
                 /* show path */
                 pathWorker.onmessage = function (event) {
