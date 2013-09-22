@@ -32,7 +32,20 @@ angular.module('core.controllers', [])
                 $scope.waypoints = [];
                 $scope.trips = [];
             },
-            detect_trips = new Worker('js/detect_trips.js');
+            detect_trips = new Worker('js/detect_trips.js'),
+            waypointsBuffer = new ArrayBuffer(0),
+            arrayBufferToJSON = function (buf) {
+                return JSON.parse(String.fromCharCode.apply(null, new Uint16Array(buf)));
+            },
+            jsonToArrayBuffer = function (json) {
+                var str = JSON.stringify(json),
+                    buf = new ArrayBuffer(str.length*2), // 2 bytes for each char
+                    bufView = new Uint16Array(buf);
+                for (var i=0, strLen=str.length; i<strLen; i++) {
+                    bufView[i] = str.charCodeAt(i);
+                }
+                return buf;
+            };
             
         angular.extend($scope, {
             riga: {
@@ -78,15 +91,12 @@ angular.module('core.controllers', [])
                 }
                 return 0;
             });
+            waypointsBuffer = jsonToArrayBuffer(response.result);
             /* Detect trip */
             $root.message('Calculating...');
-            $scope.waypoints = response.result.map(function (item) {
-                item.timestamp = new Date(item.timestamp);
-                return item;
-            });
-            detect_trips.postMessage($scope.waypoints);
+            detect_trips.postMessage(waypointsBuffer, [waypointsBuffer]);
             detect_trips.onmessage = function (event) {
-                $scope.trips = event.data;
+                $scope.trips = arrayBufferToJSON(event.data);
                 $root.message('Detected', $scope.trips.length - 1, 'trips');
                 $scope.$digest(); /* make sure model is updated */
                 $scope.$broadcast('refresh-trips');
