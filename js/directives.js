@@ -67,8 +67,8 @@ angular.module('core.directives', [])
                     $scope.waypoints_range = arrayBufferToJSON(event.data);
                 }
                 /* show path */
-                $scope.paths['selected'].latlngs = $scope.waypoints_range;
-                $root.message($scope.waypoints_range.length, 'waypoints displayed');
+                $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(0, 100);
+                $root.message($scope.waypoints_range.length || 0, 'waypoints displayed');
                 /* update model */
                 $scope.$digest();
             });   
