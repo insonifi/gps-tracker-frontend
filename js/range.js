@@ -19,8 +19,9 @@ onmessage = function (event) {
     var data = arrayBufferToJSON(event.data),
         start = data.start,
         end = data.end,
-        waypoints = data.waypoints;
-    postMessage(waypoints.filter(function (item) {
-        return (item.timestamp >= start && item.timestamp <= end);
-    }));
+        waypoints = data.waypoints.filter(function (item) {
+            return (item.timestamp >= start && item.timestamp <= end);
+        });
+        
+    postMessage(jsonToArrayBuffer(waypoints));
 }
