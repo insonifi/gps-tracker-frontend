@@ -6,10 +6,10 @@ Date.prototype.toMyString = function () {
         + this.toLocaleTimeString().slice(0,5);
 }
 
-arrayBufferToJSON = function (buf) {
+function arrayBufferToJSON (buf) {
     return JSON.parse(String.fromCharCode.apply(null, new Uint16Array(buf)));
-},
-jsonToArrayBuffer = function (json) {
+};
+function jsonToArrayBuffer (json) {
     var str = JSON.stringify(json),
         buf = new ArrayBuffer(str.length*2), // 2 bytes for each char
         bufView = new Uint16Array(buf);
@@ -19,7 +19,7 @@ jsonToArrayBuffer = function (json) {
     return buf;
 };
 
-onmessage = function (event) {
+self.onmessage = function (event) {
     var i,
         trip_idx = 1,
         previous = null,
@@ -28,7 +28,7 @@ onmessage = function (event) {
         current_coords = null,
         parking_time = 300 * 1000, /* 5mins */
         now = (new Date()).valueOf(),
-        waypoints = arrayBufferToJSON(waypoints);
+        waypoints = arrayBufferToJSON(waypoints),
         trips = [],
         tripsBuffer = new ArrayBuffer(0),
         length = waypoints.length;
@@ -73,5 +73,5 @@ onmessage = function (event) {
     /* set end boundary */
     trips[0].addressB = current.toMyString();
     tripsBuffer = jsonToArrayBuffer(json);
-    postMessage(tripsBuffer, [tripsBuffer]);
+    self.postMessage(tripsBuffer, [tripsBuffer]);
 };
