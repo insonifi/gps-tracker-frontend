@@ -33,7 +33,6 @@ angular.module('core.controllers', [])
                 $scope.trips = [];
             },
             detect_trips = new Worker('js/detect_trips.js'),
-            waypointsBuffer = new ArrayBuffer(0),
             arrayBufferToJSON = function (buf) {
                 var string = '', i, len, array = new Uint16Array(buf);
                 for (i = 0, len = array.length; i< len; i += 1) {
@@ -82,6 +81,7 @@ angular.module('core.controllers', [])
             $scope.waypoints.push(waypoint);
         });
         socket.on('query-end', function (response) {
+            var waypointsBuffer = new ArrayBuffer(0);
             $root.message('Found', response.count, 'waypoints');
             $scope.notReceiving = true;
             if (response.count === 0) { return; }
