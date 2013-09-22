@@ -45,6 +45,7 @@ angular.module('core.directives', [])
                     }
                     return buf;
                 };
+            $scope.waypointsOptions = {data: $scope.waypoints_range};
                 
             $scope.activeItem = -1;
             $scope.$on('refresh-waypoints', function (event, start, end) {
@@ -78,11 +79,7 @@ angular.module('core.directives', [])
             });
             $scope.$on('focus', function (event, index) {
                 var waypoint = $scope.waypoints_range[index];
-                $scope.markers['selected']= {
-                    lat: waypoint.lat,
-                    lng: waypoint.lng,
-                    message: waypoint
-                }
+                $scope.markers['selected']= waypoint;
                 //$scope.waypoints[index].show_address = true; 
                 $scope.$root.$digest();
             });
@@ -143,7 +140,7 @@ angular.module('core.directives', [])
                 $scope.waypoints_range[index].address = response;
             });
         }],
-        link: function ($scope, element, attrs) {
+        /*link: function ($scope, element, attrs) {
             var parent = $(element);
             $scope.sly = new Sly(parent.find('.waypoints'), {
                 itemNav: 'forceCentered',
@@ -171,7 +168,7 @@ angular.module('core.directives', [])
             $scope.sly.on('load', function () {
                 $scope.sly.activate(0);
             })
-        }
+        }*/
     }
   })
   .directive('tripsList', function () {
@@ -261,7 +258,7 @@ angular.module('core.directives', [])
                 $scope.messages.push(arguments.join(' '));
                 $timeout(function () {
                     $scope.messages.shift();
-                }, 3000);
+                }, 10000);
             }
         }],
     }
