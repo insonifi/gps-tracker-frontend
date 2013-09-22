@@ -10,7 +10,7 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template: 
-            '<div class="sly-container">' + 
+            /* '<div class="sly-container">' + 
             '<div class="w-scrollbar">' +
               '<div class="handle">' +
                 '<div class="mousearea"></div>' +
@@ -18,7 +18,7 @@ angular.module('core.directives', [])
             '</div>' +
             '<div class="waypoints">' +
               '<ul class="slidee">' +
-                '<li id="{{$index}}" sf-virtual-repeat="item in waypoints_range">' +
+                 '<li id="{{$index}}" ng-repeat="item in waypoints_range">' +
                   '<div>' +
                     '<div ng-show="item.show_address" class="address" ng-click="item.show_address=false;">{{item.address}}</div>' +
                     '<div class="time" ng-click="showAddress()">{{item.time}}</div>' +
@@ -26,13 +26,15 @@ angular.module('core.directives', [])
                 '</li>' +
               '</ul>' +
             '</div>' +
-            '</div>',
+            '</div>'*/
+            '<div ng-grid="waypointsOptions"></div>',
         scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $root) {
             var range = new Worker('js/range.js'),
                 pathWorker = new Worker('js/path.js');
                 
             $scope.activeItem = -1;
+            $scope.waypointsOptions = { data: 'waypoints_range' };
             $scope.$on('refresh-waypoints', function (event, start, end) {
                 $scope.activeItem = -1;
                 $scope.start = start;
