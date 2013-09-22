@@ -29,7 +29,6 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $root) {
             var range = new Worker('js/range.js'),
-                pathWorker = new Worker('js/path.js'),
                 arrayBufferToJSON = function (buf) {
                     var string = '', i, len, array = new Uint16Array(buf);
                     for (i = 0, len = array.length; i< len; i += 1) {
@@ -72,16 +71,8 @@ angular.module('core.directives', [])
                 }
                 /* show path */
                 $scope.paths['selected'].latlngs = $scope.waypoints_range;
-                /*
-                pathWorker.onmessage = function (event) {
-                    var array = arrayBufferToJSON(event.data);
-                    $scope.paths['selected'].latlngs = array;
-                    $root.message(array.length,'waypoints on map');
-                    /* update model *//*
-                    $scope.$digest();
-                    /* $scope.sly.reload(); *//*
-                }
-                */
+                /* update model */
+                $scope.$digest();
             });   
             $scope.$on('blur', function (event, index) {
                 if (index === -1) { return; }
