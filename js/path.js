@@ -22,5 +22,5 @@ onmessage = function (event) {
             lat: item.lat,
             lng: item.long,
         }
-    })).slice(0, 500)));
+    })).slice(0, limit)));
 }

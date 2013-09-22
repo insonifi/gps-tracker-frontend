@@ -54,8 +54,8 @@ self.onmessage = function (event) {
     for (i = 0; i < length; i += 1) {
         previous = current || waypoints[i].timestamp;
         current = waypoints[i].timestamp;
-        previous_coords = current_coords || [waypoints[i].lat, waypoints[i].long];
-        current_coords = [waypoints[i].lat, waypoints[i].long];
+        previous_coords = current_coords || [waypoints[i].lat, waypoints[i].lng];
+        current_coords = [waypoints[i].lat, waypoints[i].lng];
         if (current - previous > parking_time) { /* assume next trip of time gap exceeds parking time */
             if (trips[trip_idx].end === trips[trip_idx].start) {
                 continue;

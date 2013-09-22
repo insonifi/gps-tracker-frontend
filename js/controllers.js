@@ -114,7 +114,7 @@ angular.module('core.controllers', [])
         socket.on('update-waypoint', function (waypoint) {
             $scope.markers[waypoint.module_id] = {
                 lat: waypoint.lat,
-                lng: waypoint.long
+                lng: waypoint.lng
             }
         });
         socket.on('result-address', function (response) {
@@ -126,7 +126,7 @@ angular.module('core.controllers', [])
                 for (index = 0; index < len; index += 1) {
                     waypoint = $scope.waypoints[index];
                     if (waypoint.lat === response.lat
-                        || waypoint.long === response.long) {
+                        || waypoint.lng === response.lng) {
                         waypoint.address = response.address;
                     }
                 }

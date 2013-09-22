@@ -77,7 +77,7 @@ angular.module('core.directives', [])
                     $root.message(array.length,'waypoints on map');
                     /* update model */
                     $scope.$digest();
-                    $scope.sly.reload();
+                    /* $scope.sly.reload(); */
                 }
             });   
             $scope.$on('blur', function (event, index) {
@@ -88,7 +88,7 @@ angular.module('core.directives', [])
                 var waypoint = $scope.waypoints_range[index];
                 $scope.markers['selected']= {
                     lat: waypoint.lat,
-                    lng: waypoint.long,
+                    lng: waypoint.lng,
                     message: waypoint
                 }
                 //$scope.waypoints[index].show_address = true; 
@@ -111,7 +111,7 @@ angular.module('core.directives', [])
                     for (index = 0; index < len; index += 1) {
                         waypoint = $scope.waypoints_range[index];
                         lat_diff = Math.abs(waypoint.lat - event_latlng.lat);
-                        long_diff = Math.abs(waypoint.long - event_latlng.lng);
+                        long_diff = Math.abs(waypoint.lng - event_latlng.lng);
                         if (lat_diff < tolerance && long_diff < tolerance) {
                             $scope.sly.activate(index);
                             break;
@@ -131,7 +131,7 @@ angular.module('core.directives', [])
                         for (i = 0; i < len; i += 1) {
                             test_waypoint = $this[i];
                             if (test_waypoint.lat === waypoint.lat
-                                || test_waypoint.long === waypoint.long) {
+                                || test_waypoint.lng === waypoint.lng) {
                                 return i;
                             }
                         }
@@ -142,7 +142,7 @@ angular.module('core.directives', [])
                     if ($scope.waypoints[index].address) {
                         waypoint.address = $scope.waypoints[index].address;
                     } else {
-                        $scope.requestAddress({lat: waypoint.lat, long: waypoint.long});
+                        $scope.requestAddress({lat: waypoint.lat, long: waypoint.lng});
                     }
                 }
             }
