@@ -80,7 +80,10 @@ angular.module('core.controllers', [])
             });
             /* Detect trip */
             $root.message('Calculating...');
-            $scope.waypoints = response.result;
+            $scope.waypoints = response.result.map(function (item) {
+                item.timestamp = new Date(item.timestamp);
+                return item;
+            });
             detect_trips.postMessage($scope.waypoints);
             detect_trips.onmessage = function (event) {
                 $scope.trips = event.data;
