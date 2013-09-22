@@ -14,7 +14,7 @@ angular.module('core.controllers', [])
         })
         $scope.sendQueryRequest = function () {
             if (!$scope.module) {
-                $root.message('[queryCtrl] no module selected');
+                $root.message('no module selected');
                 return;
             }
             var start_date = $scope.start_date,
