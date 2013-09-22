@@ -22,7 +22,7 @@ angular.module('core.controllers', [])
                 module_id = $scope.module.module_id;
             
             $root.message('Searching between', start_date.toLocaleString(), '...', end_date.toLocaleString(), 'for module', module_id);
-            socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf()});
+            socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf(), type: 'complete'});
         }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope', 'socket', function ($scope, $root, socket) {
