@@ -35,7 +35,11 @@ angular.module('core.controllers', [])
             detect_trips = new Worker('js/detect_trips.js'),
             waypointsBuffer = new ArrayBuffer(0),
             arrayBufferToJSON = function (buf) {
-                return JSON.parse(String.fromCharCode.apply(null, new Uint16Array(buf)));
+                var string = '', i, len, array = new Uint16Array(buf);
+                for (i = 0, len = array.length; i< len; i += 1) {
+                    string += String.fromCharCode(array[i]);
+                }
+                return JSON.parse(string);
             },
             jsonToArrayBuffer = function (json) {
                 var str = JSON.stringify(json),

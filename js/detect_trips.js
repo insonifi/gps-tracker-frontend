@@ -1,14 +1,24 @@
 importScripts('distance.js');
 
-Date.prototype.toMyString = function () {
-    return this.getDate() + '.' 
-        + (this.getMonth() + 1) + '. '
-        + this.toLocaleTimeString().slice(0,5);
+function toMyString (timestamp) {
+    var timestamp = new Date(timestamp);
+    return timestamp.getDate() + '.' 
+        + (timestamp.getMonth() + 1) + '. '
+        + timestamp.toLocaleTimeString().slice(0,5);
 }
-
+/*
 function arrayBufferToJSON (buf) {
     return JSON.parse(String.fromCharCode.apply(null, new Uint16Array(buf)));
 };
+*/
+function arrayBufferToJSON (buf) {
+    var string = '', i, len, array = new Uint16Array(buf);
+    for (i = 0, len = array.length; i< len; i += 1) {
+        string += String.fromCharCode(array[i]);
+    }
+    return JSON.parse(string);
+};
+
 function jsonToArrayBuffer (json) {
     var str = JSON.stringify(json),
         buf = new ArrayBuffer(str.length*2), // 2 bytes for each char
@@ -34,8 +44,8 @@ self.onmessage = function (event) {
         length = waypoints.length;
     /* set start boundary */
     trips.push({
-        addressA: waypoints[0].timestamp.toMyString(),
-        addressB: waypoints[length - 1].timestamp.toMyString(),
+        addressA: toMyString(waypoints[0].timestamp),
+        addressB: toMyString(waypoints[length - 1].timestamp),
         start: waypoints[0].timestamp,
         end: waypoints[length - 1].timestamp,
         distance: 0
@@ -60,18 +70,18 @@ self.onmessage = function (event) {
             trips[trip_idx] = {
                 start: current,
                 end: 0,
-                addressA: current.toMyString(),
+                addressA: toMyString(current),
                 distance: 0
             };
         }
     }
     /* Append last waypoint */
     trips[trip_idx].end = current;
-    trips[trip_idx].addressB = current.toMyString();
+    trips[trip_idx].addressB = toMyString(current);
     trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
     trips[0].distance += trips[trip_idx].distance;
     /* set end boundary */
-    trips[0].addressB = current.toMyString();
-    tripsBuffer = jsonToArrayBuffer(json);
+    trips[0].addressB = toMyString(current);
+    tripsBuffer = jsonToArrayBuffer(trips);
     self.postMessage(tripsBuffer, [tripsBuffer]);
 };
