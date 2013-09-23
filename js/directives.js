@@ -34,7 +34,9 @@ angular.module('core.directives', [])
             $scope.$on('focus', function (event, index) {
                 $scope.$root.$broadcast('refresh-waypoints', 
                     $scope.trips[index].start,
-                    $scope.trips[index].end
+                    $scope.trips[index].end,
+                    $scope.trips[index].startIdx,
+                    $scope.trips[index].endIdx
                 );
             });
         }],
