@@ -61,6 +61,7 @@ self.onmessage = function (event) {
                 continue;
             }
             trips[trip_idx].end = previous;
+            trips[trip_idx].endIdx = i - 1;
             trips[trip_idx].addressB = toMyString(current);
             trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
             trips[0].distance += trips[trip_idx].distance;
@@ -69,7 +70,9 @@ self.onmessage = function (event) {
         if (!trips[trip_idx]) {
             trips[trip_idx] = {
                 start: current,
+                startIdx: i,
                 end: 0,
+                endIdx: 0,
                 addressA: toMyString(current),
                 distance: 0
             };

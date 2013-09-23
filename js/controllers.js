@@ -170,6 +170,7 @@ angular.module('core.controllers', [])
                 opacity: 0.618
             };
             /* filter waypoints*/
+            /*
             buffer = jsonToArrayBuffer({
                 waypoints: $scope.waypoints,
                 start: start,
@@ -179,6 +180,8 @@ angular.module('core.controllers', [])
             range.onmessage = function (event) {
                 $scope.waypoints_range = arrayBufferToJSON(event.data);
             }
+            */
+            $scope.waypoints_range = $scope.waypoints.slice(start, end);
             /* show path */
             $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(0, 1200);
             $root.message($scope.paths['selected'].latlngs.length || 0, 'waypoints displayed');
