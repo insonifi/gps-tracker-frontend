@@ -80,6 +80,7 @@ self.onmessage = function (event) {
     }
     /* Append last waypoint */
     trips[trip_idx].end = current;
+    trips[trip_idx].endIdx = i;
     trips[trip_idx].addressB = toMyString(current);
     trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
     trips[0].distance += trips[trip_idx].distance;
