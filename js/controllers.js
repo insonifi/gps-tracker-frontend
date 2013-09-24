@@ -154,7 +154,7 @@ angular.module('core.controllers', [])
             };
         $scope.waypoints_range = [];
         $scope.waypointsOptions = {
-            data: $scope.waypoints_range,
+            data: 'waypoints_range',
             columnDefs: [{field:'timestamp', displayName:'time'}],
             tabIndex: 1
         };
