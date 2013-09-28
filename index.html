@@ -39,7 +39,8 @@
 		</form>
 		<iframe id='print-frame'></iframe>
         <div ng-controller='waypointsListCtrl'>
-            <div class='grid' ng-grid='waypointsOptions'></div>
+            <!--<div class='grid' ng-grid='waypointsOptions'></div>-->
+            <div class='grid' sf-virtual-repeat='item in waypoints'>{{item.timestamp}}</div>
         </div>
         <div trips-list></div>
         <div message-box></div>
