@@ -171,7 +171,9 @@ angular.module('core.directives', [])
                 columns = [{id: 'timestamp', name: 'time', field: 'timestamp'}],
                 options = {
                     showHeaderRow: false,
-                    fullWidthRows: true
+                    fullWidthRows: true,
+                    forceFitColumns: true,
+                    
                 };
             $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
         }
