@@ -184,6 +184,11 @@ angular.module('core.directives', [])
                 $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(visible.top, visible.bottom);
                 $scope.$root.$digest();
             });
+            $scope.grid.onActiveCellChanged(function(event, args) {
+                $scope.paths['selected'].latlngs;
+                //$scope.$root.$digest(); 
+                console.log(args);
+            });
             /*
             $scope.grid.onViewportChanged(function (event,args) {
                 console.log(event, args);

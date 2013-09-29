@@ -84,9 +84,10 @@ classes should alter those!
   position: absolute;
   border: 0px;
   width: 100%;
-  font-size: 0.5em;
+  font-size: 0.8em;
   color: #ccc;
   background: #333;
+  text-align: center;
   
 }
 
