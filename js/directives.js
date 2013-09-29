@@ -96,7 +96,7 @@ angular.module('core.directives', [])
                 $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(0, 100);
                 $root.message($scope.waypoints_range.length || 0, 'waypoints displayed');
                 /* update model */
-                $scope.$digest();
+                //$scope.$digest();
                 $scope.grid.setDate($scope.waypoints_range, true);
             });   
             $scope.$on('blur', function (event, index) {
