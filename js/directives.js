@@ -92,12 +92,12 @@ angular.module('core.directives', [])
                 };
                 /* filter waypoints*/
                 $scope.waypoints_range = $scope.waypoints.slice(startIdx, endIdx);
-                /* show path */
-                $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(0, 100);
                 $root.message($scope.waypoints_range.length || 0, 'waypoints displayed');
                 /* update model */
                 //$scope.$digest();
                 $scope.grid.setData($scope.waypoints_range, true);
+                /* show path */
+                // $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(0, 100);
             });   
             $scope.$on('blur', function (event, index) {
                 if (index === -1) { return; }
@@ -177,7 +177,9 @@ angular.module('core.directives', [])
                 };
             $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
             $scope.grid.onScroll.subscribe(function (event, args) {
-               console.log(event, args);
+                var grid = args.grid,
+                    visible = grid.getViewport();
+                $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(visible.top, visible.bottom);
             });
             $scope.grid.onViewportChanged(function (event,args) {
                 console.log(event, args);
