@@ -97,7 +97,7 @@ angular.module('core.directives', [])
                 $root.message($scope.waypoints_range.length || 0, 'waypoints displayed');
                 /* update model */
                 //$scope.$digest();
-                $scope.grid.setDate($scope.waypoints_range, true);
+                $scope.grid.setData($scope.waypoints_range, true);
             });   
             $scope.$on('blur', function (event, index) {
                 if (index === -1) { return; }
