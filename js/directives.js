@@ -178,6 +178,7 @@ angular.module('core.directives', [])
                     forceFitColumns: true,
                     defaultFormatter: function (row, cell, value, columnDef, dataContext) {
                         return (new Date(value)).toLocaleTimeString();
+                    }
                 };
             $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
             $scope.grid.onScroll.subscribe(function (event, args) {
