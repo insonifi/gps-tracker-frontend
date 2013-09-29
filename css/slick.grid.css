@@ -85,7 +85,8 @@ classes should alter those!
   border: 0px;
   width: 100%;
   font-size: 0.5em;
-  color: #333;
+  color: #ccc;
+  background: #333;
   
 }
 
