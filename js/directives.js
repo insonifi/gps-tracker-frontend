@@ -176,6 +176,12 @@ angular.module('core.directives', [])
                     
                 };
             $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
+            $scope.grid.onScroll.subscribe(function (event, args) {
+               console.log(event, args);
+            });
+            $scope.grid.onViewportChanged(function (event,args) {
+                console.log(event, args);
+            });
         }
     }
   })
