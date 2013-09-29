@@ -183,6 +183,7 @@ angular.module('core.directives', [])
                 var grid = args.grid,
                     visible = grid.getViewport();
                 $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(visible.top, visible.bottom);
+                $scope.$digest();
             });
             /*
             $scope.grid.onViewportChanged(function (event,args) {
