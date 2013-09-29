@@ -167,7 +167,7 @@ angular.module('core.directives', [])
         }],
         link: function ($scope, element, attrs) {
             var parent,
-                colums = [{id: 'timestamp', name: 'time', field: 'timestamp'}],
+                columns = [{id: 'timestamp', name: 'time', field: 'timestamp'}],
                 options = {
                 };
             $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
