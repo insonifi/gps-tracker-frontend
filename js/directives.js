@@ -166,33 +166,11 @@ angular.module('core.directives', [])
             });
         }],
         link: function ($scope, element, attrs) {
-            var parent = $(element);
-            $scope.sly = new Sly(parent.find('.waypoints'), {
-                itemNav: 'forceCentered',
-                smart: 1,
-                activateMiddle: 1,
-                activateOn: 'click',
-                mouseDragging: 1,
-                touchDragging: 1,
-                releaseSwing: 1,
-                startAt: 0,
-                scrollBar: parent.find('.w-scrollbar'),
-                scrollBy: 1,
-                speed: 300,
-                elasticBounds: 1,
-                easing: 'easeOutExpo',
-                dragHandle: 1,
-                dynamicHandle: 1,
-                clickBar: 1,
-            }).init();
-            $scope.sly.on('active', function () {
-                $scope.$emit('blur', $scope.activeItem);
-                $scope.activeItem = $scope.sly.rel.activeItem;
-                $scope.$emit('focus', $scope.activeItem);
-            });
-            $scope.sly.on('load', function () {
-                $scope.sly.activate(0);
-            })
+            var parent,
+                colums = [{id: 'timestamp', name: 'time', field: 'timestamp'}],
+                options = {
+                };
+            $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
         }
     }
   })
