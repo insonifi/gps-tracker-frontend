@@ -176,14 +176,14 @@ angular.module('core.directives', [])
                     showHeaderRow: false,
                     fullWidthRows: true,
                     forceFitColumns: true,
-                    
+                    headerRowHeight: 0
                 };
             $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
             $scope.grid.onScroll.subscribe(function (event, args) {
                 var grid = args.grid,
                     visible = grid.getViewport();
                 $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(visible.top, visible.bottom);
-                $scope.$digest();
+                $scope.$root.$digest();
             });
             /*
             $scope.grid.onViewportChanged(function (event,args) {
