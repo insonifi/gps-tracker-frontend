@@ -1,0 +1,22 @@
+{"ts":1377188459810,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"{\n  \"name\": \"application-name\",\n  \"version\": \"0.0.0\",\n  \"ignore\": [\n    \"**/.*\",\n    \"node_modules\",\n    \"components\"\n  ],\n  \"dependencies\": {\n    \"angular-socket-io\": \"~0.0.2\"\n  }\n}\n"]],"start1":0,"start2":0,"length1":0,"length2":183}]],"length":183}
+{"contributors":[],"silentsave":true,"ts":1377188465307,"patch":[[{"diffs":[[0,"\": \""],[-1,"~0.0.2"],[0,"\"\n  "]],"start1":165,"start2":165,"length1":14,"length2":8}]],"length":177,"saved":false}
+{"ts":1377188471980,"patch":[[{"diffs":[[0,": \"a"],[-1,"pplication-name"],[0,"\",\n "]],"start1":10,"start2":10,"length1":23,"length2":8}]],"length":162,"saved":false}
+{"ts":1377188475622,"patch":[[{"diffs":[[0,"name\": \""],[-1,"a"],[0,"\",\n  \"ve"]],"start1":5,"start2":5,"length1":17,"length2":16}]],"length":161,"saved":false}
+{"ts":1377188479071,"patch":[[{"diffs":[[0,"name\": \""],[1,"GPS tracker "],[0,"\",\n  \"ve"]],"start1":5,"start2":5,"length1":16,"length2":28}]],"length":173,"saved":false}
+{"ts":1377188480864,"patch":[[{"diffs":[[0,"\"GPS"],[-1," tracker "],[0,"\",\n "]],"start1":12,"start2":12,"length1":17,"length2":8}]],"length":164,"saved":false}
+{"ts":1377188486843,"patch":[[{"diffs":[[0,"\": \""],[-1,"GPS"],[1,"gps-tracker-f"],[0,"\",\n "]],"start1":9,"start2":9,"length1":11,"length2":21}]],"length":174,"saved":false}
+{"ts":1377188488004,"patch":[[{"diffs":[[0,"racker-f"],[1,"ront"],[0,"\",\n  \"ve"]],"start1":18,"start2":18,"length1":16,"length2":20}]],"length":178,"saved":false}
+{"ts":1377188489261,"patch":[[{"diffs":[[0,"er-front"],[1,"end"],[0,"\",\n  \"ve"]],"start1":22,"start2":22,"length1":16,"length2":19}]],"length":181,"saved":false}
+{"ts":1377188491933,"patch":[[{"diffs":[[0,"io\": \"\"\n"],[1,"    \"\"\n"],[0,"  }\n}\n"]],"start1":167,"start2":167,"length1":14,"length2":21}]],"length":188,"saved":false}
+{"ts":1377188492687,"patch":[[{"diffs":[[0,"\"\"\n    \""],[1,"am"],[0,"\"\n  }\n}\n"]],"start1":172,"start2":172,"length1":16,"length2":18}]],"length":190,"saved":false}
+{"ts":1377188497417,"patch":[[{"diffs":[[0,"\"\n    \"a"],[-1,"m"],[1,"ngular-"],[0,"\"\n  }\n}\n"]],"start1":173,"start2":173,"length1":17,"length2":23}]],"length":196,"saved":false}
+{"ts":1377188499561,"patch":[[{"diffs":[[0,"angular-"],[1,"leaflet"],[0,"\"\n  }\n}\n"]],"start1":180,"start2":180,"length1":16,"length2":23}]],"length":203,"saved":false}
+{"ts":1377188504880,"patch":[[{"diffs":[[0,"leaflet\""],[1,": \"\""],[0,"\n  }\n}\n"]],"start1":188,"start2":188,"length1":15,"length2":19}]],"length":207,"saved":false}
+{"ts":1377188507903,"patch":[[{"diffs":[[0,"-io\": \"\""],[1,","],[0,"\n    \"an"]],"start1":166,"start2":166,"length1":16,"length2":17}]],"length":208,"saved":false}
+{"contributors":[],"silentsave":true,"ts":1377630236202,"patch":[[{"diffs":[[0,"o\": \"\",\n"],[1,"    \"angular-kendo\"\n"],[0,"    \"ang"]],"start1":168,"start2":168,"length1":16,"length2":36}]],"length":228,"saved":false}
+{"ts":1377630240606,"patch":[[{"diffs":[[0,"r-kendo\""],[1,": \"\","],[0,"\n    \"an"]],"start1":187,"start2":187,"length1":16,"length2":21}]],"length":233,"saved":false}
+{"ts":1377630545213,"patch":[[{"diffs":[[0,"ar-kendo"],[1,"-ui"],[0,"\": \"\",\n "]],"start1":186,"start2":186,"length1":16,"length2":19}]],"length":236,"saved":false}
+{"contributors":[],"silentsave":true,"ts":1379179041611,"patch":[[{"diffs":[[0,"ies\": {\n"],[1,"     \n"],[0,"    \"ang"]],"start1":139,"start2":139,"length1":16,"length2":22}]],"length":242,"saved":false}
+{"ts":1379179043083,"patch":[[{"diffs":[[0,": {\n    "],[-1," "],[1,"\"a\""],[0,"\n    \"an"]],"start1":143,"start2":143,"length1":17,"length2":19}]],"length":244,"saved":false}
+{"ts":1379179044746,"patch":[[{"diffs":[[0,"{\n    \"a"],[1,"ngular"],[0,"\"\n    \"a"]],"start1":145,"start2":145,"length1":16,"length2":22}]],"length":250,"saved":false}
+{"ts":1379179048436,"patch":[[{"diffs":[[0,"angular\""],[1,": \"\","],[0,"\n    \"an"]],"start1":152,"start2":152,"length1":16,"length2":21}]],"length":255,"saved":false}

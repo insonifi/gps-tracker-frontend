@@ -38,10 +38,10 @@
             <input type='submit' id='query'></input>
 		</form>
 		<iframe id='print-frame'></iframe>
-        <div ng-controller='waypointsListCtrl'>
+        <!--<div ng-controller='waypointsListCtrl'>-->
             <!--<div class='grid' ng-grid='waypointsOptions'></div>-->
-            <div class='grid' sf-virtual-repeat='item in waypoints_range'>{{item.timestamp}}</div>
-        </div>
+        <!--</div>-->
+        <div waypoint-list><div>
         <div trips-list></div>
         <div message-box></div>
 	</body>
