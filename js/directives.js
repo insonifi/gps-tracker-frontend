@@ -79,7 +79,7 @@ angular.module('core.directives', [])
             '<div class="grid"></div>',
         scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $root) {
-            $scope.waypointsOptions = [];
+            $scope.waypoints_range = [];
                 
             $scope.$on('refresh-waypoints', function (event, start, end, startIdx, endIdx) {
                 $scope.start = start;
