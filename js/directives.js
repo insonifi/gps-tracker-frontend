@@ -96,8 +96,11 @@ angular.module('core.directives', [])
                 /* update model */
                 //$scope.$digest();
                 $scope.grid.setData($scope.waypoints_range, true);
+                $scope.grid.invalidate();
                 /* show path */
                 // $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(0, 100);
+                $scope.markers['start']= $scope.waypoints_range[0];
+                $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];
             });   
             $scope.$on('blur', function (event, index) {
                 if (index === -1) { return; }
@@ -181,9 +184,11 @@ angular.module('core.directives', [])
                     visible = grid.getViewport();
                 $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(visible.top, visible.bottom);
             });
+            /*
             $scope.grid.onViewportChanged(function (event,args) {
                 console.log(event, args);
             });
+            */
         }
     }
   })
