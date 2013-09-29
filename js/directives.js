@@ -170,6 +170,7 @@ angular.module('core.directives', [])
             var parent,
                 columns = [{id: 'timestamp', name: 'time', field: 'timestamp'}],
                 options = {
+                    showHeaderRow: false
                 };
             $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
         }
