@@ -134,6 +134,7 @@ angular.module('core.controllers', [])
             }) ()
         });
     }])
+/*
     .controller('waypointsListCtrl', ['$scope', '$rootScope', function ($scope, $root) {
         var range = new Worker('js/range.js'),
             arrayBufferToJSON = function (buf) {
@@ -169,8 +170,6 @@ angular.module('core.controllers', [])
                 weight: 3,
                 opacity: 0.618
             };
-            /* filter waypoints*/
-            /*
             buffer = jsonToArrayBuffer({
                 waypoints: $scope.waypoints,
                 start: start,
@@ -180,12 +179,9 @@ angular.module('core.controllers', [])
             range.onmessage = function (event) {
                 $scope.waypoints_range = arrayBufferToJSON(event.data);
             }
-            */
             $scope.waypoints_range = $scope.waypoints.slice(startIdx, endIdx);
-            /* show path */
             $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(0, 1200);
             $root.message($scope.paths['selected'].latlngs.length || 0, 'waypoints displayed');
-            /* update model */
             $scope.$digest();
         });   
         $scope.$on('blur', function (event, index) {
@@ -255,3 +251,4 @@ angular.module('core.controllers', [])
             $scope.waypoints_range[index].address = response;
         });
     }])
+*/
