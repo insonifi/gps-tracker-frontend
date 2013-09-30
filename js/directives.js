@@ -171,11 +171,9 @@ angular.module('core.directives', [])
         }],
         link: function ($scope, element, attrs) {
             var parent,
-                columns = [{id: 'timestamp', name: 'time', field: 'timestamp', formatter: dateFormatter}],
+                columns = [{id: 'timestamp', field: 'timestamp', formatter: dateFormatter}],
                 options = {
-                    showHeaderRow: false,
-                    fullWidthRows: true,
-                    forceFitColumns: true
+                    /* forceFitColumns: true */
                 };
             $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
             $scope.grid.onScroll.subscribe(function (event, args) {
