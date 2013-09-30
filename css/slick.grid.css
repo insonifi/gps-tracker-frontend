@@ -77,6 +77,7 @@ classes should alter those!
 
 .grid-canvas {
   position: relative;
+  width: 5em;
   outline: 0;
 }
 
@@ -84,7 +85,7 @@ classes should alter those!
   position: absolute;
   border: 0px;
   width: 100%;
-  font-size: 0.8em;
+  font-size: 0.7em;
   color: #ccc;
   background: #333;
   text-align: center;
