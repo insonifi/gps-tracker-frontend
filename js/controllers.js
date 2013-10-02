@@ -19,20 +19,18 @@ angular.module('core.controllers', [])
             }
             var start_date = $scope.start_date,
                 end_date = $scope.end_date,
-                module_id = $scope.module.module_id;
+                module_id = $scope.module.module_id,
+                chunk_size = 10;
             
             $root.message('Searching between', start_date.toLocaleString(), '...', end_date.toLocaleString(), 'for module', module_id);
-            socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf(), type: 'complete'});
+            //init vars
+            $scope.waypoints = [];
+            $scope.trips = [];
+            socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf(), chunks: chunk_size});
         }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope', 'socket', function ($scope, $root, socket) {
-        var now,
-            init_vars = function () {
-                now = (new Date()).valueOf();
-                $scope.waypoints = [];
-                $scope.trips = [];
-            },
-            detect_trips = new Worker('js/detect_trips.js'),
+        var detect_trips = new Worker('js/detect_trips.js'),
             arrayBufferToJSON = function (buf) {
                 var string = '', i, len, array = new Uint16Array(buf);
                 for (i = 0, len = array.length; i< len; i += 1) {
@@ -48,6 +46,10 @@ angular.module('core.controllers', [])
                     bufView[i] = str.charCodeAt(i);
                 }
                 return buf;
+            },
+            receiveWaypoints = function (waypoints) {
+                $root.message(waypoints.count);
+                $scope.waypoints.concat(waypoints.result);
             };
             
         angular.extend($scope, {
@@ -63,30 +65,16 @@ angular.module('core.controllers', [])
                 maxZoom: 18
             }
         });
-        /* Initialise variables */
-        init_vars();
-        $scope.notReceiving = true;
-        /* Query waypoints */
-        socket.on('query-waypoint', function (waypoint) {
-            if($scope.notReceiving) {
-                $root.message('Receiving...');
-                init_vars()
-                $scope.notReceiving = false;
-            }
-            /* Receive waypoint */
-            waypoint.timestamp = new Date(waypoint.timestamp); /* convert to date */
-            waypoint.time = waypoint.timestamp.toLocaleTimeString();
-            waypoint.show_address = false;
-            waypoint.address = null;
-            $scope.waypoints.push(waypoint);
+        /* Receive waypoints */
+        socket.on('query-chunk', function (chunk) {
+            receiveWaypoints(chunk);
         });
-        socket.on('query-end', function (response) {
+        socket.on('query-end', function (chunk) {
             var waypointsBuffer = new ArrayBuffer(0);
-            $root.message('Found', response.count, 'waypoints');
-            $scope.notReceiving = true;
-            if (response.count === 0) { return; }
+            receiveWaypoints(chunk);
+            $root.message('Found',$scope.waypoints.length, 'waypoints');
             /* Sort waypoints */
-            response.result.sort(function (a, b) {
+            $scope.waypoints.sort(function (a, b) {
                 if (a.timestamp > b.timestamp) {
                     return 1;
                 }
@@ -95,10 +83,9 @@ angular.module('core.controllers', [])
                 }
                 return 0;
             });
-            $scope.waypoints = response.result;
             waypointsBuffer = jsonToArrayBuffer($scope.waypoints);
             /* Detect trip */
-            $root.message('Calculating...');
+            $root.message('Analysing waypoints...');
             detect_trips.postMessage(waypointsBuffer, [waypointsBuffer]);
             detect_trips.onmessage = function (event) {
                 $scope.trips = arrayBufferToJSON(event.data);
