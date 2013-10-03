@@ -49,7 +49,7 @@ angular.module('core.controllers', [])
             },
             receiveWaypoints = function (waypoints) {
                 $root.message(waypoints.length);
-                $root.waypoints.concat(waypoints);
+                $root.waypoints = $root.waypoints.concat(waypoints);
             };
             
         angular.extend($scope, {
@@ -107,11 +107,11 @@ angular.module('core.controllers', [])
         socket.on('result-address', function (response) {
             (function () {
                 var index = 0,
-                    len = $scope.waypoints.length,
+                    len = $root.waypoints.length,
                     waypoint = null;
 
                 for (index = 0; index < len; index += 1) {
-                    waypoint = $scope.waypoints[index];
+                    waypoint = $root.waypoints[index];
                     if (waypoint.lat === response.lat
                         || waypoint.lng === response.lng) {
                         waypoint.address = response.address;
