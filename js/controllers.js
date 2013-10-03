@@ -30,6 +30,8 @@ angular.module('core.controllers', [])
         }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope', 'socket', function ($scope, $root, socket) {
+        $scope.waypoints = [];
+        $scope.trips = [];
         var detect_trips = new Worker('js/detect_trips.js'),
             arrayBufferToJSON = function (buf) {
                 var string = '', i, len, array = new Uint16Array(buf);
