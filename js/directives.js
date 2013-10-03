@@ -27,16 +27,16 @@ angular.module('core.directives', [])
         '</div>' +
         '</div>',
         scope: true,
-        controller: ['$scope', function ($scope) {
+        controller: ['$scope', '$rootScope', function ($scope, $root) {
             $scope.$on('refresh-trips', function () {
                 $scope.sly.reload();
             });
             $scope.$on('focus', function (event, index) {
-                $scope.$root.$broadcast('refresh-waypoints', 
-                    $scope.trips[index].start,
-                    $scope.trips[index].end,
-                    $scope.trips[index].startIdx,
-                    $scope.trips[index].endIdx
+                $root.$broadcast('refresh-waypoints', 
+                    $root.trips[index].start,
+                    $root.trips[index].end,
+                    $root.trips[index].startIdx,
+                    $root.trips[index].endIdx
                 );
             });
         }],
@@ -91,7 +91,7 @@ angular.module('core.directives', [])
                     opacity: 0.618
                 };
                 /* filter waypoints*/
-                $scope.waypoints_range = $scope.waypoints.slice(startIdx, endIdx);
+                $scope.waypoints_range = $root.waypoints.slice(startIdx, endIdx);
                 $root.message($scope.waypoints_range.length || 0, 'waypoints displayed');
                 /* update model */
                 //$scope.$digest();
@@ -110,7 +110,7 @@ angular.module('core.directives', [])
                 var waypoint = $scope.waypoints_range[index];
                 $scope.markers['selected']= waypoint;
                 //$scope.waypoints[index].show_address = true; 
-                $scope.$root.$digest();
+                $root.$digest();
             });
             $scope.$on('leafletDirectiveMap.click', function(event, args){
                 var event_latlng = args.leafletEvent.latlng;
@@ -143,7 +143,7 @@ angular.module('core.directives', [])
                 }
                 var waypoint = $scope.waypoints_range[this.$index],
                     index = (function () {
-                        var i, $this = $scope.waypoints,
+                        var i, $this = $root.waypoints,
                             len = $this.length,
                             test_waypoint = null;
                         for (i = 0; i < len; i += 1) {
@@ -158,7 +158,7 @@ angular.module('core.directives', [])
                 waypoint.show_address = true;
                 if (!waypoint.address) {
                     if ($scope.waypoints[index].address) {
-                        waypoint.address = $scope.waypoints[index].address;
+                        waypoint.address = $root.waypoints[index].address;
                     } else {
                         $scope.requestAddress({lat: waypoint.lat, long: waypoint.lng});
                     }
@@ -180,7 +180,7 @@ angular.module('core.directives', [])
                 var grid = args.grid,
                     visible = grid.getViewport();
                 $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(visible.top, visible.bottom);
-                $scope.$root.$digest();
+                $root.$digest();
             });
             $scope.grid.onActiveCellChanged(function(event, args) {
                 $scope.paths['selected'].latlngs;
@@ -212,9 +212,13 @@ angular.module('core.directives', [])
                 return $scope.messages.length === 0;
             }
             $root.message = function () {
+                var msg_string = '';
                 arguments.join = Array.prototype.join;
-                $scope.messages.push(arguments.join(' '));
-                console.info(arguments.join(' '));
+                msg_string = arguments.join(' ')
+                $scope.messages.push(msg_string);
+                console.info(msg_string);
+                /* temporary limit solution */
+                $scope.messages = $scope.messages.slice(0, 3)
                 $timeout(function () {
                     $scope.messages.shift();
                 }, 10000);

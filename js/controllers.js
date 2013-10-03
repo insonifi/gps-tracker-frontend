@@ -24,14 +24,12 @@ angular.module('core.controllers', [])
             
             $root.message('Searching between', start_date.toLocaleString(), '...', end_date.toLocaleString(), 'for module', module_id);
             //init vars
-            $scope.waypoints = [];
-            $scope.trips = [];
+            $root.waypoints = [];
+            $root.trips = [];
             socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf(), chunks: chunk_size});
         }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope', 'socket', function ($scope, $root, socket) {
-        $scope.waypoints = [];
-        $scope.trips = [];
         var detect_trips = new Worker('js/detect_trips.js'),
             arrayBufferToJSON = function (buf) {
                 var string = '', i, len, array = new Uint16Array(buf);
@@ -51,7 +49,7 @@ angular.module('core.controllers', [])
             },
             receiveWaypoints = function (waypoints) {
                 $root.message(waypoints.count);
-                $scope.waypoints.concat(waypoints.result);
+                $root.waypoints.concat(waypoints.result);
             };
             
         angular.extend($scope, {
@@ -76,7 +74,7 @@ angular.module('core.controllers', [])
             receiveWaypoints(chunk);
             $root.message('Found',$scope.waypoints.length, 'waypoints');
             /* Sort waypoints */
-            $scope.waypoints.sort(function (a, b) {
+            $root.waypoints.sort(function (a, b) {
                 if (a.timestamp > b.timestamp) {
                     return 1;
                 }
@@ -90,10 +88,10 @@ angular.module('core.controllers', [])
             $root.message('Analysing waypoints...');
             detect_trips.postMessage(waypointsBuffer, [waypointsBuffer]);
             detect_trips.onmessage = function (event) {
-                $scope.trips = arrayBufferToJSON(event.data);
+                $root.trips = arrayBufferToJSON(event.data);
                 $root.message('Detected', $scope.trips.length - 1, 'trips');
-                $scope.$digest(); /* make sure model is updated */
-                $scope.$broadcast('refresh-trips');
+                $root.$digest(); /* make sure model is updated */
+                $root.$broadcast('refresh-trips');
             }
         });
         /* Get address for coordinates */
