@@ -20,7 +20,7 @@ angular.module('core.controllers', [])
             var start_date = $scope.start_date,
                 end_date = $scope.end_date,
                 module_id = $scope.module.module_id,
-                chunk_size = 10;
+                chunk_size = 1000;
             
             $root.message('Searching between', start_date.toLocaleString(), '...', end_date.toLocaleString(), 'for module', module_id);
             //init vars
@@ -48,8 +48,8 @@ angular.module('core.controllers', [])
                 return buf;
             },
             receiveWaypoints = function (waypoints) {
-                $root.message(waypoints.count);
-                $root.waypoints.concat(waypoints.result);
+                $root.message(waypoints.length);
+                $root.waypoints.concat(waypoints);
             };
             
         angular.extend($scope, {
