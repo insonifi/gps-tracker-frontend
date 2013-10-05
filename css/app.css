@@ -216,7 +216,7 @@ span.msg {
 	cursor: pointer;
 }
 .trips ul li:first-child {
-    background: #333;
+    background: #444;
     color: #ccc;
 }
 .trips ul li .s-trip {
