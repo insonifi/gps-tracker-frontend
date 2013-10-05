@@ -184,7 +184,7 @@ angular.module('core.directives', [])
             });
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
                 $scope.paths['selected'].latlngs;
-                //$scope.$root.$digest(); 
+                $scope.$root.$digest(); 
                 console.log(args);
             });
             /*
@@ -202,9 +202,10 @@ angular.module('core.directives', [])
         transclude: false,
         template:
             '<div id="message-box" ng-hide="isEmpty()">' +
-                '<ul ng-repeat="msg in messages">' +
+                /* '<ul ng-repeat="msg in messages">' +
                     '<li>{{msg}}</li> ' +
-                '</ul>' +
+                '</ul>' +*/
+                '{{messages}}' +
             '</div>',
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
             $scope.messages = [];
@@ -215,12 +216,13 @@ angular.module('core.directives', [])
                 var msg_string = '';
                 arguments.join = Array.prototype.join;
                 msg_string = arguments.join(' ')
-                $scope.messages.push(msg_string);
+                if ($scope.timeout_promise) {
+                    $timeout.cancel($scope.timeout_promise);
+                }
+                $scope.messages = msg_string;
                 console.info(msg_string);
-                /* temporary limit solution */
-                $scope.messages = $scope.messages.slice(0, 3)
-                $timeout(function () {
-                    $scope.messages.shift();
+                $scope.timeout_promise = $timeout(function () {
+                    $scope.messages = '';
                 }, 10000);
             }
         }],
