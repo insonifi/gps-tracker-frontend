@@ -203,9 +203,9 @@ angular.module('core.directives', [])
         template:
             '<div id="message-box" ng-hide="isEmpty()">' +
                 /* '<ul ng-repeat="msg in messages">' +
-                    '<li>{{msg}}</li> ' +
+                    '<li><{{msg}}</li> ' +
                 '</ul>' +*/
-                '{{messages}}' +
+                '<span class="timestamp">{{time}}</span><span class="msg"><{{messages}}</span>' +
             '</div>',
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
             $scope.messages = [];
@@ -213,12 +213,13 @@ angular.module('core.directives', [])
                 return $scope.messages.length === 0;
             }
             $root.message = function () {
-                var msg_string = (new Date()).toLocaleTimeString() + ' ';
+                var msg_string = '';
                 arguments.join = Array.prototype.join;
                 msg_string += arguments.join(' ')
                 if ($scope.timeout_promise) {
                     $timeout.cancel($scope.timeout_promise);
                 }
+                $scope.time = (new Date()).toTimeString().slice(0,8);
                 $scope.messages = msg_string;
                 console.info(msg_string);
                 $scope.timeout_promise = $timeout(function () {
