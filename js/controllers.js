@@ -28,6 +28,11 @@ angular.module('core.controllers', [])
             $root.trips = [];
             socket.emit('query-period', {module_id: module_id, start: start_date.valueOf(), end: end_date.valueOf(), chunks: chunk_size});
         }
+        $scope.reset = function () {
+            $root.waypoints = [];
+            $root.trips = [];
+            $root.$digest();
+        }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope', 'socket', function ($scope, $root, socket) {
         var detect_trips = new Worker('js/detect_trips.js'),
@@ -72,7 +77,7 @@ angular.module('core.controllers', [])
         socket.on('query-end', function (chunk) {
             var waypointsBuffer = new ArrayBuffer(0);
             receiveWaypoints(chunk);
-            $root.message('Found',$scope.waypoints.length, 'waypoints');
+            $root.message('Found',$root.waypoints.length, 'waypoints');
             /* Sort waypoints */
             $root.waypoints.sort(function (a, b) {
                 if (a.timestamp > b.timestamp) {
@@ -83,13 +88,13 @@ angular.module('core.controllers', [])
                 }
                 return 0;
             });
-            waypointsBuffer = jsonToArrayBuffer($scope.waypoints);
+            waypointsBuffer = jsonToArrayBuffer($root.waypoints);
             /* Detect trip */
             $root.message('Analysing waypoints...');
             detect_trips.postMessage(waypointsBuffer, [waypointsBuffer]);
             detect_trips.onmessage = function (event) {
                 $root.trips = arrayBufferToJSON(event.data);
-                $root.message('Detected', $scope.trips.length - 1, 'trips');
+                $root.message('Detected', $root.trips.length - 1, 'trips');
                 $root.$digest(); /* make sure model is updated */
                 $root.$broadcast('refresh-trips');
             }
