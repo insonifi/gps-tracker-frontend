@@ -31,6 +31,7 @@ angular.module('core.controllers', [])
             $root.trips = [];
             $root.$digest();
             $root.$broadcast('refresh-trips');
+            $root.$broadcast('refresh-waypoints');
         }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope', function ($scope, $root) {

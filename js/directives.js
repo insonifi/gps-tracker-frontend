@@ -80,27 +80,26 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $root) {
             $scope.waypoints_range = [];
-                
             $scope.$on('refresh-waypoints', function (event, start, end, startIdx, endIdx) {
-                $scope.start = start;
-                $scope.end = end;
-                $scope.startIdx = startIdx;
-                $scope.endIdx = endIdx;
-                $scope.paths['selected'] = {
-                    weight: 3,
-                    opacity: 0.618
-                };
-                /* filter waypoints*/
-                $scope.waypoints_range = $root.waypoints.slice(startIdx, endIdx);
-                $root.$broadcast('msg', $scope.waypoints_range.length, 'waypoints');
-                /* update model */
-                //$scope.$digest();
+                if (start !== undefined && end !== undefined) {
+                    $scope.start = start;
+                    $scope.end = end;
+                    $scope.startIdx = startIdx;
+                    $scope.endIdx = endIdx;
+                    $scope.paths['selected'] = {
+                        weight: 3,
+                        opacity: 0.618
+                    };
+                    /* filter waypoints*/
+                    $scope.waypoints_range = $root.waypoints.slice(startIdx, endIdx);
+                    $root.$broadcast('msg', $scope.waypoints_range.length, 'waypoints');
+                    $scope.markers['start']= $scope.waypoints_range[0];
+                    $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];
+                } else {
+                    $scope.waypoints_range = [];
+                }
                 $scope.grid.setData($scope.waypoints_range, true);
                 $scope.grid.invalidate();
-                /* show path */
-                // $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(0, 100);
-                $scope.markers['start']= $scope.waypoints_range[0];
-                $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];
             });   
             $scope.$on('result-address', function (event, response) {
                 var index = $scope.activeItem;
