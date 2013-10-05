@@ -88,10 +88,10 @@ div.angular-leaflet-map {
     height: 100%;
 }
 div.grid {
-    width: 10em;
+    width: 4.5em;
     height: 98%;
     position: absolute;
-    top: 1em;
+    top: 1%;
     right: 0em;
 }
 span.timestamp {

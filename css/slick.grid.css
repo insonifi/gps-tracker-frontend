@@ -16,6 +16,7 @@ classes should alter those!
   white-space: nowrap;
   cursor: default;
   overflow: hidden;
+  height: 0;
 }
 
 .slick-header-column.ui-state-default {

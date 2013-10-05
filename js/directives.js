@@ -131,39 +131,13 @@ angular.module('core.directives', [])
                 var waypoint = $scope.waypoints_range[index];
                 //waypoint.message: waypoint.address != '' ? waypoint.address : ;
                 $scope.markers['selected'] = waypoint;
+                $scope.markers['selected'].message = waypoint.kph;
                 $root.$digest();
             });
             $scope.$on('select-path', function (event, visible) {
                 $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(visible.top, visible.bottom);
                 $root.$digest();
             });
-            $scope.showAddress = function () {
-                if ($scope.activeItem !== this.$index) {
-                    return;
-                }
-                var waypoint = $scope.waypoints_range[this.$index],
-                    index = (function () {
-                        var i, $this = $root.waypoints,
-                            len = $this.length,
-                            test_waypoint = null;
-                        for (i = 0; i < len; i += 1) {
-                            test_waypoint = $this[i];
-                            if (test_waypoint.lat === waypoint.lat
-                                || test_waypoint.lng === waypoint.lng) {
-                                return i;
-                            }
-                        }
-                    }) ();
-                
-                waypoint.show_address = true;
-                if (!waypoint.address) {
-                    if ($scope.waypoints[index].address) {
-                        waypoint.address = $root.waypoints[index].address;
-                    } else {
-                        $scope.requestAddress({lat: waypoint.lat, long: waypoint.lng});
-                    }
-                }
-            }
             $scope.$on('result-address', function (event, response) {
                 var index = $scope.activeItem;
                 $scope.waypoints_range[index].address = response;
