@@ -29,7 +29,7 @@ body {
     border-radius: 0.2em;
     border-style: solid;
     border-color: #ccc;
-    box-shadow: inset 0em 1.5em 2em 0em #eee,inset 0 0 1em 0em #aaa;
+    box-shadow: inset 0em 1.5em 2em 0em #eee;
     color: #2e2e2e;
 }
 #query-params > input:hover {

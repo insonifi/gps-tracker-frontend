@@ -102,31 +102,6 @@ angular.module('core.directives', [])
                 $scope.markers['start']= $scope.waypoints_range[0];
                 $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];
             });   
-            $scope.$on('leafletDirectiveMap.click', function(event, args){
-                var event_latlng = args.leafletEvent.latlng;
-                console.log('[mapCtrl] find waypoint at',
-                    event_latlng.lat.toFixed(6),
-                    event_latlng.lng.toFixed(6)
-                );
-                
-                (function () {
-                    var tolerance = 0.00015,
-                        lat_diff = null,
-                        long_diff = null,
-                        index = 0,
-                        len = $scope.waypoints_range.length,
-                        waypoint = null;
-                    for (index = 0; index < len; index += 1) {
-                        waypoint = $scope.waypoints_range[index];
-                        lat_diff = Math.abs(waypoint.lat - event_latlng.lat);
-                        long_diff = Math.abs(waypoint.lng - event_latlng.lng);
-                        if (lat_diff < tolerance && long_diff < tolerance) {
-                            $scope.sly.activate(index);
-                            break;
-                        }
-                    }
-                }) ()
-            });
             $scope.$on('result-address', function (event, response) {
                 var index = $scope.activeItem;
                 $scope.waypoints_range[index].address = response;
@@ -141,10 +116,10 @@ angular.module('core.directives', [])
             $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
             $scope.grid.onScroll.subscribe(function (event, args) {
                 var visible = args.grid.getViewport();
-                $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
+                $scope$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
             });
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
-                $scope.$root.$broadcast('select-waypoint', args.row)
+                $scope.$broadcast('select-waypoint', args.row)
             });
             
         }
