@@ -7,19 +7,19 @@ body {
     height: 99%;
     overflow: inherit;
 }
-k-state-default, #query-params > input {
+k-state-default #query-params > input {
     padding: 0.5em;
     box-shadow: inset #ddd 0 0 1em 0.1em;
     height: 2.3em;
     border-radius: 0.2em;
     background: #eee;
 }
-k-state-hover, #query-params > input:hover {
+k-state-hover #query-params > input:hover {
     cursor: pointer;
     border-radius: 0.2em;
     border-color: transparent;
 }
-k-state-active, #query-params > input:active {
+k-state-active #query-params > input:active {
     margin-top: 0.1em;
 }
 #query-params {
