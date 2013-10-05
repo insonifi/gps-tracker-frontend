@@ -202,6 +202,7 @@ angular.module('core.directives', [])
             $scope.$on('msg', function () {
                 var msg_string = '';
                 arguments.join = Array.prototype.join;
+                arguments.slice = Array.prototype.slice;
                 msg_string += arguments.slice(1).join(' ');
                 if ($scope.timeout_promise) {
                     $timeout.cancel($scope.timeout_promise);
