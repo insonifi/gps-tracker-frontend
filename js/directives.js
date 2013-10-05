@@ -141,10 +141,10 @@ angular.module('core.directives', [])
             $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
             $scope.grid.onScroll.subscribe(function (event, args) {
                 var visible = args.grid.getViewport();
-                $scope.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
+                $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
             });
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
-                $scope.$broadcast('select-waypoint', args.row)
+                $scope.$root.$broadcast('select-waypoint', args.row)
             });
             
         }

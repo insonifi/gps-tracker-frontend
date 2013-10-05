@@ -9,21 +9,14 @@ body {
 }
 input {
     padding: 5px;
+    box-shadow: #333 0 0 0.2em 0;
+    height: 2.3em;
+    border-radius: 0.2em;
+    background: #333;
+    color: #ccc;
 }
 input:hover {
   cursor: pointer;
-}
-input.field {
-  border: 2px solid white;  
-}
-input#update-pwd {
-    width: 5em;
-}
-input:focus {
-  border-bottom-color: #a03232;
-}
-input[dtpicker] {
-  width: 9em;
 }
 select {
     border-radius: 0.2em;
