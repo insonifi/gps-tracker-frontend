@@ -178,7 +178,7 @@ angular.module('core.directives', [])
                     $scope.timeout_promise = $timeout(function () {
                         $scope.messages = '';
                     }, 10000);
-                    len -= 1;
+                    len -= 2; /* cut out last item */
                 }
                 msg_string += arguments.slice(1, len).join(' ');
                 $scope.time = (new Date()).toTimeString().slice(0,8);
