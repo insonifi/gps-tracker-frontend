@@ -6,7 +6,7 @@ angular.module('core.controllers', [])
     .controller('queryCtrl', ['$scope', '$rootScope', 'cnxn', function ($scope, $root, cnxn) {
         $scope.end_date = new Date();
         $scope.start_date = new Date($scope.end_date - 1000 * 3600 * 24);
-        
+        $scope.list = [];
         $scope.$on('modulelist', function (list) {
             $scope.list = list;    
         });
