@@ -77,7 +77,7 @@ angular.module('core.controllers', [])
         socket.on('query-end', function (chunk) {
             var waypointsBuffer = new ArrayBuffer(0);
             receiveWaypoints(chunk);
-            $root.message('Found',$root.waypoints.length, 'waypoints');
+            $root.message('Found', chunk, 'waypoints');
             /* Sort waypoints */
             $root.waypoints.sort(function (a, b) {
                 if (a.timestamp > b.timestamp) {

@@ -213,9 +213,9 @@ angular.module('core.directives', [])
                 return $scope.messages.length === 0;
             }
             $root.message = function () {
-                var msg_string = '';
+                var msg_string = (new Date()).toLocaleTimeString() + ' ';
                 arguments.join = Array.prototype.join;
-                msg_string = arguments.join(' ')
+                msg_string += arguments.join(' ')
                 if ($scope.timeout_promise) {
                     $timeout.cancel($scope.timeout_promise);
                 }
