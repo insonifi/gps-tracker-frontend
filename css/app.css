@@ -7,21 +7,26 @@ body {
     height: 99%;
     overflow: inherit;
 }
-input {
-    padding: 5px;
-    box-shadow: #333 0 0 0.2em 0;
+#query-params > input {
+    padding: 0.5em;
+    box-shadow: inset #ddd 0 0 1em 0.1em;
     height: 2.3em;
     border-radius: 0.2em;
-    background: #333;
-    color: #ccc;
+    background: #eee;
+    padding-top: 0;
 }
-input:hover {
-  cursor: pointer;
+#query-params > input:hover {
+    cursor: pointer;
+    background: #a03232;
+}
+#query-params > input:active {
+    padding-top: 0.1em;
 }
 select {
     border-radius: 0.2em;
 	padding: 0.2em;
-	background: #E5E3E1;
+	background: #333;
+	color: #ccc;
 }
 #query-params {
 	position: absolute;
@@ -35,9 +40,6 @@ select {
 	border: rgb(52,141,255) 1px none;
 	border-radius: 0 0 1em 0;
 	padding-left: 0.5em;
-}
-#query-params > input[type="text"] {
-  width: 8em;
 }
 #query-params > select {
   min-width: 5em;
