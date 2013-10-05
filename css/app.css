@@ -25,7 +25,7 @@ body {
     padding: 0.2em;
     min-width: 5em;
     height: 2.3em;
-    background: #ccc;
+    background: #ddd;
     border-width: 0;
     box-shadow: inset 0 1em 1em 0em #eee,inset 0 0 2em 0em #aaa;
 }
@@ -36,8 +36,6 @@ body {
     box-shadow: inset 0em 1.5em 2em 0em #ccc,inset 0 0 1em 0em #aaa;
 }
 #query-params > input:active {
-    padding-top: 0.4em;
-    padding-bottom: 0;
     background: #a99f9a;
     box-shadow: inset 0em 1.5em 2em 0em #aaa,inset 0 0 1em 0em #ccc;
 }
@@ -47,7 +45,7 @@ body {
     padding: 0.2em;
     min-width: 5em;
     height: 2.3em;
-    background: #ccc;
+    background: #ddd;
     box-shadow: inset 0 1em 1em 0em #eee,inset 0 0 2em 0em #aaa;
 }
 #print-frame {
