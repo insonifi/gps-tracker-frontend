@@ -92,7 +92,7 @@ angular.module('core.directives', [])
                 };
                 /* filter waypoints*/
                 $scope.waypoints_range = $root.waypoints.slice(startIdx, endIdx);
-                $root.message($scope.waypoints_range.length || 0, 'waypoints displayed');
+                $root.message($scope.waypoints_range.length, 'waypoints');
                 /* update model */
                 //$scope.$digest();
                 $scope.grid.setData($scope.waypoints_range, true);
@@ -102,16 +102,6 @@ angular.module('core.directives', [])
                 $scope.markers['start']= $scope.waypoints_range[0];
                 $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];
             });   
-            $scope.$on('blur', function (event, index) {
-                if (index === -1) { return; }
-                $scope.waypoints_range[index].show_address = false; 
-            });
-            $scope.$on('focus', function (event, index) {
-                var waypoint = $scope.waypoints_range[index];
-                $scope.markers['selected']= waypoint;
-                //$scope.waypoints[index].show_address = true; 
-                $root.$digest();
-            });
             $scope.$on('leafletDirectiveMap.click', function(event, args){
                 var event_latlng = args.leafletEvent.latlng;
                 console.log('[mapCtrl] find waypoint at',
@@ -183,9 +173,9 @@ angular.module('core.directives', [])
                 $scope.$digest();
             });
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
-                $scope.paths['selected'].latlngs;
-                $scope.$root.$digest(); 
-                console.log(args);
+                var waypoint = $scope.waypoints_range[args.row];
+                $scope.markers['selected'] = waypoint;
+                $root.$digest();
             });
             /*
             $scope.grid.onViewportChanged(function (event,args) {

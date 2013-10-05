@@ -32,6 +32,7 @@ angular.module('core.controllers', [])
             $root.waypoints = [];
             $root.trips = [];
             $root.$digest();
+            $root.$broadcast('refresh-trips');
         }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope', 'socket', function ($scope, $root, socket) {
