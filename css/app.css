@@ -13,20 +13,13 @@ body {
     height: 2.3em;
     border-radius: 0.2em;
     background: #eee;
-    padding-top: 0;
 }
 #query-params > input:hover {
     cursor: pointer;
     background: #a03232;
 }
 #query-params > input:active {
-    padding-top: 0.1em;
-}
-select {
-    border-radius: 0.2em;
-	padding: 0.2em;
-	background: #333;
-	color: #ccc;
+    padding-top: 0;
 }
 #query-params {
 	position: absolute;
@@ -37,13 +30,15 @@ select {
 	top: 1em;
 	height: 2.5em;
 /*	box-shadow: 0.1em 0.1em 0.2em 0em rgb(0,0,0);*/
-	border: rgb(52,141,255) 1px none;
-	border-radius: 0 0 1em 0;
+	/*border: rgb(52,141,255) 1px none;*/
+	/*border-radius: 0 0 1em 0;*/
 	padding-left: 0.5em;
 }
 #query-params > select {
-  min-width: 5em;
-  height: 2.3em;
+    border-radius: 0.2em;
+    padding: 0.2em;
+    min-width: 5em;
+    height: 2.3em;
 }
 #print-frame {
 	display: none;
