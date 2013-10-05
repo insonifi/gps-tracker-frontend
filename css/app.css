@@ -12,12 +12,12 @@ body {
     padding: 0.2em;
     min-width: 5em;
     height: 2.3em;
-    background: #eee;
+    background: #ccc;
+    border-color: transparent;
 }
 #query-params > input:hover {
     cursor: pointer;
-    border-radius: 0.2em;
-    border-color: transparent;
+    border-color: #ddd;
 }
 #query-params > input:active {
     margin-top: 0.1em;
