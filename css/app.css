@@ -8,10 +8,10 @@ body {
     overflow: inherit;
 }
 #query-params > input {
-    padding: 0.5em;
-    /*box-shadow: inset #ddd 0 0 1em 0.1em;*/
-    height: 2.3em;
     border-radius: 0.2em;
+    padding: 0.2em;
+    min-width: 5em;
+    height: 2.3em;
     background: #eee;
 }
 #query-params > input:hover {
