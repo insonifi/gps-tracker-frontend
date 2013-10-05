@@ -92,7 +92,7 @@ angular.module('core.directives', [])
                 };
                 /* filter waypoints*/
                 $scope.waypoints_range = $root.waypoints.slice(startIdx, endIdx);
-                $root.message($scope.waypoints_range.length, 'waypoints');
+                $root.$broadcast('msg', $scope.waypoints_range.length, 'waypoints');
                 /* update model */
                 //$scope.$digest();
                 $scope.grid.setData($scope.waypoints_range, true);
