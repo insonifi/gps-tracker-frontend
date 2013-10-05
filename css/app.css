@@ -95,12 +95,11 @@ div.grid {
     right: 0em;
 }
 span.timestamp {
-    font-size: 0.2em;
-    color: #333;
+    font-size: 0.8em;
+    color: #ccc;
 }
 span.msg {
-    font-size: 0.2em;
-    color: #ccc;
+    color: #ddd;
 }
 /* Sly */
 .sly-container {
