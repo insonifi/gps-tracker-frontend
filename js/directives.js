@@ -168,19 +168,23 @@ angular.module('core.directives', [])
                 return $scope.messages.length === 0;
             }
             $scope.$on('msg', function () {
-                var msg_string = '';
-                arguments.join = Array.prototype.join;
-                arguments.slice = Array.prototype.slice;
-                msg_string += arguments.slice(1).join(' ');
+                var msg_string = '',
+                    len = arguments.length;
                 if ($scope.timeout_promise) {
                     $timeout.cancel($scope.timeout_promise);
                 }
+                arguments.join = Array.prototype.join;
+                arguments.slice = Array.prototype.slice;
+                if (arguments[len - 1] !== true) {
+                    $scope.timeout_promise = $timeout(function () {
+                        $scope.messages = '';
+                    }, 10000);
+                    len -= 1;
+                }
+                msg_string += arguments.slice(1, len).join(' ');
                 $scope.time = (new Date()).toTimeString().slice(0,8);
                 $scope.messages = msg_string;
                 console.info(msg_string);
-                $scope.timeout_promise = $timeout(function () {
-                    $scope.messages = '';
-                }, 10000);
             });
         }],
     }
