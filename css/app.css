@@ -33,15 +33,15 @@ body {
 #query-params > input:hover {
     cursor: pointer;
     /*border-color: #ddd;*/
-    background: #a99f9a;
-    box-shadow: inset 0em 1.5em 2em 0em #ccc,inset 0 0 1em 0em #aaa;
+    background: #cbc5c2;
+    box-shadow: inset 0em 1.5em 2em 0em #a99f9a,inset 0 0 1em 0em #cbc5c2;
 }
 #query-params > input:active {
     padding-top: 0;
     background: #a99f9a;
     border-width: 1px;
-    border-color: #a99f9a;
-    box-shadow: inset 0em 1.5em 2em 0em #aaa,inset 0 0 1em 0em #ccc;
+    border-color: #cbc5c2;
+    box-shadow: inset 0em 1.5em 2em 0em #cbc5c2,inset 0 0 1em 0em #a99f9a;
 }
 #query-params > select {
     padding: 0.2em;
