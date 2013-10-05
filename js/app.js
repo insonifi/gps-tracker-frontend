@@ -29,7 +29,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
           socket.emit('get-modulelist');
         });
         socket.on('modulelist', function (modules) {
-          $root.modules = modules;
+          $root.$broadcast('modulelist', modules);
         })
         /* Receive waypoints */
         socket.on('query-chunk', function (chunk) {
