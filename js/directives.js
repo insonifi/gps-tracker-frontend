@@ -133,10 +133,10 @@ angular.module('core.directives', [])
                 $scope.markers['selected'] = waypoint;
                 $root.$digest();
             });
-            $scope.$on('select-path', function (event, grid, visible) {
-                $root.paths['selected'].latlngs = $scope.waypoints_range.slice(visible.top, visible.bottom);
+            $scope.$on('select-path', function (event, visible) {
+                $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(visible.top, visible.bottom);
                 $root.$digest();
-            })
+            });
             $scope.showAddress = function () {
                 if ($scope.activeItem !== this.$index) {
                     return;
@@ -177,9 +177,8 @@ angular.module('core.directives', [])
                 };
             $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
             $scope.grid.onScroll.subscribe(function (event, args) {
-                var grid = args.grid,
-                    visible = grid.getViewport();
-                $scope.$broadcast('select-path', grid, visible);
+                var visible = args.grid.getViewport();
+                $scope.$broadcast('select-path', visible);
             });
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
                 $scope.$broadcast('select-waypoint', args.row)
