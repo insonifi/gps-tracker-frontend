@@ -215,7 +215,7 @@ span.msg {
 	text-align: center;
 	cursor: pointer;
 }
-.trips ul:first-child {
+.trips ul li:first-child {
     background: #333;
     color: #ccc;
 }
