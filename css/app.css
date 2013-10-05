@@ -30,6 +30,7 @@ body {
     border-style: solid;
     border-color: #ccc;
     box-shadow: inset 0em 1.5em 2em 0em #eee,inset 0 0 1em 0em #aaa;
+    color: #2e2e2e;
 }
 #query-params > input:hover {
     cursor: pointer;
@@ -38,11 +39,12 @@ body {
     box-shadow: inset 0em 1.5em 2em 0em #cbc5c2,inset 0 0 1em 0em #a99f9a;
 }
 #query-params > input:active {
-    top: 0.1em;
     background: #a99f9a;
     border-width: 1px;
     border-color: #cbc5c2;
     box-shadow: inset 0em 1.5em 2em 0em #a99f9a,inset 0 0 1em 0em #cbc5c2;
+    padding-top: 0.3em;
+    padding-bottom: 0.1em;
 }
 #query-params > select {
     padding: 0.2em;
@@ -53,6 +55,7 @@ body {
     border-color: #ccc;
     border-radius: 0.2em;
     box-shadow: inset 0em 1.5em 2em 0em #eee,inset 0 0 1em 0em #aaa;
+    color: #2e2e2e;
 }
 #print-frame {
 	display: none;
