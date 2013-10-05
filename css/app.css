@@ -99,6 +99,7 @@ span.timestamp {
     color: #ccc;
 }
 span.msg {
+    padding: 0.7em;
     color: #ddd;
 }
 /* Sly */

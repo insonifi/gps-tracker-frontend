@@ -205,7 +205,7 @@ angular.module('core.directives', [])
                 /* '<ul ng-repeat="msg in messages">' +
                     '<li><{{msg}}</li> ' +
                 '</ul>' +*/
-                '<span class="timestamp">{{time}}</span><span class="msg"><{{messages}}</span>' +
+                '<span class="timestamp">{{time}}</span><span class="msg">{{messages}}</span>' +
             '</div>',
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
             $scope.messages = [];
