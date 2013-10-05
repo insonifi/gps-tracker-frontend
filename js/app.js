@@ -25,6 +25,12 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                 $root.$broadcast('msg', 'received', waypoints.length);
                 $root.waypoints = $root.waypoints.concat(waypoints);
             };
+        socket.on('connect', function () {
+          socket.emit('get-modulelist');
+        });
+        socket.on('modulelist', function (modules) {
+          $root.modules = modules;
+        })
         /* Receive waypoints */
         socket.on('query-chunk', function (chunk) {
             receiveWaypoints(chunk);

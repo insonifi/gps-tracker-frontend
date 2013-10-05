@@ -6,12 +6,7 @@ angular.module('core.controllers', [])
     .controller('queryCtrl', ['$scope', '$rootScope', 'cnxn', function ($scope, $root, socket, cnxn) {
         $scope.end_date = new Date();
         $scope.start_date = new Date($scope.end_date - 1000 * 3600 * 24);
-        socket.on('connect', function () {
-          socket.emit('get-modulelist');
-        });
-        socket.on('modulelist', function (list) {
-          $scope.list = list;
-        })
+        $scope.list = $root.modules;
         
         $scope.sendQueryRequest = function () {
             var start_date = $scope.start_date,
