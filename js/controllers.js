@@ -34,7 +34,7 @@ angular.module('core.controllers', [])
             $root.$broadcast('refresh-waypoints');
         }
     }])
-    .controller('mapCtrl', ['$scope', '$rootScope', function ($scope, $root) {
+    .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
         angular.extend($scope, {
             riga: {
               lat: 56.9496,
@@ -57,7 +57,7 @@ angular.module('core.controllers', [])
         $scope.$on('select-waypoint', function(event, waypoint) {
             //waypoint.message: waypoint.address != '' ? waypoint.address : ;
             $scope.markers['selected'] = waypoint;
-            $scope.markers['selected'].message = waypoint.kph;
+            $scope.markers['selected'].message = cnxn.requestAddress(waypoint);
             $scope.$digest();
         });
         /* show path from grid */

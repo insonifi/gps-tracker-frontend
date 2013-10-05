@@ -67,29 +67,34 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
         socket.on('update-waypoint', function (waypoint) {
             $root.$broadcast('update-waypoint', waypoint);
         });
-        socket.on('result-address', function (response) {
-            (function () {
-                var index = 0,
-                    len = $root.waypoints.length,
-                    waypoint = null;
-
-                for (index = 0; index < len; index += 1) {
-                    waypoint = $root.waypoints[index];
-                    if (waypoint.lat === response.lat
-                        || waypoint.lng === response.lng) {
-                        waypoint.address = response.address;
-                    }
-                }
-                $root.$broadcast('result-address', response.address);
-            }) ()
-        });
         
         return {
             queryPeriod: function () {
                 socket.emit('query-period', {module_id: arguments[0], start: arguments[1].valueOf(), end: arguments[2].valueOf(), chunks: arguments[3]});
             },
             requestAddress: function (coords) {
+                var address = $q.defer();
                 socket.emit('get-address', coords);
+                socket.on('result-address', function (response) {
+                    /* it's not clear whether we should use local cache for addresses
+                    (function () {
+                        var index = 0,
+                            len = $root.waypoints.length,
+                            waypoint = null;
+                        for (index = 0; index < len; index += 1) {
+                            waypoint = $root.waypoints[index];
+                            if (waypoint.lat === response.lat
+                                || waypoint.lng === response.lng) {
+                                waypoint.address = response.address;
+                            }
+                        }
+                    }) ()
+                    */
+                    address.resolve(response.address);
+                });
+                return address.promise.then(function (result) {
+                    console.log('got', result);
+                });
             }
         }
     }])
