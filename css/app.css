@@ -9,17 +9,17 @@ body {
 }
 #query-params > input {
     padding: 0.5em;
-    box-shadow: inset #ddd 0 0 1em 0.1em;
+    /*box-shadow: inset #ddd 0 0 1em 0.1em;*/
     height: 2.3em;
     border-radius: 0.2em;
     background: #eee;
 }
-.k-state-hover, #query-params > input:hover {
+#query-params > input:hover {
     cursor: pointer;
     border-radius: 0.2em;
     border-color: transparent;
 }
-.k-state-active, #query-params > input:active {
+#query-params > input:active {
     margin-top: 0.1em;
 }
 #query-params {
