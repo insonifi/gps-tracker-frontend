@@ -122,7 +122,31 @@ angular.module('core.directives', [])
                 var waypoint = $scope.waypoints_range[args.row];
                 $scope.$root.$broadcast('select-waypoint', waypoint);
             });
-            
+            $scope.$on('leafletDirectiveMap.click', function(event, args){
+                var event_latlng = args.leafletEvent.latlng;
+                console.log('[mapCtrl] find waypoint at',
+                    event_latlng.lat.toFixed(6),
+                    event_latlng.lng.toFixed(6)
+                );
+                
+                (function () {
+                    var tolerance = 0.00015,
+                        lat_diff = null,
+                        long_diff = null,
+                        index = 0,
+                        len = $scope.waypoints_range.length,
+                        waypoint = null;
+                    for (index = 0; index < len; index += 1) {
+                        waypoint = $scope.waypoints_range[index];
+                        lat_diff = Math.abs(waypoint.lat - event_latlng.lat);
+                        long_diff = Math.abs(waypoint.lng - event_latlng.lng);
+                        if (lat_diff < tolerance && long_diff < tolerance) {
+                            $scope.sly.activate(index);
+                            break;
+                        }
+                    }
+                }) ()
+            });
         }
     }
   })
