@@ -159,7 +159,7 @@ angular.module('core.directives', [])
                 $scope.waypoints_range[index].address = response;
             });
         }],
-        link: function ($scope, element, attrs) {
+        link: function ($scope, element, attrs, $q, $rootScope) {
             var parent,
                 columns = [{id: 'timestamp', field: 'timestamp', formatter: dateFormatter}],
                 options = {
@@ -174,14 +174,11 @@ angular.module('core.directives', [])
             });
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
                 var waypoint = $scope.waypoints_range[args.row];
+                //waypoint.message: waypoint.address != '' ? waypoint.address : ;
                 $scope.markers['selected'] = waypoint;
-                $root.$digest();
+                $rootScope.$digest();
             });
-            /*
-            $scope.grid.onViewportChanged(function (event,args) {
-                console.log(event, args);
-            });
-            */
+            
         }
     }
   })
@@ -197,12 +194,12 @@ angular.module('core.directives', [])
                 '</ul>' +*/
                 '<span class="timestamp">{{time}}</span><span class="msg">{{messages}}</span>' +
             '</div>',
-        controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
+        controller: ['$scope', '$timeout', function ($scope, $timeout) {
             $scope.messages = [];
             $scope.isEmpty = function () {
                 return $scope.messages.length === 0;
             }
-            $root.message = function () {
+            $scope.$on('msg', function () {
                 var msg_string = '';
                 arguments.join = Array.prototype.join;
                 msg_string += arguments.join(' ')
@@ -215,7 +212,7 @@ angular.module('core.directives', [])
                 $scope.timeout_promise = $timeout(function () {
                     $scope.messages = '';
                 }, 10000);
-            }
+            });
         }],
     }
   })
