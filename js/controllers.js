@@ -26,7 +26,7 @@ angular.module('core.controllers', [])
             $root.$broadcast('msg', 'Searching between', start_date.toLocaleString(), '...', end_date.toLocaleString(), 'for module', module_id);
             cnxn.queryPeriod(module_id, start_date, end_date, chunk_size);
         }
-        $scope.reset_vars = function () {
+        $scope.resetVars = function () {
             $root.waypoints = [];
             $root.trips = [];
             $root.$digest();
@@ -50,6 +50,19 @@ angular.module('core.controllers', [])
         /* Got realtime waypoint */
         $scope.$on('update-waypoint', function (waypoint) {
             $scope.markers[waypoint.module_id] = waypoint;
+            $scope.$digest();
+        });
+        /* waypoint is selected in grid */
+        $scope.$on('select-waypoint', function(event, index) {
+            var waypoint = $scope.waypoints_range[index];
+            //waypoint.message: waypoint.address != '' ? waypoint.address : ;
+            $scope.markers['selected'] = waypoint;
+            $scope.markers['selected'].message = waypoint.kph;
+            $scope.$digest();
+        });
+        /* show path from grid */
+        $scope.$on('select-path', function (event, path) {
+            $scope.paths['selected'].latlngs = path;
             $scope.$digest();
         });
     }])

@@ -127,17 +127,6 @@ angular.module('core.directives', [])
                     }
                 }) ()
             });
-            $scope.$on('select-waypoint', function(event, index) {
-                var waypoint = $scope.waypoints_range[index];
-                //waypoint.message: waypoint.address != '' ? waypoint.address : ;
-                $scope.markers['selected'] = waypoint;
-                $scope.markers['selected'].message = waypoint.kph;
-                $root.$digest();
-            });
-            $scope.$on('select-path', function (event, visible) {
-                $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(visible.top, visible.bottom);
-                $root.$digest();
-            });
             $scope.$on('result-address', function (event, response) {
                 var index = $scope.activeItem;
                 $scope.waypoints_range[index].address = response;
@@ -152,7 +141,7 @@ angular.module('core.directives', [])
             $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
             $scope.grid.onScroll.subscribe(function (event, args) {
                 var visible = args.grid.getViewport();
-                $scope.$broadcast('select-path', visible);
+                $scope.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
             });
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
                 $scope.$broadcast('select-waypoint', args.row)
