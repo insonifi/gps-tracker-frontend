@@ -51,7 +51,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
             });
             waypointsBuffer = jsonToArrayBuffer($root.waypoints);
             /* Detect trip */
-            $root.message('Analysing waypoints...');
+            $root.$broadcast('msg', 'Analysing waypoints...');
             detect_trips.postMessage(waypointsBuffer, [waypointsBuffer]);
             detect_trips.onmessage = function (event) {
                 $root.trips = arrayBufferToJSON(event.data);
