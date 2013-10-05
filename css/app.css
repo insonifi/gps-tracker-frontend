@@ -25,26 +25,28 @@ body {
     padding: 0.2em;
     min-width: 5em;
     height: 2.3em;
-    background: #ccc;
-    border-color: transparent;
+    background: #c5c5c5;
+    border-width: 0;
 }
 #query-params > input:hover {
     cursor: pointer;
     /*border-color: #ddd;*/
+    background: a99f9a;
     box-shadow: inset 0 0.2em 1em 0em #eee,inset 0 -0.2em 1em 0em #aaa;
 }
 #query-params > input:active {
-    margin-top: 0.1em;
-    margin-bottom: -0.1em;
+    padding-top: 0.4em;
+    padding-bottom: 0;
+    background: a99f9a;
     box-shadow: inset 0 0.2em 1em 0em #aaa,inset 0 -0.2em 1em 0em #eee;
 }
 #query-params > select {
     border-radius: 0.2em;
+    border-width: 0;
     padding: 0.2em;
     min-width: 5em;
     height: 2.3em;
     background: #ccc;
-    border-color: transparent;
     box-shadow: inset 0 0.2em 1em 0em #eee,inset 0 -0.2em 1em 0em #aaa;
 }
 #print-frame {
