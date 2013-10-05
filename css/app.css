@@ -39,8 +39,7 @@ body {
     box-shadow: inset 0em 1.5em 2em 0em #cbc5c2,inset 0 0 1em 0em #a99f9a;
 }
 #query-params > input:active {
-    background: #a99f9a;
-    border-width: 1px;
+    background: #cbc5c2;
     border-color: #cbc5c2;
     box-shadow: inset 0em 1.5em 2em 0em #a99f9a,inset 0 0 1em 0em #cbc5c2;
     padding-top: 0.1em;
