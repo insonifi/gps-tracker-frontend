@@ -90,7 +90,9 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                         }
                     }) ()
                     */
-                    address.resolve(response.address);
+                    $root.$apply(function () {
+                        address.resolve(response.address);    
+                    })
                 });
                 return address.promise;
             }
