@@ -39,6 +39,10 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
             var waypointsBuffer = new ArrayBuffer(0);
             receiveWaypoints(chunk);
             $root.$broadcast('msg', 'Found', $root.waypoints.length, 'waypoints');
+            if ($root.waypoints.length === 0) {
+                /* there is nothing to do */
+                return;
+            }
             /* Sort waypoints */
             $root.waypoints.sort(function (a, b) {
                 if (a.timestamp > b.timestamp) {
