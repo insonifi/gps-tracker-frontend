@@ -7,7 +7,7 @@ angular.module('core.controllers', [])
         $scope.end_date = new Date();
         $scope.start_date = new Date($scope.end_date - 1000 * 3600 * 24);
         $scope.list = [];
-        $scope.$on('modulelist', function (list) {
+        $scope.$on('modulelist', function (e, list) {
             $scope.list = list;    
         });
         
