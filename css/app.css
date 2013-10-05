@@ -7,7 +7,7 @@ body {
     height: 99%;
     overflow: inherit;
 }
-.k-state-default, #query-params > input {
+#query-params > input {
     padding: 0.5em;
     box-shadow: inset #ddd 0 0 1em 0.1em;
     height: 2.3em;
