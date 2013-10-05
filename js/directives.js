@@ -130,7 +130,8 @@ angular.module('core.directives', [])
             $scope.$on('select-waypoint', function(event, index) {
                 var waypoint = $scope.waypoints_range[index];
                 //waypoint.message: waypoint.address != '' ? waypoint.address : ;
-                $scope.markers['selected'] = waypoint; 
+                $scope.markers['selected'] = waypoint;
+                $root.$digest();
             });
             $scope.showAddress = function () {
                 if ($scope.activeItem !== this.$index) {
