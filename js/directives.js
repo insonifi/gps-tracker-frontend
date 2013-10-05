@@ -119,7 +119,8 @@ angular.module('core.directives', [])
                 $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
             });
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
-                $scope.$root.$broadcast('select-waypoint', args.row)
+                var waypoint = $scope.waypoints_range[args.row];
+                $scope.$root.$broadcast('select-waypoint', waypoint);
             });
             
         }

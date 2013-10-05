@@ -53,8 +53,7 @@ angular.module('core.controllers', [])
             $scope.$digest();
         });
         /* waypoint is selected in grid */
-        $scope.$on('select-waypoint', function(event, index) {
-            var waypoint = $scope.waypoints_range[index];
+        $scope.$on('select-waypoint', function(event, waypoint) {
             //waypoint.message: waypoint.address != '' ? waypoint.address : ;
             $scope.markers['selected'] = waypoint;
             $scope.markers['selected'].message = waypoint.kph;
