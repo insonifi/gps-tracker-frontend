@@ -92,9 +92,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                     */
                     address.resolve(response.address);
                 });
-                return address.promise.then(function (result) {
-                    console.log('got', result);
-                });
+                return address.promise;
             }
         }
     }])
