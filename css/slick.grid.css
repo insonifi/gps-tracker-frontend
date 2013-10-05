@@ -96,8 +96,8 @@ classes should alter those!
 .slick-cell, .slick-headerrow-column {
   position: absolute;
   border: 1px solid transparent;
-  border-right: 1px dotted silver;
-  border-bottom-color: silver;
+  border-right: 0;
+  border-bottom-color: #ccc;
   overflow: hidden;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
