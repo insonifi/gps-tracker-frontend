@@ -175,11 +175,11 @@ angular.module('core.directives', [])
                 options = {
                     /* forceFitColumns: true */
                 };
-            $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
+            $scope.grid = new Slick.Grid(element, $root.waypoints_range, columns, options);
             $scope.grid.onScroll.subscribe(function (event, args) {
                 var grid = args.grid,
                     visible = grid.getViewport();
-                $scope.paths['selected'].latlngs = $scope.waypoints_range.slice(visible.top, visible.bottom);
+                $scope.paths['selected'].latlngs = $root.waypoints_range.slice(visible.top, visible.bottom);
                 $root.$digest();
             });
             $scope.grid.onActiveCellChanged(function(event, args) {
