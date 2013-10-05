@@ -127,6 +127,11 @@ angular.module('core.directives', [])
                     }
                 }) ()
             });
+            $scope.$on('select-waypoint', function(event, index) {
+                var waypoint = $scope.waypoints_range[index];
+                //waypoint.message: waypoint.address != '' ? waypoint.address : ;
+                $scope.markers['selected'] = waypoint; 
+            });
             $scope.showAddress = function () {
                 if ($scope.activeItem !== this.$index) {
                     return;
@@ -173,10 +178,7 @@ angular.module('core.directives', [])
                 $scope.$digest();
             });
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
-                var waypoint = $scope.waypoints_range[args.row];
-                //waypoint.message: waypoint.address != '' ? waypoint.address : ;
-                $scope.markers['selected'] = waypoint;
-                $rootScope.$digest();
+                $scope.$broadcast('select-waypoint', args.row)
             });
             
         }
