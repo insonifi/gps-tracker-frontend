@@ -53,7 +53,7 @@ angular.module('core.controllers', [])
                 return buf;
             },
             receiveWaypoints = function (waypoints) {
-                $root.message(waypoints.length);
+                $root.message('received', waypoints.length);
                 $root.waypoints = $root.waypoints.concat(waypoints);
             };
             
