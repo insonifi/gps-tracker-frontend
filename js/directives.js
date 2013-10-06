@@ -189,3 +189,39 @@ angular.module('core.directives', [])
         }],
     }
   })
+  .directive('printFrame', function () {
+    return {
+        restrict: 'A',
+        replace: true,
+        transclude: false,
+        template:
+            '<iframe>' +
+                '<ul ng-repeat="msg in messages">' +
+                    '<li><{{msg}}</li>' +
+                '</ul>' +
+            '</iframe>',
+        controller: ['$scope', function ($scope) {
+            $scope.messages = [];
+            scope.$on('msg', function () {
+                var msg_string = '',
+                    len = arguments.length;
+                if ($scope.timeout_promise) {
+                    $timeout.cancel($scope.timeout_promise);
+                }
+                arguments.join = Array.prototype.join;
+                arguments.slice = Array.prototype.slice;
+                if (arguments[len - 1] !== true) {
+                    $scope.timeout_promise = $timeout(function () {
+                        $scope.messages = '';
+                    }, 10000);
+                } else {
+                    len -= 1; /* cut out last item */
+                }
+                msg_string += arguments.slice(1, len).join(' ');
+                $scope.time = (new Date()).toTimeString().slice(0,8);
+                $scope.messages = msg_string;
+                console.info(msg_string);
+            });
+        }],
+    }
+  })

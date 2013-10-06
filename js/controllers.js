@@ -57,7 +57,9 @@ angular.module('core.controllers', [])
         $scope.$on('select-waypoint', function(event, waypoint) {
             //waypoint.message: waypoint.address != '' ? waypoint.address : ;
             $scope.markers['selected'] = waypoint;
-            $scope.markers['selected'].message = cnxn.requestAddress(waypoint);
+            $scope.markers['selected'].message = cnxn.requestAddress(waypoint).then(function(address) {
+                console.log('got', address);
+            });
             $scope.$digest();
         });
         /* show path from grid */
