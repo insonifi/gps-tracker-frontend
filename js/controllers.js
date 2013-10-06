@@ -25,13 +25,13 @@ angular.module('core.controllers', [])
             cnxn.queryPeriod(module_id, start_date, end_date, chunk_size);
         }
         $scope.resetVars = function () {
-            
-            $scope.waypoints = [];
-            $scope.trips = [];
-            $scope.markers = {};
-            $scope.paths = {};
+            $root.waypoints = [];
+            $root.trips = [];
             $root.$broadcast('refresh-trips');
             $root.$broadcast('refresh-waypoints');
+            $scope.markers = {};
+            $scope.paths = {};
+            $scope.$digest();
         }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
@@ -50,7 +50,10 @@ angular.module('core.controllers', [])
         });
         /* Got realtime waypoint */
         $scope.$on('update-waypoint', function (waypoint) {
+            var tail = 10;
             $scope.markers[waypoint.module_id] = waypoint;
+            $scope.paths[waypoint.module_id].latlngs.push = waypoint;
+            $scope.paths[waypoint.module_id].slice(0, tail);
             $scope.$digest();
         });
         /* waypoint is selected in grid */
