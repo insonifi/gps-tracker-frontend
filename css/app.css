@@ -45,12 +45,11 @@ body {
     padding-bottom: 0.3em;
 }
 #query-params > select {
-    padding: 0.2em;
-    min-width: 5em;
-    height: 2.3em;
+    height: 2.7em;
     background: #ddd;
     border-width: 1px;
     border-color: #ccc;
+    border-style: solid;
     border-radius: 0.2em;
     box-shadow: inset 0em 1.5em 2em 0em #eee,inset 0 0 1em 0em #aaa;
     color: #2e2e2e;
