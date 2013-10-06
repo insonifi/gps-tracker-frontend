@@ -1,7 +1,6 @@
 'use strict';
 
 /* Controllers */
-
 angular.module('core.controllers', [])
     .controller('queryCtrl', ['$scope', '$rootScope', 'cnxn', function ($scope, $root, cnxn) {
         $scope.end_date = new Date();
@@ -10,7 +9,6 @@ angular.module('core.controllers', [])
         $scope.$on('modulelist', function (e, list) {
             $scope.list = list;    
         });
-        
         $scope.sendQueryRequest = function () {
             var start_date = $scope.start_date,
                 end_date = $scope.end_date,
@@ -57,7 +55,10 @@ angular.module('core.controllers', [])
         $scope.$on('select-waypoint', function(event, waypoint) {
             $scope.markers['selected'] = waypoint;
             $scope.request = cnxn.requestAddress(waypoint).then(function(address) {
-                $scope.markers['selected'].message = address;
+                $scope.markers['selected'].message = 
+                    + (new Date(waypoint.timestamp)).toTimeString().slice(0,8) + '\n'
+                    + address + '\n' 
+                    + waypoint.kph;
                 //$scope.markers['selected'].focus = true;
                 console.log('got', address);
             });
