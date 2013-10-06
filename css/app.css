@@ -117,11 +117,11 @@ span.msg {
 /* Trips list */
 .trips {
     left: 20px;
-    width: 7em;
+    width: 10em;
     height: inherit;
     position: absolute;
     top: 0;
-    overflow: inherit;
+    overflow: visible;
 }
 .trips .t-slidee {
 /*	padding: 20px 25px;*/
@@ -159,10 +159,9 @@ span.msg {
     padding-right: 0.5em;    
 }
 .trips ul li .d-trip {
-    background: #333;
     color: #ddd;
     position: absolute;
-    left: 8em;
+    left: 7em;
     padding-left: 0.5em;
     padding-right: 0.5em;
 }

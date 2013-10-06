@@ -6,11 +6,6 @@ function toMyString (timestamp) {
         + (timestamp.getMonth() + 1) + '. '
         + timestamp.toLocaleTimeString().slice(0,5);
 }
-/*
-function arrayBufferToJSON (buf) {
-    return JSON.parse(String.fromCharCode.apply(null, new Uint16Array(buf)));
-};
-*/
 function arrayBufferToJSON (buf) {
     var string = '', i, len, array = new Uint16Array(buf);
     for (i = 0, len = array.length; i< len; i += 1) {
