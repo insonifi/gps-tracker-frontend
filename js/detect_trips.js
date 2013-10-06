@@ -48,9 +48,17 @@ self.onmessage = function (event) {
         time_end: toMyString(waypoints[length - 1].timestamp),
         start: waypoints[0].timestamp,
         end: waypoints[length - 1].timestamp,
+        w_start: {
+            lat: waypoints[0].lat,
+            lng: waypoints[0].lng
+        },
+        w_end: {
+            lat: waypoints[length - 1].lat,
+            lng: waypoints[length - 1].lng
+        },
         distance: 0
     })
-    /* iterate trough waypoints */
+    /* iterate through waypoints */
     for (i = 0; i < length; i += 1) {
         previous = current || waypoints[i].timestamp;
         current = waypoints[i].timestamp;
@@ -63,6 +71,10 @@ self.onmessage = function (event) {
             trips[trip_idx].end = previous;
             trips[trip_idx].endIdx = i - 1;
             trips[trip_idx].time_end = toMyString(current);
+            trips[trip_idx].w_end = {
+                lat: waypoints[i - 1].lat,
+                lng: waypoints[i - 1].lng
+            };
             trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
             trips[0].distance += trips[trip_idx].distance;
             trip_idx += 1;
@@ -74,6 +86,14 @@ self.onmessage = function (event) {
                 end: 0,
                 endIdx: 0,
                 time_start: toMyString(current),
+                w_start: {
+                    lat: waypoints[i].lat,
+                    lng: waypoints[i].lng
+                },
+                w_end: {
+                    lat: waypoints[i].lat,
+                    lng: waypoints[i].lng
+                },
                 distance: 0
             };
         }
@@ -83,9 +103,12 @@ self.onmessage = function (event) {
     trips[trip_idx].endIdx = i;
     trips[trip_idx].time_end = toMyString(current);
     trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
+    trips[trip_idx].w_end = {
+        lat: waypoints[i].lat,
+        lng: waypoints[i].lng
+    };
     trips[0].distance += trips[trip_idx].distance;
-    /* set end boundary */
-    trips[0].time_end = toMyString(current);
+    /* return Trips array */
     tripsBuffer = jsonToArrayBuffer(trips);
     self.postMessage(tripsBuffer, [tripsBuffer]);
 };
