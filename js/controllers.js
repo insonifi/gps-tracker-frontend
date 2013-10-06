@@ -25,9 +25,11 @@ angular.module('core.controllers', [])
             cnxn.queryPeriod(module_id, start_date, end_date, chunk_size);
         }
         $scope.resetVars = function () {
-            $root.waypoints = [];
-            $root.trips = [];
-            $root.$digest();
+            
+            $scope.waypoints = [];
+            $scope.trips = [];
+            $scope.markers = {};
+            $scope.paths = {};
             $root.$broadcast('refresh-trips');
             $root.$broadcast('refresh-waypoints');
         }
