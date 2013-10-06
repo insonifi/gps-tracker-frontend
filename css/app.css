@@ -6,6 +6,7 @@ html {
 body {
     height: 99%;
     overflow: inherit;
+    font-family: sans-serif;
 }
 #query-params {
 	position: absolute;
