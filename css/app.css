@@ -21,9 +21,8 @@ body {
 	padding-left: 0.5em;
 }
 #query-params > input {
-    padding: 0.2em;
     min-width: 5em;
-    height: 2.3em;
+    height: 2.7em;
     background: #ddd;
     border-width: 1px;
     border-radius: 0.2em;
