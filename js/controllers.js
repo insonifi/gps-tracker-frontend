@@ -58,7 +58,8 @@ angular.module('core.controllers', [])
             //waypoint.message: waypoint.address != '' ? waypoint.address : ;
             $scope.markers['selected'] = waypoint;
             $scope.markers['selected'].message = cnxn.requestAddress(waypoint).then(function(address) {
-                console.log('got', address);
+                $scope.markers['selected'].message = address;
+                $scope.$digest();
             });
             $scope.$digest();
         });
