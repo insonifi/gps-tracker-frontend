@@ -55,11 +55,11 @@ angular.module('core.controllers', [])
         $scope.$on('select-waypoint', function(event, waypoint) {
             $scope.markers['selected'] = waypoint;
             $scope.request = cnxn.requestAddress(waypoint).then(function(address) {
-                $scope.markers['selected'].message = 
-                    + (new Date(waypoint.timestamp)).toTimeString().slice(0,8) + '\n'
-                    + address + '\n' 
-                    + waypoint.kph;
-                //$scope.markers['selected'].focus = true;
+                var m = $scope.markers['selected'];
+                m.message = 
+                    + (new Date(m.timestamp)).toTimeString().slice(0,8) + ': '
+                    + address + '(' + m.kph + ' km/h)';
+                $scope.markers['selected'].focus = true;
                 console.log('got', address);
             });
         });
