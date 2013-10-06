@@ -24,6 +24,8 @@ angular.module('core.controllers', [])
             $root.message('Searching between', start_date.toLocaleString(), '...', end_date.toLocaleString(), 'for module', module_id, true);
             cnxn.queryPeriod(module_id, start_date, end_date, chunk_size);
         }
+    }])
+    .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
         $scope.resetVars = function () {
             $root.waypoints = [];
             $root.trips = [];
@@ -32,9 +34,7 @@ angular.module('core.controllers', [])
             $scope.markers = {};
             $scope.paths = {};
             $scope.$digest();
-        }
-    }])
-    .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
+        };
         angular.extend($scope, {
             riga: {
               lat: 56.9496,
