@@ -56,10 +56,9 @@ angular.module('core.controllers', [])
         /* waypoint is selected in grid */
         $scope.$on('select-waypoint', function(event, waypoint) {
             $scope.request = cnxn.requestAddress(waypoint).then(function(address) {
-                var m = $scope.markers['selected'];
-                m = waypoint;
-                m.message = address;
-                m.focus = true;
+                $scope.markers['selected'] = waypoint;
+                $scope.markers['selected'].message = address;
+                $scope.markers['selected'].focus = true;
                 console.log('got', address);
                 $scope.$digest();
             });
