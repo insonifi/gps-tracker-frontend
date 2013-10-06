@@ -55,12 +55,11 @@ angular.module('core.controllers', [])
         });
         /* waypoint is selected in grid */
         $scope.$on('select-waypoint', function(event, waypoint) {
+            $scope.markers['selected'] = waypoint;
             $scope.request = cnxn.requestAddress(waypoint).then(function(address) {
-                $scope.markers['selected'] = waypoint;
                 $scope.markers['selected'].message = address;
-                $scope.markers['selected'].focus = true;
+                //$scope.markers['selected'].focus = true;
                 console.log('got', address);
-                $scope.$digest();
             });
         });
         /* show path from grid */
