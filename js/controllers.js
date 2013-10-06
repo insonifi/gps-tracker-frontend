@@ -60,6 +60,7 @@ angular.module('core.controllers', [])
             $scope.markers['selected'].message = cnxn.requestAddress(waypoint).then(function(address) {
                 $scope.markers['selected'].message = address;
                 $scope.$digest();
+                console.log('got', address);
             });
             $scope.$digest();
         });
