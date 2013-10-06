@@ -26,7 +26,7 @@ function jsonToArrayBuffer (json) {
 
 self.onmessage = function (event) {
     var i,
-        tripIdx = null,
+        trip_idx = null,
         previous = null,
         current = null,
         previous_coords = null,
@@ -54,7 +54,7 @@ self.onmessage = function (event) {
         },
         distance: 0
     };
-    tripIdx = trips.length;
+    trip_idx = trips.length;
     /* iterate through waypoints */
     for (i = 0; i < length + 1; i += 1) {
         previous = current || waypoints[i].timestamp;
