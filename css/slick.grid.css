@@ -142,6 +142,10 @@ classes should alter those!
   outline: none;
 }
 
+.slick-cell.active {
+    background: #a03232;
+}
+
 .slick-reorder-proxy {
   display: inline-block;
   background: blue;

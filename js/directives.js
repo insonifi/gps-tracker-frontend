@@ -196,8 +196,8 @@ angular.module('core.directives', [])
         transclude: false,
         template:
             '<iframe>' +
-                '<ul ng-repeat="msg in messages">' +
-                    '<li><{{msg}}</li>' +
+                '<ul ng-repeat="trip in trips">' +
+                    '<li><{{trip.time}}{{trip.address</li>' +
                 '</ul>' +
             '</iframe>',
         controller: ['$scope', function ($scope) {
