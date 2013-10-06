@@ -49,6 +49,7 @@ self.onmessage = function (event) {
         start: waypoints[0].timestamp,
         end: waypoints[length - 1].timestamp,
         w_start: {
+            address: waypoints[0].address,
             lat: waypoints[0].lat,
             lng: waypoints[0].lng
         },
@@ -72,6 +73,7 @@ self.onmessage = function (event) {
             trips[trip_idx].endIdx = i - 1;
             trips[trip_idx].time_end = toMyString(current);
             trips[trip_idx].w_end = {
+                address: waypoints[i - 1].address,
                 lat: waypoints[i - 1].lat,
                 lng: waypoints[i - 1].lng
             };
@@ -87,10 +89,12 @@ self.onmessage = function (event) {
                 endIdx: 0,
                 time_start: toMyString(current),
                 w_start: {
+                    address: waypoints[i].address,
                     lat: waypoints[i].lat,
                     lng: waypoints[i].lng
                 },
                 w_end: {
+                    address: waypoints[i].address,
                     lat: waypoints[i].lat,
                     lng: waypoints[i].lng
                 },
@@ -104,6 +108,7 @@ self.onmessage = function (event) {
     trips[trip_idx].time_end = toMyString(current);
     trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
     trips[trip_idx].w_end = {
+        address: waypoints[i - 1].address,
         lat: waypoints[i - 1].lat,
         lng: waypoints[i - 1].lng
     };
