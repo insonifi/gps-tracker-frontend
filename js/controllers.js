@@ -66,7 +66,7 @@ angular.module('core.controllers', [])
                     console.log('got', address);
                 };
             $scope.markers['selected'] = waypoint;
-            if (waypoint.address === '') {
+            if (waypoint.address === null) {
                 $scope.request = cnxn.requestAddress(waypoint).then(setAddress);
             } else {
                 setAddress(waypoint.address);
