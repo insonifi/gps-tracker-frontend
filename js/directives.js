@@ -79,7 +79,7 @@ angular.module('core.directives', [])
         controller: ['$scope', '$rootScope', function ($scope, $root) {
             $scope.waypoints_range = [];
             $scope.$on('refresh-waypoints', function (event, startIdx, endIdx) {
-                if (start !== undefined && end !== undefined) {
+                if (startIdx !== undefined && endIdx !== undefined) {
                     $scope.startIdx = startIdx;
                     $scope.endIdx = endIdx;
                     $scope.paths['selected'] = {
