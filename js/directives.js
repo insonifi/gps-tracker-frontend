@@ -162,7 +162,7 @@ angular.module('core.directives', [])
             $scope.isEmpty = function () {
                 return $scope.messages.length === 0;
             }
-            $root.message(function () {
+            $root.message = function () {
                 var msg_string = '',
                     len = arguments.length;
                 if ($scope.timeout_promise) {
@@ -181,7 +181,7 @@ angular.module('core.directives', [])
                 $scope.time = (new Date()).toTimeString().slice(0,8);
                 $scope.messages = msg_string;
                 console.info(msg_string);
-            });
+            };
         }],
     }
   })
