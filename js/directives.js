@@ -88,7 +88,7 @@ angular.module('core.directives', [])
                     };
                     /* filter waypoints*/
                     $scope.waypoints_range = $root.waypoints.slice(startIdx, endIdx);
-                    $root.$broadcast('msg', $scope.waypoints_range.length, 'waypoints');
+                    $root.message($scope.waypoints_range.length, 'waypoints');
                     $scope.markers['start']= $scope.waypoints_range[0];
                     $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];
                 } else {
@@ -157,12 +157,12 @@ angular.module('core.directives', [])
                 '</ul>' +*/
                 '<span class="timestamp">{{time}}</span><span class="msg">{{messages}}</span>' +
             '</div>',
-        controller: ['$scope', '$timeout', function ($scope, $timeout) {
+        controller: ['$scope', '$timeout', '$rootScope', function ($scope, $timeout, $root) {
             $scope.messages = [];
             $scope.isEmpty = function () {
                 return $scope.messages.length === 0;
             }
-            $scope.$on('msg', function () {
+            $root.message(function () {
                 var msg_string = '',
                     len = arguments.length;
                 if ($scope.timeout_promise) {
@@ -177,7 +177,7 @@ angular.module('core.directives', [])
                 } else {
                     len -= 1; /* cut out last item */
                 }
-                msg_string += arguments.slice(1, len).join(' ');
+                msg_string += arguments.slice(0, len).join(' ');
                 $scope.time = (new Date()).toTimeString().slice(0,8);
                 $scope.messages = msg_string;
                 console.info(msg_string);

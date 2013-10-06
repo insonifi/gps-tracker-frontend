@@ -21,7 +21,7 @@ angular.module('core.controllers', [])
                 $root.message('no module selected');
                 return;
             }
-            $root.$broadcast('msg', 'Searching between', start_date.toLocaleString(), '...', end_date.toLocaleString(), 'for module', module_id, true);
+            $root.message('Searching between', start_date.toLocaleString(), '...', end_date.toLocaleString(), 'for module', module_id, true);
             cnxn.queryPeriod(module_id, start_date, end_date, chunk_size);
         }
         $scope.resetVars = function () {

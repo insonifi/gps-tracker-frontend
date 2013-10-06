@@ -22,7 +22,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                 return buf;
             },
             receiveWaypoints = function (waypoints) {
-                $root.$broadcast('msg', 'received', waypoints.length);
+                $root.message('received', waypoints.length);
                 $root.waypoints = $root.waypoints.concat(waypoints);
             };
         socket.on('connect', function () {
@@ -38,7 +38,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
         socket.on('query-end', function (chunk) {
             var waypointsBuffer = new ArrayBuffer(0);
             receiveWaypoints(chunk);
-            $root.$broadcast('msg', 'Found', $root.waypoints.length, 'waypoints');
+            $root.message('Found', $root.waypoints.length, 'waypoints');
             if ($root.waypoints.length === 0) {
                 /* there is nothing to do */
                 return;
@@ -55,11 +55,11 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
             });
             waypointsBuffer = jsonToArrayBuffer($root.waypoints);
             /* Detect trip */
-            $root.$broadcast('msg', 'Analysing waypoints...', true);
+            $root.message('Analysing waypoints...', true);
             detect_trips.postMessage(waypointsBuffer, [waypointsBuffer]);
             detect_trips.onmessage = function (event) {
                 $root.trips = arrayBufferToJSON(event.data);
-                $root.$broadcast('msg', 'Detected', $root.trips.length - 1, 'trips');
+                $root.message('Detected', $root.trips.length - 1, 'trips');
                 $root.$digest(); /* make sure model is updated */
                 $root.$broadcast('refresh-trips');
             }
