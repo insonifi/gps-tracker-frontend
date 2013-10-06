@@ -26,7 +26,7 @@ function jsonToArrayBuffer (json) {
 
 self.onmessage = function (event) {
     var i,
-        trip_idx = 1,
+        tripIdx = null,
         previous = null,
         current = null,
         previous_coords = null,
@@ -38,7 +38,7 @@ self.onmessage = function (event) {
         tripsBuffer = new ArrayBuffer(0),
         length = waypoints.length;
     /* set start boundary */
-    trips.push({
+    trips[0]= {
         time_start: toMyString(waypoints[0].timestamp),
         time_end: toMyString(waypoints[length - 1].timestamp),
         start: waypoints[0].timestamp,
@@ -53,13 +53,15 @@ self.onmessage = function (event) {
             lng: waypoints[length - 1].lng
         },
         distance: 0
-    })
+    };
+    tripIdx = trips.length;
     /* iterate through waypoints */
-    for (i = 0; i < length; i += 1) {
+    for (i = 0; i < length + 1; i += 1) {
         previous = current || waypoints[i].timestamp;
         current = waypoints[i].timestamp;
         previous_coords = current_coords || [waypoints[i].lat, waypoints[i].lng];
         current_coords = [waypoints[i].lat, waypoints[i].lng];
+        
         if (current - previous > parking_time) { /* assume next trip of time gap exceeds parking time */
             if (trips[trip_idx].end === trips[trip_idx].start) {
                 continue;
@@ -74,7 +76,6 @@ self.onmessage = function (event) {
             };
             trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
             trips[0].distance += trips[trip_idx].distance;
-            trip_idx += 1;
         }
         if (!trips[trip_idx]) {
             trips[trip_idx] = {
@@ -95,9 +96,11 @@ self.onmessage = function (event) {
                 },
                 distance: 0
             };
+            tripIdx = trips.length;
         }
     }
     /* Append last waypoint */
+    /*
     trips[trip_idx].end = current;
     trips[trip_idx].endIdx = i - 1;
     trips[trip_idx].time_end = toMyString(current);
@@ -107,6 +110,7 @@ self.onmessage = function (event) {
         lat: waypoints[i - 1].lat,
         lng: waypoints[i - 1].lng
     };
+    */
     trips[0].distance += trips[trip_idx].distance;
     /* return Trips array */
     tripsBuffer = jsonToArrayBuffer(trips);
