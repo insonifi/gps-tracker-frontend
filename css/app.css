@@ -95,9 +95,8 @@ div.angular-leaflet-map {
 }
 div.grid {
     width: 4.5em;
-    height: 98%;
+    height: 100%;
     position: absolute;
-    top: 1%;
     right: 0em;
 }
 span.timestamp {
@@ -114,76 +113,6 @@ span.msg {
     /*top: 0;*/
     height: inherit;
 }
-/* Waypoint list */
-.waypoints {
-    right: 20px;
-	width: 6em;
-	height: inherit;
-    position: absolute;
-    top: 0;
-}
-.waypoints .slidee {
-/*	padding: 20px 25px;*/
-/*	background: #fff;*/
-}
-.waypoints ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	font-size: 14px;
-	line-height: 50px;
-}
-.waypoints ul li {
-	float: right;
-	width: 100%;
-	height: 50px;
-	margin: 0 0 1px;
-	padding: 0;
-	background: #333;
-	color: #ddd;
-	text-align: center;
-	cursor: pointer;
-}
-.waypoints ul li.active {
-	width: 100%;
-}
-.waypoints ul li.active .address {
-    background: #333;
-    color: #ddd;
-    position: absolute;
-    right: 7em;
-    width: 18em;
-}
-
-.waypoints ul li.active .time {
-    background: #a03232;
-    color: #fff;
-    right: 10em;
-}
-/* Scrollbar */
-.w-scrollbar {
-	position: absolute;
-	right: 10px;
-	width: 2px;
-	height: 80%;
-	background: #ccc;
-	line-height: 0;
-    top: 0;
-}
-.w-scrollbar .handle {
-	width: 100%;
-	height: 20%;
-	background: #292a33;
-	cursor: pointer;
-}
-.w-scrollbar .handle .mousearea {
-	position: absolute;
-	top: 0;
-	right: -10px;
-	width: 22px;
-	height: inherit;
-}
 /* Trips list */
 .trips {
     left: 20px;
@@ -191,6 +120,7 @@ span.msg {
     height: inherit;
     position: absolute;
     top: 0;
+    overflow: inherit;
 }
 .trips .t-slidee {
 /*	padding: 20px 25px;*/

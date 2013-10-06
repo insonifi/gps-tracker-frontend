@@ -44,8 +44,8 @@ self.onmessage = function (event) {
         length = waypoints.length;
     /* set start boundary */
     trips.push({
-        addressA: toMyString(waypoints[0].timestamp),
-        addressB: toMyString(waypoints[length - 1].timestamp),
+        time_start: toMyString(waypoints[0].timestamp),
+        time_end: toMyString(waypoints[length - 1].timestamp),
         start: waypoints[0].timestamp,
         end: waypoints[length - 1].timestamp,
         distance: 0
@@ -62,7 +62,7 @@ self.onmessage = function (event) {
             }
             trips[trip_idx].end = previous;
             trips[trip_idx].endIdx = i - 1;
-            trips[trip_idx].addressB = toMyString(current);
+            trips[trip_idx].time_end = toMyString(current);
             trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
             trips[0].distance += trips[trip_idx].distance;
             trip_idx += 1;
@@ -73,7 +73,7 @@ self.onmessage = function (event) {
                 startIdx: i,
                 end: 0,
                 endIdx: 0,
-                addressA: toMyString(current),
+                time_start: toMyString(current),
                 distance: 0
             };
         }
@@ -81,11 +81,11 @@ self.onmessage = function (event) {
     /* Append last waypoint */
     trips[trip_idx].end = current;
     trips[trip_idx].endIdx = i;
-    trips[trip_idx].addressB = toMyString(current);
+    trips[trip_idx].timeEnd = toMyString(current);
     trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
     trips[0].distance += trips[trip_idx].distance;
     /* set end boundary */
-    trips[0].addressB = toMyString(current);
+    trips[0].time_end = toMyString(current);
     tripsBuffer = jsonToArrayBuffer(trips);
     self.postMessage(tripsBuffer, [tripsBuffer]);
 };

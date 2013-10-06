@@ -19,8 +19,8 @@ angular.module('core.directives', [])
             '<li id="{{$index}}" ng-repeat="trip in trips">' +
               '<div>' +
                 '<div class="d-trip">{{trip.distance | km}}</div>' +
-                '<div class="s-trip">{{trip.addressA}}&#8594;</div>' +
-                '<div class="e-trip">&#8594;{{trip.addressB}}</div>' +
+                '<div class="s-trip">{{trip.time_start}}&#8594;</div>' +
+                '<div class="e-trip">&#8594;{{trip.time_end}}</div>' +
               '</div>' +
             '</li>' +
           '</ul>' +
@@ -33,8 +33,6 @@ angular.module('core.directives', [])
             });
             $scope.$on('focus', function (event, index) {
                 $root.$broadcast('refresh-waypoints', 
-                    $root.trips[index].start,
-                    $root.trips[index].end,
                     $root.trips[index].startIdx,
                     $root.trips[index].endIdx
                 );
@@ -80,10 +78,8 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $root) {
             $scope.waypoints_range = [];
-            $scope.$on('refresh-waypoints', function (event, start, end, startIdx, endIdx) {
+            $scope.$on('refresh-waypoints', function (event, startIdx, endIdx) {
                 if (start !== undefined && end !== undefined) {
-                    $scope.start = start;
-                    $scope.end = end;
                     $scope.startIdx = startIdx;
                     $scope.endIdx = endIdx;
                     $scope.paths['selected'] = {
@@ -106,7 +102,7 @@ angular.module('core.directives', [])
                 $scope.waypoints_range[index].address = response;
             });
         }],
-        link: function ($scope, element, attrs, $q, $rootScope) {
+        link: function ($scope, element, attrs) {
             var parent,
                 columns = [{id: 'timestamp', field: 'timestamp', formatter: dateFormatter}],
                 options = {
@@ -197,10 +193,13 @@ angular.module('core.directives', [])
         template:
             '<iframe>' +
                 '<ul ng-repeat="trip in trips">' +
-                    '<li><{{trip.time}}{{trip.address</li>' +
+                    '<li><{{trip.start_time}}{{trip.addressA}}</li>' +
                 '</ul>' +
             '</iframe>',
         controller: ['$scope', function ($scope) {
         }],
+        link: function ($scope, element, attrs) {
+            
+        }
     }
   })
