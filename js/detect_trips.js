@@ -1,11 +1,5 @@
 importScripts('distance.js');
 
-function toMyString (timestamp) {
-    var timestamp = new Date(timestamp);
-    return timestamp.getDate() + '.' 
-        + (timestamp.getMonth() + 1) + '. '
-        + timestamp.toLocaleTimeString().slice(0,5);
-}
 function arrayBufferToJSON (buf) {
     var string = '', i, len, array = new Uint16Array(buf);
     for (i = 0, len = array.length; i< len; i += 1) {
@@ -26,92 +20,45 @@ function jsonToArrayBuffer (json) {
 
 self.onmessage = function (event) {
     var i,
-        trip_idx = null,
-        previous = null,
-        current = null,
-        previous_coords = null,
-        current_coords = null,
         parking_time = 300 * 1000, /* 5mins */
-        now = (new Date()).valueOf(),
         waypoints = arrayBufferToJSON(event.data),
         trips = [],
+        prev_trip,
+        trip_idx,
         tripsBuffer = new ArrayBuffer(0),
-        length = waypoints.length;
+        length;
     /* set start boundary */
     trips[0]= {
-        time_start: toMyString(waypoints[0].timestamp),
-        time_end: toMyString(waypoints[length - 1].timestamp),
         start: waypoints[0].timestamp,
         end: waypoints[length - 1].timestamp,
-        w_start: {
-            address: waypoints[0].address,
-            lat: waypoints[0].lat,
-            lng: waypoints[0].lng
-        },
-        w_end: {
-            lat: waypoints[length - 1].lat,
-            lng: waypoints[length - 1].lng
-        },
         distance: 0
     };
-    trip_idx = trips.length;
     /* iterate through waypoints */
-    for (i = 0; i < length + 1; i += 1) {
-        previous = current || waypoints[i].timestamp;
-        current = waypoints[i].timestamp;
-        previous_coords = current_coords || [waypoints[i].lat, waypoints[i].lng];
-        current_coords = [waypoints[i].lat, waypoints[i].lng];
-        
-        if (current - previous > parking_time) { /* assume next trip of time gap exceeds parking time */
-            if (trips[trip_idx].end === trips[trip_idx].start) {
-                continue;
-            }
-            trips[trip_idx].end = previous;
-            trips[trip_idx].endIdx = i - 1;
-            trips[trip_idx].time_end = toMyString(current);
-            trips[trip_idx].w_end = {
-                address: waypoints[i - 1].address,
-                lat: waypoints[i - 1].lat,
-                lng: waypoints[i - 1].lng
-            };
-            trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
-            trips[0].distance += trips[trip_idx].distance;
-        }
-        if (!trips[trip_idx]) {
-            trips[trip_idx] = {
-                start: current,
-                startIdx: i,
-                end: 0,
-                endIdx: 0,
-                time_start: toMyString(current),
-                w_start: {
-                    address: waypoints[i].address,
-                    lat: waypoints[i].lat,
-                    lng: waypoints[i].lng
-                },
-                w_end: {
-                    address: waypoints[i].address,
-                    lat: waypoints[i].lat,
-                    lng: waypoints[i].lng
-                },
+    trips.push({
+        start: waypoints[0].timestamp,
+        idx_start: 0,
+        distance: 0
+    })
+    for (i = 1, length = waypoints.length; i < length; i += 1) {
+        if (waypoints[i].timestamp - waypoints[i - 1].timestamp > parking_time) {
+            prev_trip = trips[trips.length - 1];
+            prev_trip.end = waypoints[i - 1].timestamp;
+            prev_trip.idx_end = i - 1;
+            trips.push({
+                start: waypoints[i].timestamp,
+                idx_start: i,
                 distance: 0
-            };
-            tripIdx = trips.length;
+            })
+            trip_idx = trips.length -1
         }
+        trips[trip_idx].distance += calculateDistance(
+            [waypoints[i].lat,waypoints[i].lng], [waypoints[i - 1].lat, waypoints[i - 1].lng]
+        )
+        trips[0].distance += trips[trip_idx].distance;
     }
-    /* Append last waypoint */
-    /*
-    trips[trip_idx].end = current;
-    trips[trip_idx].endIdx = i - 1;
-    trips[trip_idx].time_end = toMyString(current);
-    trips[trip_idx].distance += calculateDistance(previous_coords, current_coords);
-    trips[trip_idx].w_end = {
-        address: waypoints[i - 1].address,
-        lat: waypoints[i - 1].lat,
-        lng: waypoints[i - 1].lng
-    };
-    */
-    trips[0].distance += trips[trip_idx].distance;
+    prev_trip = trips[trips.length - 1];
+    prev_trip.end = waypoints[i - 1].timestamp;
+    prev_trip.idx_end = i - 1;
     /* return Trips array */
     tripsBuffer = jsonToArrayBuffer(trips);
     self.postMessage(tripsBuffer, [tripsBuffer]);

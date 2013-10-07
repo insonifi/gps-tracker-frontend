@@ -19,8 +19,8 @@ angular.module('core.directives', [])
             '<li id="{{$index}}" ng-repeat="trip in trips">' +
               '<div>' +
                 '<div class="d-trip">{{trip.distance | km}}</div>' +
-                '<div class="s-trip">{{trip.time_start}}&#8594;</div>' +
-                '<div class="e-trip">&#8594;{{trip.time_end}}</div>' +
+                '<div class="s-trip">{{trip.start|timestring}}&#8594;</div>' +
+                '<div class="e-trip">&#8594;{{trip.end|timestring}}</div>' +
               '</div>' +
             '</li>' +
           '</ul>' +
@@ -33,8 +33,8 @@ angular.module('core.directives', [])
             });
             $scope.$on('focus', function (event, index) {
                 $root.$broadcast('refresh-waypoints', 
-                    $root.trips[index].startIdx,
-                    $root.trips[index].endIdx
+                    $root.trips[index].idx_start,
+                    $root.trips[index].idx_end
                 );
             });
         }],
@@ -78,16 +78,14 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $root) {
             $scope.waypoints_range = [];
-            $scope.$on('refresh-waypoints', function (event, startIdx, endIdx) {
-                if (startIdx !== undefined && endIdx !== undefined) {
-                    $scope.startIdx = startIdx;
-                    $scope.endIdx = endIdx;
+            $scope.$on('refresh-waypoints', function (event, idx_start, idx_end) {
+                if (idx_start !== undefined && idx_end !== undefined) {
                     $scope.paths['selected'] = {
                         weight: 3,
                         opacity: 0.618
                     };
                     /* filter waypoints*/
-                    $scope.waypoints_range = $root.waypoints.slice(startIdx, endIdx);
+                    $scope.waypoints_range = $root.waypoints.slice(idx_start, idx_end);
                     $root.message($scope.waypoints_range.length, 'waypoints');
                     $scope.markers['start']= $scope.waypoints_range[0];
                     $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];
