@@ -30,7 +30,7 @@ self.onmessage = function (event) {
     /* set start boundary */
     trips[0]= {
         start: waypoints[0].timestamp,
-        end: waypoints[length - 1].timestamp,
+        end: waypoints[waypoints.length - 1].timestamp,
         distance: 0
     };
     /* iterate through waypoints */
