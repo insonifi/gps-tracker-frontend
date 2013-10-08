@@ -27,10 +27,8 @@ angular.module('core.controllers', [])
     }])
     .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
         $scope.resetVars = function () {
-            $root.waypoints = [];
-            $root.trips = [];
-            $root.$broadcast('refresh-trips');
-            $root.$broadcast('refresh-waypoints');
+            $scope.waypoints = [];
+            $scope.trips = [];
             $scope.paths = {};
             $scope.$digest();
         };
@@ -45,7 +43,9 @@ angular.module('core.controllers', [])
             defaults: {
                 doubleClickZoom: false,
                 maxZoom: 18
-            }
+            },
+            waypoints: [],
+            trips: []
         });
         /* Got realtime waypoint */
         $scope.$on('update-waypoint', function (waypoint) {
