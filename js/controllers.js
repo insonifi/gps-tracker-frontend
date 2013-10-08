@@ -77,7 +77,7 @@ angular.module('core.controllers', [])
             $scope.$digest();
         });
         $scope.$watch('waypoints_range', function (oldValue, newValue) {
-            if (newValue.length > 0) {
+            if (newValue != undefined && newValue.length > 0) {
                 $scope.markers['start']= $scope.waypoints_range[0];
                 $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];                
                 $scope.$digest();
