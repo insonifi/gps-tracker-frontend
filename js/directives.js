@@ -26,18 +26,14 @@ angular.module('core.directives', [])
           '</ul>' +
         '</div>' +
         '</div>',
-        scope: true,
+        /*scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $root) {
-            $scope.$on('refresh-trips', function () {
-                $scope.sly.reload();
-            });
             $scope.$on('focus', function (event, index) {
                 $root.$broadcast('refresh-waypoints', 
-                    $root.trips[index].idx_start,
-                    $root.trips[index].idx_end
+                    
                 );
             });
-        }],
+        }],*/
         link: function ($scope, element, attrs) {
             var parent = $(element);
             $scope.sly = new Sly(parent.find('.trips'), {
@@ -59,12 +55,22 @@ angular.module('core.directives', [])
                 clickBar: 1,
             }).init();
             $scope.sly.on('active', function () {
+                var index = $scope.sly.rel.activeItem;
                 if ($scope.sly.rel.activeItem === 0) { return; }
-                $scope.$emit('focus', $scope.sly.rel.activeItem);
+                $scope.$apply(function () {
+                    $scope.waypoints_range = $scope.waypoints.slice(
+                        $scope.trips[index].idx_start,
+                        $scope.trips[index].idx_end
+                    );
+                });
+                
             });
             $scope.sly.on('load', function () {
                 $scope.sly.activate(1);
-            })
+            });
+            $scope.$watch('trips', function (newValue, oldValue) {
+                $scope.sly.reload();
+            });
         }
     }
   })
@@ -78,27 +84,6 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $root) {
             $scope.waypoints_range = [];
-            $scope.$on('refresh-waypoints', function (event, idx_start, idx_end) {
-                if (idx_start !== undefined && idx_end !== undefined) {
-                    $scope.paths['selected'] = {
-                        weight: 3,
-                        opacity: 0.618
-                    };
-                    /* filter waypoints*/
-                    $scope.waypoints_range = $root.waypoints.slice(idx_start, idx_end);
-                    $root.message($scope.waypoints_range.length, 'waypoints');
-                    $scope.markers['start']= $scope.waypoints_range[0];
-                    $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];
-                } else {
-                    $scope.waypoints_range = [];
-                }
-                $scope.grid.setData($scope.waypoints_range, true);
-                $scope.grid.invalidate();
-            });   
-            $scope.$on('result-address', function (event, response) {
-                var index = $scope.activeItem;
-                $scope.waypoints_range[index].address = response;
-            });
         }],
         link: function ($scope, element, attrs) {
             var parent,
@@ -140,6 +125,18 @@ angular.module('core.directives', [])
                     }
                 }) ()
             });
+            $scope.$watch('waypoints_range', function (oldValue, newValue) {
+                if (newValue.length > 0) {
+                    $scope.paths['selected'] = {
+                        weight: 3,
+                        opacity: 0.618
+                    };
+                    /* filter waypoints*/
+                    $scope.message($scope.waypoints_range.length, 'waypoints');
+                }
+                $scope.grid.setData($scope.waypoints_range, true);
+                $scope.grid.invalidate();
+            })
         }
     }
   })

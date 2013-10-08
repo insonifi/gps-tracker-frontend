@@ -54,6 +54,7 @@ body {
     border-radius: 0.2em;
     box-shadow: inset 0em 1.5em 2em 0em #eee,inset 0 0 1em 0em #aaa;
     color: #2e2e2e;
+    vertical-align: middle;
     padding-left: 0.5em;
     padding-right: 0.5em;
 }

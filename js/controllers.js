@@ -77,4 +77,9 @@ angular.module('core.controllers', [])
             $scope.paths['selected'].latlngs = path;
             $scope.$digest();
         });
+        $scope.$watch('waypoints_range', function (oldValue, newValue) {
+            $scope.markers['start']= $scope.waypoints_range[0];
+            $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];                
+            $scope.$digest();
+        })
     }])
