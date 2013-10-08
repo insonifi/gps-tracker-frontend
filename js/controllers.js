@@ -31,7 +31,6 @@ angular.module('core.controllers', [])
             $root.trips = [];
             $root.$broadcast('refresh-trips');
             $root.$broadcast('refresh-waypoints');
-            $scope.markers = {};
             $scope.paths = {};
             $scope.$digest();
         };
@@ -78,8 +77,14 @@ angular.module('core.controllers', [])
             $scope.$digest();
         });
         $scope.$watch('waypoints_range', function (oldValue, newValue) {
-            $scope.markers['start']= $scope.waypoints_range[0];
-            $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];                
-            $scope.$digest();
+            if (newValue.length > 0) {
+                $scope.markers['start']= $scope.waypoints_range[0];
+                $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];                
+                $scope.$digest();
+            } else {
+                $scope.markers = {};
+                $scope.$digest();
+            }
+            
         })
     }])
