@@ -10,10 +10,10 @@ body {
 }
 #query-params {
 	position: absolute;
-	padding: 0.4em;
+	/*padding: 0.4em;*/
 	left: 10%;
 	z-index: 1;
-	min-width: 25em;
+	/*min-width: 25em;*/
 	top: 1em;
 	height: 2.5em;
 /*	box-shadow: 0.1em 0.1em 0.2em 0em rgb(0,0,0);*/
@@ -42,8 +42,8 @@ body {
     background: #cbc5c2;
     border-color: #cbc5c2;
     box-shadow: inset 0em 1.5em 2em 0em #a99f9a,inset 0 0 1em 0em #cbc5c2;
-    padding-top: 0.1em;
-    padding-bottom: 0.3em;
+    /*padding-top: 0.1em;*/
+    /*padding-bottom: 0.3em;*/
 }
 #query-params > select {
     height: 2.7em;
@@ -54,7 +54,8 @@ body {
     border-radius: 0.2em;
     box-shadow: inset 0em 1.5em 2em 0em #eee,inset 0 0 1em 0em #aaa;
     color: #2e2e2e;
-    padding: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
 }
 #print-frame {
 	display: none;
