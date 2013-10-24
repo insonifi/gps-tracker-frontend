@@ -22,7 +22,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                 return buf;
             },
             receiveWaypoints = function (waypoints) {
-                $root.message('received', waypoints.length);
+                $root.message('+', waypoints.length, 'total', $root.waypoints.concat.length);
                 $root.waypoints = $root.waypoints.concat(waypoints);
             };
         socket.on('connect', function () {
@@ -58,7 +58,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
             $root.message('Analysing waypoints...', true);
             detect_trips.postMessage(waypointsBuffer, [waypointsBuffer]);
             detect_trips.onmessage = function (event) {
-                $root.message('Detected', $root.trips.length - 1, 'trips');
+                $root.message('Detected', ($root.trips.length === 0 ? '0' : $root.trips.length), 'trips');
                 $root.$apply(function () {
                     $root.trips = arrayBufferToJSON(event.data);
                 })
