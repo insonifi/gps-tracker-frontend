@@ -22,7 +22,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                 return buf;
             },
             receiveWaypoints = function (waypoints) {
-                $root.message('+', waypoints.length, 'total', $root.waypoints.concat.length);
+                $root.message('+', waypoints.length, 'total', $root.waypoints.length);
                 $root.waypoints = $root.waypoints.concat(waypoints);
             };
         socket.on('connect', function () {
