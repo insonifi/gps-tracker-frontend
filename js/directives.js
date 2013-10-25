@@ -34,7 +34,7 @@ angular.module('core.directives', [])
                 );
             });
         }],*/
-        link: function ($scope, element, attrs) {
+        link: ['$scope', 'element', 'attrs', '$root' , function ($scope, element, attrs, $root) {
             var parent = $(element);
             $scope.sly = new Sly(parent.find('.trips'), {
                 itemNav: 'forceCentered',
@@ -68,11 +68,10 @@ angular.module('core.directives', [])
             $scope.sly.on('load', function () {
                 $scope.sly.activate(1);
             });
-            $scope.$watch('trips', function (newValue, oldValue) {
-                console.log("wtf");
+            $root.$watch('trips', function (newValue, oldValue) {
                 $scope.sly.reload();
             });
-        }
+        }]
     }
   })
   .directive('waypointsList', function () {
