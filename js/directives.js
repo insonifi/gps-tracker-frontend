@@ -57,7 +57,7 @@ angular.module('core.directives', [])
             $scope.sly.on('active', function () {
                 var index = $scope.sly.rel.activeItem;
                 if ($scope.sly.rel.activeItem === 0) { return; }
-                $scope.$apply(function () {
+                $scope.$apply(function (newValue, oldValue) {
                     $scope.waypoints_range = $scope.waypoints.slice(
                         $scope.trips[index].idx_start,
                         $scope.trips[index].idx_end
@@ -69,6 +69,7 @@ angular.module('core.directives', [])
                 $scope.sly.activate(1);
             });
             $scope.$watch('trips', function (newValue, oldValue) {
+                console.log("wtf");
                 $scope.sly.reload();
             });
         }
