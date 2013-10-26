@@ -32,8 +32,14 @@ angular.module('core.directives', [])
                 $scope.sly.reload();
             });*/
             $root.$watch('trips', function (newValue, oldValue) {
+                $scope.trips = $root.trips;
                 $scope.sly.reload();
             });
+            $scope.watch('index', function (newValue, oldValue) {
+                $root.$apply(function () {
+                    $root.selected_trip = $scope.trips[newValue];
+                })
+            })
         }],
         link: function ($scope, element, attrs) {
             var parent = $(element);
@@ -57,12 +63,9 @@ angular.module('core.directives', [])
             }).init();
             $scope.sly.on('active', function () {
                 var index = $scope.sly.rel.activeItem;
-                if ($scope.sly.rel.activeItem === 0) { return; }
-                $scope.$apply(function (newValue, oldValue) {
-                    $scope.waypoints_range = $scope.waypoints.slice(
-                        $scope.trips[index].idx_start,
-                        $scope.trips[index].idx_end
-                    );
+                if (index === 0) { return; }
+                $scope.$apply(function () {
+                    $scope.index = index;
                 });
             });
             $scope.sly.on('load', function () {
@@ -79,7 +82,7 @@ angular.module('core.directives', [])
         template: 
             '<div class="grid"></div>',
         scope: true,
-        controller: ['$scope', function ($scope) {
+        controller: ['$scope', '$rootScope', function ($scope, $root) {
             $scope.waypoints_range = [];
             $scope.$on('leafletDirectiveMap.click', function(event, args){
                 var event_latlng = args.leafletEvent.latlng;
@@ -87,7 +90,6 @@ angular.module('core.directives', [])
                     event_latlng.lat.toFixed(6),
                     event_latlng.lng.toFixed(6)
                 );
-                
                 (function () {
                     var tolerance = 0.00015,
                         lat_diff = null,
@@ -106,7 +108,11 @@ angular.module('core.directives', [])
                     }
                 }) ()
             });
-            $scope.$watch('waypoints_range', function (oldValue, newValue) {
+            $root.$watch('selected_trip', function (newValue, oldValue) {
+                var trip = $root.selected_trip;
+                $scope.waypoints_range = $root.waypoints.slice(trip.idx_start, trip.idx_end);
+            })
+            $scope.$watch('waypoints_range', function (newValue, oldValue) {
                 if (newValue.length > 0) {
                     $scope.paths['selected'] = {
                         weight: 3,
