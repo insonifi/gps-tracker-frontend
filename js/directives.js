@@ -177,8 +177,10 @@ angular.module('core.directives', [])
                 }
                 arguments.join = Array.prototype.join;
                 arguments.slice = Array.prototype.slice;
-                arguments.pop = Array.prototype.pop;
-                delay = arguments.pop();
+                if (typeof arguments[len] === "number") {
+                    arguments.pop = Array.prototype.pop;
+                    delay = arguments.pop();
+                }
                 if (delay) {
                     $scope.timeout_promise = $timeout(function () {
                         $scope.messages = '';
