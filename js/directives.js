@@ -14,7 +14,7 @@ angular.module('core.directives', [])
             '<div class="mousearea"></div>' +
           '</div>' +
         '</div>' +
-        '<div class="trips">' +
+        '<div class="trips" style="overflow: visible">' +
           '<ul class="slidee">' +
             '<li id="{{$index}}" ng-repeat="trip in trips">' +
               '<div>' +
@@ -126,7 +126,7 @@ angular.module('core.directives', [])
                         opacity: 0.618
                     };
                     /* filter waypoints*/
-                    $scope.message($scope.waypoints_range.length, 'waypoints');
+                    $scope.message($scope.waypoints_range.length, 'waypoints', 10000);
                 }
                 $scope.grid.setData($scope.waypoints_range, true);
                 $scope.grid.invalidate();
@@ -169,20 +169,21 @@ angular.module('core.directives', [])
             }
             $root.message = function () {
                 var msg_string = '',
-                    len = arguments.length;
+                    len = arguments.length,
+                    delay;
                 if ($scope.timeout_promise) {
                     $timeout.cancel($scope.timeout_promise);
                 }
                 arguments.join = Array.prototype.join;
                 arguments.slice = Array.prototype.slice;
-                if (arguments[len - 1] !== true) {
+                arguments.pop = Array.prototype.pop;
+                delay = arguments.pop();
+                if (delay) {
                     $scope.timeout_promise = $timeout(function () {
                         $scope.messages = '';
-                    }, 10000);
-                } else {
-                    len -= 1; /* cut out last item */
+                    }, delay);
                 }
-                msg_string += arguments.slice(0, len).join(' ');
+                msg_string += arguments.join(' ');
                 $scope.time = (new Date()).toTimeString().slice(0,8);
                 $scope.messages = msg_string;
                 console.info(msg_string);

@@ -55,14 +55,14 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
             });
             waypointsBuffer = jsonToArrayBuffer($root.waypoints);
             /* Detect trip */
-            $root.message('Analysing waypoints...', true);
+            $root.message('Analysing waypoints...');
             detect_trips.postMessage(waypointsBuffer, [waypointsBuffer]);
             detect_trips.onmessage = function (event) {
                 $root.$apply(function () {
                     $root.trips = arrayBufferToJSON(event.data);
                 })
                 $root.$broadcast('update-trips');
-                $root.message('Detected', ($root.trips.length === 0 ? '0' : $root.trips.length - 1), 'trips', true);
+                $root.message('Detected', ($root.trips.length === 0 ? '0' : $root.trips.length - 1), 'trips');
             }
         });
         socket.on('update-waypoint', function (waypoint) {
