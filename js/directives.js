@@ -107,7 +107,7 @@ angular.module('core.directives', [])
                         lat_diff = Math.abs(waypoint.lat - event_latlng.lat);
                         long_diff = Math.abs(waypoint.lng - event_latlng.lng);
                         if (lat_diff < tolerance && long_diff < tolerance) {
-                            $scope.grid.setActiveCell(index);
+                            $scope.grid.setActiveCell(index, 0); /* activate first cell in discovered row */
                             break;
                         }
                     }
