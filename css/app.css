@@ -119,7 +119,7 @@ span.msg {
 /* Trips list */
 .trips {
     left: 20px;
-    width: 10em;
+    width: 6em;
     height: inherit;
     position: absolute;
     top: 0;
@@ -149,8 +149,8 @@ span.msg {
 	cursor: pointer;
 }
 .trips ul li:first-child {
-    background: #444;
-    color: #ccc;
+    background: #ccc;
+    color: #333;
 }
 .trips ul li .s-trip {
     text-align:left ;
@@ -158,10 +158,11 @@ span.msg {
 }
 .trips ul li .e-trip {
     text-align: left;
-    padding-right: 3em;    
+    padding-left: 1em;    
 }
 .trips ul li .d-trip {
     color: #ddd;
+    background: #333;
     position: absolute;
     left: 7em;
     padding-left: 0.5em;
