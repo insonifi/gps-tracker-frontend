@@ -15,7 +15,8 @@ angular.module('core.controllers', [])
                 module_id = $scope.module.module_id,
                 chunk_size = 10000;
             /* init vars */
-            $root.resetVars();
+            $root.waypoints = [];
+            $root.trips = [];
             if (!$scope.module) {
                 $root.message('no module selected');
                 return;
@@ -25,13 +26,6 @@ angular.module('core.controllers', [])
         }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
-        $root.resetVars = function () {
-            $root.$apply(function () {
-                $root.waypoints = [];
-                $root.trips = [];
-                $scope.paths = {};
-            })
-        };
         angular.extend($scope, {
             riga: {
               lat: 56.9496,
@@ -77,13 +71,13 @@ angular.module('core.controllers', [])
             })
         });
         $scope.$watch('waypoints_range', function (oldValue, newValue) {
-            $scope.$apply(function() {
+            //$scope.$apply(function() {
                 if (newValue !== undefined && newValue.length > 0) {
                     $scope.markers['start']= $scope.waypoints_range[0];
                     $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];                
                 } else {
                     $scope.markers = {};
                 }
-            })
+            //})
         })
     }])
