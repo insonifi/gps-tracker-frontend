@@ -39,9 +39,7 @@ angular.module('core.directives', [])
             */
             $scope.$watch('index', function (newValue, oldValue) {
                 if (newValue) {
-                    $root.$apply(function () {
-                        $root.selected_trip = $scope.trips[newValue];
-                    })
+                    $root.selected_trip = $scope.trips[newValue];
                 }
             })
         }],
