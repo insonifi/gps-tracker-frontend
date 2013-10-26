@@ -26,9 +26,9 @@ angular.module('core.controllers', [])
     }])
     .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
         $root.resetVars = function () {
-            $scope.$apply(function () {
-                $scope.waypoints = [];
-                $scope.trips = [];
+            $root.$apply(function () {
+                $root.waypoints = [];
+                $root.trips = [];
                 $scope.paths = {};
             })
         };
