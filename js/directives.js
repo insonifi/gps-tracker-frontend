@@ -35,7 +35,7 @@ angular.module('core.directives', [])
                 $scope.trips = $root.trips;
                 $scope.sly.reload();
             });
-            $scope.watch('index', function (newValue, oldValue) {
+            $scope.$watch('index', function (newValue, oldValue) {
                 $root.$apply(function () {
                     $root.selected_trip = $scope.trips[newValue];
                 })
@@ -110,7 +110,9 @@ angular.module('core.directives', [])
             });
             $root.$watch('selected_trip', function (newValue, oldValue) {
                 var trip = $root.selected_trip;
-                $scope.waypoints_range = $root.waypoints.slice(trip.idx_start, trip.idx_end);
+                if (trip) {
+                    $scope.waypoints_range = $root.waypoints.slice(trip.idx_start, trip.idx_end);
+                }
             })
             $scope.$watch('waypoints_range', function (newValue, oldValue) {
                 if (newValue.length > 0) {
