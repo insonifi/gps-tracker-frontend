@@ -36,9 +36,11 @@ angular.module('core.directives', [])
                 $scope.sly.reload();
             });
             $scope.$watch('index', function (newValue, oldValue) {
-                $root.$apply(function () {
-                    $root.selected_trip = $scope.trips[newValue];
-                })
+                if (newValue) {
+                    $root.$apply(function () {
+                        $root.selected_trip = $scope.trips[newValue];
+                    })
+                }
             })
         }],
         link: function ($scope, element, attrs) {
