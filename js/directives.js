@@ -63,7 +63,7 @@ angular.module('core.directives', [])
                 dynamicHandle: 1,
                 clickBar: 1,
             }).init();
-            $scope.sly.frame.style.visibility = 'visible';
+            $scope.sly.frame.style.overflow = 'visible';
             $scope.sly.on('active', function () {
                 var index = $scope.sly.rel.activeItem;
                 if (index === 0) { return; }
