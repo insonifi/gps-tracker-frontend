@@ -91,7 +91,7 @@ angular.module('core.directives', [])
             $scope.waypoints_range = [];
             $scope.$on('leafletDirectiveMap.click', function(event, args){
                 var event_latlng = args.leafletEvent.latlng;
-                console.log('[mapCtrl] find waypoint at',
+                console.log('[waypointsList] find waypoint at',
                     event_latlng.lat.toFixed(6),
                     event_latlng.lng.toFixed(6)
                 );
@@ -107,7 +107,7 @@ angular.module('core.directives', [])
                         lat_diff = Math.abs(waypoint.lat - event_latlng.lat);
                         long_diff = Math.abs(waypoint.lng - event_latlng.lng);
                         if (lat_diff < tolerance && long_diff < tolerance) {
-                            $scope.$root.$broadcast('select-waypoint', waypoint);
+                            $scope.grid.setActiveCell(index);
                             break;
                         }
                     }
