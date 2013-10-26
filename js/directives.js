@@ -67,7 +67,7 @@ angular.module('core.directives', [])
             $scope.sly.on('load', function () {
                 $scope.sly.activate(1);
             });
-            $root.$watch('trips', function (newValue, oldValue) {
+            $scope.$on('update-trips', function () {
                 $scope.sly.reload();
             });
         }]

@@ -58,10 +58,9 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
             $root.message('Analysing waypoints...', true);
             detect_trips.postMessage(waypointsBuffer, [waypointsBuffer]);
             detect_trips.onmessage = function (event) {
-                $root.$apply(function () {
-                    $root.trips = arrayBufferToJSON(event.data);
-                    $root.message('Detected', ($root.trips.length === 0 ? '0' : $root.trips.length), 'trips');
-                })
+                $root.trips = arrayBufferToJSON(event.data);
+                $root.$broadcast('update-trips');
+                $root.message('Detected', ($root.trips.length === 0 ? '0' : $root.trips.length), 'trips');
             }
         });
         socket.on('update-waypoint', function (waypoint) {
