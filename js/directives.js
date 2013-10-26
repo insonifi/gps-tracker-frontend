@@ -112,9 +112,7 @@ angular.module('core.directives', [])
             });
             $root.$watch('selected_trip', function (newValue, oldValue) {
                 var trip = $root.selected_trip;
-                if (trip) {
-                    $scope.waypoints_range = $root.waypoints.slice(trip.idx_start, trip.idx_end);
-                }
+                $scope.waypoints_range = $root.waypoints.slice(trip.idx_start, trip.idx_end);
             })
             $scope.$watch('waypoints_range', function (newValue, oldValue) {
                 if (newValue.length > 0) {
