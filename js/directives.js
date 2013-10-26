@@ -177,7 +177,7 @@ angular.module('core.directives', [])
                 }
                 arguments.join = Array.prototype.join;
                 arguments.slice = Array.prototype.slice;
-                if (typeof arguments[len] === "number") {
+                if (typeof arguments[len - 11] === "number") {
                     arguments.pop = Array.prototype.pop;
                     delay = arguments.pop();
                 }
