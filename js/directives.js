@@ -34,7 +34,7 @@ angular.module('core.directives', [])
                 );
             });
         }],*/
-        link: ['$scope', 'element', 'attrs', function ($scope, element, attrs) {
+        link: ['$scope', 'element', 'attrs', '$rootScope', function ($scope, element, attrs, $root) {
             var parent = $(element);
             $scope.sly = new Sly(parent.find('.trips'), {
                 itemNav: 'forceCentered',
@@ -67,7 +67,7 @@ angular.module('core.directives', [])
             $scope.sly.on('load', function () {
                 $scope.sly.activate(1);
             });
-            $scope.$watch('trips', function (newValue, oldValue) {
+            $root.$watch('trips', function (newValue, oldValue) {
                 $scope.sly.reload();
             });
         }]
@@ -192,8 +192,8 @@ angular.module('core.directives', [])
             '</iframe>',
         controller: ['$scope', function ($scope) {
         }],
-        link: function ($scope, element, attrs) {
+        link: ['$scope', 'element', 'attrs', function ($scope, element, attrs) {
             
-        }
+        }]
     }
   })
