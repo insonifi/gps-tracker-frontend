@@ -15,8 +15,7 @@ angular.module('core.controllers', [])
                 module_id = $scope.module.module_id,
                 chunk_size = 10000;
             /* init vars */
-            $root.waypoints = [];
-            $root.trips = [];
+            $root.resetVars();
             if (!$scope.module) {
                 $root.message('no module selected');
                 return;
@@ -26,11 +25,12 @@ angular.module('core.controllers', [])
         }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
-        $scope.resetVars = function () {
-            $scope.waypoints = [];
-            $scope.trips = [];
-            $scope.paths = {};
-            $scope.$digest();
+        $root.resetVars = function () {
+            $scope.$apply(function () {
+                $scope.waypoints = [];
+                $scope.trips = [];
+                $scope.paths = {};
+            })
         };
         angular.extend($scope, {
             riga: {
@@ -44,16 +44,15 @@ angular.module('core.controllers', [])
                 doubleClickZoom: false,
                 maxZoom: 18
             },
-            waypoints: [],
-            trips: []
         });
         /* Got realtime waypoint */
         $scope.$on('update-waypoint', function (waypoint) {
             var tail = 10;
-            $scope.markers[waypoint.module_id] = waypoint;
-            $scope.paths[waypoint.module_id].latlngs.push = waypoint;
-            $scope.paths[waypoint.module_id].slice(0, tail);
-            $scope.$digest();
+            $scope.$apply(function () {
+                $scope.markers[waypoint.module_id] = waypoint;
+                $scope.paths[waypoint.module_id].latlngs.push = waypoint;
+                $scope.paths[waypoint.module_id].slice(0, tail);
+            })
         });
         /* waypoint is selected in grid */
         $scope.$on('select-waypoint', function(event, waypoint) {
@@ -73,18 +72,18 @@ angular.module('core.controllers', [])
         });
         /* show path from grid */
         $scope.$on('select-path', function (event, path) {
-            $scope.paths['selected'].latlngs = path;
-            $scope.$digest();
+            $scope.$apply(function () {
+                $scope.paths['selected'].latlngs = path;    
+            })
         });
         $scope.$watch('waypoints_range', function (oldValue, newValue) {
-            if (newValue != undefined && newValue.length > 0) {
-                $scope.markers['start']= $scope.waypoints_range[0];
-                $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];                
-                $scope.$digest();
-            } else {
-                $scope.markers = {};
-                $scope.$digest();
-            }
-            
+            $scope.$apply(function() {
+                if (newValue !== undefined && newValue.length > 0) {
+                    $scope.markers['start']= $scope.waypoints_range[0];
+                    $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];                
+                } else {
+                    $scope.markers = {};
+                }
+            })
         })
     }])
