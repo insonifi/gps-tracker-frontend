@@ -58,8 +58,10 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
             $root.message('Analysing waypoints...', true);
             detect_trips.postMessage(waypointsBuffer, [waypointsBuffer]);
             detect_trips.onmessage = function (event) {
-                $root.trips = arrayBufferToJSON(event.data);
-                $root.$broadcast('update-trips');
+                $root.$apply(function () {
+                    $root.trips = arrayBufferToJSON(event.data);
+                })
+                /* $root.$broadcast('update-trips'); */
                 $root.message('Detected', ($root.trips.length === 0 ? '0' : $root.trips.length), 'trips');
             }
         });

@@ -26,15 +26,16 @@ angular.module('core.directives', [])
           '</ul>' +
         '</div>' +
         '</div>',
-        /*scope: true,
+        /*scope: true,*/
         controller: ['$scope', '$rootScope', function ($scope, $root) {
-            $scope.$on('focus', function (event, index) {
-                $root.$broadcast('refresh-waypoints', 
-                    
-                );
+            /*$scope.$on('update-trips', function () {
+                $scope.sly.reload();
+            });*/
+            $root.$watch('trips', function (newValue, oldValue) {
+                $scope.sly.reload();
             });
-        }],*/
-        link: ['$scope', 'element', 'attrs', '$rootScope', function ($scope, element, attrs, $root) {
+        }],
+        link: function ($scope, element, attrs) {
             var parent = $(element);
             $scope.sly = new Sly(parent.find('.trips'), {
                 itemNav: 'forceCentered',
@@ -67,10 +68,7 @@ angular.module('core.directives', [])
             $scope.sly.on('load', function () {
                 $scope.sly.activate(1);
             });
-            $scope.$on('update-trips', function () {
-                $scope.sly.reload();
-            });
-        }]
+        }
     }
   })
   .directive('waypointsList', function () {
@@ -83,22 +81,6 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', function ($scope) {
             $scope.waypoints_range = [];
-        }],
-        link: ['$scope', 'element', 'attrs', '$rootScope', function ($scope, element, attrs, $root) {
-            var parent,
-                columns = [{id: 'timestamp', field: 'timestamp', formatter: dateFormatter}],
-                options = {
-                    /* forceFitColumns: true */
-                };
-            $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
-            $scope.grid.onScroll.subscribe(function (event, args) {
-                var visible = args.grid.getViewport();
-                $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
-            });
-            $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
-                var waypoint = $scope.waypoints_range[args.row];
-                $scope.$root.$broadcast('select-waypoint', waypoint);
-            });
             $scope.$on('leafletDirectiveMap.click', function(event, args){
                 var event_latlng = args.leafletEvent.latlng;
                 console.log('[mapCtrl] find waypoint at',
@@ -136,7 +118,23 @@ angular.module('core.directives', [])
                 $scope.grid.setData($scope.waypoints_range, true);
                 $scope.grid.invalidate();
             })
-        }]
+        }],
+        link: function ($scope, element, attrs) {
+            var parent,
+                columns = [{id: 'timestamp', field: 'timestamp', formatter: dateFormatter}],
+                options = {
+                    /* forceFitColumns: true */
+                };
+            $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
+            $scope.grid.onScroll.subscribe(function (event, args) {
+                var visible = args.grid.getViewport();
+                $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
+            });
+            $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
+                var waypoint = $scope.waypoints_range[args.row];
+                $scope.$root.$broadcast('select-waypoint', waypoint);
+            });
+        }
     }
   })
   .directive('messageBox', function () {
@@ -192,8 +190,8 @@ angular.module('core.directives', [])
             '</iframe>',
         controller: ['$scope', function ($scope) {
         }],
-        link: ['$scope', 'element', 'attrs', function ($scope, element, attrs) {
+        link: function ($scope, element, attrs) {
             
-        }]
+        }
     }
   })
