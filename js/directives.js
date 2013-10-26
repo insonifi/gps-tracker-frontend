@@ -14,7 +14,7 @@ angular.module('core.directives', [])
             '<div class="mousearea"></div>' +
           '</div>' +
         '</div>' +
-        '<div class="trips" style="overflow: visible">' +
+        '<div class="trips">' +
           '<ul class="slidee">' +
             '<li id="{{$index}}" ng-repeat="trip in trips">' +
               '<div>' +
@@ -37,7 +37,7 @@ angular.module('core.directives', [])
                 $scope.sly.reload();
             });
             */
-            $scope.$watch('index', function (newValue, oldValue) {
+            $scope.$watch('trip_index', function (newValue, oldValue) {
                 if (newValue) {
                     $root.selected_trip = $scope.trips[newValue];
                 }
@@ -63,11 +63,12 @@ angular.module('core.directives', [])
                 dynamicHandle: 1,
                 clickBar: 1,
             }).init();
+            $scope.sly.frame.style.visibility = 'visible';
             $scope.sly.on('active', function () {
                 var index = $scope.sly.rel.activeItem;
                 if (index === 0) { return; }
                 $scope.$apply(function () {
-                    $scope.index = index;
+                    $scope.trip_index = index;
                 });
             });
             $scope.$on('update-trips', function () {
