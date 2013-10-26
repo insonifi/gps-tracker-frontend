@@ -23,7 +23,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
             },
             receiveWaypoints = function (waypoints) {
                 $root.waypoints = $root.waypoints.concat(waypoints);
-                $root.message('+', waypoints.length, 'total', $root.waypoints.length);
+                $root.message('received', $root.waypoints.length, '...');
             };
         socket.on('connect', function () {
           socket.emit('get-modulelist');

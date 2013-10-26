@@ -34,7 +34,7 @@ angular.module('core.directives', [])
                 );
             });
         }],*/
-        link: ['$scope', 'element', 'attrs', '$root' , function ($scope, element, attrs, $root) {
+        link: ['$scope', 'element', 'attrs', '$rootScope' , function ($scope, element, attrs, $root) {
             var parent = $(element);
             $scope.sly = new Sly(parent.find('.trips'), {
                 itemNav: 'forceCentered',
@@ -63,7 +63,6 @@ angular.module('core.directives', [])
                         $scope.trips[index].idx_end
                     );
                 });
-                
             });
             $scope.sly.on('load', function () {
                 $scope.sly.activate(1);
@@ -85,7 +84,7 @@ angular.module('core.directives', [])
         controller: ['$scope', '$rootScope', function ($scope, $root) {
             $scope.waypoints_range = [];
         }],
-        link: function ($scope, element, attrs) {
+        link: ['$scope', 'element', 'attrs', '$rootScope', function ($scope, element, attrs, $root) {
             var parent,
                 columns = [{id: 'timestamp', field: 'timestamp', formatter: dateFormatter}],
                 options = {
@@ -137,7 +136,7 @@ angular.module('core.directives', [])
                 $scope.grid.setData($scope.waypoints_range, true);
                 $scope.grid.invalidate();
             })
-        }
+        }]
     }
   })
   .directive('messageBox', function () {
