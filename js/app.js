@@ -61,8 +61,8 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                 $root.$apply(function () {
                     $root.trips = arrayBufferToJSON(event.data);
                 })
-                /* $root.$broadcast('update-trips'); */
-                $root.message('Detected', ($root.trips.length === 0 ? '0' : $root.trips.length), 'trips');
+                $root.$broadcast('update-trips');
+                $root.message('Detected', ($root.trips.length === 0 ? '0' : $root.trips.length - 1), 'trips', true);
             }
         });
         socket.on('update-waypoint', function (waypoint) {

@@ -31,10 +31,12 @@ angular.module('core.directives', [])
             /*$scope.$on('update-trips', function () {
                 $scope.sly.reload();
             });*/
+            /*
             $root.$watch('trips', function (newValue, oldValue) {
-                $scope.trips = $root.trips;
+                $scope.trips = newValue;
                 $scope.sly.reload();
             });
+            */
             $scope.$watch('index', function (newValue, oldValue) {
                 if (newValue) {
                     $root.$apply(function () {
@@ -69,6 +71,9 @@ angular.module('core.directives', [])
                 $scope.$apply(function () {
                     $scope.index = index;
                 });
+            });
+            $scope.$on('update-trips', function () {
+                $scope.sly.reload();
             });
             $scope.sly.on('load', function () {
                 $scope.sly.activate(1);
