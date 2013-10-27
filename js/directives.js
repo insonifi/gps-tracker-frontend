@@ -111,7 +111,6 @@ angular.module('core.directives', [])
                 }
             })
             $root.$watch('waypoints_range', function (newValue, oldValue) {
-                if () { return; }
                 if (newValue !== undefined && newValue.length > 0) {
                     $scope.paths['selected'] = {
                         weight: 3,
