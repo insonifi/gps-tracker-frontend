@@ -105,7 +105,7 @@ angular.module('core.directives', [])
                 }) ()
             });
             $root.$watch('selected_trip', function (newValue, oldValue) {
-                var trip = $root.selected_trip;
+                var trip = newValue;
                 if (trip) {
                     $root.waypoints_range = $root.waypoints.slice(trip.idx_start, trip.idx_end);
                 }
@@ -118,9 +118,9 @@ angular.module('core.directives', [])
                         color: '#27BEE7'
                     };
                     /* filter waypoints*/
-                    $scope.message($root.waypoints_range.length, 'waypoints', 10000);
+                    $scope.message(newValue.length, 'waypoints', 10000);
                 }
-                $scope.grid.setData($root.waypoints_range, true);
+                $scope.grid.setData(newValue, true);
                 $scope.grid.invalidate();
             })
         }],
