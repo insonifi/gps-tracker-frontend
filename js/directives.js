@@ -118,9 +118,9 @@ angular.module('core.directives', [])
                         color: '#27BEE7'
                     };
                     /* filter waypoints*/
-                    $scope.message($scope.waypoints_range.length, 'waypoints', 10000);
+                    $scope.message($root.waypoints_range.length, 'waypoints', 10000);
                 }
-                $scope.grid.setData($scope.waypoints_range, true);
+                $scope.grid.setData($root.waypoints_range, true);
                 $scope.grid.invalidate();
             })
         }],
