@@ -116,7 +116,7 @@ angular.module('core.directives', [])
                     $scope.paths['selected'] = {
                         weight: 3,
                         opacity: 0.618,
-                        color: '#27BEE7'
+                        color: '#1A529C'
                     };
                     /* filter waypoints*/
                     $scope.message(newValue.length, 'waypoints', 10000);
