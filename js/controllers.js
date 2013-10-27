@@ -15,8 +15,7 @@ angular.module('core.controllers', [])
                 module_id = $scope.module.module_id,
                 chunk_size = 10000;
             /* init vars */
-            $root.waypoints = [];
-            $root.trips = [];
+            $scope.resetVars();
             if (!$scope.module) {
                 $root.message('no module selected');
                 return;
@@ -26,6 +25,12 @@ angular.module('core.controllers', [])
         }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
+        $scope.resetVars = function () {
+            $root.waypoints = [],
+            $root.trips = [],
+            $scope.path = {},
+            $scope.markers = {}
+        }
         angular.extend($scope, {
             riga: {
               lat: 56.9496,
