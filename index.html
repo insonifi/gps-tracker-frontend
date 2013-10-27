@@ -13,12 +13,11 @@
         <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
         <script src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'></script>
         <script src="//cdn.kendostatic.com/2013.2.716/js/kendo.all.min.js"></script>
-        <script src='//crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha512.js'></script>
+        <!--<script src='//crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha512.js'></script>-->
         <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js'></script>
         <script src='bower_components/angular-socket-io/socket.js'></script>
         <script src="bower_components/angular-kendo-ui/build/angular-kendo.js"></script>
         <script src='bower_components/angular-leaflet/dist/angular-leaflet-directive.min.js'></script>
-        <script src='bower_components/angular-virtual-scroll/angular-virtual-scroll.min.js'></script>
         <script src='lib/sly.min.js'></script>
         <script src='lib/jquery.event.drag-2.0.min.js'></script>
         <script src='js/date_formatter.js'></script>
@@ -38,7 +37,7 @@
             <input kendo-date-time-picker ng-model='start_date'></input>
             <input kendo-date-time-picker ng-model='end_date'></input>
             <select ng-model='module' ng-options='module.name for module in list' label='module'>select module</select>
-            <input type='submit' id='query' value='Query'></input>
+            <input type='submit' id='query' value='Find'></input>
             <input type='button' value='Clear' ng-click='resetVars()'></input>
 		</form>
 		<iframe print-frame></iframe>
