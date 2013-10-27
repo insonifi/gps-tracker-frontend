@@ -28,15 +28,6 @@ angular.module('core.directives', [])
         '</div>',
         /*scope: true,*/
         controller: ['$scope', '$rootScope', function ($scope, $root) {
-            /*$scope.$on('update-trips', function () {
-                $scope.sly.reload();
-            });*/
-            /*
-            $root.$watch('trips', function (newValue, oldValue) {
-                $scope.trips = newValue;
-                $scope.sly.reload();
-            });
-            */
             $scope.$watch('trip_index', function (newValue, oldValue) {
                 if (newValue) {
                     $root.selected_trip = $scope.trips[newValue];
@@ -89,7 +80,6 @@ angular.module('core.directives', [])
             '<div class="grid"></div>',
         scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $root) {
-            $scope.waypoints_range = [];
             $scope.$on('leafletDirectiveMap.click', function(event, args){
                 var event_latlng = args.leafletEvent.latlng;
                 console.log('[waypointsList] find waypoint at',
@@ -117,14 +107,15 @@ angular.module('core.directives', [])
             $root.$watch('selected_trip', function (newValue, oldValue) {
                 var trip = $root.selected_trip;
                 if (trip) {
-                    $scope.waypoints_range = $root.waypoints.slice(trip.idx_start, trip.idx_end);
+                    $root.waypoints_range = $root.waypoints.slice(trip.idx_start, trip.idx_end);
                 }
             })
-            $scope.$watch('waypoints_range', function (newValue, oldValue) {
+            $root.$watch('waypoints_range', function (newValue, oldValue) {
                 if (newValue.length > 0) {
                     $scope.paths['selected'] = {
                         weight: 3,
-                        opacity: 0.618
+                        opacity: 0.618,
+                        color: '#27BEE7'
                     };
                     /* filter waypoints*/
                     $scope.message($scope.waypoints_range.length, 'waypoints', 10000);

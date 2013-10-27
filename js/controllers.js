@@ -27,6 +27,7 @@ angular.module('core.controllers', [])
     .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
         $scope.resetVars = function () {
             $root.waypoints = [],
+            $root.waypoints_range = [],
             $root.trips = [],
             $scope.path = {},
             $scope.markers = {}
@@ -75,7 +76,7 @@ angular.module('core.controllers', [])
                 $scope.paths['selected'].latlngs = path;    
             })
         });
-        $scope.$watch('waypoints_range', function (oldValue, newValue) {
+        $root.$watch('waypoints_range', function (oldValue, newValue) {
             if (newValue !== undefined && newValue.length > 0) {
                 $scope.markers['start']= $scope.waypoints_range[0];
                 $scope.markers['end']= $scope.waypoints_range[$scope.waypoints_range.length - 1];                
