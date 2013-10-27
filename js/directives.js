@@ -111,17 +111,19 @@ angular.module('core.directives', [])
                 }
             })
             $root.$watch('waypoints_range', function (newValue, oldValue) {
-                if (newValue !== undefined && newValue.length > 0) {
-                    $scope.paths['selected'] = {
-                        weight: 3,
-                        opacity: 0.618,
-                        color: '#1A529C'
-                    };
-                    /* filter waypoints*/
-                    $scope.message(newValue.length, 'waypoints', 10000);
+                if (newValue !== undefined) {
+                    if (newValue.length > 0) {
+                        $scope.paths['selected'] = {
+                            weight: 3,
+                            opacity: 0.618,
+                            color: '#1A529C'
+                        };
+                        /* filter waypoints*/
+                        $scope.message(newValue.length, 'waypoints', 10000);
+                    }
+                    $scope.grid.setData(newValue, true);
+                    $scope.grid.invalidate();
                 }
-                $scope.grid.setData(newValue, true);
-                $scope.grid.invalidate();
             })
         }],
         link: function ($scope, element, attrs) {
