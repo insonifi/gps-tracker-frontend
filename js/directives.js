@@ -111,6 +111,7 @@ angular.module('core.directives', [])
                 }
             })
             $root.$watch('waypoints_range', function (newValue, oldValue) {
+                
                 if (newValue.length > 0) {
                     $scope.paths['selected'] = {
                         weight: 3,
@@ -126,18 +127,19 @@ angular.module('core.directives', [])
         }],
         link: function ($scope, element, attrs) {
             var parent,
+                empty_array = [],
                 columns = [{id: 'timestamp', field: 'timestamp', formatter: dateFormatter}],
                 options = {
                     /* forceFitColumns: true */
                 };
-            $scope.grid = new Slick.Grid(element, $scope.waypoints_range, columns, options);
+            $scope.grid = new Slick.Grid(element, empty_array, columns, options);
             $scope.grid.onScroll.subscribe(function (event, args) {
                 var visible = args.grid.getViewport();
                 $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
             });
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
-                var waypoint = $scope.waypoints_range[args.row];
-                $scope.$root.$broadcast('select-waypoint', waypoint);
+                //var waypoint = $scope.grid.getData()[args.row];
+                $scope.$root.$broadcast('select-waypoint', $scope.grid.getDataItem(args.row));
             });
         }
     }
