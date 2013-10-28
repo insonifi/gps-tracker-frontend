@@ -80,6 +80,10 @@ angular.module('core.directives', [])
             '<div class="grid"></div>',
         scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $root) {
+            $scope.mapPath = function () {
+                var visible = $scope.grid.getViewport();
+                $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
+            }
             $scope.$on('leafletDirectiveMap.click', function(event, args){
                 var event_latlng = args.leafletEvent.latlng;
                 console.log('[waypointsList] find waypoint at',
@@ -123,6 +127,7 @@ angular.module('core.directives', [])
                     }
                     $scope.grid.setData(newValue, true);
                     $scope.grid.invalidate();
+                    $scope.mapPath();
                 }
             })
         }],
@@ -134,12 +139,8 @@ angular.module('core.directives', [])
                     /* forceFitColumns: true */
                 };
             $scope.grid = new Slick.Grid(element, empty_array, columns, options);
-            $scope.grid.onScroll.subscribe(function (event, args) {
-                var visible = args.grid.getViewport();
-                $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
-            });
+            $scope.grid.onScroll.subscribe($scope.mapPath);
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
-                //var waypoint = $scope.grid.getData()[args.row];
                 $scope.$root.$broadcast('select-waypoint', $scope.grid.getDataItem(args.row));
             });
         }
@@ -199,7 +200,8 @@ angular.module('core.directives', [])
                     '<li><{{trip.start_time}}{{trip.addressA}}</li>' +
                 '</ul>' +
             '</iframe>',
-        controller: ['$scope', function ($scope) {
+        controller: ['$scope', '$rootScope', function ($scope, $root) {
+            $
         }],
         link: function ($scope, element, attrs) {
             
