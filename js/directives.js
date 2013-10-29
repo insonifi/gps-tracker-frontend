@@ -196,11 +196,25 @@ angular.module('core.directives', [])
         template:
             '<iframe>' +
                 '<ul ng-repeat="trip in trips">' +
-                    '<li><{{trip.start_time}}{{trip.addressA}}</li>' +
+                    '<li>{{trip.start|datestring}} {{trip.address_start}} --- {{trip.end|datestring}} {{trip.address_end}}</li>' +
                 '</ul>' +
             '</iframe>',
-        controller: ['$scope', '$rootScope', function ($scope, $root) {
-            $
+        controller: ['$scope', '$rootScope', 'cnxn', function ($scope, $root, cnxn) {
+            $root.$watch('trips', function (newValue, oldValue) {
+                var i,
+                    trips = $root.trips,
+                    waypoints = $root.waypoints,
+                    len = $root.trips.length,
+                    setAddress = function (address) {
+                        return address;
+                    };
+                for (i = 0; i < len; i += 1) {
+                    trips[i].address_start = cnxn.requestAddress(waypoints[trips.idx_start])
+                        .then(setAddress);
+                    trips[i].address_end = cnxn.requestAddress(waypoints[trips.idx_end])
+                        .then(setAddress);
+                }
+            })
         }],
         link: function ($scope, element, attrs) {
             
