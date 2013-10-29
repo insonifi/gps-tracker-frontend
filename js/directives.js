@@ -28,11 +28,11 @@ angular.module('core.directives', [])
         '</div>',
         scope: true,
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
-            /*$scope.$watch('trip_index', function (newValue, oldValue) {
+            $scope.$watch('trip_index', function (newValue, oldValue) {
                 if (newValue) {
-                    $root.selected_trip = $scope.trips[newValue];
+                    $root.trip_index = $scope.trips[newValue];
                 }
-            });*/
+            });
             $root.$watch('trips', function (newValue, oldValue) {
                 $timeout(function () {
                     $scope.sly.reload();
