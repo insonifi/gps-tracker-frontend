@@ -34,6 +34,7 @@ angular.module('core.directives', [])
                 }
             });
             $root.$watch('trips', function (newValue, oldValue) {
+                $scope.trips = newValue;
                 $scope.sly.reload();
             })
         }],
