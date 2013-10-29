@@ -26,15 +26,14 @@ angular.module('core.directives', [])
           '</ul>' +
         '</div>' +
         '</div>',
-        /*scope: true,*/
+        scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $root) {
-            $scope.$watch('trip_index', function (newValue, oldValue) {
+            /*$scope.$watch('trip_index', function (newValue, oldValue) {
                 if (newValue) {
                     $root.selected_trip = $scope.trips[newValue];
                 }
-            });
+            });*/
             $root.$watch('trips', function (newValue, oldValue) {
-                $scope.trips = newValue;
                 $scope.sly.reload();
             })
         }],
@@ -109,7 +108,7 @@ angular.module('core.directives', [])
                     }
                 }) ()
             });
-            $root.$watch('selected_trip', function (newValue, oldValue) {
+            $root.$watch('trip_index', function (newValue, oldValue) {
                 var trip = newValue;
                 if (trip) {
                     $root.waypoints_range = $root.waypoints.slice(trip.idx_start, trip.idx_end);
