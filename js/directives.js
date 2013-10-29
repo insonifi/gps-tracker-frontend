@@ -27,14 +27,16 @@ angular.module('core.directives', [])
         '</div>' +
         '</div>',
         scope: true,
-        controller: ['$scope', '$rootScope', function ($scope, $root) {
+        controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
             /*$scope.$watch('trip_index', function (newValue, oldValue) {
                 if (newValue) {
                     $root.selected_trip = $scope.trips[newValue];
                 }
             });*/
             $root.$watch('trips', function (newValue, oldValue) {
-                $scope.sly.reload();
+                $timeout(function () {
+                    $scope.sly.reload();
+                }, 800); //delay for ng-repeat to prepare DOM for Sly
             })
         }],
         link: function ($scope, element, attrs) {
@@ -64,9 +66,6 @@ angular.module('core.directives', [])
                 $scope.$apply(function () {
                     $scope.trip_index = index;
                 });
-            });
-            $scope.$on('update-trips', function () {
-                $scope.sly.reload();
             });
             $scope.sly.on('load', function () {
                 $scope.sly.activate(1);
