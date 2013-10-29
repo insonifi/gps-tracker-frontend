@@ -32,6 +32,7 @@ angular.module('core.controllers', [])
             $scope.path = {},
             $scope.markers = {}
         }
+        $scope.resetVars();
         angular.extend($scope, {
             riga: {
               lat: 56.9496,
