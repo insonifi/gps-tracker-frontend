@@ -196,11 +196,11 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template:
-            '<iframe>' +
+            '<div style="visibility: hidden">' +
                 '<ul ng-repeat="trip in trips">' +
                     '<li>{{trip.start|datestring}} {{trip.address_start}} --- {{trip.end|datestring}} {{trip.address_end}}</li>' +
                 '</ul>' +
-            '</iframe>',
+            '</div>',
         controller: ['$scope', '$rootScope', 'cnxn', function ($scope, $root, cnxn) {
             $root.$watch('trips', function (newValue, oldValue) {
                 var i,
