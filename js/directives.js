@@ -32,6 +32,9 @@ angular.module('core.directives', [])
                 if (newValue) {
                     $root.selected_trip = $scope.trips[newValue];
                 }
+            });
+            $root.$watch('trips', function (newValue, oldValue) {
+                $scope.sly.reload();
             })
         }],
         link: function ($scope, element, attrs) {
