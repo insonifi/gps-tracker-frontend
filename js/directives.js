@@ -206,15 +206,11 @@ angular.module('core.directives', [])
                 var i,
                     trips = $root.trips,
                     waypoints = $root.waypoints,
-                    len = $root.trips.length,
-                    setAddress = function (address) {
-                        return address;
-                    };
+                    len = $root.trips.length;
+                    
                 for (i = 0; i < len; i += 1) {
                     trips[i].address_start = cnxn.requestAddress(waypoints[trips.idx_start])
-                        .then(setAddress);
                     trips[i].address_end = cnxn.requestAddress(waypoints[trips.idx_end])
-                        .then(setAddress);
                 }
             })
         }],

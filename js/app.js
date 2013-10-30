@@ -24,7 +24,9 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
             receiveWaypoints = function (waypoints) {
                 $root.waypoints = $root.waypoints.concat(waypoints);
                 $root.message('received', $root.waypoints.length, '...');
-            };
+            },
+            address = $q.defer(),
+            addressCache = {};
         socket.on('connect', function () {
           socket.emit('get-modulelist');
         });
@@ -67,31 +69,22 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
         socket.on('update-waypoint', function (waypoint) {
             $root.$broadcast('update-waypoint', waypoint);
         });
-        
+        socket.on('result-address', function (response) {
+            var coords_str = response.lat.toString() + response.lng.toString();
+            addressCache[coords_str] = response.address;
+            address.resolve(response.address);
+        });        
         return {
             queryPeriod: function () {
                 socket.emit('query-period', {module_id: arguments[0], start: arguments[1].valueOf(), end: arguments[2].valueOf(), chunks: arguments[3]});
             },
             requestAddress: function (coords) {
-                var address = $q.defer();
-                socket.emit('get-address', coords);
-                socket.on('result-address', function (response) {
-                    /* it's not clear whether we should use local cache for addresses
-                    (function () {
-                        var index = 0,
-                            len = $root.waypoints.length,
-                            waypoint = null;
-                        for (index = 0; index < len; index += 1) {
-                            waypoint = $root.waypoints[index];
-                            if (waypoint.lat === response.lat
-                                || waypoint.lng === response.lng) {
-                                waypoint.address = response.address;
-                            }
-                        }
-                    }) ()
-                    */
-                    address.resolve(response.address);    
-                });
+                var coords_str = coords.toString();
+                if (addressCache.hasOwnProperty(coords_str)) {
+                    address.resolve(addressCache(coords_str));
+                } else {
+                    socket.emit('get-address', coords);
+                }
                 return address.promise;
             }
         }
