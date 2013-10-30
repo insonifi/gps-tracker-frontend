@@ -206,11 +206,14 @@ angular.module('core.directives', [])
                 var i,
                     trips = $root.trips,
                     waypoints = $root.waypoints,
-                    len = $root.trips.length;
+                    len = $root.trips.length,
+                    update = function () {
+                        $scope.$digest();
+                    };
                     
                 for (i = 0; i < len; i += 1) {
-                    trips[i].address_start = cnxn.requestAddress(waypoints[trips.idx_start])
-                    trips[i].address_end = cnxn.requestAddress(waypoints[trips.idx_end])
+                    trips[i].address_start = cnxn.requestAddress(waypoints[trips.idx_start]).then(update);
+                    trips[i].address_end = cnxn.requestAddress(waypoints[trips.idx_end]).then(update)
                 }
             })
         }],
