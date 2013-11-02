@@ -74,7 +74,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
             $root.$broadcast('update-waypoint', waypoint);
         });
         socket.on('result-address', function (response) {
-            var coords_str = response.lat.toString() + response.lng.toString();
+            var coords_str = [response.lat,response.lng()].join();
             addressCache[coords_str] = response.address;
             addressPromises[coords_str].resolve(response.address);
         });        
@@ -83,9 +83,11 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                 socket.emit('query-period', {module_id: arguments[0], start: arguments[1].valueOf(), end: arguments[2].valueOf(), chunks: arguments[3]});
             },
             requestAddress: function (coords) {
-                var coords_str = coords.toString(),
+                var coords_str = [coords.lat,coords.lng()].join(),
                     address = $q.defer();
-                if (addressCache.hasOwnProperty(coords_str)) {
+                /*if (coords.address) {
+                    address.resolve(addressCache(coords_str));
+                } else*/ if (addressCache.hasOwnProperty(coords_str)) {
                     address.resolve(addressCache(coords_str));
                 } else {
                     addressPromises[coords_str] = address;
