@@ -38,7 +38,7 @@ angular.module('core.controllers', [])
                 iframe_element = document.querySelector('iframe'),
                 temp_doc = document.createDocumentFragment();
                 
-            iframe.document.write('<html><body onclick="window.print();return false;"><body></html>')
+            iframe.document.write('<html><body style="left:10em; width=80m; font-size: 10px" onclick="window.print();return false;"><body></html>')
             iframe.document.body.innerHTML = print_frame.innerHTML;
             iframe_element.style.cssText = 'width: 100%; height: 100%; position: absolute; background: white; left: 0px; top: 0px; z-index: 10';
         }

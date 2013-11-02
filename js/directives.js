@@ -196,14 +196,14 @@ angular.module('core.directives', [])
             '<div id="print-frame" style="visibility: hidden">\
                 <h4>{{trip[0].start|datestring}} ― {{trip[0].end|datestring}}</h4>\
                 <ol ng-repeat="trip in trips">\
-                    <li>\
+                    <li ng-repeat-start>\
                         <span>\
                             <div>{{trip.start|datestring}}</div>\
                             <div>{{trip.end|datestring}}</div>\
                         </span>\
                         <span>{{trip.address_start}} ―  {{trip.address_end}}</span>\
                         <span>{{trip.distance|km}}</span>\
-                    </li>\
+                    </li ng-repeat-stop>\
                 </ol>\
             </div>',
         controller: ['$scope', '$rootScope', 'cnxn', function ($scope, $root, cnxn) {
