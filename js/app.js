@@ -25,8 +25,8 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                 $root.waypoints = $root.waypoints.concat(waypoints);
                 $root.message('received', $root.waypoints.length, '...');
             },
-            address = $q.defer(),
-            addressCache = {};
+            addressCache = {},
+            addressPromises = {};
         socket.on('connect', function () {
             $root.message('connected to server', 3);
             socket.emit('get-modulelist');
@@ -76,19 +76,22 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
         socket.on('result-address', function (response) {
             var coords_str = response.lat.toString() + response.lng.toString();
             addressCache[coords_str] = response.address;
-            address.resolve(response.address);
+            addressPromises[coords_str].resolve(response.address);
         });        
         return {
             queryPeriod: function () {
                 socket.emit('query-period', {module_id: arguments[0], start: arguments[1].valueOf(), end: arguments[2].valueOf(), chunks: arguments[3]});
             },
             requestAddress: function (coords) {
-                var coords_str = coords.toString();
+                var coords_str = coords.toString(),
+                    address = $q.defer();
                 if (addressCache.hasOwnProperty(coords_str)) {
                     address.resolve(addressCache(coords_str));
                 } else {
+                    addressPromises[coords_str] = address;
                     socket.emit('get-address', coords);
                 }
+                
                 return address.promise;
             }
         }
