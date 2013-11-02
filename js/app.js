@@ -28,8 +28,12 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
             address = $q.defer(),
             addressCache = {};
         socket.on('connect', function () {
-          socket.emit('get-modulelist');
+            $root.message('connected to server', 3);
+            socket.emit('get-modulelist');
         });
+        socket.on('disconnect', function () {
+            $root.message('disconnected from server', 10);
+        })
         socket.on('modulelist', function (modules) {
           $root.$broadcast('modulelist', modules);
         })
@@ -63,7 +67,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                 $root.$apply(function () {
                     $root.trips = arrayBufferToJSON(event.data);
                 })
-                $root.message('Detected', ($root.trips.length === 0 ? '0' : $root.trips.length - 1), 'trips');
+                $root.message('Detected', ($root.trips.length === 0 ? '0' : $root.trips.length - 1), 'trips', 3);
             }
         });
         socket.on('update-waypoint', function (waypoint) {

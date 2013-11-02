@@ -122,7 +122,7 @@ angular.module('core.directives', [])
                             color: '#1A529C'
                         };
                         /* filter waypoints*/
-                        $scope.message(newValue.length, 'waypoints', 10000);
+                        $scope.message(newValue.length, 'waypoints', 3);
                     }
                     $scope.grid.setData(newValue, true);
                     $scope.grid.invalidate();
@@ -175,7 +175,7 @@ angular.module('core.directives', [])
                 arguments.slice = Array.prototype.slice;
                 if (typeof arguments[len - 1] === "number") {
                     arguments.pop = Array.prototype.pop;
-                    delay = arguments.pop();
+                    delay = arguments.pop() * 1000; //milliseconds to seconds
                 }
                 if (delay) {
                     $scope.timeout_promise = $timeout(function () {
@@ -210,7 +210,7 @@ angular.module('core.directives', [])
                     
                 for (i = 1; i < len; i += 1) {
                     trips[i].address_start = cnxn.requestAddress(waypoints[trips[i].idx_start]);
-                    trips[i].address_end = cnxn.requestAddress(waypoints[trips[i]idx_end]);;
+                    trips[i].address_end = cnxn.requestAddress(waypoints[trips[i].idx_end]);;
                 }
             })
         }],
