@@ -83,7 +83,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                 socket.emit('query-period', {module_id: arguments[0], start: arguments[1].valueOf(), end: arguments[2].valueOf(), chunks: arguments[3]});
             },
             requestAddress: function (coords) {
-                var coords_str = [coords.lat,coords.lng()].join(),
+                var coords_str = [coords.lat,coords.lng].join(),
                     address = $q.defer();
                 /*if (coords.address) {
                     address.resolve(addressCache(coords_str));
