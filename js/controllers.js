@@ -34,7 +34,8 @@ angular.module('core.controllers', [])
         }
         $scope.printTrips = function () {
             var print_frame = angular.element.find('#print-frame'),
-                iframe = angular.element.find('iframe');
+                iframe = window.frames['print'],
+                temp_doc = document.createDocumentFragment();
                 iframe.document.write('<html><body onclick="window.print();return false;"><body></html>')
                 iframe.document.body.write(print_frame.outerHtml);
                 iframe.style.cssText = 'width: 100%; height: 100%; position: absolute; left: 0px; top: 0px; z-index: 10';
