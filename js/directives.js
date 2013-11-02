@@ -194,10 +194,17 @@ angular.module('core.directives', [])
         transclude: false,
         template:
             '<div id="print-frame" style="visibility: hidden">\
-                <ul ng-repeat="trip in trips">\
-                    <h1 ng-show="{{$first}}">{{trip.start|datestring}} -- {{trip.end|datestring}}</h1>\
-                    <li ng>{{trip.start|datestring}} {{trip.address_start}} --- {{trip.end|datestring}} {{trip.address_end}} {{trip.distance|km}}</li>\
-                </ul>\
+                <h4>{{trip[0].start|datestring}} ― {{trip[0].end|datestring}}</h4>\
+                <ol ng-repeat="trip in trips">\
+                    <li>\
+                        <span>\
+                            <div>{{trip.start|datestring}}</div>\
+                            <div>{{trip.end|datestring}}</div>\
+                        </span>\
+                        <span>{{trip.address_start}} ―  {{trip.address_end}}</span>\
+                        <span>{{trip.distance|km}}</span>\
+                    </li>\
+                </ol>\
             </div>',
         controller: ['$scope', '$rootScope', 'cnxn', function ($scope, $root, cnxn) {
             $root.$watch('trips', function (newValue, oldValue) {
