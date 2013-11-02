@@ -34,9 +34,10 @@ angular.module('core.controllers', [])
         }
         $scope.printTrips = function () {
             var print_frame = angular.element.find('#print-frame'),
-                temp_window = window.opne('', 'temp_window', 'status=1,width=400,height=600');
-                temp_window.document.write('<html><body onclick="window.print();return false;"><body></html>')
-                temp_window.document.body.write(print_frame.outerHtml);
+                iframe = angular.element.find('iframe');
+                iframe.document.write('<html><body onclick="window.print();return false;"><body></html>')
+                iframe.document.body.write(print_frame.outerHtml);
+                iframe.style.cssText = 'width: 100%; height: 100%; position: absolute; left: 0px; top: 0px; z-index: 10';
         }
         $scope.resetVars();
         angular.extend($scope, {

@@ -8,6 +8,10 @@ body {
     overflow: inherit;
     font-family: sans-serif;
 }
+iframe {
+    width: 0;
+    height: 0;
+}
 #query-params {
 	position: absolute;
 	/*padding: 0.4em;*/
