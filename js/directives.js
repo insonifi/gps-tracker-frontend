@@ -209,8 +209,8 @@ angular.module('core.directives', [])
                     len = $root.trips.length;
                     
                 for (i = 1; i < len; i += 1) {
-                    trips[i].address_start = cnxn.requestAddress(waypoints[trips.idx_start]);
-                    trips[i].address_end = cnxn.requestAddress(waypoints[trips.idx_end]);;
+                    trips[i].address_start = cnxn.requestAddress(waypoints[trips[i].idx_start]);
+                    trips[i].address_end = cnxn.requestAddress(waypoints[trips[i]idx_end]);;
                 }
             })
         }],
