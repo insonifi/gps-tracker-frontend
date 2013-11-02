@@ -86,7 +86,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                 var coords_str = [coords.lat, coords.lng].join(),
                     address = $q.defer();
                 if (coords.address) {
-                    address.resolve(addressCache(coords_str));
+                    address.resolve(coords.address);
                 } else if (addressCache.hasOwnProperty(coords_str)) {
                     address.resolve(addressCache(coords_str));
                 } else {
