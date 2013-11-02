@@ -32,6 +32,12 @@ angular.module('core.controllers', [])
             $scope.path = {},
             $scope.markers = {}
         }
+        $scope.printTrips = function () {
+            var print_frame = angular.element.find('#print-frame'),
+                temp_window = window.opne('', 'temp_window', 'status=1,width=400,height=600');
+                temp_window.document.write('<html><body onclick="window.print();return false;"><body></html>')
+                temp_window.document.body.write(print_frame.outerHtml);
+        }
         $scope.resetVars();
         angular.extend($scope, {
             riga: {

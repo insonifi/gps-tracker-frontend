@@ -8,24 +8,24 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template: 
-        '<div class="sly-container">' + 
-        '<div class="t-scrollbar">' +
-          '<div class="handle">' +
-            '<div class="mousearea"></div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="trips">' +
-          '<ul class="slidee">' +
-            '<li id="{{$index}}" ng-repeat="trip in trips">' +
-              '<div>' +
-                '<div class="d-trip">{{trip.distance | km}}</div>' +
-                '<div class="s-trip">{{trip.start|timestring}}&#8594;</div>' +
-                '<div class="e-trip">&#8594;{{trip.end|timestring}}</div>' +
-              '</div>' +
-            '</li>' +
-          '</ul>' +
-        '</div>' +
-        '</div>',
+        '<div class="sly-container">\
+        <div class="t-scrollbar">\
+          <div class="handle">\
+            <div class="mousearea"></div>\
+          </div>\
+        </div>\
+        <div class="trips">\
+          <ul class="slidee">\
+            <li id="{{$index}}" ng-repeat="trip in trips">\
+              <div>\
+                <div class="d-trip">{{trip.distance | km}}</div>\
+                <div class="s-trip">{{trip.start|timestring}}&#8594;</div>\
+                <div class="e-trip">&#8594;{{trip.end|timestring}}</div>\
+              </div>\
+            </li>\
+          </ul>\
+        </div>\
+        </div>',
         scope: true,
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
             $scope.$watch('trip_index', function (newValue, oldValue) {
@@ -153,12 +153,9 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template:
-            '<div id="message-box" ng-hide="isEmpty()">' +
-                /* '<ul ng-repeat="msg in messages">' +
-                    '<li><{{msg}}</li> ' +
-                '</ul>' +*/
-                '<span class="timestamp">{{time}}</span><span class="msg">{{messages}}</span>' +
-            '</div>',
+            '<div id="message-box" ng-hide="isEmpty()">\
+                <span class="timestamp">{{time}}</span><span class="msg">{{messages}}</span>\
+            </div>',
         controller: ['$scope', '$timeout', '$rootScope', function ($scope, $timeout, $root) {
             $scope.messages = [];
             $scope.isEmpty = function () {
@@ -196,11 +193,12 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template:
-            '<div style="visibility: hidden">' +
-                '<ul ng-repeat="trip in trips">' +
-                    '<li>{{trip.start|datestring}} {{trip.address_start}} --- {{trip.end|datestring}} {{trip.address_end}}</li>' +
-                '</ul>' +
-            '</div>',
+            '<div id="print-frame" style="visibility: hidden">\
+                <ul ng-repeat="trip in trips">\
+                    <h1 ng-show="{{$first}}">{{trip.start|datestring}} -- {{trip.end|datestring}}</h1>\
+                    <li ng>{{trip.start|datestring}} {{trip.address_start}} --- {{trip.end|datestring}} {{trip.address_end}} {{trip.distance|km}}</li>\
+                </ul>\
+            </div>',
         controller: ['$scope', '$rootScope', 'cnxn', function ($scope, $root, cnxn) {
             $root.$watch('trips', function (newValue, oldValue) {
                 var i,
