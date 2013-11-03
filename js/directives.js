@@ -196,11 +196,7 @@ angular.module('core.directives', [])
             '<div id="print-frame" ng-click="print();">\
                 <input id="close" type="button" value="Close" ng-click="close();"></input>\
                 <table>\
-                    <thead>\
-                        <tr>\
-                            <th><span style="font-size: large;">{{trips[0].start|datestring}} ― {{trips[0].end|datestring}}</span></th>\
-                        </tr>\
-                    </thead>\
+                    <caption><span style="font-size: large;">{{trips[0].start|datestring}} ― {{trips[0].end|datestring}}</span></caption>\
                     <tbody ng-repeat="trip in trips">\
                         <tr>\
                             <td>\
@@ -211,6 +207,7 @@ angular.module('core.directives', [])
                               {{trip.address_start}} ―  {{trip.address_end}}\
                             </td>\
                             <td>\
+                                {{trip.distance}}\
                             </td>\
                         </tr>\
                     </tbody>\
