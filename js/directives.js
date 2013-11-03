@@ -207,7 +207,7 @@ angular.module('core.directives', [])
                               {{trip.address_start}} ―  {{trip.address_end}}\
                             </td>\
                             <td>\
-                                {{trip.distance}}\
+                                {{trip.distance|km}}\
                             </td>\
                         </tr>\
                     </tbody>\
@@ -231,6 +231,7 @@ angular.module('core.directives', [])
                     </html>'
                 );
                 iframe.document.body.innerHTML = print_frame.innerHTML;
+                iframe.print();
             };
             $scope.close = function () {
                 document.getElementById('print-frame').style.cssText = 'display: none';
