@@ -33,16 +33,14 @@
 	</head>
 	<body ng-app='core' ng-controller='mapCtrl'>
         <leaflet defaults='defaults' center='riga' markers='markers' paths='paths'></leaflet>
-        <div id='query-params'>
-    		<form ng-controller='queryCtrl' ng-submit='sendQueryRequest()'>
-                <input kendo-date-time-picker ng-model='start_date'></input>
-                <input kendo-date-time-picker ng-model='end_date'></input>
-                <select ng-model='module' ng-options='module.name for module in list' label='module'>select module</select>
-                <input type='submit' id='query' value='Find'></input>
-                <input type='button' value='Clear' ng-click='resetVars()'></input>
-    		    <input type='button' value='Report' ng-click='tripsReport()'></input>
-    		</form>
-		</div>
+		<form id='query-params' ng-controller='queryCtrl' ng-submit='sendQueryRequest()'>
+            <input kendo-date-time-picker ng-model='start_date'></input>
+            <input kendo-date-time-picker ng-model='end_date'></input>
+            <select ng-model='module' ng-options='module.name for module in list' label='module'>select module</select>
+            <input type='submit' id='query' value='Find'></input>
+            <input type='button' value='Clear' ng-click='resetVars()'></input>
+		    <input type='button' value='Report' ng-click='tripsReport()'></input>
+		</form>
 		<div print-frame></div>
         <div waypoints-list></div>
         <div trips-list></div>

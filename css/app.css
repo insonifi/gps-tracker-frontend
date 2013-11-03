@@ -65,11 +65,11 @@ iframe {
 #print-frame {
 	display: none;
 	position: fixed;
-	width: 40em;
+	width: 45em;
 	height: 100%;
 	background: white;
 	left: 16em;
-	top: 6em;
+	top: 4em;
 	z-index: 10;
 }
 #clock {
