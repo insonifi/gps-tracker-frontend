@@ -194,7 +194,6 @@ angular.module('core.directives', [])
         transclude: false,
         template:
             '<div id="print-frame" ng-click="print();">\
-                <input id="close" type="button" value="Close" ng-click="close();"></input>\
                 <table>\
                     <caption><span style="font-size: large;">{{trips[0].start|datestring}} ― {{trips[0].end|datestring}}</span></caption>\
                     <tbody ng-repeat="trip in trips">\
@@ -214,9 +213,13 @@ angular.module('core.directives', [])
                 </table>\
             </div>',
         controller: ['$scope', '$rootScope', 'cnxn', function ($scope, $root, cnxn) {
-            $root.printTrips = function () {
+            $root.tripsReport = function () {
                 var print_frame = document.getElementById('print-frame');
-                print_frame.style.cssText = 'display: block';
+                if (print_frame.style.display === 'block') {
+                    print_frame.style.display = 'none';
+                } else {
+                    print_frame.style.display = 'block';
+                }
             };
             $scope.print = function() {
                 var iframe = window.frames['print'],
