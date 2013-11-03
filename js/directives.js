@@ -194,7 +194,7 @@ angular.module('core.directives', [])
         transclude: false,
         template:
             '<div id="print-frame" ng-click="print();">\
-                <input id="close" type="button" value="Close" ng-click="close"></input>\
+                <input id="close" type="button" value="Close" ng-click="close();"></input>\
                 <table>\
                     <thead>\
                         <tr>\
