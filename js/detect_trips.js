@@ -51,11 +51,11 @@ self.onmessage = function (event) {
                 distance: 0
             })
             trip_idx = trips.length -1
+            trips[0].distance += prev_trip.distance;
         }
         trips[trip_idx].distance += calculateDistance(
             [waypoints[i].lat,waypoints[i].lng], [waypoints[i - 1].lat, waypoints[i - 1].lng]
         )
-        trips[0].distance += trips[trip_idx].distance;
     }
     prev_trip = trips[trips.length - 1];
     prev_trip.end = waypoints[i - 1].timestamp;
