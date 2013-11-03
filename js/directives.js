@@ -200,7 +200,7 @@ angular.module('core.directives', [])
                         <tr>\
                             <th><span style="font-size: large;">{{trips[0].start|datestring}} ― {{trips[0].end|datestring}}</span></th>\
                         </tr>\
-                    </thead>\t
+                    </thead>\
                     <tbody ng-repeat="trip in trips">\
                         <tr>\
                             <td>\
