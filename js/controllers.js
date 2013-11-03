@@ -32,16 +32,6 @@ angular.module('core.controllers', [])
             $scope.path = {},
             $scope.markers = {}
         }
-        $scope.printTrips = function () {
-            var print_frame = document.getElementById('print-frame'),
-                iframe = window.frames['print'],
-                iframe_element = document.querySelector('iframe'),
-                temp_doc = document.createDocumentFragment();
-                
-            iframe.document.write('<html><body style="left:10em; width=80m; font-size: 10px" onclick="window.print();return false;"><body></html>')
-            iframe.document.body.innerHTML = print_frame.innerHTML;
-            iframe_element.style.cssText = 'width: 40em; height: 100%; position: absolute; background: white; left: 16em; top: 6em; z-index: 10';
-        }
         $scope.resetVars();
         angular.extend($scope, {
             riga: {

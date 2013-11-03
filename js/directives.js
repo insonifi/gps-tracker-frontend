@@ -193,13 +193,14 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template:
-            '<div id="print-frame" style="visibility: hidden">\
+            '<div id="print-frame" ng-click="print();">\
+                <input id="close" type="button" value="Close" ng-click="close"></input>\
                 <table>\
                     <thead>\
                         <tr>\
-                            <th><h4>{{trips[0].start|datestring}} ― {{trips[0].end|datestring}}</h4></th>\
+                            <th><span style="font-size: large;">{{trips[0].start|datestring}} ― {{trips[0].end|datestring}}</span></th>\
                         </tr>\
-                    </thead>\
+                    </thead>\t
                     <tbody ng-repeat="trip in trips">\
                         <tr>\
                             <td>\
@@ -216,6 +217,27 @@ angular.module('core.directives', [])
                 </table>\
             </div>',
         controller: ['$scope', '$rootScope', 'cnxn', function ($scope, $root, cnxn) {
+            $root.printTrips = function () {
+                var print_frame = document.getElementById('print-frame');
+                print_frame.style.cssText = 'display: block';
+            };
+            $scope.print = function() {
+                var iframe = window.frames['print'],
+                    iframe_element = document.querySelector('iframe'),
+                    print_frame = document.getElementById('print-frame'),
+                    temp_doc = document.createDocumentFragment();
+                    
+                iframe.document.write(
+                    '<html>\
+                        <body style="left:10em; width=80em; font-size: 10px">\
+                        <body>\
+                    </html>'
+                );
+                iframe.document.body.innerHTML = print_frame.innerHTML;
+            };
+            $scope.close = function () {
+                document.getElementById('print-frame').style.cssText = 'display: none';
+            }
             $root.$watch('trips', function (newValue, oldValue) {
                 var i,
                     trips = $root.trips,

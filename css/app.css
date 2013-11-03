@@ -65,6 +65,12 @@ iframe {
 #print-frame {
 	display: none;
 	position: fixed;
+	width: 40em;
+	height: 100%;
+	background: white;
+	left: 16em;
+	top: 6em;
+	z-index: 10;
 }
 #clock {
     position: absolute;
