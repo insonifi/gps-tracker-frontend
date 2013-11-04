@@ -20,7 +20,7 @@ iframe {
 	/*min-width: 25em;*/
 	top: 1em;
 	height: 2.5em;
-/*	box-shadow: 0.1em 0.1em 0.2em 0em rgb(0,0,0);*/
+/*	box-shadow: 0.1em 0.1em 0.2em 0 rgb(0,0,0);*/
 	/*border: rgb(52,141,255) 1px none;*/
 	/*border-radius: 0 0 1em 0;*/
 	padding-left: 0.5em;
@@ -33,30 +33,30 @@ iframe {
     border-radius: 0.2em;
     border-style: solid;
     border-color: #ccc;
-    box-shadow: inset 0em 1.5em 2em 0em #eee;
+    box-shadow: inset 0 1.5em 2em 0 #eee;
     color: #2e2e2e;
 }
-#query-params > input:hover {
+input[type=button]:hover {
     cursor: pointer;
     /*border-color: #ddd;*/
     background: #cbc5c2;
-    box-shadow: inset 0em 1.5em 2em 0em #cbc5c2,inset 0 0 1em 0em #a99f9a;
+    box-shadow: inset 0 1.5em 2em 0 #cbc5c2,inset 0 0 1em 0 #a99f9a;
 }
-#query-params > input:active {
+input[type=button]:active {
     background: #cbc5c2;
     border-color: #cbc5c2;
-    box-shadow: inset 0em 1.5em 2em 0em #a99f9a,inset 0 0 1em 0em #cbc5c2;
+    box-shadow: inset 0 1.5em 2em 0 #a99f9a,inset 0 0 1em 0 #cbc5c2;
     /*padding-top: 0.1em;*/
     /*padding-bottom: 0.3em;*/
 }
-#query-params > select {
+select {
     height: 2.7em;
     background: #ddd;
     border-width: 1px;
     border-color: #ccc;
     border-style: solid;
     border-radius: 0.2em;
-    box-shadow: inset 0em 1.5em 2em 0em #eee,inset 0 0 1em 0em #aaa;
+    box-shadow: inset 0 1.5em 2em 0 #eee,inset 0 0 1em 0 #aaa;
     color: #2e2e2e;
     vertical-align: middle;
     padding-left: 0.5em;
@@ -109,7 +109,7 @@ div.grid {
     width: 4.6em;
     height: 100%;
     position: absolute;
-    right: 0em;
+    right: 0;
     top: 0;
 }
 span.timestamp {
