@@ -201,7 +201,7 @@ angular.module('core.directives', [])
                 <table>\
                     <caption><span style="font-size: large;">{{trips[0].start|datestring}} ― {{trips[0].end|datestring}}</span></caption>\
                     <tbody ng-repeat="trip in trips">\
-                        <tr>\
+                        <tr ng-repeat-start ng-hide="$first">\
                             <td>\
                                 <div>{{trip.start|datestring}}</div>\
                                 <div>{{trip.end|datestring}}</div>\
@@ -212,7 +212,7 @@ angular.module('core.directives', [])
                             <td>\
                                 {{trip.distance|km}}\
                             </td>\
-                        </tr>\
+                        </tr ng-repeat-end>\
                     </tbody>\
                 </table>\
             </div>',
