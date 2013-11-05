@@ -29,16 +29,18 @@ angular.module('core.directives', [])
         scope: true,
         controller: ['$scope', '$rootScope', '$timeout', function ($scope, $root, $timeout) {
             $scope.$watch('trip_index', function (newValue, oldValue) {
-                if (newValue) {
+                if (newValue !== oldValue) {
                     $root.trip_index = $scope.trips[newValue];
                 }
             });
             $root.$watch('trips', function (newValue, oldValue) {
-                $scope.sly.style.visibility = 'hidden';
-                $timeout(function () {
-                    $scope.sly.reload();
-                    $scope.sly.style.visibility = 'visible';
-                }, 800); //delay for ng-repeat to prepare DOM for Sly
+                if (newValue !== oldValue) {
+                    $scope.sly.style.visibility = 'hidden';
+                    $timeout(function () {
+                        $scope.sly.reload();
+                        $scope.sly.style.visibility = 'visible';
+                    }, 800); //delay for ng-repeat to prepare DOM for Sly
+                }
             })
         }],
         link: function ($scope, element, attrs) {
