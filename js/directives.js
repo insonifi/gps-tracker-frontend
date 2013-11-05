@@ -35,10 +35,10 @@ angular.module('core.directives', [])
             });
             $root.$watch('trips', function (newValue, oldValue) {
                 if (newValue !== oldValue) {
-                    $scope.sly.style.visibility = 'hidden';
+                    $scope.sly.frame.style.visibility = 'hidden';
                     $timeout(function () {
                         $scope.sly.reload();
-                        $scope.sly.style.visibility = 'visible';
+                        $scope.sly.frame.style.visibility = 'visible';
                     }, 800); //delay for ng-repeat to prepare DOM for Sly
                 }
             })

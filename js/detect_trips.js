@@ -60,7 +60,7 @@ self.onmessage = function (event) {
     prev_trip = trips[trips.length - 1];
     prev_trip.end = waypoints[i - 1].timestamp;
     prev_trip.idx_end = i - 1;
-    trips[0].distance += prev_trip.distance;Human-Computer Interaction Desi
+    trips[0].distance += prev_trip.distance;
     /* return Trips array */
     tripsBuffer = jsonToArrayBuffer(trips);
     self.postMessage(tripsBuffer, [tripsBuffer]);
