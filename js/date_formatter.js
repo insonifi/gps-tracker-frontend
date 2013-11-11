@@ -1,3 +1,4 @@
 var dateFormatter = function (row, cell, value, columnDef, dataContext) {
-    return (new Date(value)).toTimeString().slice(0,8)
+    var date = new Date(value)
+    return date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 }
