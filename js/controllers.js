@@ -31,7 +31,14 @@ angular.module('core.controllers', [])
             $root.trips = [],
             $scope.path = {},
             $scope.markers = {}
-        }
+        };
+        $scope.hasWaypoints = function () {
+            if($root.waypoints.length === 0) {
+                return false;
+            } else {
+                return true;
+            }
+        };
         $scope.resetVars();
         angular.extend($scope, {
             riga: {

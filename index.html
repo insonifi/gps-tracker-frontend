@@ -39,7 +39,7 @@
             <select ng-model='module' ng-options='module.name for module in list' label='module'>select module</select>
             <input type='submit' id='query' value='Find'></input>
             <input type='button' value='Clear' ng-click='resetVars()'></input>
-		    <input type='button' value='Report' ng-click='tripsReport()'></input>
+		    <input type='button' value='Report' ng-click='tripsReport()' ng-show='hasWaypoints()'></input>
 		</form>
 		<div print-frame></div>
         <div waypoints-list></div>

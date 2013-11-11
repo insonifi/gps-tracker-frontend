@@ -139,15 +139,17 @@ angular.module('core.directives', [])
                 columns = [{id: 'timestamp', field: 'timestamp', formatter: dateFormatter}],
                 options = {
                     /* forceFitColumns: true */
+                },
+                selectPath = function(event, args) {
+                    $scope.$root.$broadcast('select-waypoint', $scope.grid.getDataItem(args.row));
                 };
             $scope.grid = new Slick.Grid(element, empty_array, columns, options);
             $scope.grid.onScroll.subscribe(function (event, args) {
                 var visible = args.grid.getViewport();
                 $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
             });
-            $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
-                $scope.$root.$broadcast('select-waypoint', $scope.grid.getDataItem(args.row));
-            });
+            $scope.grid.onViewportChanged.subscribe(selectPath);
+            $scope.grid.onActiveCellChanged.subscribe(selectPath);
         }
     }
   })
