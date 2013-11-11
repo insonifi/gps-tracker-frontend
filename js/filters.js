@@ -15,6 +15,8 @@ angular.module('core.filters', [])
   })
   .filter('datestring', function () {
       return function (timestamp) {
-          return (new Date(timestamp).toLocaleString("de"))
+          var date = new Date(timestamp);
+          return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + '.'
+            + ' ' + date.getHours() + ':' date.getMinutes() + ':' + date.getSeconds();
       }
   });
