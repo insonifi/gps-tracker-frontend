@@ -49,7 +49,7 @@ angular.module('core.controllers', [])
                 char = str.charCodeAt(i);
                 hash += (char * ((i + 1) * hash));
             }
-            return '#' (hash % 0xffffff).toString(16);
+            return '#' + (hash % 0xffffff).toString(16);
         }
         $scope.resetVars();
         angular.extend($scope, {
