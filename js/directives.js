@@ -111,6 +111,10 @@ angular.module('core.directives', [])
                     }
                 }) ()
             });
+            $scope.selectPath = function (event, args) {
+                var visible = $scope.grid.getViewport();
+                $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
+            };
             $root.$watch('trip_index', function (newValue, oldValue) {
                 var trip = newValue;
                 if (trip) {
@@ -130,7 +134,8 @@ angular.module('core.directives', [])
                     }
                     $scope.grid.setData(newValue, true);
                     $scope.grid.invalidate();
-                    $scope.grid.grid.resetActiveCell()
+                    $scope.grid.resetActiveCell()
+                    $scope.selectPath();
                     /*$scope.$root.$broadcast('select-waypoint', null);*/
                 }
             })
@@ -141,14 +146,10 @@ angular.module('core.directives', [])
                 columns = [{id: 'timestamp', field: 'timestamp', formatter: dateFormatter}],
                 options = {
                     /* forceFitColumns: true */
-                },
-                selectPath = function (event, args) {
-                    var visible = args.grid.getViewport();
-                    $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
                 };
             $scope.grid = new Slick.Grid(element, empty_array, columns, options);
             /* $scope.grid.onScroll.subscribe(selectPath); */
-            $scope.grid.onViewportChanged.subscribe(selectPath);
+            $scope.grid.onViewportChanged.subscribe($scope.selectPath);
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
                 $scope.$root.$broadcast('select-waypoint', $scope.grid.getDataItem(args.row));
             });
