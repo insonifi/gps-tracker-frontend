@@ -77,7 +77,7 @@ angular.module('core.controllers', [])
                     latlngs: []
                 };
             }
-            $scope.paths[waypoint.module_id].latlngs.push(waypoint);
+            $scope.paths[waypoint.module_id].latlngs.unshift(waypoint);
             $scope.paths[waypoint.module_id].latlngs = $scope.paths[waypoint.module_id].latlngs.slice(0, tail);
             $scope.$digest();
         });
