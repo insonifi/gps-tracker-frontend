@@ -73,7 +73,8 @@ angular.module('core.controllers', [])
                 $scope.paths[waypoint.module_id] = {
                     weight: 3,
                     opacity: 0.618,
-                    color: $scope.hashColorCode(waypoint.module_id)
+                    color: $scope.hashColorCode(waypoint.module_id),
+                    latlngs: []
                 };
             }
             $scope.paths[waypoint.module_id].latlngs.push = waypoint;
