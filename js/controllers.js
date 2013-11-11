@@ -70,11 +70,15 @@ angular.module('core.controllers', [])
                     $scope.markers['selected'].focus = true;
                     console.log('got', address);
                 };
-            $scope.markers['selected'] = waypoint;
-            if (waypoint.address === null) {
-                $scope.request = cnxn.requestAddress(waypoint).then(setAddress);
+            if (waypoint === null) {
+                $scope.markers['selected'] = {};
             } else {
-                setAddress(waypoint.address);
+                $scope.markers['selected'] = waypoint;
+                if (waypoint.address === null) {
+                    $scope.request = cnxn.requestAddress(waypoint).then(setAddress);
+                } else {
+                    setAddress(waypoint.address);
+                }
             }
         });
         /* show path from grid */

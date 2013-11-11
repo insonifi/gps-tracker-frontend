@@ -130,7 +130,8 @@ angular.module('core.directives', [])
                     }
                     $scope.grid.setData(newValue, true);
                     $scope.grid.invalidate();
-                    $scope.grid.scrollRowToTop(0);
+                    $scope.grid.grid.resetActiveCell()
+                    /*$scope.$root.$broadcast('select-waypoint', null);*/
                 }
             })
         }],
