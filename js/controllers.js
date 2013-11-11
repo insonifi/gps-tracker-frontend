@@ -33,7 +33,7 @@ angular.module('core.controllers', [])
             $scope.markers = {}
         };
         $scope.hasWaypoints = function () {
-            if($root.waypoints.length === 0) {
+            if($root.trips.length === 0) {
                 return false;
             } else {
                 return true;
@@ -79,9 +79,8 @@ angular.module('core.controllers', [])
         });
         /* show path from grid */
         $scope.$on('select-path', function (event, path) {
-            $scope.$apply(function () {
-                $scope.paths['selected'].latlngs = path;    
-            })
+            $scope.paths['selected'].latlngs = path;    
+            $scope.$digest();
         });
         $root.$watch('waypoints_range', function (newValue, oldValue) {
             if (newValue !== undefined && newValue.length > 0) {
