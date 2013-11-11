@@ -54,7 +54,7 @@ angular.module('core.controllers', [])
             },
         });
         /* Got realtime waypoint */
-        $scope.$on('update-waypoint', function (waypoint) {
+        $scope.$on('update-waypoint', function (event, waypoint) {
             var tail = 10;
             $scope.markers[waypoint.module_id] = waypoint;
             $scope.paths[waypoint.module_id].latlngs.push = waypoint;
