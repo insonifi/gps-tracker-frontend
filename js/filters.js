@@ -10,7 +10,8 @@ angular.module('core.filters', [])
   })
   .filter('timestring', function () {
       return function (timestamp) {
-          return (new Date(timestamp)).toTimeString().slice(0,8);
+          var date = new Date(timestamp)
+          return date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
       }
   })
   .filter('datestring', function () {
