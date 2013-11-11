@@ -56,11 +56,10 @@ angular.module('core.controllers', [])
         /* Got realtime waypoint */
         $scope.$on('update-waypoint', function (waypoint) {
             var tail = 10;
-            $scope.$apply(function () {
-                $scope.markers[waypoint.module_id] = waypoint;
-                $scope.paths[waypoint.module_id].latlngs.push = waypoint;
-                $scope.paths[waypoint.module_id].slice(0, tail);
-            })
+            $scope.markers[waypoint.module_id] = waypoint;
+            $scope.paths[waypoint.module_id].latlngs.push = waypoint;
+            $scope.paths[waypoint.module_id].slice(0, tail);
+            $scope.$digest();
         });
         /* waypoint is selected in grid */
         $scope.$on('select-waypoint', function(event, waypoint) {
