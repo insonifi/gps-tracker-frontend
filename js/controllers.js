@@ -39,6 +39,18 @@ angular.module('core.controllers', [])
                 return true;
             }
         };
+        $scope.hashColorCode = function(str) {
+            var hash = 0xa2d4e7,
+                len = str.length,
+                i = 0,
+                char = 0;
+            if (str.length === 0) return '#' + hash.toString(16);
+            for (i = 0; i < len; i += 1) {
+                char = str.charCodeAt(i);
+                hash += (char * ((i + 1) * hash));
+            }
+            return '#' (hash % 0xffffff).toString(16);
+        }
         $scope.resetVars();
         angular.extend($scope, {
             riga: {
@@ -57,8 +69,15 @@ angular.module('core.controllers', [])
         $scope.$on('update-waypoint', function (event, waypoint) {
             var tail = 10;
             $scope.markers[waypoint.module_id] = waypoint;
+            if (!$scope.paths[waypoint.module_id]) {
+                $scope.paths[waypoint.module_id] = {
+                    weight: 3,
+                    opacity: 0.618,
+                    color: $scope.hashColorCode(waypoint.module_id)
+                };
+            }
             $scope.paths[waypoint.module_id].latlngs.push = waypoint;
-            $scope.paths[waypoint.module_id].slice(0, tail);
+            $scope.paths[waypoint.module_id].latlngs = $scope.paths[waypoint.module_id].latlngs.slice(0, tail);
             $scope.$digest();
         });
         /* waypoint is selected in grid */

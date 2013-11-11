@@ -86,6 +86,11 @@ angular.module('core.directives', [])
             '<div class="grid"></div>',
         scope: true,
         controller: ['$scope', '$rootScope', function ($scope, $root) {
+            $scope.paths['selected'] = {
+                weight: 3,
+                opacity: 0.618,
+                color: '#1A529C'
+            };
             $scope.$on('leafletDirectiveMap.click', function(event, args){
                 var event_latlng = args.leafletEvent.latlng;
                 console.log('[waypointsList] find waypoint at',
@@ -124,11 +129,6 @@ angular.module('core.directives', [])
             $root.$watch('waypoints_range', function (newValue, oldValue) {
                 if (newValue !== undefined) {
                     if (newValue.length > 0) {
-                        $scope.paths['selected'] = {
-                            weight: 3,
-                            opacity: 0.618,
-                            color: '#1A529C'
-                        };
                         /* filter waypoints*/
                         $scope.message(newValue.length, 'waypoints', 3);
                         $scope.grid.setData(newValue, true);
