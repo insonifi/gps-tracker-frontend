@@ -88,7 +88,7 @@ angular.module('core.controllers', [])
             }
             $scope.paths[waypoint.module_id].latlngs.unshift(waypoint);
             $scope.paths[waypoint.module_id].latlngs = $scope.paths[waypoint.module_id].latlngs.slice(0, tail);
-            $scope.$digest();
+            /* $scope.$digest(); */
         });
         /* waypoint is selected in grid */
         $scope.$on('select-waypoint', function(event, waypoint) {
@@ -114,7 +114,7 @@ angular.module('core.controllers', [])
         $scope.$on('select-path', function (event, path) {
             if(path) {
                 $scope.paths['selected'].latlngs = path;    
-                $scope.$digest();
+                /* $scope.$digest(); */
             }
         });
         $root.$watch('waypoints_range', function (newValue, oldValue) {
