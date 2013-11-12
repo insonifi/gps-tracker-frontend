@@ -119,8 +119,7 @@ angular.module('core.directives', [])
             $scope.selectPath = function (event, args) {
                 var visible = $scope.grid.getRenderedRange();
                 if (visible.top < visible.bottom) {
-                    $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
-                    $root.$digest();
+                  $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
                 }
             };
             $root.$watch('trip_index', function (newValue, oldValue) {
@@ -152,7 +151,11 @@ angular.module('core.directives', [])
                 };
             $scope.grid = new Slick.Grid(element, empty_array, columns, options);
             /* $scope.grid.onScroll.subscribe(selectPath); */
-            $scope.grid.onViewportChanged.subscribe($scope.selectPath);
+            $scope.grid.onViewportChanged.subscribe(function () {
+                $scope.$apply(function () {
+                    $scope.selectPath()
+                })
+            });
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
                 $scope.$root.$broadcast('select-waypoint', $scope.grid.getDataItem(args.row));
             });
