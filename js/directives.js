@@ -126,7 +126,7 @@ angular.module('core.directives', [])
                 }
             })
             $root.$watch('waypoints_range', function (newValue, oldValue) {
-                if (newValue !== undefined) {
+                if (newValue !== oldValue) {
                     if (newValue.length > 0) {
                         /* filter waypoints*/
                         $scope.message(newValue.length, 'waypoints', 3);
