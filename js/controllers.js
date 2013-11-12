@@ -32,10 +32,10 @@ angular.module('core.controllers', [])
             if (!$scope.markers) {
                 $scope.markers = {};
             }
-            if (!$scope.path) {
-                $scope.path = {};
+            if (!$scope.paths) {
+                $scope.paths = {};
             }
-            $scope.path.selected = {};
+            $scope.paths.selected = {};
             $scope.markers.selected = {};
             $scope.markers.start = {};
             $scope.markers.end = {};
@@ -80,8 +80,8 @@ angular.module('core.controllers', [])
             $scope.markers[waypoint.module_id] = waypoint;
             if (!$scope.paths[waypoint.module_id]) {
                 $scope.paths[waypoint.module_id] = {
-                    weight: 3,
-                    opacity: 0.618,
+                    weight: 2,
+                    opacity: 0.8,
                     color: $scope.hashColorCode(waypoint.module_id),
                     latlngs: []
                 };
