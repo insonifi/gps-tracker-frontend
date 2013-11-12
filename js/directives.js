@@ -151,7 +151,7 @@ angular.module('core.directives', [])
                 };
             $scope.grid = new Slick.Grid(element, empty_array, columns, options);
             /* $scope.grid.onScroll.subscribe(selectPath); */
-            $scope.grid.onViewportChanged.subscribe(function (event, args) {
+            $scope.grid.onScroll.subscribe(function (event, args) {
                 $scope.selectPath(event, args);
                 $scope.$root.$digest();
             });
