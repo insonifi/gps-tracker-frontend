@@ -26,11 +26,13 @@ angular.module('core.controllers', [])
     }])
     .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
         $scope.resetVars = function () {
-            $root.waypoints = [],
-            $root.waypoints_range = [],
-            $root.trips = [],
-            $scope.path = {},
-            $scope.markers = {}
+            $root.waypoints = [];
+            $root.waypoints_range = [];
+            $root.trips = [];
+            $scope.path.selected = {};
+            $scope.markers.selected = {};
+            $scope.markers.start = {};
+            $scope.markers.end = {};
         };
         $scope.hasWaypoints = function () {
             if($root.trips.length === 0) {
@@ -51,7 +53,6 @@ angular.module('core.controllers', [])
             }
             return '#' + (hash % 0xffffff).toString(16);
         }
-        $scope.resetVars();
         angular.extend($scope, {
             riga: {
               lat: 56.9496,
@@ -64,6 +65,7 @@ angular.module('core.controllers', [])
                 doubleClickZoom: false,
                 maxZoom: 18
             },
+            zoomControl: false
         });
         /* Got realtime waypoint */
         $scope.$on('update-waypoint', function (event, waypoint) {

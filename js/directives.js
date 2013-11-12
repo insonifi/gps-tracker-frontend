@@ -131,11 +131,11 @@ angular.module('core.directives', [])
                     if (newValue.length > 0) {
                         /* filter waypoints*/
                         $scope.message(newValue.length, 'waypoints', 3);
-                        $scope.grid.setData(newValue, true);
-                        $scope.grid.invalidate();
-                        $scope.grid.resetActiveCell()
-                        $scope.selectPath();
                     }
+                    $scope.grid.resetActiveCell()
+                    $scope.selectPath();
+                    $scope.grid.setData(newValue, true);
+                    $scope.grid.invalidate();
                     /*$scope.$root.$broadcast('select-waypoint', null);*/
                 }
             })
