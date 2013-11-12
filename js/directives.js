@@ -67,9 +67,8 @@ angular.module('core.directives', [])
             $scope.sly.on('active', function () {
                 var index = $scope.sly.rel.activeItem;
                 if (index === 0) { return; }
-                $scope.$apply(function () {
-                    $scope.trip_index = index;
-                });
+                $scope.trip_index = index;
+                $scope.$digest();
             });
             $scope.sly.on('load', function () {
                 $scope.sly.activate(1);
