@@ -112,10 +112,10 @@ angular.module('core.controllers', [])
         });
         /* show path from grid */
         $scope.$on('select-path', function (event, path) {
-            if(path) {
+            /* if(path) { */
                 $scope.paths['selected'].latlngs = path;    
                 /* $scope.$digest(); */
-            }
+            /* }
         });
         $root.$watch('waypoints_range', function (newValue, oldValue) {
             if (newValue !== undefined && newValue.length > 0) {
