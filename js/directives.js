@@ -119,6 +119,7 @@ angular.module('core.directives', [])
             $scope.selectPath = function (event, args) {
                 var visible = $scope.grid.getRenderedRange();
                 $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom));
+                $root.$digest();
             };
             $root.$watch('trip_index', function (newValue, oldValue) {
                 var trip = newValue;
