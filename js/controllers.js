@@ -29,11 +29,18 @@ angular.module('core.controllers', [])
             $root.waypoints = [];
             $root.waypoints_range = [];
             $root.trips = [];
+            if (!$scope.markers) {
+                $scope.markers = {};
+            }
+            if (!$scope.path) {
+                $scope.path = {};
+            }
             $scope.path.selected = {};
             $scope.markers.selected = {};
             $scope.markers.start = {};
             $scope.markers.end = {};
         };
+        $scope.resetVars();
         $scope.hasWaypoints = function () {
             if($root.trips.length === 0) {
                 return false;
@@ -59,8 +66,6 @@ angular.module('core.controllers', [])
               lng: 24.1040,
               zoom: 12
             },
-            markers: {},
-            paths: {},
             defaults: {
                 doubleClickZoom: false,
                 maxZoom: 18
