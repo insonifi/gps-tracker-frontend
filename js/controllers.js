@@ -29,16 +29,14 @@ angular.module('core.controllers', [])
             $root.waypoints = [];
             $root.waypoints_range = [];
             $root.trips = [];
-            if (!$scope.markers) {
-                $scope.markers = {};
+            if ($scope.markers) {
+                $scope.markers.selected = {};
+                $scope.markers.start = {};
+                $scope.markers.end = {};
             }
-            if (!$scope.paths) {
-                $scope.paths = {};
+            if ($scope.paths) {
+                $scope.paths.selected = {};
             }
-            $scope.paths.selected = {};
-            $scope.markers.selected = {};
-            $scope.markers.start = {};
-            $scope.markers.end = {};
         };
         $scope.resetVars();
         $scope.hasWaypoints = function () {
