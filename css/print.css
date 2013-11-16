@@ -8,6 +8,7 @@
         padding-bottom: 1em;
     }
     td.period {
+        font-size: 8pt;
         width: 12em;
     }
     td.address {
