@@ -1,8 +1,7 @@
 @media print {
     body {
         left: 10em;
-        width: 80em;
-        font-size: 10pt;
+        font-size: 12pt;
     }
     caption {
         padding-bottom: 1em;
