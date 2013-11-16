@@ -210,8 +210,8 @@ angular.module('core.directives', [])
             '<div id="print-frame" ng-click="print();">\
                 <table>\
                     <caption><span style="font-size: large;">{{trips[0].start|datestring}} ― {{trips[0].end|datestring}}</span></caption>\
-                    <tbody ng-repeat="trip in trips">\
-                        <tr ng-repeat-start ng-hide="$first">\
+                    <tbody>\
+                        <tr ng-repeat="trip in trips" ng-hide="$first">\
                             <td>\
                                 <div>{{trip.start|datestring}}</div>\
                                 <div>{{trip.end|datestring}}</div>\
@@ -222,7 +222,7 @@ angular.module('core.directives', [])
                             <td>\
                                 {{trip.distance|km}}\
                             </td>\
-                        </tr ng-repeat-end>\
+                        </tr>\
                     </tbody>\
                 </table>\
             </div>',
