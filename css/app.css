@@ -65,12 +65,21 @@ select {
 #print-frame {
 	display: none;
 	position: fixed;
-	width: 45em;
+	width: 48em;
 	height: 100%;
 	background: white;
 	left: 16em;
 	top: 4em;
 	z-index: 10;
+}
+td.period {
+    width: 12em;
+}
+td.address {
+    width: 28em;
+}
+td.distance {
+    
 }
 #clock {
     position: absolute;
