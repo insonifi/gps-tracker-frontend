@@ -243,7 +243,8 @@ angular.module('core.directives', [])
                     
                 iframe.document.write(
                     '<html>\
-                        <body style="left:10em; width=80em; font-size: 10px">\
+                        <link type="text/css" href="css/print.css" rel="stylesheet" />\
+                        <body>\
                         <body>\
                     </html>'
                 );
