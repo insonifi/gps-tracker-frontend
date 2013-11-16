@@ -1,9 +1,10 @@
 @media print {
     body {
         left: 10em;
-        font-size: 11pt;
+        font-size: 10pt;
     }
     caption {
+        font-size: 12pt;
         padding-bottom: 1em;
     }
     td.period {
