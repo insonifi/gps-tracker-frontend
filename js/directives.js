@@ -207,7 +207,7 @@ angular.module('core.directives', [])
         replace: true,
         transclude: false,
         template:
-            '<div id="print-frame" ng-click="print();">\
+            '<div id="print-frame">\
                 <table>\
                     <caption><span style="font-size: large;">{{trips[0].start|datestring}} ― {{trips[0].end|datestring}}</span></caption>\
                     <tbody>\
@@ -228,12 +228,15 @@ angular.module('core.directives', [])
             </div>',
         controller: ['$scope', '$rootScope', 'cnxn', function ($scope, $root, cnxn) {
             $root.tripsReport = function () {
+                /*
                 var print_frame = document.getElementById('print-frame');
                 if (print_frame.style.display === 'block') {
                     print_frame.style.display = 'none';
                 } else {
                     print_frame.style.display = 'block';
                 }
+                */
+                $scope.print();
             };
             $scope.print = function() {
                 var iframe = window.frames['print'],
