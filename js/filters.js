@@ -11,13 +11,13 @@ angular.module('core.filters', [])
   .filter('timestring', function () {
       return function (timestamp) {
           var date = new Date(timestamp)
-          return date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+          return date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + date.getSeconds();
       }
   })
   .filter('datestring', function () {
       return function (timestamp) {
           var date = new Date(timestamp);
-          return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + '.'
-            + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+          return date.getDate() + '.' + ('0' + (date.getMonth() + 1)).slice(-2) + '.' + date.getFullYear() + '.'
+            + ' ' + date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + date.getSeconds();
       }
   });
