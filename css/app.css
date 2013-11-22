@@ -36,13 +36,13 @@ input.find, .clear, .report {
     /*box-shadow: inset 0 1.5em 2em 0 #eee;*/
     color: #2e2e2e;
 }
-input.find:hover {
+input.find:hover, .report:hover {
     cursor: pointer;
     /*border-color: #ddd;*/
     background: #cbc5c2;
     box-shadow: inset 0 1.5em 2em 0 #cbc5c2,inset 0 0 1em 0 #a99f9a;
 }
-input.find:active {
+input.find:active, .report:active {
     background: #cbc5c2;
     border-color: #cbc5c2;
     box-shadow: inset 0 1.5em 2em 0 #a99f9a,inset 0 0 1em 0 #cbc5c2;
@@ -62,10 +62,7 @@ input.clear:hover {
     color: #7A0D0D;
 }
 input.clear:active {
-    position: fixed;
-    left: 4em;
     background: #AC3333;
-    box-shadow: inset 0 1.5em 2em 0 #D37373;
     border-color: #d37373;
     color: #7A0D0D;
 }
@@ -74,19 +71,7 @@ input.report {
     right: 8em;
     top: 1.2em;
 }
-input.report:hover {
-    cursor: pointer;
-    background: #AC3333;
-    box-shadow: inset 0 1.5em 2em 0 #D37373;
-    border-color: #d37373;
-    color: #7A0D0D;
-}
-input.report:active {
-    background: #AC3333;
-    box-shadow: inset 0 1.5em 2em 0 #D37373;
-    border-color: #d37373;
-    color: #7A0D0D;
-}
+
 
 select {
     height: 2.7em;
