@@ -1,25 +1,27 @@
 module.exports = function(grunt) {
 
+  require('load-grunt-tasks')(grunt);
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
-      config: {
-        options: {
-          banner: "(function(angular) {",
-          footer: "}(angular));"
-        }
+      options: {
+        banner: "(function(angular) {",
+        footer: "}(angular));"
       },
       dist: {
-        src: ['src/main.js',
-              'src/services/widget.js',
-              'src/factories/widget.js',
-              'src/factories/directive.js',
-              'src/directives/widgets.js',
-              'src/directives/dataSource.js'],
+        src: [
+            'src/main.js',
+            'src/services/widget.js',
+            'src/services/kendoDecorator.js',
+            'src/factories/widget.js',
+            'src/factories/directive.js',
+            'src/directives/widgets.js',
+            'src/directives/dataSource.js',
+            'src/directives/kendoGrid.js'],
         dest: 'build/angular-kendo.js'
       },
-
     },
     uglify: {
       options: {
@@ -30,26 +32,19 @@ module.exports = function(grunt) {
         dest: 'build/<%= pkg.name %>.min.js'
       }
     },
-    // docco: {
-    //   build: {
-    //     src: [ '<%= pkg.name %>.js' ],
-    //     options: {
-    //       css: 'app/css/docco.css',
-    //       output: 'docs/'
-    //     }
-    //   }
-    // },
     copy: {
       main: {
-        files: [
-          { src: ['docs/angular-kendo.html'], dest: 'app/partials/docs.html', filter: 'isFile' }, // includes files in path
-        ]
+        files: [{
+          src: ['docs/angular-kendo.html'],
+          dest: 'app/partials/docs.html',
+          filter: 'isFile'
+        }]
       }
     },
     watch: {
       scripts: {
         files: "src/**/*.js",
-        tasks: "default"
+        tasks: ['default']
       }
     },
     changelog: {
@@ -59,12 +54,11 @@ module.exports = function(grunt) {
         version: grunt.file.readJSON('bower.json').version
       }
     }
+
   });
 
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
-
-  grunt.loadNpmTasks('grunt-docco');
 
   grunt.loadNpmTasks('grunt-contrib-copy');
 
@@ -75,6 +69,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-conventional-changelog');
 
   // Default task(s).
-  grunt.registerTask('default', ['concat', 'uglify', 'watch']);
+  grunt.registerTask('default', ['concat', 'uglify']);
+  grunt.registerTask('debug', ['default', 'watch']);
 
 };
