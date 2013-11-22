@@ -36,13 +36,13 @@ iframe {
     box-shadow: inset 0 1.5em 2em 0 #eee;
     color: #2e2e2e;
 }
-input[type=button]:hover {
+input.find:hover {
     cursor: pointer;
     /*border-color: #ddd;*/
     background: #cbc5c2;
     box-shadow: inset 0 1.5em 2em 0 #cbc5c2,inset 0 0 1em 0 #a99f9a;
 }
-input[type=button]:active {
+input.find:active {
     background: #cbc5c2;
     border-color: #cbc5c2;
     box-shadow: inset 0 1.5em 2em 0 #a99f9a,inset 0 0 1em 0 #cbc5c2;
@@ -53,9 +53,6 @@ input.clear {
     position: fixed;
     left: 4em;
     top: 1.2em;
-    background: #AC3333;
-    box-shadow: inset 0 1.5em 2em 0 #D37373;
-    color: #7A0D0D;
 }
 input.clear:hover {
     cursor: pointer;
@@ -74,11 +71,8 @@ input.clear:active {
 }
 input.report {
     position: fixed;
-    left: 4em;
+    right: 8em;
     top: 1.2em;
-    background: #AC3333;
-    box-shadow: inset 0 1.5em 2em 0 #D37373;
-    color: #7A0D0D;
 }
 input.report:hover {
     cursor: pointer;
@@ -88,8 +82,6 @@ input.report:hover {
     color: #7A0D0D;
 }
 input.report:active {
-    position: fixed;
-    right: 8em;
     background: #AC3333;
     box-shadow: inset 0 1.5em 2em 0 #D37373;
     border-color: #d37373;
