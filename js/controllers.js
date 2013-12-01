@@ -39,7 +39,7 @@ angular.module('core.controllers', [])
                 return;
             }
             $root.message('Find', module_id, 'between', $scope.start_date.toLocaleString(), '...', $scope.end_date.toLocaleString());
-            cnxn.queryPeriod(module_id, start_date.value(), end_date.value(), chunk_size);
+            cnxn.queryPeriod(module_id, start_date.valueOf(), end_date.valueOf(), chunk_size);
         }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
