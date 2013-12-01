@@ -13,8 +13,8 @@ angular.module('core.controllers', [])
             $scope.list.unshift({name: 'select module', module_id: null});
         });
         $scope.sendQueryRequest = function () {
-            var start_date = $scope.start_date,
-                end_date = $scope.end_date,
+            var start_date = Date.parse($scope.start_date),
+                end_date = Date.parse($scope.end_date),
                 module_id = $scope.module_id,
                 chunk_size = 10000;
             /* init vars */
