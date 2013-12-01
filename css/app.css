@@ -45,7 +45,7 @@ input.find:hover, .report:hover {
 input.find:active, .report:active {
     background: #cbc5c2;
     border-color: #cbc5c2;
-    box-shadow: inset 0 1.5em 2em 0 #a99f9a,inset 0 0 1em 0 #cbc5c2;
+    /*box-shadow: inset 0 1.5em 2em 0 #a99f9a,inset 0 0 1em 0 #cbc5c2;*/
     /*padding-top: 0.1em;*/
     /*padding-bottom: 0.3em;*/
 }
@@ -71,7 +71,6 @@ input.report {
     right: 8em;
     top: 1.2em;
 }
-
 
 select {
     height: 2.7em;
