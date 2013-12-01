@@ -23,7 +23,7 @@ angular.module('core.controllers', [])
                 $root.message('no module selected');
                 return;
             }
-            $root.message('Find', module_id, 'between', start_date.toLocaleString(), '...', end_date.toLocaleString());
+            $root.message('Find', module_id, 'between', $scope.start_date.toLocaleString(), '...', $scope.end_date.toLocaleString());
             cnxn.queryPeriod(module_id, start_date, end_date, chunk_size);
         }
     }])
