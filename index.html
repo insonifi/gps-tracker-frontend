@@ -36,7 +36,7 @@
 		<form id='query-params' ng-controller='queryCtrl' ng-submit='sendQueryRequest()'>
             <input kendo-date-time-picker ng-model='start_date'></input>
             <input kendo-date-time-picker ng-model='end_date'></input>
-            <select ng-model='module' ng-options='module.name for module in list'></select>
+            <select ng-model='module_id' ng-options='module.module_id as module.name for module in list'></select>
             <input type='submit' class='find' id='query' value='Find'></input>
             <input type='button' class='clear' value='Clear' ng-click='resetVars()' ng-show='hasWaypoints()'></input>
 		    <input type='button' class='report' value='Report' ng-click='tripsReport()' ng-show='hasWaypoints()'></input>

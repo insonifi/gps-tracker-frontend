@@ -6,6 +6,7 @@ angular.module('core.controllers', [])
         $scope.end_date = new Date();
         $scope.start_date = new Date($scope.end_date - 1000 * 3600 * 24);
         $scope.list = [{name: 'no modules', module_id: null}];
+        $scope.module_id = null;
         $scope.$on('modulelist', function (e, list) {
             $scope.list = list;    
             /* add description as first item */
@@ -14,7 +15,7 @@ angular.module('core.controllers', [])
         $scope.sendQueryRequest = function () {
             var start_date = $scope.start_date,
                 end_date = $scope.end_date,
-                module_id = $scope.module.module_id,
+                module_id = $scope.module_id,
                 chunk_size = 10000;
             /* init vars */
             $scope.resetVars();
