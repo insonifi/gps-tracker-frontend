@@ -5,6 +5,8 @@ angular.module('core.controllers', [])
     .controller('queryCtrl', ['$scope', '$rootScope', 'cnxn', function ($scope, $root, cnxn) {
         $scope.end_date = new Date();
         $scope.start_date = new Date($scope.end_date - 1000 * 3600 * 24);
+        $scope.end = $scope.end_date;
+        $scope.start = $scope.start_date;
         $scope.dtOptions = {
             format: 'dd.MM.yy HH:mm',
             parseFormats: ['dd.MM.yy', 'HH:mm'],
