@@ -5,9 +5,10 @@ angular.module('core.controllers', [])
     .controller('queryCtrl', ['$scope', '$rootScope', 'cnxn', function ($scope, $root, cnxn) {
         $scope.end_date = new Date();
         $scope.start_date = new Date($scope.end_date - 1000 * 3600 * 24);
-        $scope.list = [];
         $scope.$on('modulelist', function (e, list) {
             $scope.list = list;    
+            /* add description as first item */
+            $scope.list.unshift({name: 'select module', module_id: null});
         });
         $scope.sendQueryRequest = function () {
             var start_date = $scope.start_date,
@@ -16,7 +17,7 @@ angular.module('core.controllers', [])
                 chunk_size = 10000;
             /* init vars */
             $scope.resetVars();
-            if (!$scope.module) {
+            if (!module_id) {
                 $root.message('no module selected');
                 return;
             }
