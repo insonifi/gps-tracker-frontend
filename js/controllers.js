@@ -5,6 +5,11 @@ angular.module('core.controllers', [])
     .controller('queryCtrl', ['$scope', '$rootScope', 'cnxn', function ($scope, $root, cnxn) {
         $scope.end_date = new Date();
         $scope.start_date = new Date($scope.end_date - 1000 * 3600 * 24);
+        $scope.dtOptions = {
+            format: 'dd.MM.yy HH:mm',
+            parseFormats: ['dd.MM.yy', 'HH:mm'],
+            timeFormat: 'HH:mm'
+        }
         $scope.list = [{name: 'no modules', module_id: null}];
         $scope.module_id = null;
         $scope.$on('modulelist', function (e, list) {
