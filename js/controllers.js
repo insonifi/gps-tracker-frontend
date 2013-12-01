@@ -17,9 +17,19 @@ angular.module('core.controllers', [])
             /* add description as first item */
             $scope.list.unshift({name: 'select module', module_id: null});
         });
+        $scope.$watch('start', function (newValue, oldValue) {
+            if (newValue instanceof Date) {
+                $scope.start_date = newValue;
+            }
+        });
+        $scope.$watch('end', function (newValue, oldValue) {
+            if (newValue instanceof Date) {
+                $scope.end_date = newValue;
+            }
+        });
         $scope.sendQueryRequest = function () {
-            var start_date = Date.parse($scope.start_date),
-                end_date = Date.parse($scope.end_date),
+            var start_date = $scope.start_date,
+                end_date = $scope.end_date,
                 module_id = $scope.module_id,
                 chunk_size = 10000;
             /* init vars */
@@ -29,7 +39,7 @@ angular.module('core.controllers', [])
                 return;
             }
             $root.message('Find', module_id, 'between', $scope.start_date.toLocaleString(), '...', $scope.end_date.toLocaleString());
-            cnxn.queryPeriod(module_id, start_date, end_date, chunk_size);
+            cnxn.queryPeriod(module_id, start_date.value(), end_date.value(), chunk_size);
         }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
