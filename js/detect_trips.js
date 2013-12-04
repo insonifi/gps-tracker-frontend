@@ -43,7 +43,7 @@ self.onmessage = function (event) {
     for (i = 1, length = waypoints.length; i < length; i += 1) {
         if (waypoints[i].timestamp - waypoints[i - 1].timestamp > parking_time) {
             prev_trip = trips[trips.length - 1];
-            if (prev_trip.start === prev_trip.stop) {
+            if (prev_trip.start === prev_trip.end) {
                 trips.pop();
             }
             prev_trip.end = waypoints[i - 1].timestamp;
