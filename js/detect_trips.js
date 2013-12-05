@@ -43,7 +43,7 @@ self.onmessage = function (event) {
     for (i = 1, length = waypoints.length; i < length; i += 1) {
         if (waypoints[i].timestamp - waypoints[i - 1].timestamp > parking_time) {
             prev_trip = trips[trips.length - 1];
-            if (prev_trip.start === prev_trip.end) {
+            if (prev_trip.distance === 0) {
                 trips.pop();
             }
             prev_trip.end = waypoints[i - 1].timestamp;
@@ -56,6 +56,7 @@ self.onmessage = function (event) {
             trip_idx = trips.length -1
             trips[0].distance += prev_trip.distance;
         }
+        /* TODO: don't calculate distance between first waypoint of new trip and last one from previous */
         trips[trip_idx].distance += calculateDistance(
             [waypoints[i].lat,waypoints[i].lng], [waypoints[i - 1].lat, waypoints[i - 1].lng]
         )

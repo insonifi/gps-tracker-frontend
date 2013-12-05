@@ -67,7 +67,7 @@ angular.module('core.controllers', [])
             }
         };
         $scope.hashColorCode = function(str) {
-            var hash = 0xa2d4e7,
+            var hash = 0xa2d3e8,
                 len = str.length,
                 i = 0,
                 char = 0;
@@ -101,7 +101,7 @@ angular.module('core.controllers', [])
                 };
             if (!$scope.paths[waypoint.module_id]) {
                 $scope.paths[waypoint.module_id] = {
-                    weight: 2,
+                    weight: 3,
                     opacity: 0.8,
                     color: $scope.hashColorCode(waypoint.module_id),
                     latlngs: []
