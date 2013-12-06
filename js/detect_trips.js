@@ -55,11 +55,12 @@ self.onmessage = function (event) {
             })
             trip_idx = trips.length -1
             trips[0].distance += prev_trip.distance;
+        } else {
+            /* TODO: don't calculate distance between first waypoint of new trip and last one from previous */
+            trips[trip_idx].distance += calculateDistance(
+                [waypoints[i].lat,waypoints[i].lng], [waypoints[i - 1].lat, waypoints[i - 1].lng]
+            )
         }
-        /* TODO: don't calculate distance between first waypoint of new trip and last one from previous */
-        trips[trip_idx].distance += calculateDistance(
-            [waypoints[i].lat,waypoints[i].lng], [waypoints[i - 1].lat, waypoints[i - 1].lng]
-        )
     }
     prev_trip = trips[trips.length - 1];
     prev_trip.end = waypoints[i - 1].timestamp;
