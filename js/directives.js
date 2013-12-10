@@ -117,7 +117,7 @@ angular.module('core.directives', [])
                 }) ()
             });
             $scope.selectPath = function (event, args) {
-                var visible = $scope.grid.getRenderedRange();
+                var visible = $scope.grid.getViewport();
                 if (visible.top < visible.bottom) {
                   $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom + 1));
                 }
