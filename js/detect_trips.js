@@ -63,8 +63,8 @@ self.onmessage = function (event) {
         }
     }
     prev_trip = trips[trips.length - 1];
-    prev_trip.end = waypoints[i].timestamp;
-    prev_trip.idx_end = i;
+    prev_trip.end = waypoints[i - 1].timestamp;
+    prev_trip.idx_end = i - 1;
     trips[0].distance += prev_trip.distance;
     /* return Trips array */
     tripsBuffer = jsonToArrayBuffer(trips);
