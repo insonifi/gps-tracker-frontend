@@ -143,6 +143,9 @@ span.msg {
     padding: 0.7em;
     color: #ddd;
 }
+span.k-datetimepicker {
+    width: 12em;
+}
 /* Sly */
 .sly-container {
     /*position: absolute;*/
