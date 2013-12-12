@@ -258,14 +258,16 @@ angular.module('core.directives', [])
                 document.getElementById('print-frame').style.cssText = 'display: none';
             }
             $root.$watch('trips', function (newValue, oldValue) {
-                var i,
-                    trips = $root.trips,
-                    waypoints = $root.waypoints,
-                    len = $root.trips.length;
-                    
-                for (i = 1; i < len; i += 1) {
-                    trips[i].address_start = cnxn.requestAddress(waypoints[trips[i].idx_start]);
-                    trips[i].address_end = cnxn.requestAddress(waypoints[trips[i].idx_end]);
+                if (newValue !== oldValue) {
+                    var i,
+                        trips = newValue,
+                        waypoints = $root.waypoints,
+                        len = trips.length;
+                        
+                    for (i = 1; i < len; i += 1) {
+                        trips[i].address_start = cnxn.requestAddress(waypoints[trips[i].idx_start]);
+                        trips[i].address_end = cnxn.requestAddress(waypoints[trips[i].idx_end]);
+                    }
                 }
             })
         }],
