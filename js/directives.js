@@ -273,7 +273,7 @@ angular.module('core.directives', [])
                         };
                         
                     for (i = 1; i < len; i += 1) {
-                        ()
+                        bindPromise(i);
                     }
                 }
             })
