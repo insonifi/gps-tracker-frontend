@@ -268,7 +268,7 @@ angular.module('core.directives', [])
                                 trips[i].address_start = value;
                             })
                             trips[i].address_end = cnxn.requestAddress(waypoints[trips[i].idx_end]).then(function (value) {
-                                trips[i].address_start = value;
+                                trips[i].address_end = value;
                             })
                         };
                         
