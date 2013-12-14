@@ -88,7 +88,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                 if (coords.address) {
                     address.resolve(coords.address);
                 } else if (addressCache.hasOwnProperty(coords_str)) {
-                    address.resolve(addressCache(coords_str));
+                    address.resolve(addressCache[coords_str]);
                 } else {
                     addressPromises[coords_str] = address;
                     socket.emit('get-address', coords);
