@@ -17,4 +17,7 @@
     td.distance {
         text-align: right;
     }
+    tr.ng-hide {
+        display: none;
+    }
 }
