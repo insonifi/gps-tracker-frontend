@@ -120,6 +120,7 @@ angular.module('core.controllers', [])
                         + address + ', ' + m.kph + ' km/h';
                     $scope.markers['selected'].focus = true;
                     console.log('got', address);
+                    $scope.$digest();
                 };
             if (waypoint === null) {
                 $scope.markers['selected'] = {};
