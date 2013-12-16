@@ -137,7 +137,7 @@ angular.module('core.controllers', [])
         $scope.$on('select-path', function (event, path) {
             //if(path) {
                 $scope.paths['selected'].latlngs = path;    
-                /* $scope.$digest(); */
+                $scope.$digest();
             //}
         });
         $root.$watch('waypoints_range', function (newValue, oldValue) {
