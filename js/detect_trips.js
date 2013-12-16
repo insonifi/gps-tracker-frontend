@@ -21,6 +21,7 @@ function jsonToArrayBuffer (json) {
 self.onmessage = function (event) {
     var i,
         parking_time = 300 * 1000, /* 5mins */
+        distance_threshold = 100,
         waypoints = arrayBufferToJSON(event.data),
         trips = [],
         prev_trip,
@@ -43,7 +44,7 @@ self.onmessage = function (event) {
     for (i = 1, length = waypoints.length; i < length; i += 1) {
         if (waypoints[i].timestamp - waypoints[i - 1].timestamp > parking_time) {
             prev_trip = trips[trips.length - 1];
-            if (prev_trip.distance === 0) {
+            if (prev_trip.distance < distance_threshold) {
                 trips.pop();
             }
             prev_trip.end = waypoints[i - 1].timestamp;
