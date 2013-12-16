@@ -117,10 +117,8 @@ angular.module('core.directives', [])
                 }) ()
             });
             $scope.selectPath = function (event, args) {
-                var visible = $scope.grid.getViewport();
-                if (visible.top < visible.bottom) {
-                  $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom + 1));
-                }
+                var visible = $scope.grid.getRenderedRange();
+                $scope.$root.$broadcast('select-path', $scope.waypoints_range.slice(visible.top, visible.bottom + 1));
             };
             $root.$watch('trip_index', function (newValue, oldValue) {
                 var trip = newValue;
@@ -135,7 +133,6 @@ angular.module('core.directives', [])
                         $scope.message(newValue.length, 'waypoints', 3);
                     }
                     $scope.grid.resetActiveCell()
-                    $scope.selectPath();
                     $scope.grid.setData(newValue, true);
                     $scope.grid.invalidate();
                     $scope.selectPath();
