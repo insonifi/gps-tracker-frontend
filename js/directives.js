@@ -138,7 +138,7 @@ angular.module('core.directives', [])
                     $scope.selectPath();
                     $scope.grid.setData(newValue, true);
                     $scope.grid.invalidate();
-                    /*$scope.$root.$broadcast('select-waypoint', null);*/
+                    $scope.selectPath();
                 }
             })
         }],
@@ -150,7 +150,6 @@ angular.module('core.directives', [])
                     /* forceFitColumns: true */
                 };
             $scope.grid = new Slick.Grid(element, empty_array, columns, options);
-            $scope.grid.onViewportChanged.subscribe($scope.selectPath);
             $scope.grid.onScroll.subscribe($scope.selectPath);
             $scope.grid.onActiveCellChanged.subscribe(function(event, args) {
                 $scope.$root.$broadcast('select-waypoint', $scope.grid.getDataItem(args.row));
