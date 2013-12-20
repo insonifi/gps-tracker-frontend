@@ -121,9 +121,10 @@ angular.module('core.directives', [])
                 $root.selected_path = $scope.waypoints_range.slice(visible.top > 0 ? visible.top : 0, visible.bottom);
             };
             $scope.selectWaypoint = function (waypoint) {
-                $root.$apply(function () {
-                    $root.selected_waypoint = waypoint;
-                })
+                $root.selected_waypoint = waypoint;
+                if(!$root.$$phase) {
+                    $root.$digest();
+                }
             }
             $root.$watch('trip_index', function (newValue, oldValue) {
                 var trip = newValue;
