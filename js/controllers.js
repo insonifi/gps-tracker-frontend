@@ -113,8 +113,9 @@ angular.module('core.controllers', [])
             $scope.$digest();
         });
         /* waypoint is selected in grid */
-        $scope.$on('select-waypoint', function(event, waypoint) {
-            var setAddress = function(address) {
+        $root.$watch('selected_waypoint', function (newValue, oldValue) {
+            var waypoint = newValue,
+                setAddress = function(address) {
                     var m = $scope.markers['selected'];
                     m.message = new Date(m.timestamp).toTimeString().slice(0,8) + ': '
                         + address + ', ' + m.kph + ' km/h';
@@ -122,23 +123,24 @@ angular.module('core.controllers', [])
                     console.log('got', address);
                     $scope.$digest();
                 };
-            if (waypoint === null) {
-                $scope.markers['selected'] = {};
-            } else {
-                $scope.markers['selected'] = waypoint;
-                if (waypoint.address === null) {
-                    $scope.request = cnxn.requestAddress(waypoint).then(setAddress);
+            if (newValue !== oldValue) {
+                if (waypoint === null) {
+                    $scope.markers['selected'] = {};
                 } else {
-                    setAddress(waypoint.address);
+                    $scope.markers['selected'] = waypoint;
+                    if (waypoint.address === null) {
+                        $scope.request = cnxn.requestAddress(waypoint).then(setAddress);
+                    } else {
+                        setAddress(waypoint.address);
+                    }
                 }
             }
         });
         /* show path from grid */
-        $scope.$on('select-path', function (event, path) {
-            //if(path) {
-                $scope.paths['selected'].latlngs = path;    
-                // $scope.$digest();
-            //}
+        $root.$watch('selected_path', function (newValue, oldValue) {
+            if (newValue !== oldValue) {
+                $scope.paths['selected'].latlngs = newValue;    
+            }
         });
         $root.$watch('waypoints_range', function (newValue, oldValue) {
             if (newValue !== undefined && newValue.length > 0) {
