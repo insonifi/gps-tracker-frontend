@@ -140,9 +140,6 @@ angular.module('core.controllers', [])
         $root.$watch('selected_path', function (newValue, oldValue) {
             if (newValue !== oldValue) {
                 $scope.paths['selected'].latlngs = newValue;
-                if(!$scope.$$phase) {
-                    $scope.$digest();
-                }
             }
         });
         $root.$watch('waypoints_range', function (newValue, oldValue) {

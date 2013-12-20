@@ -119,6 +119,9 @@ angular.module('core.directives', [])
             $scope.selectPath = function (event, args) {
                 var visible = $scope.grid.getViewport();
                 $root.selected_path = $scope.waypoints_range.slice(visible.top > 0 ? visible.top : 0, visible.bottom);
+                if(!$root.$$phase) {
+                  $root.$digest();
+                }
             };
             $scope.selectWaypoint = function (waypoint) {
                 $root.selected_waypoint = waypoint;
