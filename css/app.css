@@ -155,7 +155,7 @@ span.k-datetimepicker {
 /* Trips list */
 .trips {
     left: 20px;
-    width: 6em;
+    width: 7em;
     height: inherit;
     position: absolute;
     top: 0;
@@ -202,14 +202,18 @@ span.k-datetimepicker {
     z-index: 0;
 }
 .trips ul li .s-trip {
-    text-align:left ;
-    padding-left: 0.5em;
+    text-align: left;
+    padding-left: 0.2em;
     z-index: 1;
+    position: absolute;
+    padding-top: 0.2em;
 }
 .trips ul li .e-trip {
     text-align: left;
     padding-left: 1em;
     z-index: 1;
+    position: absolute;
+    padding-top: 1.8em;
 }
 .trips ul li .d-trip {
     color: #ddd;
