@@ -190,7 +190,7 @@ span.k-datetimepicker {
 }
 .trips ul li .day-trip {
     text-align: right;
-    color: #555;
+    color: #444;
     background: none;
     position: absolute;
     right: 0;
@@ -219,7 +219,7 @@ span.k-datetimepicker {
     color: #ddd;
     background: #333;
     position: absolute;
-    left: 7em;
+    left: 8em;
     padding-left: 0.5em;
     padding-right: 0.5em;
 }
