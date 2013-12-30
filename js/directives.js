@@ -18,7 +18,8 @@ angular.module('core.directives', [])
           <ul class="slidee">\
             <li id="{{$index}}" ng-repeat="trip in trips">\
               <div>\
-                <div class="d-trip">{{trip.distance | km}}</div>\
+                <div class="day-trip">{{trip.start|day}}</div>\
+                <div class="d-trip">{{trip.distance|km}}</div>\
                 <div class="s-trip">{{trip.start|timestring}}&#8594;</div>\
                 <div class="e-trip">&#8594;{{trip.end|timestring}}</div>\
               </div>\
