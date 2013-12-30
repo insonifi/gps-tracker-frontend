@@ -180,7 +180,7 @@ span.k-datetimepicker {
 	margin: 0 0 1px;
 	padding: 0;
 	background: #333;
-	color: #ddd;
+	color: #999;
 	text-align: center;
 	cursor: pointer;
 }
@@ -194,7 +194,7 @@ span.k-datetimepicker {
     background: none;
     position: absolute;
     right: 0;
-    padding-top: 0.3em;
+    padding-top: 0.25em;
     padding-left: 0.2em;
     font-family: monospace;
     font-weight: bold;
@@ -216,7 +216,7 @@ span.k-datetimepicker {
     padding-top: 1.8em;
 }
 .trips ul li .d-trip {
-    color: #ddd;
+    color: #999;
     background: #333;
     position: absolute;
     left: 8em;
@@ -227,6 +227,9 @@ span.k-datetimepicker {
 	color: #fff;
 	width: 100%;
 	background: #a03232;
+}
+.trips ul li.active .day-trip {
+	color: #7C3232;
 }
 /* Scrollbar */
 .t-scrollbar {
