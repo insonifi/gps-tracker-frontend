@@ -189,19 +189,27 @@ span.k-datetimepicker {
     color: #333;
 }
 .trips ul li .day-trip {
-    text-align:left ;
+    text-align: right;
     color: #555;
     background: none;
     position: absolute;
-    left:0;
+    right: 0;
+    padding-top: 0.3em;
+    padding-left: 0.2em;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 4em;
+    z-index: 0;
 }
 .trips ul li .s-trip {
     text-align:left ;
     padding-left: 0.5em;
+    z-index: 1;
 }
 .trips ul li .e-trip {
     text-align: left;
-    padding-left: 1em;    
+    padding-left: 1em;
+    z-index: 1;
 }
 .trips ul li .d-trip {
     color: #ddd;
