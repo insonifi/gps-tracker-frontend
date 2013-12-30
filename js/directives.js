@@ -207,6 +207,7 @@ angular.module('core.directives', [])
         transclude: false,
         template:
             '<div id="print-frame">\
+                <h3>Maršruta lapa</h3>\
                 <table>\
                     <caption><span style="font-size: large;">{{trips[0].start|datestring}} ― {{trips[0].end|datestring}}</span></caption>\
                     <tbody>\
