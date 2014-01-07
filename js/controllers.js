@@ -86,6 +86,7 @@ angular.module('core.controllers', [])
             },
             paths: {},
             markers: {},
+            maxbounds: {},
             defaults: {
                 doubleClickZoom: false,
                 maxZoom: 18
@@ -117,8 +118,10 @@ angular.module('core.controllers', [])
             var waypoint = newValue,
                 setAddress = function(address) {
                     var m = $scope.markers['selected'];
-                    m.message = new Date(m.timestamp).toTimeString().slice(0,8) + ': '
-                        + address + ', ' + m.kph + ' km/h';
+                    m.label = {
+                        message: new Date(m.timestamp).toTimeString().slice(0,8) + ': '
+                        + address + ', ' + m.kph + ' km/h',
+                    };
                     $scope.markers['selected'].focus = true;
                     console.log('got', address);
                     $scope.$digest();
@@ -130,6 +133,16 @@ angular.module('core.controllers', [])
                     $scope.markers['selected'] = waypoint;
                     if (waypoint.address === null) {
                         $scope.request = cnxn.requestAddress(waypoint).then(setAddress);
+                        angular.extend($scope.markers['selected'], {
+                            icon: L.icon({
+                                iconUrl: 'markers/active32.png',
+                                iconSize: [32, 48],
+                                iconAnchor: [16, 2],
+                                popupAnchor: [0, 0],
+                                shadowSize: [32, 10],
+                                shadowAnchor: [6, 0]
+                            })
+                        });
                     } else {
                         setAddress(waypoint.address);
                     }
@@ -138,14 +151,36 @@ angular.module('core.controllers', [])
         });
         /* show path from grid */
         $root.$watch('selected_path', function (newValue, oldValue) {
+            var path = $scope.paths['selected'].latlngs;
             if (newValue !== oldValue) {
-                $scope.paths['selected'].latlngs = newValue;
+                path = newValue;
+                $scope.maxbounds = [path[0], path[path.length - 1]];
             }
         });
         $root.$watch('waypoints_range', function (newValue, oldValue) {
             if (newValue !== undefined && newValue.length > 0) {
-                $scope.markers['start']= newValue[0];
-                $scope.markers['end']= newValue[newValue.length - 1];                
+                $scope.markers['start'] = newValue[0];
+                angular.extend($scope.markers['start'], {
+                    icon: L.icon({
+                        iconUrl: 'markers/start32.png',
+                        iconSize: [32, 48],
+                        iconAnchor: [16, 2],
+                        popupAnchor: [0, 0],
+                        shadowSize: [32, 10],
+                        shadowAnchor: [6, 0]
+                    })
+                });
+                $scope.markers['end'] = newValue[newValue.length - 1];
+                angular.extend($scope.markers['end'], {
+                    icon: L.icon({
+                        iconUrl: 'markers/end32.png',
+                        iconSize: [32, 48],
+                        iconAnchor: [16, 2],
+                        popupAnchor: [0, 0],
+                        shadowSize: [32, 10],
+                        shadowAnchor: [6, 0]
+                    })
+                });
             } else {
                 $scope.markers = {};
             }
