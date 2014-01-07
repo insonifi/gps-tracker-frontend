@@ -151,10 +151,9 @@ angular.module('core.controllers', [])
         });
         /* show path from grid */
         $root.$watch('selected_path', function (newValue, oldValue) {
-            var path = $scope.paths['selected'].latlngs;
             if (newValue !== oldValue) {
-                path = newValue;
-                $scope.maxbounds = [path[0], path[path.length - 1]];
+                $scope.paths['selected'].latlngs = newValue;
+                $scope.maxbounds = [newValue[0], newValue[newValue.length - 1]];
             }
         });
         $root.$watch('waypoints_range', function (newValue, oldValue) {
