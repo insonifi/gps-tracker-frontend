@@ -125,7 +125,8 @@ angular.module('core.controllers', [])
                     $scope.markers.selected.lat = null;
                     $scope.markers.selected.lng = null;
                 } else {
-                    $scope.markers.selected = {
+                    $scope.markers.selected = waypoint
+                    angular.extend($scope.markers.selected, {
                         icon: L.icon({
                             iconUrl: 'markers/active32.png',
                             iconSize: [32, 48],
@@ -134,10 +135,8 @@ angular.module('core.controllers', [])
                             shadowUrl: 'markers/shadow32.png',
                             shadowSize: [32, 10],
                             shadowAnchor: [6, 10]
-                        }),
-                        lat: waypoint.lat,
-                        lng: waypoint.lng
-                    };
+                        })
+                    });
                     if (waypoint.address === null) {
                         $scope.request = cnxn.requestAddress(waypoint).then(setAddress);
                     } else {
