@@ -49,7 +49,7 @@ angular.module('core.controllers', [])
                 var m = $scope.markers['selected'];
                 m.label = {
                     message: new Date(m.timestamp).toTimeString().slice(0,8) + ': '
-                    + address + ', ' + m.kph + ' km/h',
+                    + address + ', ' + m.kph + ' km/h'
                 };
                 $scope.markers['selected'].focus = true;
                 console.log('got', address);
