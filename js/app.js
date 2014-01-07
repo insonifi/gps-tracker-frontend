@@ -5,6 +5,7 @@
 angular.module('core', ['core.filters', 'core.services', 'core.directives', 'core.controllers', 'btford.socket-io', 'leaflet-directive', 'kendo.directives'])
     .factory('cnxn', ['socketFactory', '$q', '$rootScope', function (socketFactory, $q, $root) {
         var detect_trips = new Worker('js/detect_trips.js'),
+            /* example from MDN */
             arrayBufferToJSON = function (buf) {
                 var string = '', i, len, array = new Uint16Array(buf);
                 for (i = 0, len = array.length; i< len; i += 1) {
@@ -25,7 +26,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                 $root.waypoints = $root.waypoints.concat(waypoints);
                 $root.message('received', $root.waypoints.length, '...');
             },
-            socket = socketFactory(),
+            socket = socketFactory({ioSocket: 'ws:' + window.location.hostname + ':8000'}),
             addressCache = {},
             addressPromises = {};
         socket.on('connect', function () {
