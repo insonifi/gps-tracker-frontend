@@ -137,10 +137,10 @@ angular.module('core.controllers', [])
                             icon: L.icon({
                                 iconUrl: 'markers/active32.png',
                                 iconSize: [32, 48],
-                                iconAnchor: [16, 2],
-                                popupAnchor: [0, 0],
+                                iconAnchor: [16, -48],
+                                popupAnchor: [0, -48],
                                 shadowSize: [32, 10],
-                                shadowAnchor: [6, 0]
+                                shadowAnchor: [6, -10]
                             })
                         });
                     } else {
@@ -163,10 +163,10 @@ angular.module('core.controllers', [])
                     icon: L.icon({
                         iconUrl: 'markers/start32.png',
                         iconSize: [32, 48],
-                        iconAnchor: [16, 2],
-                        popupAnchor: [0, 0],
+                        iconAnchor: [16, -48],
+                        popupAnchor: [0, -48],
                         shadowSize: [32, 10],
-                        shadowAnchor: [6, 0]
+                        shadowAnchor: [6, -10]
                     })
                 });
                 $scope.markers['end'] = newValue[newValue.length - 1];
@@ -174,10 +174,10 @@ angular.module('core.controllers', [])
                     icon: L.icon({
                         iconUrl: 'markers/end32.png',
                         iconSize: [32, 48],
-                        iconAnchor: [16, 2],
-                        popupAnchor: [0, 0],
+                        iconAnchor: [16, -48],
+                        popupAnchor: [0, -48],
                         shadowSize: [32, 10],
-                        shadowAnchor: [6, 0]
+                        shadowAnchor: [6, -10]
                     })
                 });
             } else {
