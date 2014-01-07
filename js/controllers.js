@@ -67,7 +67,9 @@ angular.module('core.controllers', [])
                             shadowUrl: 'markers/shadow32.png',
                             shadowSize: [32, 10],
                             shadowAnchor: [6, 10]
-                        })
+                        }),
+                        lat: null,
+                        lng: null
                     },
                     start: {
                         icon: L.icon({
@@ -78,7 +80,9 @@ angular.module('core.controllers', [])
                             shadowUrl: 'markers/shadow32.png',
                             shadowSize: [32, 10],
                             shadowAnchor: [6, 10]
-                        })
+                        }),
+                        lat: null,
+                        lng: null
                     },
                     end: {
                         icon: L.icon({
@@ -89,7 +93,9 @@ angular.module('core.controllers', [])
                             shadowUrl: 'markers/shadow32.png',
                             shadowSize: [32, 10],
                             shadowAnchor: [6, 10]
-                        })
+                        }),
+                        lat: null,
+                        lng: null
                     }
                 }
             };
