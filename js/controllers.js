@@ -47,10 +47,8 @@ angular.module('core.controllers', [])
     .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
         var setAddress = function(address) {
                 var m = $scope.markers['selected'];
-                m.label = {
-                    message: new Date(m.timestamp).toTimeString().slice(0,8) + ': '
-                    + address + ', ' + m.kph + ' km/h'
-                };
+                m.message = new Date(m.timestamp).toTimeString().slice(0,8) + ': '
+                    + address + ', ' + m.kph + ' km/h';
                 $scope.markers['selected'].focus = true;
                 console.log('got', address);
             };
