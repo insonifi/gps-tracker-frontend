@@ -125,7 +125,9 @@ angular.module('core.directives', [])
                 }
             };
             $scope.selectWaypoint = function (waypoint) {
-                $root.selected_waypoint = waypoint;
+                $root.$apply(function () {
+                    $root.selected_waypoint = waypoint;    
+                })
             }
             $root.$watch('trip_index', function (newValue, oldValue) {
                 var trip = newValue;

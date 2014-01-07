@@ -86,7 +86,7 @@ angular.module('core.controllers', [])
             },
             paths: {},
             markers: {},
-            maxbounds: {},
+            /* maxbounds: {}, */
             defaults: {
                 doubleClickZoom: false,
                 maxZoom: 18
@@ -124,7 +124,7 @@ angular.module('core.controllers', [])
                     };
                     $scope.markers['selected'].focus = true;
                     console.log('got', address);
-                    $scope.$digest();
+                    /* $scope.$digest(); */
                 };
             if (newValue !== oldValue) {
                 if (waypoint === null) {
