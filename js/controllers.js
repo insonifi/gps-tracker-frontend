@@ -46,10 +46,10 @@ angular.module('core.controllers', [])
     }])
     .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
         var setAddress = function(address) {
-                var m = $scope.markers['selected'];
+                var m = $scope.markers.selected;
                 m.message = new Date(m.timestamp).toTimeString().slice(0,8) + ': '
                     + address + ', ' + m.kph + ' km/h';
-                $scope.markers['selected'].focus = true;
+                $scope.markers.selected.focus = true;
                 console.log('got', address);
             },
             transferLatLngs = function(waypointA, waypointB) {
@@ -153,7 +153,7 @@ angular.module('core.controllers', [])
                     latlngs: []
                 };
             }
-            transferLatLngs($scope.markers[waypoint.module_id], coords);
+            transferLatLngs($scope.markers[waypoint.module_id], waypoint);
             $scope.paths[waypoint.module_id].latlngs.unshift(coords);
             $scope.paths[waypoint.module_id].latlngs = $scope.paths[waypoint.module_id].latlngs.slice(0, tail);
             $scope.$digest();
@@ -178,7 +178,7 @@ angular.module('core.controllers', [])
         /* show path from grid */
         $root.$watch('selected_path', function (newValue, oldValue) {
             if (newValue !== oldValue) {
-                $scope.paths['selected'].latlngs = newValue;
+                $scope.paths.selected.latlngs = newValue;
                 /* $scope.maxbounds = [newValue[0], newValue[newValue.length - 1]]; */
             }
         });
