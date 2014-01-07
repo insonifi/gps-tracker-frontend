@@ -54,7 +54,7 @@ angular.module('core.controllers', [])
             },
             transferLatLngs = function(waypointA, waypointB) {
                 waypointA.lat = waypointB.lat;
-                waypointB.lng = waypointB.lng;
+                waypointA.lng = waypointB.lng;
             },
             resetMarkers = function () {
                 $scope.markers = {
@@ -178,7 +178,7 @@ angular.module('core.controllers', [])
         $root.$watch('selected_path', function (newValue, oldValue) {
             if (newValue !== oldValue) {
                 $scope.paths['selected'].latlngs = newValue;
-                $scope.maxbounds = [newValue[0], newValue[newValue.length - 1]];
+                /* $scope.maxbounds = [newValue[0], newValue[newValue.length - 1]]; */
             }
         });
         $root.$watch('waypoints_range', function (newValue, oldValue) {
