@@ -1,42 +1,162 @@
 module.exports = function(grunt) {
 
+    require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        shell: {
+            options: {
+                stdout: true
+            },
+            selenium: {
+                command: 'node_modules/protractor/bin/webdriver-manager start',
+                options: {
+                    stdout: false,
+                    async: true
+                }
+            },
+            protractor_update: {
+                command: 'node_modules/protractor/bin/webdriver-manager update'
+            },
+            npm_install: {
+                command: 'npm install'
+            }
+        },
+
+        changelog: {},
+
+        bump: {
+            options: {
+                files: ['package.json'],
+                updateConfigs: [],
+                commit: true,
+                commitMessage: 'Release v%VERSION%',
+                commitFiles: ['package.json'],
+                createTag: true,
+                tagName: 'v%VERSION%',
+                tagMessage: 'Version %VERSION%',
+                push: true,
+                pushTo: 'origin',
+                gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
+            }
+        },
+
+        connect: {
+            options: {
+                base: ''
+            },
+            webserver: {
+                options: {
+                    port: 8888,
+                    keepalive: true
+                }
+            },
+            devserver: {
+                options: {
+                    port: 8888
+                }
+            },
+            testserver: {
+                options: {
+                    port: 9999
+                }
+            },
+            coverage: {
+                options: {
+                    base: 'coverage/',
+                    directory: 'coverage/',
+                    port: 5555,
+                    keepalive: true
+                }
+            }
+        },
+
+        protractor: {
+            options: {
+                keepAlive: false,
+                configFile: "test/protractor.conf.js"
+            },
+            singlerun: {},
+            saucelabs: {
+                options: {
+                    args: {
+                        baseUrl: "http://tombatossals.github.io/angular-leaflet-directive/examples/",
+                        sauceUser: process.env.SAUCE_USERNAME,
+                        sauceKey: process.env.SAUCE_ACCESS_KEY
+                    }
+                }
+            }
+        },
+
         uglify: {
             options: {
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
             },
             dist: {
                 files: {
-                    'dist/<%= pkg.name %>.min.js': ['dist/angular-leaflet-directive.ngmin.js']
+                    'dist/<%= pkg.name %>.min.no-header.js': ['dist/angular-leaflet-directive.ngmin.js']
                 }
+            }
+        },
+
+        ngmin: {
+            directives: {
+                expand: true,
+                cwd: 'dist',
+                src: ['angular-leaflet-directive.js'],
+                dest: 'dist',
+                ext: '.ngmin.js',
+                flatten: 'src/'
             }
         },
 
         jshint: {
             options: {
-                jquery: true,
-                smarttabs: true,
+                node: true,
+                browser: true,
+                esnext: true,
+                bitwise: true,
                 curly: true,
                 eqeqeq: true,
                 immed: true,
-                latedef: false,
+                indent: 4,
+                latedef: true,
                 newcap: true,
                 noarg: true,
-                sub: true,
+                regexp: true,
                 undef: true,
-                boss: true,
-                eqnull: true,
-                unused: false,
-                browser: true,
+                unused: true,
+                trailing: true,
+                smarttabs: true,
                 globals: {
-                    angular: true,
-                    module: true,
-                    L: true,
+                    angular: false,
+                    L: false,
+                    lvector: false,
+                    // Jasmine
+                    jasmine    : false,
+                    isCommonJS : false,
+                    exports    : false,
+                    spyOn      : false,
+                    it         : false,
+                    xit        : false,
+                    expect     : false,
+                    runs       : false,
+                    waits      : false,
+                    waitsFor   : false,
+                    beforeEach : false,
+                    afterEach  : false,
+                    describe   : false,
+                    xdescribe   : false,
+
+                    // Protractor
+                    protractor: false,
+                    browser: false,
+                    by: false,
+                    element: false
                 }
             },
             source: {
-                src: ['src/angular-leaflet-directive.js']
+                src: ['src/directives/*.js', 'src/services/*.js']
             },
             tests: {
                 src: ['test/unit/*.js', 'test/e2e/*.js'],
@@ -45,65 +165,124 @@ module.exports = function(grunt) {
                 src: ['Gruntfile.js']
             }
         },
-        connect: {
-            options: {
-                port: 8000,
-                base: './'
-            },
-            server: {
-                options: {
-                    keepalive: true
-                }
-            },
-            testserver: {}
-        },
+
         karma: {
             unit: {
-                configFile: 'config/karma.conf.js',
-            },
-            e2e: {
-                configFile: 'config/karma-e2e.conf.js'
-            },
-            background: {
-                configFile: 'config/karma.conf.js',
-                background: true,
+                configFile: 'test/karma-unit.conf.js',
                 autoWatch: false,
-                singleRun: false,
-                browsers: ['PhantomJS']
-            }
-        },
-        ngmin: {
-            directives: {
-                expand: true,
-                cwd: 'src',
-                src: ['angular-leaflet-directive.js'],
-                dest: 'dist',
-                ext: '.ngmin.js',
-                flatten: 'src/'
-            }
-        },
-        watch: {
-            source: {
-                files: ['src/angular-leaflet-directive.js', 'test/unit/*.js', 'test/e2e/*.js'],
-                tasks: [ 'karma:background:run', 'jshint', 'ngmin', 'uglify' ]
+                singleRun: true
             },
-            grunt: {
-                files: ['Gruntfile.js'],
-                tasks: ['jshint:grunt']
+            unit_coverage: {
+                configFile: 'test/karma-unit.conf.js',
+                autoWatch: false,
+                singleRun: true,
+                //logLevel: 'DEBUG',
+                reporters: ['progress', 'coverage'],
+                preprocessors: {
+                    'dist/angular-leaflet-directive.js': ['coverage']
+                },
+                coverageReporter: {
+                    type : 'html',
+                    dir : 'coverage/'
+                }
             }
+        },
+
+        watch: {
+            options : {
+                livereload: 7777
+            },
+            source: {
+                files: ['src/**/*.js', 'test/unit/**.js', 'test/e2e/**.js'],
+                tasks: [
+                    'jshint',
+                    'concat:dist',
+                    'ngmin',
+                    'uglify',
+                    'test:unit',
+                    'concat:license'
+                ]
+            }
+        },
+
+        open: {
+            devserver: {
+                path: 'http://localhost:8888'
+            },
+            coverage: {
+                path: 'http://localhost:5555'
+            }
+        },
+
+        bower: {
+            install: {
+              //  options: {
+              //      targetDir: './bower_components',
+              //      cleanup: true
+              //  }
+            }
+        },
+
+        concat: {
+            dist: {
+                options: {
+                    banner: '(function() {\n\n"use strict";\n\n',
+                    footer: '\n}());'
+                },
+                src: [
+                    'src/directives/leaflet.js',
+                    'src/directives/center.js',
+                    'src/directives/tiles.js',
+                    'src/directives/legend.js',
+                    'src/directives/geojson.js',
+                    'src/directives/layers.js',
+                    'src/directives/bounds.js',
+                    'src/directives/markers.js',
+                    'src/directives/paths.js',
+                    'src/directives/controls.js',
+                    'src/directives/eventBroadcast.js',
+                    'src/directives/maxbounds.js',
+                    'src/services/leafletData.js',
+                    'src/services/leafletMapDefaults.js',
+                    'src/services/leafletEvents.js',
+                    'src/services/leafletLayerHelpers.js',
+                    'src/services/leafletBoundsHelpers.js',
+                    'src/services/leafletMarkerHelpers.js',
+                    'src/services/leafletHelpers.js'
+                ],
+                dest: 'dist/angular-leaflet-directive.js',
+            },
+            license: {
+                src: [
+                    'src/header-MIT-license.txt',
+                    'dist/angular-leaflet-directive.min.no-header.js'
+                ],
+                dest: 'dist/angular-leaflet-directive.min.js',
+            },
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-ngmin');
+    //single run tests
+    grunt.registerTask('test', ['jshint','test:unit', 'test:e2e']);
+    grunt.registerTask('test:unit', ['karma:unit']);
+    grunt.registerTask('test:e2e', ['shell:protractor_update', 'connect:testserver', 'protractor:singlerun']);
 
-    grunt.registerTask('test:e2e', ['connect:testserver', 'karma:e2e']);
-    grunt.registerTask('test', ['karma:unit', 'test:e2e']);
-    grunt.registerTask('server', ['connect:server']);
-    grunt.registerTask('default', ['karma:background', 'watch']);
+    //coverage testing
+    grunt.registerTask('test:coverage', ['karma:unit_coverage']);
+    grunt.registerTask('coverage', ['karma:unit_coverage', 'open:coverage', 'connect:coverage']);
 
+    //installation-related
+    grunt.registerTask('install', ['shell:npm_install', 'bower:install', 'shell:protractor_update']);
+
+    //defaults
+    grunt.registerTask('default', ['watch:source']);
+
+    //development
+    grunt.registerTask('dev', ['connect:devserver', 'open:devserver', 'watch:source']);
+
+    //server daemon
+    grunt.registerTask('serve', ['connect:webserver']);
+
+    //travis
+    grunt.registerTask('travis', ['bower:install', 'test:unit', 'shell:protractor_update', 'protractor:saucelabs']);
 };

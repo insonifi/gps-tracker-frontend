@@ -1,4 +1,5 @@
-# angular-leaflet-directive
+# angular-leaflet-directive [![Build Status](https://travis-ci.org/tombatossals/angular-leaflet-directive.png)](https://travis-ci.org/tombatossals/angular-leaflet-directive) [![Dependency Status](https://gemnasium.com/tombatossals/angular-leaflet-directive.png)](https://gemnasium.com/tombatossals/angular-leaflet-directive)
+
 
 [AngularJS](http://angularjs.org/) directive for the Leaflet Javascript
 Library. This software aims to easily embed maps managed by leaflet on your
@@ -7,16 +8,31 @@ Library. This software aims to easily embed maps managed by leaflet on your
 See some basic examples:
 
 * [Basic example](http://tombatossals.github.io/angular-leaflet-directive/examples/simple-example.html)
+* [Center example](http://tombatossals.github.io/angular-leaflet-directive/examples/center-example.html)
+* [Center autodiscover example](http://tombatossals.github.io/angular-leaflet-directive/examples/center-autodiscover-example.html)
 * [Custom parameters example](http://tombatossals.github.io/angular-leaflet-directive/examples/custom-parameters-example.html)
+* [Bounds example](http://tombatossals.github.io/angular-leaflet-directive/examples/bounds-example.html)
+* [MaxBounds example](http://tombatossals.github.io/angular-leaflet-directive/examples/maxbounds-example.html)
+* [Tiles example](http://tombatossals.github.io/angular-leaflet-directive/examples/tiles-example.html)
+* [Tile zoom changer example](http://tombatossals.github.io/angular-leaflet-directive/examples/tiles-zoom-changer-example.html)
+* [Layers simple example](http://tombatossals.github.io/angular-leaflet-directive/examples/tiles-simple-example.html)
+* [Overlays simple example](http://tombatossals.github.io/angular-leaflet-directive/examples/overlays-simple-example.html)
+* [ImageOverlay simple example](http://tombatossals.github.io/angular-leaflet-directive/examples/layers-imageoverlay-example.html)
+* [Single marker example](http://tombatossals.github.io/angular-leaflet-directive/examples/marker-example.html)
+* [Marker addition example](http://tombatossals.github.io/angular-leaflet-directive/examples/marker-add-example.html)
+* [Marker with label example](http://tombatossals.github.io/angular-leaflet-directive/examples/marker-label-example.html)
 * [Markers example](http://tombatossals.github.io/angular-leaflet-directive/examples/markers-example.html)
+* [Marker groups example](http://tombatossals.github.io/angular-leaflet-directive/examples/marker-groups-example.html)
 * [Polyline example](http://tombatossals.github.io/angular-leaflet-directive/examples/path-example.html)
-* [Tile changer example](http://tombatossals.github.io/angular-leaflet-directive/examples/tiles-example.html)
 * [Legend example](http://tombatossals.github.io/angular-leaflet-directive/examples/legend-example.html)
 * [GeoJson example](http://tombatossals.github.io/angular-leaflet-directive/examples/geojson-example.html)
+* [Simple layers example](http://tombatossals.github.io/angular-leaflet-directive/examples/layers-simple-example.html)
 * [Layers example](http://tombatossals.github.io/angular-leaflet-directive/examples/layers-example.html)
 * [Events example](http://tombatossals.github.io/angular-leaflet-directive/examples/events-example.html)
 * [Overlays example](http://tombatossals.github.io/angular-leaflet-directive/examples/overlays-example.html)
 * [Google Maps example](http://tombatossals.github.io/angular-leaflet-directive/examples/googlemaps-example.html)
+* [Accessing the leaflet map object](http://tombatossals.github.io/angular-leaflet-directive/examples/access-leaflet-object-example.html)
+* [Accessing the leaflet map object of two maps](http://tombatossals.github.io/angular-leaflet-directive/examples/double-map-example.html)
 
 
 To see it in action, go to the main page where you can find more examples and
