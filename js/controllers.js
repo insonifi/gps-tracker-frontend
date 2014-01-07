@@ -136,7 +136,7 @@ angular.module('core.controllers', [])
                                 iconUrl: 'markers/active32.png',
                                 iconSize: [32, 48],
                                 iconAnchor: [16, 48],
-                                popupAnchor: [0, 48],
+                                popupAnchor: [0, -48],
                                 shadowSize: [32, 10],
                                 shadowAnchor: [6, 10]
                             })
