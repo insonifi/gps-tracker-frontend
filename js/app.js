@@ -26,7 +26,7 @@ angular.module('core', ['core.filters', 'core.services', 'core.directives', 'cor
                 $root.waypoints = $root.waypoints.concat(waypoints);
                 $root.message('received', $root.waypoints.length, '...');
             },
-            socket = socketFactory({ioSocket: 'ws:' + window.location.hostname + ':8000'}),
+            socket = socketFactory({ioSocket: io.connect('ws://' + window.location.hostname + ':8000')}),
             addressCache = {},
             addressPromises = {};
         socket.on('connect', function () {
