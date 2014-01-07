@@ -45,6 +45,15 @@ angular.module('core.controllers', [])
         }
     }])
     .controller('mapCtrl', ['$scope', '$rootScope' ,'cnxn' , function ($scope, $root, cnxn) {
+        var setAddress = function(address) {
+                var m = $scope.markers['selected'];
+                m.label = {
+                    message: new Date(m.timestamp).toTimeString().slice(0,8) + ': '
+                    + address + ', ' + m.kph + ' km/h',
+                };
+                $scope.markers['selected'].focus = true;
+                console.log('got', address);
+            };
         $scope.resetVars = function () {
             $root.waypoints = [];
             $root.waypoints_range = [];
@@ -115,17 +124,7 @@ angular.module('core.controllers', [])
         });
         /* waypoint is selected in grid */
         $root.$watch('selected_waypoint', function (newValue, oldValue) {
-            var waypoint = newValue,
-                setAddress = function(address) {
-                    var m = $scope.markers['selected'];
-                    m.label = {
-                        message: new Date(m.timestamp).toTimeString().slice(0,8) + ': '
-                        + address + ', ' + m.kph + ' km/h',
-                    };
-                    $scope.markers['selected'].focus = true;
-                    console.log('got', address);
-                    /* $scope.$digest(); */
-                };
+            var waypoint = newValue;
             if (newValue !== oldValue) {
                 if (waypoint === null) {
                     $scope.markers['selected'] = {};
