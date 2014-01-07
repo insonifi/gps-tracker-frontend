@@ -57,7 +57,8 @@ angular.module('core.controllers', [])
                 waypointB.lng = waypointB.lng;
             },
             resetMarkers = function () {
-                $scope.markers.selected = {
+                $scope.markers = {
+                    selected: {
                         icon: L.icon({
                             iconUrl: 'markers/active32.png',
                             iconSize: [32, 48],
@@ -66,27 +67,28 @@ angular.module('core.controllers', [])
                             shadowSize: [32, 10],
                             shadowAnchor: [6, 10]
                         })
-                    };
-                $scope.markers.start = {
-                    icon: L.icon({
-                        iconUrl: 'markers/start32.png',
-                        iconSize: [32, 48],
-                        iconAnchor: [16, 48],
-                        popupAnchor: [0, 48],
-                        shadowSize: [32, 10],
-                        shadowAnchor: [6, 10]
-                    })
-                };
-                $scope.markers.end = {
-                    icon: L.icon({
-                        iconUrl: 'markers/end32.png',
-                        iconSize: [32, 48],
-                        iconAnchor: [16, 48],
-                        popupAnchor: [0, 48],
-                        shadowSize: [32, 10],
-                        shadowAnchor: [6, 10]
-                    })
-                };
+                    },
+                    start: {
+                        icon: L.icon({
+                            iconUrl: 'markers/start32.png',
+                            iconSize: [32, 48],
+                            iconAnchor: [16, 48],
+                            popupAnchor: [0, 48],
+                            shadowSize: [32, 10],
+                            shadowAnchor: [6, 10]
+                        })
+                    },
+                    end: {
+                        icon: L.icon({
+                            iconUrl: 'markers/end32.png',
+                            iconSize: [32, 48],
+                            iconAnchor: [16, 48],
+                            popupAnchor: [0, 48],
+                            shadowSize: [32, 10],
+                            shadowAnchor: [6, 10]
+                        })
+                    }
+                }
             };
         $scope.resetVars = function () {
             $root.waypoints = [];
@@ -150,7 +152,7 @@ angular.module('core.controllers', [])
                     latlngs: []
                 };
             }
-            $scope.markers[waypoint.module_id] = coords;
+            transferLatLngs($scope.markers[waypoint.module_id], coords);
             $scope.paths[waypoint.module_id].latlngs.unshift(coords);
             $scope.paths[waypoint.module_id].latlngs = $scope.paths[waypoint.module_id].latlngs.slice(0, tail);
             $scope.$digest();
