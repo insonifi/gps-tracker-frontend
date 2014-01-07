@@ -51,60 +51,13 @@ angular.module('core.controllers', [])
                     + address + ', ' + m.kph + ' km/h';
                 $scope.markers.selected.focus = true;
                 console.log('got', address);
-            },
-            transferLatLngs = function(waypointA, waypointB) {
-                waypointA.lat = waypointB.lat;
-                waypointA.lng = waypointB.lng;
-            },
-            resetMarkers = function () {
-                $scope.markers = {
-                    selected: {
-                        icon: L.icon({
-                            iconUrl: 'markers/active32.png',
-                            iconSize: [32, 48],
-                            iconAnchor: [16, 48],
-                            popupAnchor: [0, -48],
-                            shadowUrl: 'markers/shadow32.png',
-                            shadowSize: [32, 10],
-                            shadowAnchor: [6, 10]
-                        }),
-                        lat: null,
-                        lng: null
-                    },
-                    start: {
-                        icon: L.icon({
-                            iconUrl: 'markers/start32.png',
-                            iconSize: [32, 48],
-                            iconAnchor: [16, 48],
-                            popupAnchor: [0, 48],
-                            shadowUrl: 'markers/shadow32.png',
-                            shadowSize: [32, 10],
-                            shadowAnchor: [6, 10]
-                        }),
-                        lat: null,
-                        lng: null
-                    },
-                    end: {
-                        icon: L.icon({
-                            iconUrl: 'markers/end32.png',
-                            iconSize: [32, 48],
-                            iconAnchor: [16, 48],
-                            popupAnchor: [0, 48],
-                            shadowUrl: 'markers/shadow32.png',
-                            shadowSize: [32, 10],
-                            shadowAnchor: [6, 10]
-                        }),
-                        lat: null,
-                        lng: null
-                    }
-                }
             };
         $scope.resetVars = function () {
             $root.waypoints = [];
             $root.waypoints_range = [];
             $root.trips = [];
-            resetMarkers();
             if ($scope.paths) {
+                $scope.markers = {};
                 $scope.paths.selected = {};
             }
         };
@@ -159,7 +112,7 @@ angular.module('core.controllers', [])
                     latlngs: []
                 };
             }
-            transferLatLngs($scope.markers[waypoint.module_id], waypoint);
+            $scope.markers[waypoint.module_id] = waypoint;
             $scope.paths[waypoint.module_id].latlngs.unshift(coords);
             $scope.paths[waypoint.module_id].latlngs = $scope.paths[waypoint.module_id].latlngs.slice(0, tail);
             $scope.$digest();
@@ -169,10 +122,22 @@ angular.module('core.controllers', [])
             var waypoint = newValue;
             if (newValue !== oldValue) {
                 if (waypoint === null) {
-                    delete $scope.markers.selected.lat;
-                    delete $scope.markers.selected.lng;
+                    $scope.markers.selected.lat = null;
+                    $scope.markers.selected.lng = null;
                 } else {
-                    transferLatLngs($scope.markers.selected, waypoint);
+                    $scope.markers.selected = {
+                        icon: L.icon({
+                            iconUrl: 'markers/active32.png',
+                            iconSize: [32, 48],
+                            iconAnchor: [16, 48],
+                            popupAnchor: [0, 48],
+                            shadowUrl: 'markers/shadow32.png',
+                            shadowSize: [32, 10],
+                            shadowAnchor: [6, 10]
+                        }),
+                        lat: waypoint.lat,
+                        lng: waypoint.lng
+                    };
                     if (waypoint.address === null) {
                         $scope.request = cnxn.requestAddress(waypoint).then(setAddress);
                     } else {
@@ -189,11 +154,37 @@ angular.module('core.controllers', [])
             }
         });
         $root.$watch('waypoints_range', function (newValue, oldValue) {
+            var first = newValue[0],
+                last = newValue[newValue.length - 1];
             if (newValue !== undefined && newValue.length > 0) {
-                transferLatLngs($scope.markers.start, newValue[0]);
-                transferLatLngs($scope.markers.end, newValue[newValue.length - 1]);
+                $scope.markers.start = {
+                        icon: L.icon({
+                            iconUrl: 'markers/start32.png',
+                            iconSize: [32, 48],
+                            iconAnchor: [16, 48],
+                            popupAnchor: [0, -48],
+                            shadowUrl: 'markers/shadow32.png',
+                            shadowSize: [32, 10],
+                            shadowAnchor: [6, 10]
+                        }),
+                        lat: first.lat,
+                        lng: first.lng
+                    }
+                $scope.markers.end =  {
+                        icon: L.icon({
+                            iconUrl: 'markers/end32.png',
+                            iconSize: [32, 48],
+                            iconAnchor: [16, 48],
+                            popupAnchor: [0, 48],
+                            shadowUrl: 'markers/shadow32.png',
+                            shadowSize: [32, 10],
+                            shadowAnchor: [6, 10]
+                        }),
+                        lat: last.lat,
+                        lng: last.lng
+                    };
             } else {
-                resetMarkers();
+                $scope.markers = {};
             }
         })
     }])
