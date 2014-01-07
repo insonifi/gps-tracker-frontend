@@ -54,7 +54,7 @@ angular.module('core.controllers', [])
             },
             transferLatLngs = function(waypointA, waypointB) {
                 waypointA.lat = waypointB.lat;
-                waypointB.lng = waypointB
+                waypointB.lng = waypointB.lng;
             },
             resetMarkers = function () {
                 $scope.markers.selected = {
@@ -160,7 +160,8 @@ angular.module('core.controllers', [])
             var waypoint = newValue;
             if (newValue !== oldValue) {
                 if (waypoint === null) {
-                    delete $scope.markers['selected'].latlngs;
+                    delete $scope.markers['selected'].lat;
+                    delete $scope.markers['selected'].lng;
                 } else {
                     $scope.markers['selected'].latlngs = waypoint;
                     if (waypoint.address === null) {
@@ -180,8 +181,8 @@ angular.module('core.controllers', [])
         });
         $root.$watch('waypoints_range', function (newValue, oldValue) {
             if (newValue !== undefined && newValue.length > 0) {
-                $scope.markers['start'].latlngs = newValue[0];
-                $scope.markers['end'].latlngs = newValue[newValue.length - 1];
+                transferLatLngs($scope.markers['start'], newValue[0]);
+                transferLatLngs($scope.markers['end'], newValue[newValue.length - 1]);
             } else {
                 resetMarkers();
             }
