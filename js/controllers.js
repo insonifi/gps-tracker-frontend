@@ -64,6 +64,7 @@ angular.module('core.controllers', [])
                             iconSize: [32, 48],
                             iconAnchor: [16, 48],
                             popupAnchor: [0, -48],
+                            shadowUrl: 'markers/shadow32.png',
                             shadowSize: [32, 10],
                             shadowAnchor: [6, 10]
                         })
@@ -74,6 +75,7 @@ angular.module('core.controllers', [])
                             iconSize: [32, 48],
                             iconAnchor: [16, 48],
                             popupAnchor: [0, 48],
+                            shadowUrl: 'markers/shadow32.png',
                             shadowSize: [32, 10],
                             shadowAnchor: [6, 10]
                         })
@@ -84,6 +86,7 @@ angular.module('core.controllers', [])
                             iconSize: [32, 48],
                             iconAnchor: [16, 48],
                             popupAnchor: [0, 48],
+                            shadowUrl: 'markers/shadow32.png',
                             shadowSize: [32, 10],
                             shadowAnchor: [6, 10]
                         })
@@ -94,9 +97,7 @@ angular.module('core.controllers', [])
             $root.waypoints = [];
             $root.waypoints_range = [];
             $root.trips = [];
-            if ($scope.markers) {
-                resetMarkers();
-            }
+            resetMarkers();
             if ($scope.paths) {
                 $scope.paths.selected = {};
             }
@@ -129,7 +130,7 @@ angular.module('core.controllers', [])
             },
             paths: {},
             markers: {},
-            maxbounds: {},
+            /* maxbounds: {}, */
             defaults: {
                 doubleClickZoom: false,
                 scrollWheelZoom: true,
@@ -162,10 +163,10 @@ angular.module('core.controllers', [])
             var waypoint = newValue;
             if (newValue !== oldValue) {
                 if (waypoint === null) {
-                    delete $scope.markers['selected'].lat;
-                    delete $scope.markers['selected'].lng;
+                    delete $scope.markers.selected.lat;
+                    delete $scope.markers.selected.lng;
                 } else {
-                    $scope.markers['selected'].latlngs = waypoint;
+                    transferLatLngs($scope.markers.selected, waypoint);
                     if (waypoint.address === null) {
                         $scope.request = cnxn.requestAddress(waypoint).then(setAddress);
                     } else {
@@ -183,8 +184,8 @@ angular.module('core.controllers', [])
         });
         $root.$watch('waypoints_range', function (newValue, oldValue) {
             if (newValue !== undefined && newValue.length > 0) {
-                transferLatLngs($scope.markers['start'], newValue[0]);
-                transferLatLngs($scope.markers['end'], newValue[newValue.length - 1]);
+                transferLatLngs($scope.markers.start, newValue[0]);
+                transferLatLngs($scope.markers.end, newValue[newValue.length - 1]);
             } else {
                 resetMarkers();
             }
