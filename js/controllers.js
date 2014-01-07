@@ -95,9 +95,10 @@ angular.module('core.controllers', [])
             },
             paths: {},
             markers: {},
-            /* maxbounds: {}, */
+            maxbounds: {},
             defaults: {
                 doubleClickZoom: false,
+                scrollWheelZoom: true,
                 maxZoom: 18
             },
             zoomControl: false
