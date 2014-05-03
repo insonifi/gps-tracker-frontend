@@ -98,7 +98,7 @@ angular.module('core.controllers', [])
             zoomControl: false
         });
         /* Got realtime waypoint */
-        $scope.$on('update-waypoint', function (event, waypoint) {
+        $root.$on('update-waypoint', function (event, waypoint) {
             var tail = 10,
                 coords = {
                     lat: waypoint.lat,
