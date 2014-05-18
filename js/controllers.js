@@ -99,21 +99,18 @@ angular.module('core.controllers', [])
         });
         /* Got realtime waypoint */
         $root.$on('update-waypoint', function (event, waypoint) {
-            var tail = 10,
-                coords = {
-                    lat: waypoint.lat,
-                    lng: waypoint.lng
-                };
+            var tail = 10;
             if (!$scope.paths[waypoint.module_id]) {
                 $scope.paths[waypoint.module_id] = {
                     weight: 3,
                     opacity: 0.8,
                     color: $scope.hashColorCode(waypoint.module_id),
+                    type: 'polyline',
                     latlngs: []
                 };
             }
             $scope.markers[waypoint.module_id] = waypoint;
-            $scope.paths[waypoint.module_id].latlngs.unshift(coords);
+            $scope.paths[waypoint.module_id].latlngs.unshift(waypoint);
             $scope.paths[waypoint.module_id].latlngs = $scope.paths[waypoint.module_id].latlngs.slice(0, tail);
             $scope.$digest();
         });
