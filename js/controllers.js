@@ -118,7 +118,8 @@ angular.module('core.controllers', [])
                 icon: {
                     iconUrl: 'markers/now32.png',
                     iconSize: [16, 16],
-                    iconAnchor: [8, 8]
+                    iconAnchor: [8, 8],
+                    shadowUrl: ''
                 },
                 lat: waypoint.lat,
                 lng: waypoint.lng
