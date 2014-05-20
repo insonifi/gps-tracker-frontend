@@ -58,7 +58,11 @@ angular.module('core.controllers', [])
             $root.trips = [];
             if ($scope.paths) {
                 $scope.markers = {};
-                $scope.paths.selected = {};
+                $scope.paths.selected = {
+			weight: 3,
+			opacity: 1,
+			color: '#444444'
+		};
             }
         };
         $scope.resetVars();
@@ -99,19 +103,29 @@ angular.module('core.controllers', [])
         });
         /* Got realtime waypoint */
         $root.$on('update-waypoint', function (event, waypoint) {
-            var tail = 10;
-            if (!$scope.paths[waypoint.module_id]) {
-                $scope.paths[waypoint.module_id] = {
+            var tail = 10,
+		id = 'm_id' + waypoind.module_id;
+            if (!$scope.paths[id]) {
+                $scope.paths[id] = {
                     weight: 3,
-                    opacity: 0.8,
-                    color: $scope.hashColorCode(waypoint.module_id),
+                    opacity: 1,
+                    color: $scope.hashColorCode(id),
                     type: 'polyline',
                     latlngs: []
                 };
             }
-            $scope.markers[waypoint.module_id] = waypoint;
-            $scope.paths[waypoint.module_id].latlngs.unshift(waypoint);
-            $scope.paths[waypoint.module_id].latlngs = $scope.paths[waypoint.module_id].latlngs.slice(0, tail);
+            if (!$scope.markers[id]) {
+                $scope.markers[id] = {
+		   icon: {
+                       iconUrl: 'markers/now32.png',
+                       iconSize: [16, 16],
+                       iconAnchor: [8, 8]
+                   }
+                }
+            }
+            $scope.markers[id] = waypoint;
+            $scope.paths[id].latlngs.unshift(waypoint);
+            $scope.paths[id].latlngs = $scope.paths[id].latlngs.slice(0, tail);
             $scope.$digest();
         });
         /* waypoint is selected in grid */
@@ -124,15 +138,15 @@ angular.module('core.controllers', [])
                 } else {
                     $scope.markers.selected = waypoint
                     angular.extend($scope.markers.selected, {
-                        icon: L.icon({
+                        icon: {
                             iconUrl: 'markers/active32.png',
                             iconSize: [32, 48],
                             iconAnchor: [16, 48],
                             popupAnchor: [0, -48],
                             shadowUrl: 'markers/shadow32.png',
-                            shadowSize: [32, 10],
-                            shadowAnchor: [6, 10]
-                        })
+                            shadowSize: [64, 20],
+                            shadowAnchor: [0, 20]
+                        }
                     });
                     if (waypoint.address === null) {
                         $scope.request = cnxn.requestAddress(waypoint).then(setAddress);
@@ -154,28 +168,28 @@ angular.module('core.controllers', [])
                 last = newValue[newValue.length - 1];
             if (newValue !== undefined && newValue.length > 0) {
                 $scope.markers.start = {
-                        icon: L.icon({
+                        icon: {
                             iconUrl: 'markers/start32.png',
                             iconSize: [32, 48],
                             iconAnchor: [16, 48],
                             popupAnchor: [0, -48],
                             shadowUrl: 'markers/shadow32.png',
-                            shadowSize: [32, 10],
-                            shadowAnchor: [6, 10]
-                        }),
+                            shadowSize: [64, 20],
+                            shadowAnchor: [0, 20]
+                        },
                         lat: first.lat,
                         lng: first.lng
                     }
                 $scope.markers.end =  {
-                        icon: L.icon({
+                        icon: {
                             iconUrl: 'markers/end32.png',
                             iconSize: [32, 48],
                             iconAnchor: [16, 48],
                             popupAnchor: [0, -48],
                             shadowUrl: 'markers/shadow32.png',
-                            shadowSize: [32, 10],
-                            shadowAnchor: [6, 10]
-                        }),
+                            shadowSize: [64, 20],
+                            shadowAnchor: [0, 20]
+                        },
                         lat: last.lat,
                         lng: last.lng
                     };
