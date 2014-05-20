@@ -114,16 +114,15 @@ angular.module('core.controllers', [])
                     latlngs: []
                 };
             }
-            if (!$scope.markers[id]) {
-                $scope.markers[id] = {
-		   icon: {
-                       iconUrl: 'markers/now32.png',
-                       iconSize: [16, 16],
-                       iconAnchor: [8, 8]
-                   }
-                }
+            $scope.markers[id] = {
+                icon: {
+                    iconUrl: 'markers/now32.png',
+                    iconSize: [16, 16],
+                    iconAnchor: [8, 8]
+                },
+                lat: waypoint.lat,
+                lng: waypoinr.lng
             }
-            $scope.markers[id] = waypoint;
             $scope.paths[id].latlngs.unshift(waypoint);
             $scope.paths[id].latlngs = $scope.paths[id].latlngs.slice(0, tail);
             $scope.$digest();
