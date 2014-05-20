@@ -104,7 +104,7 @@ angular.module('core.controllers', [])
         /* Got realtime waypoint */
         $root.$on('update-waypoint', function (event, waypoint) {
             var tail = 10,
-		id = 'm_id' + waypoind.module_id;
+		id = 'm_id' + waypoint.module_id;
             if (!$scope.paths[id]) {
                 $scope.paths[id] = {
                     weight: 3,
