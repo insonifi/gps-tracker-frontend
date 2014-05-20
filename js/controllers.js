@@ -121,7 +121,7 @@ angular.module('core.controllers', [])
                     iconAnchor: [8, 8]
                 },
                 lat: waypoint.lat,
-                lng: waypoinr.lng
+                lng: waypoint.lng
             }
             $scope.paths[id].latlngs.unshift(waypoint);
             $scope.paths[id].latlngs = $scope.paths[id].latlngs.slice(0, tail);
