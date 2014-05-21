@@ -67,7 +67,10 @@ angular.module('core.directives', [])
             $scope.sly.frame.style.overflow = 'visible';
             $scope.sly.on('active', function () {
                 var index = $scope.sly.rel.activeItem;
-                if (index === 0) { return; }
+                if (index === 0) {
+                  $scope.sly.activate(1, true);
+                  return; 
+                }
                 $scope.$apply(function () {
                     $scope.trip_index = index;
                 })
