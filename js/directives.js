@@ -133,7 +133,7 @@ angular.module('core.directives', [])
             $root.$watch('trip_index', function (newValue, oldValue) {
                 var trip = newValue;
                 if (newValue !== oldValue) {
-                    $root.waypoints_range = $root.waypoints.slice(trip.idx_start, trip.idx_end);
+                    $root.waypoints_range = $root.waypoints.slice(trip.idx_start, trip.idx_end + 1);
                 }
             })
             $root.$watch('waypoints_range', function (newValue, oldValue) {
